@@ -47,16 +47,12 @@ public class InicioSesion extends JFrame {
 		JButton IniciarSesion = new JButton("Iniciar sesion");
 		IniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			    // 1. Extraemos los valores de los campos
 			    String usuario = NomUsuario.getText();
 			    String pass = new String(passwordField.getPassword());
 
-			    // 2. Comparamos los strings extraídos
 			    if (usuario.equals("admin") && pass.equals("1234")) {
-			        System.out.println("¡Bienvenida, Edna! Sin capas, por favor.");
-			        // Aquí abrirías la siguiente ventana
+			        System.out.println("¡Bienvenido!");
 			    } else {
-			        // 3. Mostramos la miniventana (asegúrate de importar javax.swing.JOptionPane)
 			        javax.swing.JOptionPane.showMessageDialog(InicioSesion.this, 
 			            "Usuario o contraseña incorrectos", 
 			            "Error de Autenticación", 
