@@ -1,0 +1,16 @@
+3FN:
+CLIENTE (id_cliente_PK, nombre_heroe, superpoder, colores, tipo)
+TRAJE (id_traje_PK, id_cliente_FK_CLIENTE, nombre_traje, estado)
+TALLER (id_taller_PK, nombre_sala, tipo_sala)
+EMPLEADO (id_empleado_PK, nombre, apellidos, apodo, categoria, usuario, contrasena)
+CITA (id_cita_PK, id_cliente_FK_CLIENTE, id_traje_FK_TRAJE, id_empleado_FK_EMPLEADO, id_taller_FK_TALLER, dia, hora, duracion)
+CITA_APRENDIZ (id_cita_FK_CITA, id_aprendiz_FK_EMPLEADO)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+En la tabla CLIENTE, todos los demás atributos dependen exclusivamente del id_cliente.
+En la tabla TRAJE, separé el traje del cliente para evitar que, si un héroe tiene varios trajes, se repita varias veces su nombre y superpoder.
+En la tabla TALLER, el nombre de la sala y el tipo de costura dependen únicamente del id_sala.
+En EMPLEADO, todos los datos de login y categoría dependen únicamente del id_empleado.
+En CITA, ocurren los mayores cambios, ya que necesita claves foráneas de otras tablas; si el cliente cambia, modificando solo el id_cliente, el resto se actualiza automáticamente.
+Y en CITA_APRENDIZ, que es una relación N:M, se pueden permitir hasta 2 aprendices por cita, pudiendo solo visualizar sin modificar nada.
