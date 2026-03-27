@@ -1,26 +1,38 @@
 package vista;
 
+// Importaciones necesarias para la interfaz gráfica y tablas
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Font;
 
+// Clase duplicada que también representa la ventana de listado de talleres
 public class ListaTalleres extends JFrame {
+    
+    // Tabla donde se mostrarán los datos
     private JTable table;
 
+    // Constructor de la ventana
     public ListaTalleres() {
-        setTitle("Sedes y Talleres - EDNA MODA");
-        setBounds(100, 100, 450, 350);
-        getContentPane().setLayout(null);
+        
+        // Configuración básica de la ventana
+        setTitle("Sedes y Talleres - EDNA MODA"); // Título
+        setBounds(100, 100, 450, 350); // Tamaño y posición
+        getContentPane().setLayout(null); // Layout absoluto
 
+        // Botón para añadir un nuevo taller
         JButton btnNuevoTaller = new JButton("+ Nuevo");
         btnNuevoTaller.setBounds(10, 11, 89, 23);
         getContentPane().add(btnNuevoTaller);
 
+        // ScrollPane para contener la tabla
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBounds(10, 45, 414, 180);
         getContentPane().add(scrollPane);
 
+        // Creación de la tabla
         table = new JTable();
+        
+        // Modelo de la tabla con datos de ejemplo
         table.setModel(new DefaultTableModel(
             new Object[][] {
                 {"París", "Alta Costura"},
@@ -31,23 +43,25 @@ public class ListaTalleres extends JFrame {
             },
             new String[] {"Sede / Ciudad", "Tipo de Sala"}
         ));
+        
+        // Se añade la tabla al scroll
         scrollPane.setViewportView(table);
 
+        // Botón para editar el elemento seleccionado
         JButton btnEditar = new JButton("Editar");
-        btnEditar.setBounds(10, 240, 100, 30);
+        btnEditar.setBounds(20, 240, 100, 30);
         getContentPane().add(btnEditar);
 
+        // Botón para eliminar el elemento seleccionado
         JButton btnEliminar = new JButton("Eliminar");
-        btnEliminar.setBounds(324, 240, 100, 30);
+        btnEliminar.setBounds(169, 240, 100, 30);
         getContentPane().add(btnEliminar);
         
-        // Acción para abrir la ventana pequeña (Círculo 5)
-        btnNuevoTaller.addActionListener(e -> {
-            String nombre = JOptionPane.showInputDialog("Nombre de la Sala:");
-            String tipo = JOptionPane.showInputDialog("Tipo de sala:");
-            if(nombre != null && tipo != null) {
-                ((DefaultTableModel)table.getModel()).addRow(new Object[]{nombre, tipo});
-            }
-        });
+        // Botón para volver
+        JButton btnVolver = new JButton("Volver");
+        btnVolver.setBounds(315, 240, 100, 30);
+        getContentPane().add(btnVolver);
+        
+        
     }
 }
