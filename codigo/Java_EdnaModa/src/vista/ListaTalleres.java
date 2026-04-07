@@ -17,8 +17,8 @@ public class ListaTalleres extends JFrame {
         // Configuración básica de la ventana
         setTitle("Sedes y Talleres - EDNA MODA"); // Título
         setBounds(100, 100, 450, 350); // Tamaño y posición
-        getContentPane().setLayout(null); // Layout absoluto
-
+        getContentPane().setLayout(null);
+        
         // Botón para añadir un nuevo taller
         JButton btnNuevoTaller = new JButton("+ Nuevo");
         btnNuevoTaller.setBounds(10, 11, 89, 23);
@@ -32,21 +32,21 @@ public class ListaTalleres extends JFrame {
         // Creación de la tabla
         table = new JTable();
         
-        // Modelo de la tabla con datos de ejemplo
+        // Modelo de la tabla
         table.setModel(new DefaultTableModel(
             new Object[][] {
-                {"París", "Alta Costura"},
-                {"Milán", "Diseño"},
-                {"Madrid", "Pruebas"},
-                {"New York", "Costura"},
-                {"Berlín", "Exámenes"}
+                      {"París", "Diseño"},
+                      {"Milán", "Diseño"},
+                      {"Madrid", "Costura"},
+                      {"New York", "Costura"},
+                      {"Berlín", "Pruebas"}
             },
-            new String[] {"Sede / Ciudad", "Tipo de Sala"}
-        ));
+    		new String[] { "Sede / ciudad", "Tipo de sala"}
+    	));
         
         // Se añade la tabla al scroll
         scrollPane.setViewportView(table);
-
+        
         // Botón para editar el elemento seleccionado
         JButton btnEditar = new JButton("Editar");
         btnEditar.setBounds(20, 240, 100, 30);
@@ -64,4 +64,5 @@ public class ListaTalleres extends JFrame {
         
         
     }
+       
 }

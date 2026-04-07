@@ -54,25 +54,31 @@ public class VentanaMaestro extends JFrame {
 		JMenu Clientes = new JMenu("Clientes");
 		menuBar.add(Clientes);
 		
-		// Subopción: lista de clientes
-		JMenuItem listaClientes = new JMenu("Lista de clientes");
+		JMenuItem listaClientes = new JMenuItem("Lista de clientes");
 		Clientes.add(listaClientes);
 		
-		// Subopción: nuevo cliente
-		JMenuItem nuevoCliente = new JMenu("Nuevo cliente");
+		JMenuItem nuevoCliente = new JMenuItem("Nuevo cliente");
 		Clientes.add(nuevoCliente);
 		
 		// Menú "Talleres"
 		JMenu Talleres = new JMenu("Talleres");
 		menuBar.add(Talleres);
 		
-		// Subopción: lista de talleres
-		JMenuItem listaTalleres = new JMenu("Lista de talleres");
+		JMenuItem listaTalleres = new JMenuItem("Lista de talleres");
 		Talleres.add(listaTalleres);
 		
-		// Subopción: nuevo taller
-		JMenuItem nuevoTaller = new JMenu("Nuevo taller");
+		JMenuItem nuevoTaller = new JMenuItem("Nuevo taller");
 		Talleres.add(nuevoTaller);
+		
+		// Menú "Trajes"
+		JMenu Trajes = new JMenu("Trajes");
+		menuBar.add(Trajes);
+		
+		JMenuItem listaTrajes = new JMenuItem("Lista de trajes");
+		Trajes.add(listaTrajes);
+		
+		JMenuItem nuevoTraje = new JMenuItem("Nuevo traje");
+		Trajes.add(nuevoTraje);
 
 		// Creación del panel principal
 		contentPane = new JPanel();

@@ -3,6 +3,7 @@ package vista;
 // Importaciones necesarias para la interfaz gráfica
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -70,11 +71,32 @@ public class InicioSesion extends JFrame {
         lblNewLabel.setBounds(129, 168, 176, 14);
         getContentPane().add(lblNewLabel);
         
-        // Logo de la empresa
+        // Logo
         JLabel lblLogo = new JLabel("");
         lblLogo.setIcon(new ImageIcon(InicioSesion.class.getResource("/img/LOGO RHGR_BUILD.png")));
         lblLogo.setBounds(36, 193, 316, 322);
         getContentPane().add(lblLogo);
+        
+        //Mensaje que sirve de utilidad como introduccion a la aplicacion mostrando informacion util
+        JOptionPane.showMessageDialog(
+        	    this,
+        	    "Le damos la bienvenida a la aplicacion de gestion de citas de Edna Moda\n"
+        	    + "segun el rol que contengas, podras realizar una serie de acciones:\n"
+        	    + "\n"
+        	    + "--> Aprendiz: solo puedes ver tus citas en las que trabajas, sin tener\n"
+        	    + "acceso a la creacion y modificacion de estas\n"
+        	    + "\n"
+        	    + "--> Oficial: eres capaz de ver todas las citas, modificar tus citas\n"
+        	    + "crear citas (que el maestro haya creado para usted) asignando a los aprendices, y\n "
+        	    + "ver todos los talleres\n"
+        	    + "\n"
+        	    + "--> Maestro: Contiene todas las funciones habilitadas, las cuales son\n "
+        	    + "ver y modificar citas, reservar citas donde y cuando quieran y\n"
+        	    + "asignarlas a un oficial. Añadir, modificar y borrar clientes. Crear,\n"
+        	    + "modificar y borrar citas y añadir, modificar y borrar talleres disponibles\n",
+        	    "¡Bienvenido!",
+        	    JOptionPane.INFORMATION_MESSAGE
+        	);
     }
     
     // Método para obtener el nombre ingresado

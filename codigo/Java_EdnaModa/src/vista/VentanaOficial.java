@@ -1,6 +1,6 @@
 package vista;
 
-// Importaciones necesarias para la interfaz gráfica y eventos
+// Importaciones necesarias para la interfaz gráfica y gestión de eventos
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,19 +18,19 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-// Clase principal de la ventana que hereda de JFrame
+// Clase principal que representa la ventana del usuario tipo "Oficial"
 public class VentanaOficial extends JFrame {
 
-	// Panel principal donde se añaden todos los componentes
+	// Panel principal donde se colocan todos los componentes
 	private JPanel contentPane;
 
 	// Constructor de la ventana
 	public VentanaOficial() {
 		
 		// Configuración básica de la ventana
-		setTitle("RGHR EDNA MODA - Sistema de Gestión"); // Título de la ventana
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Acción al cerrar
-		setBounds(100, 100, 700, 500); // Tamaño y posición
+		setTitle("RGHR EDNA MODA - Sistema de Gestión"); // Título
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Cerrar aplicación
+		setBounds(100, 100, 700, 500); // Posición y tamaño
 		
 		// --- BARRA DE MENÚ SUPERIOR ---
 		
@@ -42,80 +42,85 @@ public class VentanaOficial extends JFrame {
 		JMenu Citas = new JMenu("Citas");
 		menuBar.add(Citas);
 		
-		// Opción para ver lista de citas
+		// Opción: ver lista de citas
 		JMenuItem ListaCitas = new JMenuItem("Lista de citas");
 		Citas.add(ListaCitas);
 		
-		// Opción para crear nueva cita (deshabilitada por defecto)
+		// Opción: crear nueva cita
 		JMenuItem nuevaCita = new JMenuItem("Nueva cita");
 		Citas.add(nuevaCita);
-		nuevaCita.setEnabled(false);
 		
-		// Menú "Clientes" (deshabilitado)
+		// Menú "Clientes"
 		JMenu Clientes = new JMenu("Clientes");
 		menuBar.add(Clientes);
-		Clientes.setEnabled(false);
 		
-		// Subopciones de clientes
-		JMenuItem listaClientes = new JMenu("Lista de clientes");
+		JMenuItem listaClientes = new JMenuItem("Lista de clientes");
 		Clientes.add(listaClientes);
 		
-		JMenuItem nuevoCliente = new JMenu("Nuevo cliente");
+		JMenuItem nuevoCliente = new JMenuItem("Nuevo cliente");
 		Clientes.add(nuevoCliente);
 		
-		// Menú "Talleres" (deshabilitado)
+		// Menú "Talleres"
 		JMenu Talleres = new JMenu("Talleres");
 		menuBar.add(Talleres);
-		Talleres.setEnabled(false);
 		
-		// Subopciones de talleres
-		JMenuItem listaTalleres = new JMenu("Lista de talleres");
+		JMenuItem listaTalleres = new JMenuItem("Lista de talleres");
 		Talleres.add(listaTalleres);
 		
-		JMenuItem nuevoTaller = new JMenu("Nuevo taller");
+		JMenuItem nuevoTaller = new JMenuItem("Nuevo taller");
 		Talleres.add(nuevoTaller);
+		
+		// Menú "Trajes"
+		JMenu Trajes = new JMenu("Trajes");
+		menuBar.add(Trajes);
+		
+		JMenuItem listaTrajes = new JMenuItem("Lista de trajes");
+		Trajes.add(listaTrajes);
+		
+		JMenuItem nuevoTraje = new JMenuItem("Nuevo traje");
+		Trajes.add(nuevoTraje);
 
 		// Creación del panel principal
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5)); // Márgenes internos
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5)); // Márgenes
 		setContentPane(contentPane);
 		contentPane.setLayout(null); // Layout absoluto
 
 		// --- ETIQUETA DE USUARIO / APRENDIZ ---
 		
-		// Etiqueta para mostrar el usuario (alineada a la derecha)
+		// Etiqueta para mostrar el usuario actual
 		JLabel lblUsuario = new JLabel("");
-		lblUsuario.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblUsuario.setHorizontalAlignment(SwingConstants.RIGHT); // Alineación derecha
 		lblUsuario.setBounds(400, 11, 220, 20);
 		contentPane.add(lblUsuario);
 		
-		// Etiqueta para "Salir"
+		// Etiqueta para acción de salir (logout)
 		JLabel lblSalir = new JLabel("");
-		lblSalir.setForeground(Color.BLUE);
-		lblSalir.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblSalir.setForeground(Color.BLUE); // Color azul
+		lblSalir.setFont(new Font("Tahoma", Font.BOLD, 11)); // Fuente en negrita
 		lblSalir.setBounds(625, 11, 40, 20);
 		contentPane.add(lblSalir);
 
 		// --- SECCIÓN INFERIOR: ACCESOS DIRECTOS ---
 		
-		// Texto descriptivo de todas las citas
+		// Texto: todas las citas
 		JLabel lblTodasCitas = new JLabel("TODAS LAS CITAS:");
 		lblTodasCitas.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTodasCitas.setBounds(45, 310, 150, 20);
 		contentPane.add(lblTodasCitas);
 		
-		// Panel contenedor de número de citas
+		// Panel contenedor para el número total de citas
 		JPanel boxCitas = new JPanel();
 		boxCitas.setBackground(new Color(192, 192, 192)); // Color gris
 		boxCitas.setBorder(new LineBorder(new Color(0, 0, 0))); // Borde negro
 		boxCitas.setBounds(45, 335, 170, 80);
 		contentPane.add(boxCitas);
 		
-		// Etiqueta donde se mostrará el número de citas
+		// Etiqueta donde se mostrará el número total de citas
 		JLabel lblTodasLasCitas = new JLabel("");
 		boxCitas.add(lblTodasLasCitas);
 
-		// Texto descriptivo de "Mis citas"
+		// Texto: mis citas
 		JLabel lblMisCitas = new JLabel("MIS CITAS:");
 		lblMisCitas.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblMisCitas.setBounds(260, 310, 150, 20);
@@ -128,11 +133,11 @@ public class VentanaOficial extends JFrame {
 		boxMisCitas.setBounds(260, 335, 170, 80);
 		contentPane.add(boxMisCitas);
 		
-		// Etiqueta para número de mis citas
+		// Etiqueta donde se mostrará el número de mis citas
 		JLabel lblNumeroDeMisCitas = new JLabel("");
 		boxMisCitas.add(lblNumeroDeMisCitas);
 
-		// Texto descriptivo de talleres
+		// Texto: talleres
 		JLabel lblTalleresTab = new JLabel("TALLERES:");
 		lblTalleresTab.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTalleresTab.setBounds(475, 310, 150, 20);
@@ -145,11 +150,11 @@ public class VentanaOficial extends JFrame {
 		boxTalleres.setBounds(475, 335, 170, 80);
 		contentPane.add(boxTalleres);
 		
-		// Etiqueta para número de talleres
+		// Etiqueta donde se mostrará el número de talleres
 		JLabel lblNumeroDeTalleres = new JLabel("");
 		boxTalleres.add(lblNumeroDeTalleres);
 		
-		// Imagen del logo
+		// Imagen del logo de la aplicación
 		JLabel imagen = new JLabel("");
 		imagen.setIcon(new ImageIcon(VentanaMaestro.class.getResource("/img/LOGO RHGR_BUILD.png")));
 		imagen.setBounds(188, 0, 316, 302);
