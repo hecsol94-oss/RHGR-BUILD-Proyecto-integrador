@@ -63,5 +63,17 @@ public class DetalleClientes extends JFrame {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(20, 320, 390, 2);
 		contentPane.add(separator);
+		
+		JTextArea txtInfoTrajes = new JTextArea();
+		txtInfoTrajes.setText("Nombre del traje: \r\nEstado:");
+		txtInfoTrajes.setEditable(false);
+		txtInfoTrajes.setBorder(new LineBorder(new Color(192, 192, 192)));
+		txtInfoTrajes.setBounds(20, 194, 390, 100);
+		contentPane.add(txtInfoTrajes);
+		
+		JLabel lblTitulo_1 = new JLabel("INFORMACIÓN DEL TRAJE");
+		lblTitulo_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTitulo_1.setBounds(20, 158, 250, 25);
+		contentPane.add(lblTitulo_1);
 	}
 }

@@ -69,16 +69,6 @@ public class VentanaAprendiz extends JFrame {
 		
 		JMenuItem nuevoTaller = new JMenuItem("Nuevo taller");
 		Talleres.add(nuevoTaller);
-		
-		// Menú "Trajes"
-		JMenu Trajes = new JMenu("Trajes");
-		menuBar.add(Trajes);
-		
-		JMenuItem listaTrajes = new JMenuItem("Lista de trajes");
-		Trajes.add(listaTrajes);
-		
-		JMenuItem nuevoTraje = new JMenuItem("Nuevo traje");
-		Trajes.add(nuevoTraje);
 
 		// Creación del panel principal
 		contentPane = new JPanel();

@@ -13,6 +13,8 @@ public class NuevaCitaMaestro extends JFrame {
     
     // Campos de texto para introducir datos de la cita
     private JTextField txtFecha, txtHora, txtDuracion;
+    private JTextField textField;
+    private JTextField textField_1;
 
     // Constructor de la ventana
     public NuevaCitaMaestro() {
@@ -89,19 +91,30 @@ public class NuevaCitaMaestro extends JFrame {
         btnCliente.setBounds(22, 247, 388, 25);
         getContentPane().add(btnCliente);
         
-        //boton para crear un nuevo traje en caso de que este no exista en la lista de trajes
-        JButton btnTraje = new JButton("¿Existe el traje? añadelo");
-        btnTraje.setBounds(23, 277, 387, 25);
-        getContentPane().add(btnTraje);
-        
         //boton para crear un nuevo taller en caso de que este no exista en la lista de talleres
         JButton btnTaller = new JButton("¿Existe el taller? añadelo");
-        btnTaller.setBounds(24, 308, 386, 25);
+        btnTaller.setBounds(24, 283, 386, 25);
         getContentPane().add(btnTaller);
         
         JLabel lblDatosDeLa = new JLabel("DATOS DE LA CITA");
         lblDatosDeLa.setFont(new Font("Tahoma", Font.BOLD, 14));
         lblDatosDeLa.setBounds(20, 11, 200, 25);
         getContentPane().add(lblDatosDeLa);
+        
+        textField = new JTextField();
+        textField.setBounds(167, 187, 100, 25);
+        getContentPane().add(textField);
+        
+        JLabel lblHora = new JLabel("Hora:");
+        lblHora.setBounds(167, 162, 100, 14);
+        getContentPane().add(lblHora);
+        
+        textField_1 = new JTextField();
+        textField_1.setBounds(310, 187, 100, 25);
+        getContentPane().add(textField_1);
+        
+        JLabel lblDuracion = new JLabel("Duracion:");
+        lblDuracion.setBounds(310, 162, 100, 14);
+        getContentPane().add(lblDuracion);
     }
 }
