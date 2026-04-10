@@ -1,17 +1,45 @@
 package main;
 
-// Importa la clase de la ventana de inicio de sesión
+import modelo.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import vista.InicioSesion;
 
 public class Main {
 
-    // Método principal que se ejecuta al iniciar el programa
-    public static void main(String[] arga) {
+    public static void main(String[] args) {
+    	
+    	AccesoBBDD acceso = new AccesoBBDD();
+	    Connection c = acceso.abrirConexion();
+	    
+	    try {
+	    	// Secuencia lógica: Limpiar -> Insertar datos -> guardarlos en ArrayLists
+	    	acceso.limpiarTablas(c);
+	        
+	        acceso.insertarClientes(c);
+	        ArrayList<Cliente> clientes = acceso.recogeClientes(c);
+	        
+	        acceso.insertarEmpleados(c);
+	        ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
+	        
+	        acceso.insertarTalleres(c);
+	        ArrayList<Taller> talleres = acceso.recogeTalleres(c);
+	        
+	        acceso.insertarTrajes(c);
+	        ArrayList<Traje> trajes = acceso.recogeTrajes(c);
+	        
+	        acceso.insertarCitas(c);
+	        ArrayList<Cita> citas = acceso.recogeCitas(c);
+	        	        
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 
-        // Crea una instancia de la ventana de inicio de sesión
+	    acceso.cerrarConexion(c);
+
+        // Lanzamiento de la interfaz gráfica una vez preparada la base de datos
         InicioSesion sesion = new InicioSesion();
-
-        // Hace visible la ventana para que el usuario pueda interactuar con ella
         sesion.setVisible(true);
     }
 }
