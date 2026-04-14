@@ -22,7 +22,7 @@ public class Main {
 	        
 	        acceso.insertarEmpleados(c);
 	        ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
-	        
+	       
 	        acceso.insertarTalleres(c);
 	        ArrayList<Taller> talleres = acceso.recogeTalleres(c);
 	        
@@ -31,15 +31,19 @@ public class Main {
 	        
 	        acceso.insertarCitas(c);
 	        ArrayList<Cita> citas = acceso.recogeCitas(c);
+	        
+	        acceso.insertarCitasAprendiz(c);
+	        ArrayList<Cita_Aprendiz> citasAprendiz = acceso.recogeCitasAprendiz(c);
 	        	        
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
+	    
 
 	    acceso.cerrarConexion(c);
 
         // Lanzamiento de la interfaz gráfica una vez preparada la base de datos
-        InicioSesion sesion = new InicioSesion();
-        sesion.setVisible(true);
+//        InicioSesion sesion = new InicioSesion();
+//        sesion.setVisible(true);
     }
 }

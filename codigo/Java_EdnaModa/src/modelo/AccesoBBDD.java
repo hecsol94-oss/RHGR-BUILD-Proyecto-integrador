@@ -43,6 +43,7 @@ public class AccesoBBDD {
 	    st.executeUpdate("SET FOREIGN_KEY_CHECKS = 0");
 	    
 	    // Vaciado de tablas y reinicio de contadores AUTO_INCREMENT
+	    st.executeUpdate("TRUNCATE TABLE Cita_Aprendiz");
 	    st.executeUpdate("TRUNCATE TABLE Citas");
 	    st.executeUpdate("TRUNCATE TABLE Traje");
 	    st.executeUpdate("TRUNCATE TABLE Cliente");
@@ -59,9 +60,22 @@ public class AccesoBBDD {
 	    ArrayList<String> queryC = new ArrayList<>();
 
 	    // Lista de sentencias SQL para dar de alta a los personajes
-	    queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Mr. Increíble', 'superhéroe', 'superfuerza', 'rojo y azul')");
-	    // ... resto de clientes ...
-        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Silbido', 'superhéroe', 'chillido agudo', 'negro')");
+	    queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Mr. Increíble', 'superhéroe', 'superfuerza', 'rojo y azúl');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Elastigirl', 'superheroína', 'elasticidad', 'rojo y blanco');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Dash', 'superhéroe', 'supervelocidad', 'rojo y negro');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Violeta', 'superheroína', 'invisible y campos fuerza', 'rojo y negro');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Síndrome', 'supervillano', 'inventos', 'blanco y negro');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Jack-Jack', 'superhéroe', 'multipoderes', 'rojo y negro');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Frozono', 'superhéroe', 'hielo', 'blanco y azúl claro');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('The Underminer', 'supervillano', 'excavar', 'marrón y amarillo');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Bomb Voyage', 'supervillano', 'bombas atómicas', 'blanco y negro');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Rapta-Pantallas', 'supervillana', 'hipnosis', 'negro');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Vacío', 'superheroína', 'portales', 'verde y azúl');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Helectrix', 'superhéroe', 'electricidad', 'azúl oscuro');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Krujido', 'superhéroe', 'telequinesia', 'azúl oscuro');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Reflujo', 'superhéroe', 'lava', 'naranja');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Bloque', 'superheroína', 'superfuerza', 'marrón y negro');");
+        queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Silbido', 'superhéroe', 'chillido agudo', 'negro');");
 
 	    // Ejecución masiva de los inserts
 	    for (String query : queryC) {
@@ -244,25 +258,27 @@ public class AccesoBBDD {
 	    
 	    ArrayList<String> queryCi = new ArrayList<>();
 
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-10', '09:00', 1, 1, 3)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-10', '10:00', 1, 2, 1)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-10', '11:00', 1, 3, 3)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-10', '12:00', 1, 4, 5)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-10', '15:00', 1, 5, 1)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-10', '16:00', 1, 8, 4)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-10', '17:00', 1, 9, 4)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-11', '09:00', 1, 6, 5)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-11', '10:00', 1, 7, 3)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-11', '11:00', 1, 11, 5)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-11', '12:00', 1, 12, 3)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-11', '15:00', 1, 10, 1)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-11', '16:00', 1, 16, 4)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-12', '09:00', 1, 13, 3)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-12', '10:00', 1, 14, 5)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-12', '11:00', 1, 15, 4)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-12', '15:00', 1, 5, 1)");
-	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-12', '16:00', 1, 8, 4)");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '09:00', 1, 1, 3, 6, 1);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '10:00', 1, 2, 1, 5, 3);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '11:00', 1, 3, 3, 6, 5);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '12:00', 1, 4, 5, 7, 7);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '15:00', 1, 5, 1, 8, 9);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '16:00', 1, 8, 4, 8, 13);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '17:00', 1, 9, 4, 8, 15);");
 
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '09:00', 1, 6, 5, 6, 11);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '10:00', 1, 7, 3, 7, 12);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '11:00', 1, 11, 5, 7, 17);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '12:00', 1, 12, 3, 6, 19);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '15:00', 1, 10, 1, 8, 14);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '16:00', 1, 16, 4, 8, 31);");
+
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '09:00', 1, 13, 3, 7, 21);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '10:00', 1, 14, 5, 7, 23);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '11:00', 1, 15, 4, 6, 25);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '15:00', 1, 5, 1, 8, 10);");
+	    queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '16:00', 1, 8, 4, 8, 14);");
+	    
 	    for (String q : queryCi) {
 	        st.executeUpdate(q);
 	    }
@@ -280,17 +296,59 @@ public class AccesoBBDD {
 	        Date fecha = resultados.getDate("fecha");
 	        Time hora = resultados.getTime("hora_inicio");
 	        int duracion = resultados.getInt("duracion");
+	        int idEmpleado = resultados.getInt("id_empleado");
 	        int idCliente = resultados.getInt("id_cliente");
 	        int idSala = resultados.getInt("id_sala");
+	        int idTraje = resultados.getInt("id_traje");
 
 	        // Se lo pasamos al constructor de tu clase Cita
-	        Cita cita = new Cita(id, fecha, hora, duracion, idCliente, idSala);
+	        Cita cita = new Cita(id, fecha, hora, duracion, idEmpleado, idCliente, idSala, idTraje);
 	        citas.add(cita);
 	    }
 
 	    resultados.close();
 	    st.close();
 	    return citas;
+	}
+	
+public void insertarCitasAprendiz(Connection c) throws SQLException {
+		
+		Statement st = c.createStatement();
+	    
+		ArrayList<String> QueryCA = new ArrayList<>();
+
+		QueryCA.add("INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (1, 1);");
+		QueryCA.add("INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (2, 1);");
+		QueryCA.add("INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (3, 2);");
+		QueryCA.add("INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (5, 1);");
+		QueryCA.add("INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (6, 2);");
+		QueryCA.add("INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (10, 1);");
+		
+	    for (String q : QueryCA) {
+	        st.executeUpdate(q);
+	    }
+	    st.close();
+	}
+	
+	public ArrayList<Cita_Aprendiz> recogeCitasAprendiz(Connection c) throws SQLException {
+	    ArrayList<Cita_Aprendiz> citasAprendiz = new ArrayList<>();
+	    Statement st = c.createStatement();
+	    ResultSet resultados = st.executeQuery("SELECT * FROM Cita_Aprendiz");
+
+	    while (resultados.next()) {
+	        // Extraemos el ID que MySQL creó automáticamente
+	        int idAprendiz = resultados.getInt("id_aprendiz"); 
+	        int idEmpleado = resultados.getInt("id_empleado");
+	        int idCita = resultados.getInt("id_cita");
+	    
+	        // Se lo pasamos al constructor de tu clase Cita
+	        Cita_Aprendiz citaAprendiz = new Cita_Aprendiz(idAprendiz, idEmpleado, idCita);
+	        citasAprendiz.add(citaAprendiz);
+	    }
+
+	    resultados.close();
+	    st.close();
+	    return citasAprendiz;
 	}
 
 }

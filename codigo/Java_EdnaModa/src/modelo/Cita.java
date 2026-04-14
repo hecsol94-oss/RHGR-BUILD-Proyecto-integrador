@@ -10,17 +10,22 @@ public class Cita {
 	private Date fecha;
 	private Time hora_inicio;
 	private int duracion;
+	private int id_empleado;
 	private int id_cliente;
 	private int id_sala;
+	private int id_traje;
+	
 	
 	// Constructor completo para gestionar la agenda del taller
-	public Cita(int id_cita, Date fecha, Time hora_inicio, int duracion, int id_cliente, int id_sala) {
+	public Cita(int id_cita, Date fecha, Time hora_inicio, int duracion, int id_empleado, int id_cliente, int id_sala, int id_traje) {
 		this.id_cita = id_cita;
 		this.fecha = fecha;
 		this.hora_inicio = hora_inicio;
 		this.duracion = duracion;
+		this.id_empleado = id_empleado;
 		this.id_cliente = id_cliente;
 		this.id_sala = id_sala;
+		this.id_traje = id_traje;
 	}
 
 	// Métodos de acceso para la gestión temporal y espacial de la cita
@@ -71,5 +76,23 @@ public class Cita {
 	public void setId_cita(int id_cita) {
 		this.id_cita = id_cita;
 	}
+
+	public int getId_empleado() {
+		return id_empleado;
+	}
+
+	public void setId_empleado(int id_empleado) {
+		this.id_empleado = id_empleado;
+	}
+
+	public int getId_traje() {
+		return id_traje;
+	}
+
+	public void setId_traje(int id_traje) {
+		this.id_traje = id_traje;
+	}
+	
+	
 	
 }
