@@ -24,6 +24,17 @@ public class VentanaAprendiz extends JFrame {
 	// Panel principal donde se colocan todos los componentes
 	private JPanel contentPane;
 
+	// Items de menú accesibles desde el controlador
+	private JMenuItem menuItemListaCitas;
+	private JMenuItem menuItemListaTalleres;
+
+	// Etiquetas accesibles desde el controlador
+	private JLabel lblUsuario;
+	private JLabel lblSalir;
+	private JLabel lblTodasLasCitas;
+	private JLabel lblNumeroDeMisCitas;
+	private JLabel lblNumeroDeTalleres;
+
 	// Constructor de la ventana
 	public VentanaAprendiz() {
 		
@@ -43,8 +54,8 @@ public class VentanaAprendiz extends JFrame {
 		menuBar.add(Citas);
 		
 		// Opción: ver lista de citas
-		JMenuItem ListaCitas = new JMenuItem("Lista de citas");
-		Citas.add(ListaCitas);
+		menuItemListaCitas = new JMenuItem("Lista de citas");
+		Citas.add(menuItemListaCitas);
 		
 		// Opción: crear nueva cita
 		JMenuItem nuevaCita = new JMenuItem("Nueva cita");
@@ -64,8 +75,8 @@ public class VentanaAprendiz extends JFrame {
 		JMenu Talleres = new JMenu("Talleres");
 		menuBar.add(Talleres);
 		
-		JMenuItem listaTalleres = new JMenuItem("Lista de talleres");
-		Talleres.add(listaTalleres);
+		menuItemListaTalleres = new JMenuItem("Lista de talleres");
+		Talleres.add(menuItemListaTalleres);
 		
 		JMenuItem nuevoTaller = new JMenuItem("Nuevo taller");
 		Talleres.add(nuevoTaller);
@@ -79,13 +90,13 @@ public class VentanaAprendiz extends JFrame {
 		// --- ETIQUETA DE USUARIO / APRENDIZ ---
 		
 		// Etiqueta para mostrar el usuario actual
-		JLabel lblUsuario = new JLabel("");
+		lblUsuario = new JLabel("");
 		lblUsuario.setHorizontalAlignment(SwingConstants.RIGHT); // Alineación derecha
 		lblUsuario.setBounds(400, 11, 220, 20);
 		contentPane.add(lblUsuario);
 		
 		// Etiqueta para acción de salir (logout)
-		JLabel lblSalir = new JLabel("");
+		lblSalir = new JLabel("");
 		lblSalir.setForeground(Color.BLUE); // Color azul
 		lblSalir.setFont(new Font("Tahoma", Font.BOLD, 11)); // Fuente en negrita
 		lblSalir.setBounds(625, 11, 40, 20);
@@ -107,7 +118,7 @@ public class VentanaAprendiz extends JFrame {
 		contentPane.add(boxCitas);
 		
 		// Etiqueta donde se mostrará el número total de citas
-		JLabel lblTodasLasCitas = new JLabel("");
+		lblTodasLasCitas = new JLabel("");
 		boxCitas.add(lblTodasLasCitas);
 
 		// Texto: mis citas
@@ -124,7 +135,7 @@ public class VentanaAprendiz extends JFrame {
 		contentPane.add(boxMisCitas);
 		
 		// Etiqueta donde se mostrará el número de mis citas
-		JLabel lblNumeroDeMisCitas = new JLabel("");
+		lblNumeroDeMisCitas = new JLabel("");
 		boxMisCitas.add(lblNumeroDeMisCitas);
 
 		// Texto: talleres
@@ -141,13 +152,24 @@ public class VentanaAprendiz extends JFrame {
 		contentPane.add(boxTalleres);
 		
 		// Etiqueta donde se mostrará el número de talleres
-		JLabel lblNumeroDeTalleres = new JLabel("");
+		lblNumeroDeTalleres = new JLabel("");
 		boxTalleres.add(lblNumeroDeTalleres);
 		
 		// Imagen del logo de la aplicación
 		JLabel imagen = new JLabel("");
-		imagen.setIcon(new ImageIcon(VentanaMaestro.class.getResource("/img/LOGO RHGR_BUILD.png")));
+		imagen.setIcon(new ImageIcon(VentanaAprendiz.class.getResource("/img/LOGO RHGR_BUILD.png")));
 		imagen.setBounds(188, 0, 316, 302);
 		contentPane.add(imagen);
 	}
+
+	// Getters para los items de menú
+	public JMenuItem getMenuItemListaCitas() { return menuItemListaCitas; }
+	public JMenuItem getMenuItemListaTalleres() { return menuItemListaTalleres; }
+
+	// Getters para las etiquetas del dashboard
+	public JLabel getLblUsuario() { return lblUsuario; }
+	public JLabel getLblSalir() { return lblSalir; }
+	public JLabel getLblTodasLasCitas() { return lblTodasLasCitas; }
+	public JLabel getLblNumeroDeMisCitas() { return lblNumeroDeMisCitas; }
+	public JLabel getLblNumeroDeTalleres() { return lblNumeroDeTalleres; }
 }

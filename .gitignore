@@ -1,1 +1,23 @@
 .metadata/
+# Compilados do Java (Arquivos que o Git deve ignorar)
+
+*.class
+
+
+# Pastas de build
+
+bin/
+
+target/
+
+
+# Configurações de IDE (Opcional, mas limpa o repo)
+
+.project
+
+.classpath
+
+.settings/
+
+.idea/
+

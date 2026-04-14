@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS Cita_Aprendiz;
 DROP TABLE IF EXISTS Citas;
 DROP TABLE IF EXISTS Traje;
 DROP TABLE IF EXISTS Taller;
@@ -19,7 +20,7 @@ CREATE TABLE Empleados (
     apellido VARCHAR(30),
     apodo VARCHAR(30),
     usuario VARCHAR(30),
-    contrasena VARCHAR(30)
+    contraseña VARCHAR(30)
 );
 
 CREATE TABLE Taller (
@@ -41,10 +42,22 @@ CREATE TABLE Citas (
     fecha DATE,
     hora_inicio TIME,
     duracion INT DEFAULT 1,
+    id_empleado INT,
     id_cliente INT,
     id_sala INT,
+    id_traje INT,
     CONSTRAINT fk_citas_cliente  FOREIGN KEY (id_cliente) REFERENCES Cliente (id_cliente),
-    CONSTRAINT fk_citas_taller FOREIGN KEY (id_sala) REFERENCES Taller (id_sala)
+    CONSTRAINT fk_citas_taller FOREIGN KEY (id_sala) REFERENCES Taller (id_sala),
+    CONSTRAINT fk_citas_empleado FOREIGN KEY (id_empleado) REFERENCES Empleados (id_empleado),
+    CONSTRAINT fk_citas_traje FOREIGN KEY (id_traje) REFERENCES Traje (id_traje)
+);
+
+CREATE TABLE Cita_Aprendiz (
+    id_aprendiz INT AUTO_INCREMENT PRIMARY KEY,
+    id_cita INT,
+    id_empleado INT,
+    CONSTRAINT fk_aprendiz_citas FOREIGN KEY (id_cita) REFERENCES Citas (id_cita),
+    CONSTRAINT fk_aprendiz_empleado FOREIGN KEY (id_empleado) REFERENCES Empleados (id_empleado)
 );
 
 INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Mr. Increíble', 'superhéroe', 'superfuerza', 'rojo y azúl');
@@ -64,16 +77,16 @@ INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES (
 INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Bloque', 'superheroína', 'superfuerza', 'marrón y negro');
 INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Silbido', 'superhéroe', 'chillido agudo', 'negro');
 
-INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contrasena) VALUES ('aprendiz', 'Lucía', 'Martínez', 'Aguja', 'lucia', 'Lucia2026');
-INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contrasena) VALUES ('aprendiz', 'Carlos', 'Ruiz', 'Tijeras', 'carlos', 'Tijeras123');
-INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contrasena) VALUES ('oficial', 'Ana', 'Torres', 'SastreX', 'ana', 'SastreX2026');
-INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contrasena) VALUES ('maestro', 'Javier', 'Gómez', 'MaestroModa', 'javier', 'MaestroModa!');
-INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contrasena) VALUES ('aprendiz', 'María', 'Delgado', 'Costurilla', 'maria', 'Costurilla22');
-INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contrasena) VALUES ('aprendiz', 'Pablo', 'Herrera', 'HiloFino', 'pablo', 'HiloFino33');
-INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contrasena) VALUES ('oficial', 'Sofía', 'Navarro', 'PatrónX', 'sofia', 'PatronX44');
-INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contrasena) VALUES ('oficial', 'Diego', 'Fernández', 'CorteMaestro', 'diego', 'CorteMaestro55');
-INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contrasena) VALUES ('maestro', 'Elena', 'Rivas', 'DamaAguja', 'elena', 'DamaAguja66');
-INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contrasena) VALUES ('maestro', 'Tomás', 'Villalba', 'GranSastre', 'tomas', 'GranSastre77');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Lucía', 'Martínez', 'Aguja', 'lucia', 'Lucia2026');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Carlos', 'Ruiz', 'Tijeras', 'carlos', 'Tijeras123');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Ana', 'Torres', 'SastreX', 'ana', 'SastreX2026');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Javier', 'Gómez', 'MaestroModa', 'javier', 'MaestroModa!');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'María', 'Delgado', 'Costurilla', 'maria', 'Costurilla22');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Pablo', 'Herrera', 'HiloFino', 'pablo', 'HiloFino33');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Sofía', 'Navarro', 'PatrónX', 'sofia', 'PatronX44');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Diego', 'Fernández', 'CorteMaestro', 'diego', 'CorteMaestro55');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Elena', 'Rivas', 'DamaAguja', 'elena', 'DamaAguja66');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Tomás', 'Villalba', 'GranSastre', 'tomas', 'GranSastre77');
 
 INSERT INTO Taller (nombre_sala, tipo_sala) VALUES ('Milán', 'diseño');
 INSERT INTO Taller (nombre_sala, tipo_sala) VALUES ('París', 'diseño');
@@ -114,21 +127,28 @@ INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de impacto p
 INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de protección auditiva', 'costura', 16);
 INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje amplificador de ondas sonoras', 'diseño', 16);
 
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-10', '09:00', 1, 1, 3);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-10', '10:00', 1, 2, 1);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-10', '11:00', 1, 3, 3);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-10', '12:00', 1, 4, 5);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-10', '15:00', 1, 5, 1);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-10', '16:00', 1, 8, 4);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-10', '17:00', 1, 9, 4);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-11', '09:00', 1, 6, 5);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-11', '10:00', 1, 7, 3);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-11', '11:00', 1, 11, 5);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-11', '12:00', 1, 12, 3);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-11', '15:00', 1, 10, 1);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-11', '16:00', 1, 16, 4);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-12', '09:00', 1, 13, 3);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-12', '10:00', 1, 14, 5);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-12', '11:00', 1, 15, 4);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-12', '15:00', 1, 5, 1);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala) VALUES ('2026-04-12', '16:00', 1, 8, 4);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '09:00', 1, 1, 3, 6, 1);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '10:00', 1, 2, 1, 5, 3);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '11:00', 1, 3, 3, 6, 5);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '12:00', 1, 4, 5, 7, 7);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '15:00', 1, 5, 1, 8, 9);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '16:00', 1, 8, 4, 8, 13);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '17:00', 1, 9, 4, 8, 15);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '09:00', 1, 6, 5, 6, 11);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '10:00', 1, 7, 3, 7, 12);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '11:00', 1, 11, 5, 7, 17);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '12:00', 1, 12, 3, 6, 19);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '15:00', 1, 10, 1, 8, 14);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '16:00', 1, 16, 4, 8, 31);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '09:00', 1, 13, 3, 7, 21);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '10:00', 1, 14, 5, 7, 23);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '11:00', 1, 15, 4, 6, 25);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '15:00', 1, 5, 1, 8, 10);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '16:00', 1, 8, 4, 8, 14);
+
+INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (1, 1);
+INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (2, 1);
+INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (3, 2);
+INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (5, 1);
+INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (6, 2);
+INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (10, 1);
