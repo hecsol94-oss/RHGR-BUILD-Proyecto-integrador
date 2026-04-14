@@ -99,6 +99,11 @@ public class InicioSesion extends JFrame {
         	);
     }
     
+    // Método para obtener el botón de entrar (usado por el controlador para asignar el listener)
+    public JButton getBtnEntrar() {
+        return entrar;
+    }
+    
     // Método para obtener el nombre ingresado
     public String getInfoNombre() {
         return NomUsuario.getText();
