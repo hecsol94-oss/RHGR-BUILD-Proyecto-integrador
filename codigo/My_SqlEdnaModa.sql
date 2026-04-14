@@ -1,4 +1,4 @@
-
+DROP TABLE IF EXISTS Cita_Aprendiz;
 DROP TABLE IF EXISTS Citas;
 DROP TABLE IF EXISTS Traje;
 DROP TABLE IF EXISTS Empleados;
@@ -20,8 +20,8 @@ CREATE TABLE Empleados (
     apellido VARCHAR(30),
     apodo VARCHAR(30),
     usuario VARCHAR(30),
-    contrasena VARCHAR(30)
-);
+    contraseña VARCHAR(30)
+);	
 
 CREATE TABLE Taller (
     id_sala INT AUTO_INCREMENT PRIMARY KEY,
@@ -42,8 +42,21 @@ CREATE TABLE Citas (
     fecha DATE,
     hora_inicio TIME,
     duracion INT,
+    id_empleado INT,
     id_cliente INT,
     id_sala INT,
+    id_traje INT,
     CONSTRAINT fk_citas_cliente  FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente),
-    CONSTRAINT fk_citas_taller FOREIGN KEY (id_sala) REFERENCES Taller(id_sala)
+    CONSTRAINT fk_citas_taller FOREIGN KEY (id_sala) REFERENCES Taller(id_sala),
+    CONSTRAINT fk_citas_empleado FOREIGN KEY (id_empleado) REFERENCES Empleados(id_empleado),
+    CONSTRAINT fk_citas_traje FOREIGN KEY (id_traje) REFERENCES Traje(id_traje)
+);
+
+
+CREATE TABLE Cita_Aprendiz(
+id_aprendiz INT AUTO_INCREMENT  PRIMARY KEY,
+id_cita INT,
+id_empleado INT ,
+CONSTRAINT fk_aprendiz_citas  FOREIGN KEY (id_cita) REFERENCES Citas(id_cita),
+CONSTRAINT fk_aprendiz_empleado FOREIGN KEY (id_empleado) REFERENCES Empleados(id_empleado)
 );
