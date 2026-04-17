@@ -4,6 +4,8 @@ import modelo.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import controlador.ControladorInicioSesion;
 import vista.InicioSesion;
 
 public class Main {
@@ -13,27 +15,35 @@ public class Main {
     	AccesoBBDD acceso = new AccesoBBDD();
 	    Connection c = acceso.abrirConexion();
 	    
+	    ArrayList<Cliente> clientes = new ArrayList<>();
+        ArrayList<Empleado> empleados = new ArrayList<>();
+        ArrayList<Taller> talleres = new ArrayList<>();
+        ArrayList<Traje> trajes = new ArrayList<>();
+        ArrayList<Cita> citas = new ArrayList<>();
+        ArrayList<Cita_Aprendiz> citasAprendiz = new ArrayList<>();
+        
+
 	    try {
 	    	// Secuencia lógica: Limpiar -> Insertar datos -> guardarlos en ArrayLists
 	    	acceso.limpiarTablas(c);
 	        
 	        acceso.insertarClientes(c);
-	        ArrayList<Cliente> clientes = acceso.recogeClientes(c);
+	        clientes = acceso.recogeClientes(c);
 	        
 	        acceso.insertarEmpleados(c);
-	        ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
+	        empleados = acceso.recogeEmpleados(c);
 	       
 	        acceso.insertarTalleres(c);
-	        ArrayList<Taller> talleres = acceso.recogeTalleres(c);
+	        talleres = acceso.recogeTalleres(c);
 	        
 	        acceso.insertarTrajes(c);
-	        ArrayList<Traje> trajes = acceso.recogeTrajes(c);
+	        trajes = acceso.recogeTrajes(c);
 	        
 	        acceso.insertarCitas(c);
-	        ArrayList<Cita> citas = acceso.recogeCitas(c);
+	        citas = acceso.recogeCitas(c);
 	        
 	        acceso.insertarCitasAprendiz(c);
-	        ArrayList<Cita_Aprendiz> citasAprendiz = acceso.recogeCitasAprendiz(c);
+	        citasAprendiz = acceso.recogeCitasAprendiz(c);
 	        	        
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -42,8 +52,10 @@ public class Main {
 
 	    acceso.cerrarConexion(c);
 
-        // Lanzamiento de la interfaz gráfica una vez preparada la base de datos
-//        InicioSesion sesion = new InicioSesion();
-//        sesion.setVisible(true);
+        InicioSesion sesion = new InicioSesion();
+        
+        new ControladorInicioSesion(sesion, acceso, empleados);
+        
+        sesion.setVisible(true);
     }
 }

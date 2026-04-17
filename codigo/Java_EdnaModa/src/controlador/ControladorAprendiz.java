@@ -75,7 +75,7 @@ public class ControladorAprendiz {
       try {
           ArrayList<Cita> citas = acceso.recogeCitas(c);
           ListaCitas vistaLista = new ListaCitas();
-          new ControladorListaCitas(vistaLista, acceso, c, citas, false);
+          new ControladorListaCitas();
           vistaLista.setVisible(true);
       } catch (SQLException ex) {
           ex.printStackTrace();
@@ -84,14 +84,13 @@ public class ControladorAprendiz {
 
   // Abre la ventana de lista de talleres en modo solo lectura
   private void abrirListaTalleres() {
-      try {
+
           ArrayList<Taller> talleres = acceso.recogeTalleres(c);
           ListaTalleres vistaLista = new ListaTalleres();
-          new ControladorListaTalleres(vistaLista, acceso, c, talleres, false);
+          vistaLista.recogerDatos(talleres);
+          new ControladorListaTalleres(vistaLista, acceso, c, talleres, empleado);
           vistaLista.setVisible(true);
-      } catch (SQLException ex) {
-          ex.printStackTrace();
-      }
+
   }
 
   // Cierra la sesión: cierra la conexión y vuelve al inicio de sesión

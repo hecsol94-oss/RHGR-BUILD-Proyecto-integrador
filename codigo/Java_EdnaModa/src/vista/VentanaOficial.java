@@ -1,3 +1,4 @@
+
 package vista;
 
 // Importaciones necesarias para la interfaz gráfica y gestión de eventos
@@ -52,36 +53,36 @@ public class VentanaOficial extends JFrame {
 		setJMenuBar(menuBar);
 		
 		// Menú "Citas"
-		JMenu Citas = new JMenu("Citas");
-		menuBar.add(Citas);
+		JMenu citas = new JMenu("Citas");
+		menuBar.add(citas);
 		
 		// Opción: ver lista de citas
 		menuItemListaCitas = new JMenuItem("Lista de citas");
-		Citas.add(menuItemListaCitas);
+		citas.add(menuItemListaCitas);
 		
 		// Opción: crear nueva cita
 		menuItemNuevaCita = new JMenuItem("Nueva cita");
-		Citas.add(menuItemNuevaCita);
+		citas.add(menuItemNuevaCita);
 		
 		// Menú "Clientes"
-		JMenu Clientes = new JMenu("Clientes");
-		menuBar.add(Clientes);
+		JMenu clientes = new JMenu("Clientes");
+		menuBar.add(clientes);
 		
 		menuItemListaClientes = new JMenuItem("Lista de clientes");
-		Clientes.add(menuItemListaClientes);
+		clientes.add(menuItemListaClientes);
 		
 		JMenuItem menuItemNuevoCliente = new JMenuItem("Nuevo cliente");
-		Clientes.add(menuItemNuevoCliente);
+		clientes.add(menuItemNuevoCliente);
 		
 		// Menú "Talleres"
-		JMenu Talleres = new JMenu("Talleres");
-		menuBar.add(Talleres);
+		JMenu talleres = new JMenu("Talleres");
+		menuBar.add(talleres);
 		
 		menuItemListaTalleres = new JMenuItem("Lista de talleres");
-		Talleres.add(menuItemListaTalleres);
+		talleres.add(menuItemListaTalleres);
 		
 		JMenuItem menuItemNuevoTaller = new JMenuItem("Nuevo taller");
-		Talleres.add(menuItemNuevoTaller);
+		talleres.add(menuItemNuevoTaller);
 
 		// Creación del panel principal
 		contentPane = new JPanel();
@@ -94,7 +95,7 @@ public class VentanaOficial extends JFrame {
 		// Etiqueta para mostrar el usuario actual
 		lblUsuario = new JLabel("");
 		lblUsuario.setHorizontalAlignment(SwingConstants.RIGHT); // Alineación derecha
-		lblUsuario.setBounds(400, 11, 220, 20);
+		lblUsuario.setBounds(514, 11, 106, 20);
 		contentPane.add(lblUsuario);
 		
 		// Etiqueta para acción de salir (logout)

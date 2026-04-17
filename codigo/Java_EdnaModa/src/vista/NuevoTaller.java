@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.Taller;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -16,13 +19,19 @@ import java.awt.Color;
 // Clase que representa la ventana para crear un nuevo taller
 public class NuevoTaller extends JFrame {
 
+	private static final String String = null;
+
 	// Panel principal de la ventana
 	private JPanel contentPane;
 	
 	// Campos de texto para introducir datos del taller
 	private JTextField txtNomeSala;
-	private JTextField txtTipoSala;
-
+	// Selector para el tipo de sala
+	private JComboBox cbTipoSala;
+	// Botones de acción
+	private JButton btnGuardar;
+	private JButton btnCancelar;
+    
 	// Constructor de la ventana
 	public NuevoTaller() {
 		
@@ -36,7 +45,7 @@ public class NuevoTaller extends JFrame {
 
 		// Panel principal con fondo blanco y márgenes
 		contentPane = new JPanel();
-	    contentPane.setLayout(null);
+	    contentPane.setLayout(null); // Diseño absoluto (coordenadas fijas)
 	    setContentPane(contentPane);
 
 		// --- Fila 1: Nome da la Sala ---
@@ -61,28 +70,66 @@ public class NuevoTaller extends JFrame {
 		lblTipoSala.setBounds(20, 115, 120, 14);
 		contentPane.add(lblTipoSala);
 
-		// ComboBox para seleccionar el tipo de sala
-        JComboBox cbTipoSala = new JComboBox(new String[] {"Diseño", "Costura", "Pruebas"});
+		// ComboBox para seleccionar el tipo de sala (Opciones predefinidas)
+
+		cbTipoSala = new JComboBox(new String[] {"diseño", "costura", "pruebas"});
         cbTipoSala.setBounds(20, 140, 340, 24);
         getContentPane().add(cbTipoSala);;
 
 		// --- Fila 3: Botones ---
 		
 		// Botón para guardar los datos introducidos
-		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar = new JButton("Guardar");
 		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnGuardar.setBounds(77, 248, 100, 30);
 		contentPane.add(btnGuardar);
 
 		// Botón para cancelar la operación
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnCancelar.setBounds(217, 248, 100, 30);
 		contentPane.add(btnCancelar);
 		
+		// Título visual dentro del panel
 		JLabel lblDatosDelTaller = new JLabel("DATOS DEL TALLER");
 		lblDatosDelTaller.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblDatosDelTaller.setBounds(20, 11, 200, 25);
 		contentPane.add(lblDatosDelTaller);
 	}
+	
+	// Método para obtener el texto del campo nombre
+	public String getNombreSala() {
+		return txtNomeSala.getText();
+	}
+	
+	// Método para obtener el valor seleccionado del combo
+	public String getTipoSala() {
+		return (String) cbTipoSala.getSelectedItem();
+	}
+	
+	// Getter del botón guardar para el controlador
+	public JButton getBtnGuardar() {
+		return btnGuardar;
+	}
+	
+	// Getter del botón cancelar para el controlador
+	public JButton getBtnCancelar() {
+		return btnCancelar;
+	}
+	
+	// Método para rellenar los campos al editar un taller existente
+	public void cargarDatos(Taller taller) {
+	    txtNomeSala.setText(taller.getNombre());
+	    cbTipoSala.setSelectedItem(taller.getTipo());
+	}
+	
+	public Taller devolverTallerViejo() {
+		String nombre = txtNomeSala.getText();
+	    String tipo = (String) cbTipoSala.getSelectedItem();
+	    
+	    Taller tviejo = new Taller(0, nombre, tipo);
+	    
+	    return tviejo;
+	}
+	
 }
