@@ -556,5 +556,41 @@ public class AccesoBBDD {
 		}
 
 	} 
+	
+	public void eliminarCliente(Connection c, int id_cliente) {
+		
+	    String query = "DELETE FROM Cliente WHERE id_cliente = ?";
+	    
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        
+	        pstmt.setInt(1, id_cliente); 
+	        pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        System.out.println("Erro ao eliminar o cliente: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	    
+	}
+	
+	public void actualizarCliente(Connection c, int id_cliente, String nombre, String tipo, String superpoder, String color) {
+	    String query = "UPDATE Cliente SET nombre_personaje = ?, tipo_heroe = ?, superpoder = ?, colores = ? WHERE id_cliente = ?";
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        
+	        pstmt.setString(1, nombre);
+	        pstmt.setString(2, tipo);
+	        pstmt.setString(3, superpoder);
+	        pstmt.setString(4, color);
+	        pstmt.setInt(5, id_cliente);
+	        
+	        pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        System.out.println("Erro ao atualizar o cliente: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	}
 
 }
