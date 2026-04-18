@@ -1,6 +1,6 @@
 package vista;
 
-// Importaciones necesarias para la interfaz gráfica
+//Importaciones necesarias para la interfaz gráfica
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,7 +12,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 
-// Clase que representa la ventana de listado de clientes
+//Clase que representa la ventana de listado de clientes
 public class ListaClientes extends JFrame {
 
 	// Panel principal
@@ -23,6 +23,16 @@ public class ListaClientes extends JFrame {
 	
 	// Tabla donde se mostrarán los clientes
 	private JTable table;
+	
+	private JButton btnBuscar;
+	private JButton btnNuevo;
+	private JButton btnDetalle;
+	private JButton btnEditar;
+	private JButton btnVolver;
+	private JButton btnTodos;
+	private JButton btnHeroe;
+	private JButton btnVillano;
+	private JButton btnEliminar;
 
 	// Constructor de la ventana
 	public ListaClientes() {
@@ -106,4 +116,37 @@ public class ListaClientes extends JFrame {
 		btnEliminar.setBounds(247, 320, 110, 30);
 		contentPane.add(btnEliminar);
 	}
+	public JTextField getTxtBuscar() {
+		return txtBuscar; }
+	
+	public JTable getTable() {
+		return table; }
+	
+	public JButton getBtnBuscar() {
+		return btnBuscar; }
+	
+	public JButton getBtnNuevo() {
+		return btnNuevo; }
+	
+	public JButton getBtnDetalle() {
+		return btnDetalle; }
+	
+	public JButton getBtnEditar() {
+		return btnEditar; }
+	
+	public JButton getBtnVolver() {
+		return btnVolver; }
+	
+	public JButton getBtnTodos() {
+		return btnTodos; }
+	
+	public JButton getBtnHeroe() {
+		return btnHeroe; }
+	
+	public JButton getBtnVillano() {
+		return btnVillano; }
+	
+	public JButton getBtnEliminar() {
+		return btnEliminar; }
+	
 }

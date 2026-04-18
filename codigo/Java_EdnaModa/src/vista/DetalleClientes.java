@@ -17,7 +17,12 @@ public class DetalleClientes extends JFrame {
 
     // Panel principal de la ventana
 	private JPanel contentPane;
-
+	private JTextArea txtInfoPersonal;
+	private JTextArea txtInfoTrajes;
+	private JButton btnEditar;
+	private JButton btnEliminar;
+	private JButton btnVolver;
+	
     // Constructor
 	public DetalleClientes() {
 	    // Configuración básica de la ventana
@@ -76,4 +81,24 @@ public class DetalleClientes extends JFrame {
 		lblTitulo_1.setBounds(20, 158, 250, 25);
 		contentPane.add(lblTitulo_1);
 	}
+	
+		public JTextArea getTxtInfoPersonal() {
+			return txtInfoPersonal; 
+		}
+	
+		public JTextArea getTxtInfoTrajes() {
+			return txtInfoTrajes; 
+		}
+	
+		public JButton getBtnEditar() {
+			return btnEditar; 
+		}
+	
+		public JButton getBtnEliminar() {
+			return btnEliminar; 
+		}
+	
+		public JButton getBtnVolver() {
+			return btnVolver; 
+		}
 }

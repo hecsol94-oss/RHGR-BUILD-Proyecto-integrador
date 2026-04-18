@@ -1,6 +1,6 @@
 package vista;
 
-// Importaciones necesarias para la interfaz gráfica
+//Importaciones necesarias para la interfaz gráfica
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JComboBox;
 
-// Clase que representa la ventana para crear o editar un cliente
+//Clase que representa la ventana para crear o editar un cliente
 public class NuevoCliente extends JFrame {
 
 	// Panel principal
@@ -21,6 +21,9 @@ public class NuevoCliente extends JFrame {
 	private JTextField txtColor;
 	private JTextField txtTipo;
 	private JTextField textField;
+	private JButton btnGuardar;
+	private JButton btnCancelar;
+	private JComboBox<Object> cbEstado;
 
 	// Constructor de la ventana
 	public NuevoCliente() {
@@ -117,8 +120,34 @@ public class NuevoCliente extends JFrame {
 		lblEstado.setBounds(20, 355, 100, 14);
 		contentPane.add(lblEstado);
 		
-		JComboBox cbEstado = new JComboBox(new Object[]{});
+		JComboBox<Object> cbEstado = new JComboBox<>(new Object[]{});
 		cbEstado.setBounds(20, 380, 340, 25);
 		contentPane.add(cbEstado);
 	}
+	
+	//getters para el controlador acessar los componentes de la vista
+		public JTextField getTxtNombre() {
+			return txtNombre; }
+		
+		public JTextField getTxtSuperpoder() {
+			return txtSuperpoder; }
+	
+		public JTextField getTxtColor() {
+			return txtColor; }
+	
+		public JTextField getTxtTipo() {
+			return txtTipo; }
+	
+		public JTextField getTextField() {
+			return textField; }
+	
+		public JComboBox<Object> getCbEstado() {
+			return cbEstado; }
+	
+		public JButton getBtnGuardar() {
+			return btnGuardar; }
+	
+		public JButton getBtnCancelar() {
+			return btnCancelar; }
+	
 }
