@@ -127,27 +127,35 @@ public class NuevoCliente extends JFrame {
 	
 	//getters para el controlador acessar los componentes de la vista
 		public JTextField getTxtNombre() {
-			return txtNombre; }
+			return txtNombre; 
+		}
 		
 		public JTextField getTxtSuperpoder() {
-			return txtSuperpoder; }
+			return txtSuperpoder; 
+		}
 	
 		public JTextField getTxtColor() {
-			return txtColor; }
+			return txtColor; 
+		}
 	
 		public JTextField getTxtTipo() {
-			return txtTipo; }
+			return txtTipo; 
+		}
 	
 		public JTextField getTextField() {
-			return textField; }
+			return textField; 
+		}
 	
 		public JComboBox<Object> getCbEstado() {
-			return cbEstado; }
+			return cbEstado; 
+		}
 	
 		public JButton getBtnGuardar() {
-			return btnGuardar; }
+			return btnGuardar; 
+		}
 	
 		public JButton getBtnCancelar() {
-			return btnCancelar; }
+			return btnCancelar; 
+		}
 	
 }
