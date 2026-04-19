@@ -117,36 +117,47 @@ public class ListaClientes extends JFrame {
 		contentPane.add(btnEliminar);
 	}
 	public JTextField getTxtBuscar() {
-		return txtBuscar; }
+		return txtBuscar; 
+	}
 	
 	public JTable getTable() {
-		return table; }
+		return table; 
+	}
 	
 	public JButton getBtnBuscar() {
-		return btnBuscar; }
+		return btnBuscar; 
+	}
 	
 	public JButton getBtnNuevo() {
-		return btnNuevo; }
+		return btnNuevo; 
+	}
 	
 	public JButton getBtnDetalle() {
-		return btnDetalle; }
+		return btnDetalle; 
+	}
 	
 	public JButton getBtnEditar() {
-		return btnEditar; }
+		return btnEditar; 
+	}
 	
 	public JButton getBtnVolver() {
-		return btnVolver; }
+		return btnVolver; 
+	}
 	
 	public JButton getBtnTodos() {
-		return btnTodos; }
+		return btnTodos; 
+	}
 	
 	public JButton getBtnHeroe() {
-		return btnHeroe; }
+		return btnHeroe; 
+	}
 	
 	public JButton getBtnVillano() {
-		return btnVillano; }
+		return btnVillano; 
+	}
 	
 	public JButton getBtnEliminar() {
-		return btnEliminar; }
+		return btnEliminar; 
+	}
 	
 }
