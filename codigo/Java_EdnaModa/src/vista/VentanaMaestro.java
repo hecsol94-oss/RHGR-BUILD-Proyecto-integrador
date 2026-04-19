@@ -167,17 +167,39 @@ public class VentanaMaestro extends JFrame {
 	}
 
 	// Getters para los items de menú
-	public JMenuItem getMenuItemListaCitas() { return menuItemListaCitas; }
-	public JMenuItem getMenuItemNuevaCita() { return menuItemNuevaCita; }
-	public JMenuItem getMenuItemListaClientes() { return menuItemListaClientes; }
-	public JMenuItem getMenuItemNuevoCliente() { return menuItemNuevoCliente; }
-	public JMenuItem getMenuItemListaTalleres() { return menuItemListaTalleres; }
-	public JMenuItem getMenuItemNuevoTaller() { return menuItemNuevoTaller; }
+	public JMenuItem getMenuItemListaCitas() { 
+		return menuItemListaCitas; 
+	}
+	public JMenuItem getMenuItemNuevaCita() { 
+		return menuItemNuevaCita; 
+	}
+	public JMenuItem getMenuItemListaClientes() { 
+		return menuItemListaClientes; 
+	}
+	public JMenuItem getMenuItemNuevoCliente() { 
+		return menuItemNuevoCliente; 
+	}
+	public JMenuItem getMenuItemListaTalleres() { 
+		return menuItemListaTalleres; 
+	}
+	public JMenuItem getMenuItemNuevoTaller() { 
+		return menuItemNuevoTaller; 
+	}
 
 	// Getters para las etiquetas del dashboard
-	public JLabel getLblUsuario() { return lblUsuario; }
-	public JLabel getLblSalir() { return lblSalir; }
-	public JLabel getLblTodasLasCitas() { return lblTodasLasCitas; }
-	public JLabel getLblNumeroDeMisCitas() { return lblNumeroDeMisCitas; }
-	public JLabel getLblNumeroDeTalleres() { return lblNumeroDeTalleres; }
+	public JLabel getLblUsuario() { 
+		return lblUsuario; 
+	}
+	public JLabel getLblSalir() { 
+		return lblSalir; 
+	}
+	public JLabel getLblTodasLasCitas() { 
+		return lblTodasLasCitas; 
+	}
+	public JLabel getLblNumeroDeMisCitas() { 
+		return lblNumeroDeMisCitas; 
+	}
+	public JLabel getLblNumeroDeTalleres() { 
+		return lblNumeroDeTalleres; 
+	}
 }
