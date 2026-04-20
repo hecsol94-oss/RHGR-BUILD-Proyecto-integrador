@@ -245,4 +245,8 @@ public class ControladorNuevaCitaMaestro {
 			}
 		});
 	}
+<<<<<<< HEAD:codigo/Java_EdnaModa/controlador/ControladorNuevaCitaMaestro.java
 }
+=======
+}
+>>>>>>> 1e4823f4ac8ca2c340b15af8eba49786a346af1a:codigo/Java_EdnaModa/src/controlador/ControladorNuevaCitaMaestro.java
