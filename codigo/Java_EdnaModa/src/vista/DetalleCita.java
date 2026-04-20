@@ -9,28 +9,37 @@ import java.awt.Font;
 // Clase que representa la ventana de detalle de una cita
 public class DetalleCita extends JFrame {
 
-    // Constructor de la ventana
+    // componentes como campos privados para que el controlador pueda acceder mediante getters
+    private JTextArea txtDetalles;
+    private JButton btnVolver;
+
     public DetalleCita() {
-        // Configuración básica de la ventana
-        setTitle("Detalle de la Cita"); // Título de la ventana
-        setBounds(150, 150, 300, 350); // Posición y tamaño de la ventana
-        getContentPane().setLayout(null); // Layout absoluto para colocar los componentes manualmente
+        setTitle("Detalle de la Cita");
+        setBounds(150, 150, 300, 350);
+        getContentPane().setLayout(null);
 
-        // Área de texto que muestra la información de la cita
-        JTextArea txtDetalles = new JTextArea();
-        txtDetalles.setText("ID: 001\nFecha: 24/03/2026\nHora: 10:00\nCliente: Mr. Increíble\nTraje: Classic Blue\nTaller: París\nProfesional: Edna\nAprendiz: Rafael");
-        txtDetalles.setEditable(false); // Solo lectura, no editable por el usuario
-        txtDetalles.setBounds(20, 47, 240, 155); // Posición y tamaño dentro de la ventana
-        getContentPane().add(txtDetalles); // Se agrega al panel principal
+        //texto vacío — el controlador rellenará los datos reales
+        txtDetalles = new JTextArea();
+        txtDetalles.setEditable(false);
+        txtDetalles.setBounds(20, 47, 240, 155);
+        getContentPane().add(txtDetalles);
 
-        // Botón para volver a la ventana anterior
-        JButton btnVolver = new JButton("Volver");
-        btnVolver.setBounds(170, 254, 90, 30); // Posición y tamaño del botón
-        getContentPane().add(btnVolver); // Se agrega al panel principal
-        
+        btnVolver = new JButton("Volver");
+        btnVolver.setBounds(170, 254, 90, 30);
+        getContentPane().add(btnVolver);
+
         JLabel lblInformacinDeLa = new JLabel("INFORMACIÓN DE LA CITA");
         lblInformacinDeLa.setFont(new Font("Tahoma", Font.BOLD, 14));
         lblInformacinDeLa.setBounds(20, 11, 250, 25);
         getContentPane().add(lblInformacinDeLa);
+    }
+
+    // Getters necesarios para que el controlador acceda a los componentes
+    public JTextArea getTxtDetalles() {
+        return txtDetalles;
+    }
+
+    public JButton getBtnVolver() {
+        return btnVolver;
     }
 }
