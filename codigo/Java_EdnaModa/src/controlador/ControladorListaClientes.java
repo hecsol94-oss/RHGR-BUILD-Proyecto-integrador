@@ -25,8 +25,7 @@ public class ControladorListaClientes {
     private boolean editable;
 
     // Constructor: carga la tabla y asigna los listeners
-    public ControladorListaClientes(ListaClientes vista, AccesoBBDD acceso, Connection c,
-                                     ArrayList<Cliente> clientes, boolean editable) {
+    public ControladorListaClientes(ListaClientes vista, AccesoBBDD acceso, Connection c, ArrayList<Cliente> clientes, boolean editable) {
         this.vista = vista;
         this.acceso = acceso;
         this.c = c;

@@ -60,38 +60,22 @@ public class AccesoBBDD {
 		ArrayList<String> queryC = new ArrayList<>();
 
 		// Lista de sentencias SQL para dar de alta a los personajes
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Mr. Increíble', 'superhéroe', 'superfuerza', 'rojo y azúl');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Elastigirl', 'superheroína', 'elasticidad', 'rojo y blanco');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Dash', 'superhéroe', 'supervelocidad', 'rojo y negro');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Violeta', 'superheroína', 'invisible y campos fuerza', 'rojo y negro');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Síndrome', 'supervillano', 'inventos', 'blanco y negro');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Jack-Jack', 'superhéroe', 'multipoderes', 'rojo y negro');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Frozono', 'superhéroe', 'hielo', 'blanco y azúl claro');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('The Underminer', 'supervillano', 'excavar', 'marrón y amarillo');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Bomb Voyage', 'supervillano', 'bombas atómicas', 'blanco y negro');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Rapta-Pantallas', 'supervillana', 'hipnosis', 'negro');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Vacío', 'superheroína', 'portales', 'verde y azúl');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Helectrix', 'superhéroe', 'electricidad', 'azúl oscuro');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Krujido', 'superhéroe', 'telequinesia', 'azúl oscuro');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Reflujo', 'superhéroe', 'lava', 'naranja');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Bloque', 'superheroína', 'superfuerza', 'marrón y negro');");
-		queryC.add(
-				"INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Silbido', 'superhéroe', 'chillido agudo', 'negro');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Mr. Increíble', 'superhéroe', 'superfuerza', 'rojo y azúl');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Elastigirl', 'superheroína', 'elasticidad', 'rojo y blanco');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Dash', 'superhéroe', 'supervelocidad', 'rojo y negro');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Violeta', 'superheroína', 'invisible y campos fuerza', 'rojo y negro');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Síndrome', 'supervillano', 'inventos', 'blanco y negro');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Jack-Jack', 'superhéroe', 'multipoderes', 'rojo y negro');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Frozono', 'superhéroe', 'hielo', 'blanco y azúl claro');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('The Underminer', 'supervillano', 'excavar', 'marrón y amarillo');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Bomb Voyage', 'supervillano', 'bombas atómicas', 'blanco y negro');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Rapta-Pantallas', 'supervillana', 'hipnosis', 'negro');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Vacío', 'superheroína', 'portales', 'verde y azúl');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Helectrix', 'superhéroe', 'electricidad', 'azúl oscuro');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Krujido', 'superhéroe', 'telequinesia', 'azúl oscuro');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Reflujo', 'superhéroe', 'lava', 'naranja');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Bloque', 'superheroína', 'superfuerza', 'marrón y negro');");
+		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Silbido', 'superhéroe', 'chillido agudo', 'negro');");
 
 		// Ejecución masiva de los inserts
 		for (String query : queryC) {
@@ -131,26 +115,17 @@ public class AccesoBBDD {
 		Statement st = c.createStatement();
 
 		ArrayList<String> queryE = new ArrayList<>();
-		queryE.add(
-				"INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Lucía', 'Martínez', 'Aguja', 'lucia', 'Lucia2026')");
-		queryE.add(
-				"INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Carlos', 'Ruiz', 'Tijeras', 'carlos', 'Tijeras123')");
-		queryE.add(
-				"INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Ana', 'Torres', 'SastreX', 'ana', 'SastreX2026')");
-		queryE.add(
-				"INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Javier', 'Gómez', 'MaestroModa', 'javier', 'MaestroModa!')");
-		queryE.add(
-				"INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'María', 'Delgado', 'Costurilla', 'maria', 'Costurilla22')");
-		queryE.add(
-				"INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Pablo', 'Herrera', 'HiloFino', 'pablo', 'HiloFino33')");
-		queryE.add(
-				"INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Sofía', 'Navarro', 'PatrónX', 'sofia', 'PatronX44')");
-		queryE.add(
-				"INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Diego', 'Fernández', 'CorteMaestro', 'diego', 'CorteMaestro55')");
-		queryE.add(
-				"INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Elena', 'Rivas', 'DamaAguja', 'elena', 'DamaAguja66')");
-		queryE.add(
-				"INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Tomás', 'Villalba', 'GranSastre', 'tomas', 'GranSastre77')");
+		// Lista de sentencias SQL para dar de alta a los empleados
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Lucía', 'Martínez', 'Aguja', 'lucia', 'Lucia2026')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Carlos', 'Ruiz', 'Tijeras', 'carlos', 'Tijeras123')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Ana', 'Torres', 'SastreX', 'ana', 'SastreX2026')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Javier', 'Gómez', 'MaestroModa', 'javier', 'MaestroModa!')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'María', 'Delgado', 'Costurilla', 'maria', 'Costurilla22')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Pablo', 'Herrera', 'HiloFino', 'pablo', 'HiloFino33')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Sofía', 'Navarro', 'PatrónX', 'sofia', 'PatronX44')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Diego', 'Fernández', 'CorteMaestro', 'diego', 'CorteMaestro55')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Elena', 'Rivas', 'DamaAguja', 'elena', 'DamaAguja66')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Tomás', 'Villalba', 'GranSastre', 'tomas', 'GranSastre77')");
 
 		for (String q : queryE) {
 			st.executeUpdate(q);
@@ -188,6 +163,7 @@ public class AccesoBBDD {
 		Statement st = c.createStatement();
 
 		ArrayList<String> queryT = new ArrayList<>();
+		// Lista de sentencias SQL para dar de alta a los talleres
 		queryT.add("INSERT INTO Taller (nombre_sala, tipo_sala) VALUES ('Milán', 'diseño');");
 		queryT.add("INSERT INTO Taller (nombre_sala, tipo_sala) VALUES ('París', 'diseño');");
 		queryT.add("INSERT INTO Taller (nombre_sala, tipo_sala) VALUES ('Madrid', 'costura');");
@@ -231,71 +207,39 @@ public class AccesoBBDD {
 		Statement st = c.createStatement();
 
 		ArrayList<String> queryT = new ArrayList<>();
-
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje principal de Mr. Increíble', 'pruebas', 1)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje reforzado para misiones pesadas', 'costura', 1)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje elástico de alta resistencia', 'pruebas', 2)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de infiltración flexible', 'diseño', 2)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje aerodinámico de velocidad', 'costura', 3)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje antifricción para carreras', 'diseño', 3)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de invisibilidad optimizado', 'pruebas', 4)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de campos de fuerza', 'costura', 4)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Armadura tecnológica de Síndrome', 'diseño', 5)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de vuelo mejorado', 'costura', 5)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje ignífugo para Jack-Jack', 'pruebas', 6)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje multirresistente para poderes variables', 'diseño', 6)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje térmico de hielo', 'costura', 7)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje anti-condensación', 'diseño', 7)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de excavación subterránea', 'diseño', 8)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje blindado anti-derrumbes', 'costura', 8)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje explosivo reforzado', 'pruebas', 9)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje ignífugo anti-detonación', 'diseño', 9)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de hipnosis visual', 'costura', 10)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de camuflaje digital', 'diseño', 10)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje estabilizador de portales', 'pruebas', 11)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje anti-distorsión espacial', 'costura', 11)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje conductor de electricidad', 'costura', 12)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje aislante de alto voltaje', 'diseño', 12)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de concentración telequinética', 'diseño', 13)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje reforzado para control mental', 'costura', 13)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje resistente a lava', 'pruebas', 14)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje térmico de contención', 'diseño', 14)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de superfuerza reforzado', 'pruebas', 15)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de impacto pesado', 'costura', 15)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de protección auditiva', 'costura', 16)");
-		queryT.add(
-				"INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje amplificador de ondas sonoras', 'diseño', 16)");
+		// Lista de sentencias SQL para dar de alta a los trajes
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje principal de Mr. Increíble', 'pruebas', 1)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje reforzado para misiones pesadas', 'costura', 1)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje elástico de alta resistencia', 'pruebas', 2)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de infiltración flexible', 'diseño', 2)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje aerodinámico de velocidad', 'costura', 3)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje antifricción para carreras', 'diseño', 3)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de invisibilidad optimizado', 'pruebas', 4)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de campos de fuerza', 'costura', 4)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Armadura tecnológica de Síndrome', 'diseño', 5)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de vuelo mejorado', 'costura', 5)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje ignífugo para Jack-Jack', 'pruebas', 6)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje multirresistente para poderes variables', 'diseño', 6)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje térmico de hielo', 'costura', 7)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje anti-condensación', 'diseño', 7)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de excavación subterránea', 'diseño', 8)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje blindado anti-derrumbes', 'costura', 8)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje explosivo reforzado', 'pruebas', 9)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje ignífugo anti-detonación', 'diseño', 9)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de hipnosis visual', 'costura', 10)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de camuflaje digital', 'diseño', 10)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje estabilizador de portales', 'pruebas', 11)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje anti-distorsión espacial', 'costura', 11)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje conductor de electricidad', 'costura', 12)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje aislante de alto voltaje', 'diseño', 12)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de concentración telequinética', 'diseño', 13)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje reforzado para control mental', 'costura', 13)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje resistente a lava', 'pruebas', 14)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje térmico de contención', 'diseño', 14)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de superfuerza reforzado', 'pruebas', 15)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de impacto pesado', 'costura', 15)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de protección auditiva', 'costura', 16)");
+		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje amplificador de ondas sonoras', 'diseño', 16)");
 
 		for (String q : queryT) {
 			st.executeUpdate(q);
@@ -328,45 +272,27 @@ public class AccesoBBDD {
 		Statement st = c.createStatement();
 
 		ArrayList<String> queryCi = new ArrayList<>();
-
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '09:00', 1, 1, 3, 6, 1);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '10:00', 1, 2, 1, 5, 3);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '11:00', 1, 3, 3, 6, 5);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '12:00', 1, 4, 5, 7, 7);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '15:00', 1, 5, 1, 8, 9);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '16:00', 1, 8, 4, 8, 13);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '17:00', 1, 9, 4, 8, 15);");
-
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '09:00', 1, 6, 5, 6, 11);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '10:00', 1, 7, 3, 7, 12);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '11:00', 1, 11, 5, 7, 17);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '12:00', 1, 12, 3, 6, 19);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '15:00', 1, 10, 1, 8, 14);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '16:00', 1, 16, 4, 8, 31);");
-
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '09:00', 1, 13, 3, 7, 21);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '10:00', 1, 14, 5, 7, 23);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '11:00', 1, 15, 4, 6, 25);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '15:00', 1, 5, 1, 8, 10);");
-		queryCi.add(
-				"INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '16:00', 1, 8, 4, 8, 14);");
+		// Lista de sentencias SQL para dar de alta a las citas (10-04-2026)
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '09:00', 1, 1, 3, 6, 1);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '10:00', 1, 2, 1, 5, 3);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '11:00', 1, 3, 3, 6, 5);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '12:00', 1, 4, 5, 7, 7);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '15:00', 1, 5, 1, 8, 9);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '16:00', 1, 8, 4, 8, 13);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '17:00', 1, 9, 4, 8, 15);");
+		// Lista de sentencias SQL para dar de alta a las citas (11-04-2026)
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '09:00', 1, 6, 5, 6, 11);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '10:00', 1, 7, 3, 7, 12);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '11:00', 1, 11, 5, 7, 17);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '12:00', 1, 12, 3, 6, 19);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '15:00', 1, 10, 1, 8, 14);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '16:00', 1, 16, 4, 8, 31);");
+		// Lista de sentencias SQL para dar de alta a las citas (12-04-2026)
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '09:00', 1, 13, 3, 7, 21);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '10:00', 1, 14, 5, 7, 23);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '11:00', 1, 15, 4, 6, 25);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '15:00', 1, 5, 1, 8, 10);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '16:00', 1, 8, 4, 8, 14);");
 
 		for (String q : queryCi) {
 			st.executeUpdate(q);
@@ -405,7 +331,7 @@ public class AccesoBBDD {
 		Statement st = c.createStatement();
 
 		ArrayList<String> QueryCA = new ArrayList<>();
-
+		// Lista de sentencias SQL para dar de alta a las citas de los aprendices
 		QueryCA.add("INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (1, 1);");
 		QueryCA.add("INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (2, 1);");
 		QueryCA.add("INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (3, 2);");

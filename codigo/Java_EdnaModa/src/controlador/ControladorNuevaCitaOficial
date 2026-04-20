@@ -1,0 +1,180 @@
+package controlador;
+
+import modelo.Cita;
+import modelo.Cliente;
+import modelo.Empleado;
+import modelo.Traje;
+import vista.NuevaCitaOficial;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+public class ControladorNuevaCitaOficial implements ActionListener {
+
+    private NuevaCitaOficial vista;
+    private Cita cita;
+    private Cliente cliente;
+    private Traje traje;
+    private Empleado empleado;
+
+    private Empleado oficialLogueado;
+
+    public ControladorNuevaCitaOficial(NuevaCitaOficial vista, Empleado oficialLogueado) {
+        this.vista = vista;
+        this.oficialLogueado = oficialLogueado;
+
+        this.cita = new Cita();
+        this.cliente = new Cliente();
+        this.traje = new Traje();
+        this.empleado = new Empleado();
+
+        cargarDatosIniciales();
+        configurarEventos();
+    }
+
+    public void iniciar() {
+        vista.setLocationRelativeTo(null);
+        vista.setVisible(true);
+    }
+
+    private void cargarDatosIniciales() {
+        // Clientes
+        List<Cliente> clientes = Cliente.listarClientes();
+        vista.cargarClientes(clientes);
+
+        // Aprendices
+        List<Empleado> aprendices = Empleado.listarAprendices();
+        vista.cargarAprendices(aprendices);
+
+        // Salas (si las cargas desde BD)
+        vista.cargarSalas(Cita.listarSalas());
+    }
+
+    private void configurarEventos() {
+        vista.getBtnGuardar().addActionListener(this);
+        vista.getBtnCancelar().addActionListener(this);
+
+        // Cuando cambia el cliente, recargar trajes
+        vista.getComboCliente().addActionListener(e -> cargarTrajesCliente());
+    }
+
+    private void cargarTrajesCliente() {
+        Cliente cliente = vista.getClienteSeleccionado();
+        if (cliente != null) {
+            List<Traje> trajes = modeloTraje.listarTrajesPorCliente(cliente.getIdCliente());
+            vista.cargarTrajes(trajes);
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(vista.getBtnGuardar())) {
+            crearCita();
+        } else if (e.getSource().equals(vista.getBtnCancelar())) {
+            vista.dispose();
+        }
+    }
+
+    private void crearCita() {
+        try {
+            // Validar rol
+            if (!oficialLogueado.getCategoria().equalsIgnoreCase("oficial")
+                    && !oficialLogueado.getCategoria().equalsIgnoreCase("maestro")) {
+                JOptionPane.showMessageDialog(vista,
+                        "No tienes permisos para crear citas.",
+                        "Permisos insuficientes",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            Cliente cliente = vista.getClienteSeleccionado();
+            Traje traje = vista.getTrajeSeleccionado();
+            int idSala = vista.getSalaSeleccionada();
+            List<Empleado> aprendices = vista.getAprendicesSeleccionados();
+
+            LocalDate fecha = vista.getFechaSeleccionada();   // p.ej. desde un JDateChooser
+            LocalTime hora = vista.getHoraSeleccionada();     // p.ej. desde campos HH:MM
+            int duracion = vista.getDuracionSeleccionada();   // en horas
+
+            if (cliente == null || traje == null) {
+                JOptionPane.showMessageDialog(vista,
+                        "Debes seleccionar un cliente y un traje.",
+                        "Datos incompletos",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // El traje debe pertenecer al cliente
+            if (traje.getIdCliente() != cliente.getIdCliente()) {
+                JOptionPane.showMessageDialog(vista,
+                        "El traje seleccionado no pertenece al cliente.",
+                        "Error de datos",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Máximo 2 aprendices
+            if (aprendices.size() > 2) {
+                JOptionPane.showMessageDialog(vista,
+                        "Solo se pueden asignar hasta 2 aprendices por cita.",
+                        "Límite de aprendices",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Regla héroe / villano
+            if (!modeloCita.cumpleReglaHeroeVillano(cliente.getIdCliente(), fecha, hora)) {
+                JOptionPane.showMessageDialog(vista,
+                        "No se puede crear la cita: héroes y villanos deben tener 1 hora de separación.",
+                        "Regla de negocio",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Disponibilidad de sala
+            if (!modeloCita.estaSalaDisponible(idSala, fecha, hora, duracion)) {
+                JOptionPane.showMessageDialog(vista,
+                        "La sala seleccionada no está disponible en ese horario.",
+                        "Sala ocupada",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Crear objeto Cita
+            Cita cita = new Cita();
+            cita.setFecha(fecha);
+            cita.setHoraInicio(hora);
+            cita.setDuracion(duracion);
+            cita.setIdCliente(cliente.getIdCliente());
+            cita.setIdSala(idSala);
+            cita.setIdEmpleado(oficialLogueado.getIdEmpleado());
+            cita.setIdTraje(traje.getIdTraje());
+
+            int idCita = modeloCita.insertarCita(cita);
+
+            // Insertar aprendices
+            for (Empleado ap : aprendices) {
+                modeloCita.insertarAprendizEnCita(idCita, ap.getIdEmpleado());
+            }
+
+            JOptionPane.showMessageDialog(vista,
+                    "Cita creada correctamente.",
+                    "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            vista.dispose();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(vista,
+                    "Se ha producido un error al crear la cita.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}
