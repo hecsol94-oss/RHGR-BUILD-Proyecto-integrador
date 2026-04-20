@@ -160,4 +160,11 @@ public class ListaClientes extends JFrame {
 		return btnEliminar; 
 	}
 	
+	public void deshabilitarBotones() {
+    	btnEditar.setEnabled(false);
+    	btnEliminar.setEnabled(false);
+    	btnNuevo.setEnabled(false);
+
+    }
+	
 }

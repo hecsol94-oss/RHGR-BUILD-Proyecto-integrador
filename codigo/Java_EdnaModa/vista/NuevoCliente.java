@@ -20,7 +20,7 @@ public class NuevoCliente extends JFrame {
 	private JTextField txtSuperpoder;
 	private JTextField txtColor;
 	private JTextField txtTipo;
-	private JTextField textField;
+	private JTextField txtNombreTraje;
 	private JButton btnGuardar;
 	private JButton btnCancelar;
 	private JComboBox<Object> cbEstado;
@@ -107,9 +107,9 @@ public class NuevoCliente extends JFrame {
 		lblNombre_1.setBounds(20, 287, 100, 14);
 		contentPane.add(lblNombre_1);
 		
-		textField = new JTextField();
-		textField.setBounds(20, 307, 340, 25);
-		contentPane.add(textField);
+		txtNombreTraje = new JTextField();
+		txtNombreTraje.setBounds(20, 307, 340, 25);
+		contentPane.add(txtNombreTraje);
 		
 		JLabel lblTitle_1 = new JLabel("DATOS DEL TRAJE");
 		lblTitle_1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -142,8 +142,8 @@ public class NuevoCliente extends JFrame {
 			return txtTipo; 
 		}
 	
-		public JTextField getTextField() {
-			return textField; 
+		public JTextField getTxtNombreTraje() {
+			return txtNombreTraje; 
 		}
 	
 		public JComboBox<Object> getCbEstado() {

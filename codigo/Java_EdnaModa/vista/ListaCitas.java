@@ -122,4 +122,10 @@ public class ListaCitas extends JFrame {
     public JButton getBtnVolver()       {
     	return btnVolver; 
     	}
+    
+    public void deshabilitarBotones() {
+    	btnEditar.setEnabled(false);
+    	btnNuevaCita.setEnabled(false);
+
+    }
 }

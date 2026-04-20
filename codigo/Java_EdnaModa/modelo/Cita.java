@@ -15,6 +15,11 @@ public class Cita {
 	private int id_sala;
 	private int id_traje;
 	
+	Cliente cliente;
+	Traje traje;
+	Taller taller;
+	Empleado empleado;
+	
 	
 	// Constructor completo para gestionar la agenda del taller
 	public Cita(int id_cita, Date fecha, Time hora_inicio, int duracion, int id_empleado, int id_cliente, int id_sala, int id_traje) {
@@ -92,6 +97,18 @@ public class Cita {
 	public void setId_traje(int id_traje) {
 		this.id_traje = id_traje;
 	}
+	
+//	public String setDetalles(String detalles) {
+//		return detalles = "Fecha: " + fecha +"\nHora: "+ hora_inicio + "\nCliente: " + cliente.getNombre() + "\nTraje: " + traje.getNombre_traje()+ "\nTaller: " + taller.getNombre() + "\nDuracion: " + duracion;
+//	}
+//
+//	public int setIdAprendiz1(int id_emp1) {
+//		return empleado.getId_empleado();	
+//	}
+//	
+//	public int setIdAprendiz2(int id_emp2) {
+//		return empleado.getId_empleado();	
+//	}
 	
 	
 	

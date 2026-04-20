@@ -1,3 +1,4 @@
+
 package vista;
 
 // Importaciones necesarias para la interfaz gráfica y gestión de eventos
@@ -18,14 +19,16 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-// Clase principal que representa la ventana del usuario tipo "Aprendiz"
-public class VentanaAprendiz extends JFrame {
+// Clase principal que representa la ventana del usuario tipo "Oficial"
+public class VentanaOficial extends JFrame {
 
 	// Panel principal donde se colocan todos los componentes
 	private JPanel contentPane;
 
 	// Items de menú accesibles desde el controlador
 	private JMenuItem menuItemListaCitas;
+	private JMenuItem menuItemNuevaCita;
+	private JMenuItem menuItemListaClientes;
 	private JMenuItem menuItemListaTalleres;
 
 	// Etiquetas accesibles desde el controlador
@@ -36,7 +39,7 @@ public class VentanaAprendiz extends JFrame {
 	private JLabel lblNumeroDeTalleres;
 
 	// Constructor de la ventana
-	public VentanaAprendiz() {
+	public VentanaOficial() {
 		
 		// Configuración básica de la ventana
 		setTitle("RGHR EDNA MODA - Sistema de Gestión"); // Título
@@ -50,36 +53,39 @@ public class VentanaAprendiz extends JFrame {
 		setJMenuBar(menuBar);
 		
 		// Menú "Citas"
-		JMenu Citas = new JMenu("Citas");
-		menuBar.add(Citas);
+		JMenu citas = new JMenu("Citas");
+		menuBar.add(citas);
 		
 		// Opción: ver lista de citas
 		menuItemListaCitas = new JMenuItem("Lista de citas");
-		Citas.add(menuItemListaCitas);
+		citas.add(menuItemListaCitas);
 		
 		// Opción: crear nueva cita
-		JMenuItem nuevaCita = new JMenuItem("Nueva cita");
-		Citas.add(nuevaCita);
+		menuItemNuevaCita = new JMenuItem("Nueva cita");
+		citas.add(menuItemNuevaCita);
 		
 		// Menú "Clientes"
-		JMenu Clientes = new JMenu("Clientes");
-		menuBar.add(Clientes);
+		JMenu clientes = new JMenu("Clientes");
+		menuBar.add(clientes);
 		
-		JMenuItem listaClientes = new JMenuItem("Lista de clientes");
-		Clientes.add(listaClientes);
+		menuItemListaClientes = new JMenuItem("Lista de clientes");
+		clientes.add(menuItemListaClientes);
 		
-		JMenuItem nuevoCliente = new JMenuItem("Nuevo cliente");
-		Clientes.add(nuevoCliente);
+		JMenuItem menuItemNuevoCliente = new JMenuItem("Nuevo cliente");
+		clientes.add(menuItemNuevoCliente);
+		menuItemNuevoCliente.setEnabled(false);
 		
 		// Menú "Talleres"
-		JMenu Talleres = new JMenu("Talleres");
-		menuBar.add(Talleres);
+		JMenu talleres = new JMenu("Talleres");
+		menuBar.add(talleres);
 		
 		menuItemListaTalleres = new JMenuItem("Lista de talleres");
-		Talleres.add(menuItemListaTalleres);
+		talleres.add(menuItemListaTalleres);
 		
-		JMenuItem nuevoTaller = new JMenuItem("Nuevo taller");
-		Talleres.add(nuevoTaller);
+		JMenuItem menuItemNuevoTaller = new JMenuItem("Nuevo taller");
+		talleres.add(menuItemNuevoTaller);
+		menuItemNuevoTaller.setEnabled(false);
+
 
 		// Creación del panel principal
 		contentPane = new JPanel();
@@ -92,7 +98,7 @@ public class VentanaAprendiz extends JFrame {
 		// Etiqueta para mostrar el usuario actual
 		lblUsuario = new JLabel("");
 		lblUsuario.setHorizontalAlignment(SwingConstants.RIGHT); // Alineación derecha
-		lblUsuario.setBounds(400, 11, 220, 20);
+		lblUsuario.setBounds(514, 11, 106, 20);
 		contentPane.add(lblUsuario);
 		
 		// Etiqueta para acción de salir (logout)
@@ -157,7 +163,7 @@ public class VentanaAprendiz extends JFrame {
 		
 		// Imagen del logo de la aplicación
 		JLabel imagen = new JLabel("");
-		imagen.setIcon(new ImageIcon(VentanaAprendiz.class.getResource("/img/LOGO RHGR_BUILD.png")));
+		imagen.setIcon(new ImageIcon(VentanaOficial.class.getResource("/img/LOGO RHGR_BUILD.png")));
 		imagen.setBounds(188, 0, 316, 302);
 		contentPane.add(imagen);
 	}
@@ -165,6 +171,12 @@ public class VentanaAprendiz extends JFrame {
 	// Getters para los items de menú
 	public JMenuItem getMenuItemListaCitas() { 
 		return menuItemListaCitas; 
+	}
+	public JMenuItem getMenuItemNuevaCita() { 
+		return menuItemNuevaCita; 
+	}
+	public JMenuItem getMenuItemListaClientes() { 
+		return menuItemListaClientes; 
 	}
 	public JMenuItem getMenuItemListaTalleres() { 
 		return menuItemListaTalleres; 

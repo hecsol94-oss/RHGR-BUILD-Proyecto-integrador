@@ -7,7 +7,7 @@ public class AccesoBBDD {
 
 	// Configuración de los parámetros de conexión a MySQL
 	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost/TallerEdnaModa";
+	private String url = "jdbc:mysql://localhost/tallerednamoda";
 	private String usuario = "root";
 	private String pword = "12345678";
 
@@ -365,14 +365,39 @@ public class AccesoBBDD {
 		st.close();
 		return citasAprendiz;
 	}
+
+	public ArrayList<Empleado> recogeAprendices(Connection c) throws SQLException {
+		ArrayList<Empleado> empleados = new ArrayList<>();
+		Statement st = c.createStatement();
+		ResultSet resultados = st.executeQuery("SELECT * FROM Empleados WHERE caterogia = 'aprendiz'");
+
+		while (resultados.next()) {
+			// Declaración de variables según las columnas de la tabla
+			int idEmpleado = resultados.getInt("id_empleado");
+			String categoria = resultados.getString("categoria");
+			String nombre = resultados.getString("nombre");
+			String apellido = resultados.getString("apellido");
+			String apodo = resultados.getString("apodo");
+			String usuario = resultados.getString("usuario");
+			String contrasena = resultados.getString("contraseña");
+
+			// Creación del objeto e inserción en la lista
+			Empleado aprendices = new Empleado(idEmpleado, categoria, nombre, apellido, apodo, usuario, contrasena);
+			empleados.add(aprendices);
+		}
+
+		resultados.close();
+		st.close();
+		return empleados;
+	}
 	
 	//Al crear un nuevo cliente en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD
-	public void insertarNuevoCliente(Connection c, Cliente cl) {
+	public void insertarNuevoCliente(Connection c, String nombre, String tipo, String superpoder, String color) {
 
 		Statement st;
 		try {
 			st = c.createStatement();
-			String queryC = ("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('" +cl.getNombre() + "', '" +cl.getTipo_heroe() + "', '" +cl.getSuperpoder() + "', '" +cl.getColor() + "');");
+			String queryC = ("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('" +nombre + "', '" +tipo + "', '" +superpoder + "', '" +color + "');");
 
 			st.executeUpdate(queryC);
 			st.close();
@@ -431,12 +456,12 @@ public class AccesoBBDD {
 	}
 	
 	//Al crear un nuevo traje en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD
-	public void insertarNuevoTraje(Connection c, Traje t) {
+	public void insertarNuevoTraje(Connection c, String nombre, String estado, int id_cliente) {
 
 		Statement st;
 		try {
 			st = c.createStatement();
-			String queryTr = "INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('" +t.getNombre_traje() + "', '" +t.getEstado() + "', " +t.getId_cliente() + ")";
+			String queryTr = "INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('" +nombre + "', '" +estado + "', " +id_cliente + ")";
 
 			st.executeUpdate(queryTr);
 			st.close();

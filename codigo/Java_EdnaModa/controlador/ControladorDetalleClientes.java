@@ -92,15 +92,10 @@ public class ControladorDetalleClientes {
             "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
         if (confirmacion == JOptionPane.YES_OPTION) {
-            try {
-                acceso.eliminarCliente(c, cliente.getId_cliente());
-                JOptionPane.showMessageDialog(vista, "Cliente eliminado correctamente.");
-                vista.dispose();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(vista, "Error al eliminar el cliente.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            acceso.eliminarCliente(c, cliente.getId_cliente());
+            JOptionPane.showMessageDialog(vista, "Cliente eliminado correctamente.");
+            vista.dispose();
+            
         }
     }
 }

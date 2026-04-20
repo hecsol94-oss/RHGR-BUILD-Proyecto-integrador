@@ -50,7 +50,7 @@ public class ControladorNuevoCliente {
         String superpoder = vista.getTxtSuperpoder().getText().trim();
         String color = vista.getTxtColor().getText().trim();
         String tipo = vista.getTxtTipo().getText().trim();
-        String nombreTraje = vista.getTextField().getText().trim();
+        String nombreTraje = vista.getTxtNombreTraje().getText().trim();
         String estadoTraje = vista.getCbEstado().getSelectedItem() != null
             ? vista.getCbEstado().getSelectedItem().toString() : "";
 
@@ -64,13 +64,13 @@ public class ControladorNuevoCliente {
         try {
             if (clienteEditar == null) {
                 // Inserción de nuevo cliente
-                acceso.insertarClienteNuevo(c, nombre, tipo, superpoder, color);
+                acceso.insertarNuevoCliente(c, nombre, tipo, superpoder, color);
                 // Si se ha introducido un traje, se inserta también
                 if (!nombreTraje.isEmpty()) {
                     // Se obtiene el ID del cliente recién insertado para asociarle el traje
                     java.util.ArrayList<Cliente> clientes = acceso.recogeClientes(c);
                     int idNuevo = clientes.get(clientes.size() - 1).getId_cliente();
-                    acceso.insertarTrajeNuevo(c, nombreTraje, estadoTraje, idNuevo);
+                    acceso.insertarNuevoTraje(c, nombreTraje, estadoTraje, idNuevo);
                 }
                 JOptionPane.showMessageDialog(vista, "Cliente creado correctamente.");
             } else {

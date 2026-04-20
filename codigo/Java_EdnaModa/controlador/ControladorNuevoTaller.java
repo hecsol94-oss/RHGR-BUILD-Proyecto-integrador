@@ -70,25 +70,34 @@ public class ControladorNuevoTaller {
 		String nombreIntroducido = vista.getNombreSala();
 		String tipoIntroducido = vista.getTipoSala();
 		
-		// Instancia un nuevo objeto Taller calculando un ID provisional (tamaño actual + 1)
-		Taller nuevoTaller = new Taller((talleres.size() + 1), nombreIntroducido, tipoIntroducido);
-		
-		// Llama al modelo para persistir los datos en la base de datos
-		acceso.insertarNuevoTaller(c, nuevoTaller);
-		
-		// Actualiza la lista local de talleres recuperándola de nuevo de la BBDD
-		talleres = acceso.recogeTalleres(c);
+		if (!nombreIntroducido.isEmpty()) {
+			// Instancia un nuevo objeto Taller calculando un ID provisional (tamaño actual + 1)
+			Taller nuevoTaller = new Taller((talleres.size() + 1), nombreIntroducido, tipoIntroducido);
+			
+			// Llama al modelo para persistir los datos en la base de datos
+			acceso.insertarNuevoTaller(c, nuevoTaller);
+			
+			// Actualiza la lista local de talleres recuperándola de nuevo de la BBDD
+			talleres = acceso.recogeTalleres(c);
 
-		// Crea la vista de la lista para mostrar los cambios
-		ListaTalleres lt = new ListaTalleres();
-		lt.recogerDatos(talleres); // Carga la tabla/lista con los datos actualizados
-		
-		// Inicializa el controlador de la lista y muestra la ventana
-		new ControladorListaTalleres(lt, acceso, c, talleres, emp);
-		lt.setVisible(true);
-		
-		// Cierra la ventana actual de formulario
-		vista.dispose();
+			// Crea la vista de la lista para mostrar los cambios
+			ListaTalleres lt = new ListaTalleres();
+			lt.recogerDatos(talleres); // Carga la tabla/lista con los datos actualizados
+			
+			// Inicializa el controlador de la lista y muestra la ventana
+			new ControladorListaTalleres(lt, acceso, c, talleres, emp);
+			lt.setVisible(true);
+			
+			// Cierra la ventana actual de formulario
+			vista.dispose();
+			
+		} else {
+			
+			JOptionPane.showConfirmDialog(vista, 
+		            "por favor, rellene los campos necesarios para crear un nuevo taller", 
+		            "Error", JOptionPane.ERROR_MESSAGE);
+			
+		}
 
 	}
 

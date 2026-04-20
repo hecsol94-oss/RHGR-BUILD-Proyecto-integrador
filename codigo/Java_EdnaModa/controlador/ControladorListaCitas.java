@@ -2,9 +2,11 @@ package controlador;
 
 import modelo.AccesoBBDD;
 import modelo.Cita;
+import modelo.Empleado;
 import vista.ListaCitas;
 import vista.DetalleCita;
 import vista.NuevaCitaMaestro;
+import vista.NuevaCitaOficial;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -20,15 +22,17 @@ public class ControladorListaCitas {
     private Connection c;
     private ArrayList<Cita> citas;
     private ArrayList<Cita> citasFiltradas;
+    private Empleado empleado;
     private boolean editable;
 
     public ControladorListaCitas(ListaCitas vista, AccesoBBDD acceso, Connection c,
-                                  ArrayList<Cita> citas, boolean editable) {
+                                  ArrayList<Cita> citas, Empleado empleado, boolean editable) {
         this.vista = vista;
         this.acceso = acceso;
         this.c = c;
         this.citas = citas;
         this.citasFiltradas = new ArrayList<>(citas);
+        this.empleado = empleado;
         this.editable = editable;
 
         if (!editable) {
@@ -127,14 +131,26 @@ public class ControladorListaCitas {
         //usa citasFiltradas (lista visible), no la lista original
         Cita cita = citasFiltradas.get(fila);
         NuevaCitaMaestro vistaForm = new NuevaCitaMaestro();
-        new ControladorNuevaCitaMaestro(vistaForm, acceso, c, null, null, cita);
+        new ControladorNuevaCitaMaestro(vistaForm, acceso, c, empleado);
         vistaForm.setVisible(true);
     }
 
     private void nuevaCita() {
         if (!editable) return;
-        NuevaCitaMaestro vistaForm = new NuevaCitaMaestro();
-        new ControladorNuevaCitaMaestro(vistaForm, acceso, c, null, null);
-        vistaForm.setVisible(true);
+        String rol = empleado.getCategoria();
+        
+        switch(rol) {
+        case "maestro":
+        	NuevaCitaMaestro vistaFormM = new NuevaCitaMaestro();
+            new ControladorNuevaCitaMaestro(vistaFormM, acceso, c, empleado);
+            vistaFormM.setVisible(true);
+        break;
+        case "oficial":
+        	NuevaCitaOficial vistaFormO = new NuevaCitaOficial();
+//            new ControladorNuevaCitaOficial(vistaFormO, empleado);
+            vistaFormO.setVisible(true);
+        break;
+        	
+        }
     }
 }
