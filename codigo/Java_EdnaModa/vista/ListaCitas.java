@@ -35,7 +35,7 @@ public class ListaCitas extends JFrame {
         tableCitas = new JTable();
         tableCitas.setModel(new DefaultTableModel(
             new Object[][] {},
-            new String[] {"Fecha/Hora", "Cliente", "Taller", "Estado"}
+            new String[] {"Fecha/Hora", "Cliente", "Taller", "Duracion", "Aprendices"}
         ));
         scrollPane.setViewportView(tableCitas);
 
@@ -124,8 +124,8 @@ public class ListaCitas extends JFrame {
     	}
     
     public void deshabilitarBotones() {
-    	btnEditar.setEnabled(false);
-    	btnNuevaCita.setEnabled(false);
+    	btnEditar.setVisible(false);
+    	btnNuevaCita.setVisible(false);
 
     }
 }

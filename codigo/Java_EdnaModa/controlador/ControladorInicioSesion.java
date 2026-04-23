@@ -67,18 +67,21 @@ public class ControladorInicioSesion {
                 VentanaAprendiz vAprendiz = new VentanaAprendiz();
                 new ControladorAprendiz(vAprendiz, acceso, c, empleadoAutenticado);
                 vAprendiz.setVisible(true);
+                vista.dispose();
                 break;
 
             case "oficial":
                 VentanaOficial vOficial = new VentanaOficial();
                 new ControladorOficial(vOficial, acceso, c, empleadoAutenticado);
                 vOficial.setVisible(true);
+                vista.dispose();
                 break;
 
             case "maestro":
                 VentanaMaestro vMaestro = new VentanaMaestro();
                 new ControladorMaestro(vMaestro, acceso, c, empleadoAutenticado);
                 vMaestro.setVisible(true);
+                vista.dispose();
                 break;
 
             default:

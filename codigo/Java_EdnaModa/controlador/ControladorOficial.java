@@ -5,12 +5,13 @@ import modelo.Cita;
 import modelo.Cliente;
 import modelo.Empleado;
 import modelo.Taller;
+import modelo.Traje;
 import vista.VentanaOficial;
 import vista.InicioSesion;
 import vista.ListaCitas;
 import vista.ListaClientes;
 import vista.ListaTalleres;
-import vista.NuevaCitaOficial;
+import vista.NuevaCita2;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -78,6 +79,7 @@ public class ControladorOficial {
             ListaCitas vistaLista = new ListaCitas();
             new ControladorListaCitas(vistaLista, acceso, c, citas, empleado, false);
             vistaLista.setVisible(true);
+            vista.dispose();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -87,9 +89,10 @@ public class ControladorOficial {
      * Formulario para que el Oficial complete/gestione su cita asignada.
      */
     private void abrirNuevaCita() {
-        NuevaCitaOficial vistaForm = new NuevaCitaOficial();
+        NuevaCita2 vistaForm = new NuevaCita2();
 //        new ControladorNuevaCitaOficial(vistaForm, empleado);
         vistaForm.setVisible(true);
+        vista.dispose();
     }
 
     /**
@@ -98,10 +101,12 @@ public class ControladorOficial {
     private void abrirListaClientes() {
         try {
             ArrayList<Cliente> clientes = acceso.recogeClientes(c);
+            ArrayList<Traje> trajes = acceso.recogeTrajes(c);
             ListaClientes vistaLista = new ListaClientes();
-            new ControladorListaClientes(vistaLista, acceso, c, clientes, false);
+            new ControladorListaClientes(vistaLista, acceso, c, clientes, trajes, empleado, false);
             vistaLista.deshabilitarBotones(); // solo lectura para Oficial
             vistaLista.setVisible(true);
+            vista.dispose();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -117,6 +122,7 @@ public class ControladorOficial {
         new ControladorListaTalleres(vistaLista, acceso, c, talleres, empleado);
         vistaLista.deshabilitarBotones(); // solo lectura para Oficial
         vistaLista.setVisible(true);
+        vista.dispose();
     }
 
     private void cerrarSesion() {
@@ -131,6 +137,7 @@ public class ControladorOficial {
             InicioSesion inicioSesion = new InicioSesion();
             new ControladorInicioSesion(inicioSesion, acceso, empleados);
             inicioSesion.setVisible(true);
+            vista.dispose();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

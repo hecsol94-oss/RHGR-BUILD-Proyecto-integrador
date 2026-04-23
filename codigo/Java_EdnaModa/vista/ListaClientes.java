@@ -55,12 +55,12 @@ public class ListaClientes extends JFrame {
 		txtBuscar.setColumns(10);
 
 		// Botón para ejecutar la búsqueda
-		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(270, 40, 89, 25);
 		contentPane.add(btnBuscar);
 
 		// Botón para crear un nuevo cliente
-		JButton btnNuevo = new JButton("+ Nuevo");
+		btnNuevo = new JButton("+ Nuevo");
 		btnNuevo.setBounds(385, 40, 89, 25);
 		contentPane.add(btnNuevo);
 
@@ -82,37 +82,37 @@ public class ListaClientes extends JFrame {
 		scrollPane.setViewportView(table);
 
 		// Botón para ver detalle del cliente seleccionado
-		JButton btnDetalle = new JButton("Ver detalle");
+		btnDetalle = new JButton("Ver detalle");
 		btnDetalle.setBounds(10, 320, 110, 30);
 		contentPane.add(btnDetalle);
 
 		// Botón para editar el cliente seleccionado
-		JButton btnEditar = new JButton("Editar");
+		btnEditar = new JButton("Editar");
 		btnEditar.setBounds(127, 320, 110, 30);
 		contentPane.add(btnEditar);
 
 		// Botón para volver a la ventana anterior
-		JButton btnVolver = new JButton("Volver");
+		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(364, 320, 110, 30);
 		contentPane.add(btnVolver);
 		
 		// Botón para mostrar todos los clientes
-		JButton btnTodos = new JButton("Todos");
+		btnTodos = new JButton("Todos");
 		btnTodos.setBounds(92, 4, 89, 25);
 		contentPane.add(btnTodos);
 		
 		// Botón para filtrar por héroes
-		JButton btnHeroe = new JButton("Heroe");
+		btnHeroe = new JButton("Heroe");
 		btnHeroe.setBounds(211, 5, 89, 25);
 		contentPane.add(btnHeroe);
 		
 		// Botón para filtrar por villanos
-		JButton btnVillano = new JButton("Villano");
+		btnVillano = new JButton("Villano");
 		btnVillano.setBounds(330, 5, 89, 25);
 		contentPane.add(btnVillano);
 		
 		// Botón para eliminar el cliente seleccionado
-		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(247, 320, 110, 30);
 		contentPane.add(btnEliminar);
 	}

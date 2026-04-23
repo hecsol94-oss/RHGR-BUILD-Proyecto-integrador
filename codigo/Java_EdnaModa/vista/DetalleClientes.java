@@ -41,7 +41,7 @@ public class DetalleClientes extends JFrame {
 		contentPane.add(lblTitulo);
 
 		// Bloque de información personal (Nombre, Superpoder, Colores, Tipo)
-		JTextArea txtInfoPersonal = new JTextArea();
+		txtInfoPersonal = new JTextArea();
 		txtInfoPersonal.setBorder(new LineBorder(new Color(192, 192, 192))); // Borde gris
 		txtInfoPersonal.setEditable(false); // Solo lectura
 		txtInfoPersonal.setText("Nombre: \nSuperpoder: \nColores: \nTipo (Héroe/Villano): "); // Texto por defecto
@@ -49,18 +49,18 @@ public class DetalleClientes extends JFrame {
 		contentPane.add(txtInfoPersonal);
 
 		// Botón para editar la información del cliente
-		JButton btnEditar = new JButton("Editar");
+		btnEditar = new JButton("Editar");
 		btnEditar.setBounds(20, 350, 100, 30);
 		contentPane.add(btnEditar);
 
 		// Botón para eliminar al cliente (en rojo)
-		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar = new JButton("Eliminar");
 		btnEliminar.setForeground(Color.RED);
 		btnEliminar.setBounds(130, 350, 100, 30);
 		contentPane.add(btnEliminar);
 
 		// Botón para volver a la ventana anterior
-		JButton btnVolver = new JButton("Volver");
+		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(310, 350, 100, 30);
 		contentPane.add(btnVolver);
         
@@ -69,7 +69,7 @@ public class DetalleClientes extends JFrame {
 		separator.setBounds(20, 320, 390, 2);
 		contentPane.add(separator);
 		
-		JTextArea txtInfoTrajes = new JTextArea();
+		txtInfoTrajes = new JTextArea();
 		txtInfoTrajes.setText("Nombre del traje: \r\nEstado:");
 		txtInfoTrajes.setEditable(false);
 		txtInfoTrajes.setBorder(new LineBorder(new Color(192, 192, 192)));

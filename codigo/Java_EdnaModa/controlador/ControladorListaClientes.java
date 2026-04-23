@@ -2,10 +2,13 @@ package controlador;
 
 import modelo.AccesoBBDD;
 import modelo.Cliente;
+import modelo.Empleado;
 import modelo.Traje;
 import vista.ListaClientes;
 import vista.DetalleClientes;
 import vista.NuevoCliente;
+import vista.VentanaMaestro;
+import vista.VentanaOficial;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -22,15 +25,21 @@ public class ControladorListaClientes {
     private Connection c;
     private ArrayList<Cliente> clientes;
     private ArrayList<Cliente> clientesFiltrados;
+    private ArrayList<Traje> trajes;
+    private ArrayList<Traje> trajesFiltrados;
+    private Empleado empleado;
     private boolean editable;
 
     // Constructor: carga la tabla y asigna los listeners
-    public ControladorListaClientes(ListaClientes vista, AccesoBBDD acceso, Connection c, ArrayList<Cliente> clientes, boolean editable) {
+    public ControladorListaClientes(ListaClientes vista, AccesoBBDD acceso, Connection c, ArrayList<Cliente> clientes, ArrayList<Traje> trajes, Empleado empleado, boolean editable) {
         this.vista = vista;
         this.acceso = acceso;
         this.c = c;
         this.clientes = clientes;
+        this.trajes = trajes;
         this.clientesFiltrados = new ArrayList<>(clientes);
+        this.trajesFiltrados = new ArrayList<>(trajes);
+        this.empleado = empleado;
         this.editable = editable;
 
         // Oculta los botones de gestión si el usuario no tiene permisos
@@ -41,12 +50,12 @@ public class ControladorListaClientes {
         }
 
         // Carga inicial de la tabla
-        cargarTabla(clientesFiltrados);
+        cargarTabla(clientesFiltrados, trajesFiltrados);
 
         // Listeners de los botones de filtro por tipo
         vista.getBtnTodos().addActionListener(e -> {
             clientesFiltrados = new ArrayList<>(clientes);
-            cargarTabla(clientesFiltrados);
+            cargarTabla(clientesFiltrados, trajesFiltrados);
         });
         vista.getBtnHeroe().addActionListener(e -> filtrarPorTipo("superhéroe"));
         vista.getBtnVillano().addActionListener(e -> filtrarPorTipo("villano"));
@@ -67,21 +76,30 @@ public class ControladorListaClientes {
         vista.getBtnEliminar().addActionListener(e -> eliminarCliente());
 
         // Listener del botón "Volver"
-        vista.getBtnVolver().addActionListener(e -> vista.dispose());
+        vista.getBtnVolver().addActionListener(e -> volver());
     }
 
     // Carga la lista de clientes en la tabla
-    private void cargarTabla(ArrayList<Cliente> lista) {
+    private void cargarTabla(ArrayList<Cliente> clientes, ArrayList<Traje> trajes) {
         DefaultTableModel modelo = (DefaultTableModel) vista.getTable().getModel();
-        modelo.setRowCount(0);
+        String nombreTraje = "";
 
-        for (Cliente cliente : lista) {
-            modelo.addRow(new Object[]{
-                cliente.getNombre(),
-                cliente.getSuperpoder(),
-                cliente.getTipo_heroe(),
-                "-"  // Número de trajes: se puede cruzar con recogeTrajes si se necesita
+        for (Cliente cliente : clientes) {
+        	
+        	for (Traje traje : trajes) {
+        		
+        		if (cliente.getId_cliente() == traje.getId_cliente()) {
+                	nombreTraje = nombreTraje + (traje.getNombre_traje() + ", ");
+        		}
+        	}
+        		
+        	modelo.addRow(new Object[]{
+                    cliente.getNombre(),
+                    cliente.getSuperpoder(),
+                    cliente.getTipo_heroe(),
+                    nombreTraje
             });
+        	
         }
     }
 
@@ -93,7 +111,7 @@ public class ControladorListaClientes {
                 clientesFiltrados.add(cliente);
             }
         }
-        cargarTabla(clientesFiltrados);
+        cargarTabla(clientesFiltrados, trajesFiltrados);
     }
 
     // Filtra los clientes por nombre introducido en el campo de búsqueda
@@ -106,7 +124,7 @@ public class ControladorListaClientes {
             }
         }
         clientesFiltrados = resultado;
-        cargarTabla(clientesFiltrados);
+        cargarTabla(clientesFiltrados, trajesFiltrados);
     }
 
     // Abre la ventana de detalle del cliente seleccionado
@@ -118,9 +136,19 @@ public class ControladorListaClientes {
             return;
         }
         Cliente cliente = clientesFiltrados.get(fila);
+        Traje traje = new Traje(0, "", "", 0);
+        String nombreTraje = (String) vista.getTable().getValueAt(fila, 3);
+        for (Traje trajeFiltrado : trajesFiltrados) {
+        	if (trajeFiltrado.getNombre_traje().equals(nombreTraje)) {
+        		traje = trajeFiltrado;
+        		
+        	}
+        }
         DetalleClientes vistaDetalle = new DetalleClientes();
-        new ControladorDetalleClientes(vistaDetalle, acceso, c, cliente, editable);
+        new ControladorDetalleClientes(vistaDetalle, acceso, c, cliente, traje, empleado, editable);
         vistaDetalle.setVisible(true);
+        vista.dispose();
+
     }
 
     // Abre el formulario de edición para el cliente seleccionado
@@ -133,17 +161,27 @@ public class ControladorListaClientes {
             return;
         }
         Cliente cliente = clientesFiltrados.get(fila);
+        Traje traje = new Traje(0, "", "", 0);
+        String nombreTraje = (String) vista.getTable().getValueAt(fila, 3);
+        for (Traje trajeFiltrado : trajesFiltrados) {
+        	if (trajeFiltrado.getNombre_traje().equals(nombreTraje)) {
+        		traje = trajeFiltrado;
+        		
+        	}
+        }
         NuevoCliente vistaForm = new NuevoCliente();
-        new ControladorNuevoCliente(vistaForm, acceso, c, cliente);
+        new ControladorNuevoCliente(vistaForm, acceso, c, cliente, traje, clientes, trajes, empleado);
         vistaForm.setVisible(true);
+        vista.dispose();
     }
 
     // Abre el formulario para crear un nuevo cliente
     private void nuevoCliente() {
         if (!editable) return;
         NuevoCliente vistaForm = new NuevoCliente();
-        new ControladorNuevoCliente(vistaForm, acceso, c, null);
+        new ControladorNuevoCliente(vistaForm, acceso, c, null, null, clientes, trajes, empleado);
         vistaForm.setVisible(true);
+        vista.dispose();
     }
 
     // Elimina el cliente seleccionado tras confirmación
@@ -156,17 +194,47 @@ public class ControladorListaClientes {
             return;
         }
         Cliente cliente = clientesFiltrados.get(fila);
+        Traje traje = trajesFiltrados.get(fila);
         int confirmacion = JOptionPane.showConfirmDialog(vista,
             "¿Estás seguro de que quieres eliminar a " + cliente.getNombre() + "?",
             "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
         if (confirmacion == JOptionPane.YES_OPTION) {
                 acceso.eliminarCliente(c, cliente.getId_cliente());
+                acceso.eliminarTraje(c, traje.getId_cliente());
                 clientes.remove(cliente);
+                trajes.remove(traje);
                 clientesFiltrados.remove(cliente);
-                cargarTabla(clientesFiltrados);
+                trajesFiltrados.remove(traje);
+                cargarTabla(clientesFiltrados, trajesFiltrados);
                 JOptionPane.showMessageDialog(vista, "Cliente eliminado correctamente.");
             
         }
+    }
+    
+    private void volver() {
+    	
+    	try {
+			String rol = empleado.getCategoria().toLowerCase();
+
+			switch (rol) {
+			case "maestro":
+				VentanaMaestro vMaestro = new VentanaMaestro();
+				new ControladorMaestro(vMaestro, acceso, c, empleado);
+				vMaestro.setVisible(true);
+				vista.dispose();
+				break;
+
+			case "oficial":
+				VentanaOficial vOficial = new VentanaOficial();
+				new ControladorOficial(vOficial, acceso, c, empleado);
+				vOficial.setVisible(true);
+				vista.dispose();
+				break;
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+    	
     }
 }

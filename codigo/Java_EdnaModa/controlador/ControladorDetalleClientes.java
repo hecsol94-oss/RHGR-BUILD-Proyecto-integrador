@@ -2,6 +2,7 @@ package controlador;
 
 import modelo.AccesoBBDD;
 import modelo.Cliente;
+import modelo.Empleado;
 import modelo.Traje;
 import vista.DetalleClientes;
 import vista.NuevoCliente;
@@ -19,14 +20,18 @@ public class ControladorDetalleClientes {
     private AccesoBBDD acceso;
     private Connection c;
     private Cliente cliente;
+    private Traje t;
+    private Empleado empleado;
     private boolean editable;
 
     // Constructor: rellena los campos con los datos del cliente y asigna los listeners
-    public ControladorDetalleClientes(DetalleClientes vista, AccesoBBDD acceso, Connection c, Cliente cliente, boolean editable) {
+    public ControladorDetalleClientes(DetalleClientes vista, AccesoBBDD acceso, Connection c, Cliente cliente, Traje t, Empleado empleado, boolean editable) {
         this.vista = vista;
         this.acceso = acceso;
         this.c = c;
         this.cliente = cliente;
+        this.t = t;
+        this.empleado = empleado;
         this.editable = editable;
 
         // Rellena la sección de información personal
@@ -65,6 +70,7 @@ public class ControladorDetalleClientes {
                 if (traje.getId_cliente() == cliente.getId_cliente()) {
                     sb.append("Nombre del traje: ").append(traje.getNombre_traje()).append("\n");
                     sb.append("Estado:           ").append(traje.getEstado()).append("\n\n");
+                    t = traje;
                 }
             }
             if (sb.length() == 0) {
@@ -79,10 +85,18 @@ public class ControladorDetalleClientes {
 
     // Abre el formulario de edición para este cliente
     private void editarCliente() {
-        NuevoCliente vistaForm = new NuevoCliente();
-        new ControladorNuevoCliente(vistaForm, acceso, c, cliente);
-        vistaForm.setVisible(true);
-        vista.dispose();
+		try {
+			ArrayList<Cliente> clientes = acceso.recogeClientes(c);
+			ArrayList<Traje> trajes = acceso.recogeTrajes(c);
+	        NuevoCliente vistaForm = new NuevoCliente();
+	        new ControladorNuevoCliente(vistaForm, acceso, c, cliente, t, clientes, trajes, empleado);
+	        vistaForm.setVisible(true);
+	        vista.dispose();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     }
 
     // Elimina el cliente tras confirmación

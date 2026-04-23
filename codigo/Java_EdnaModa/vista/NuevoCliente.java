@@ -94,12 +94,12 @@ public class NuevoCliente extends JFrame {
 		// --- Botones ---
 		
 		// Botón para guardar el cliente
-		JButton btnGuardar = new JButton("Guardar Cliente");
+		btnGuardar = new JButton("Guardar Cliente");
 		btnGuardar.setBounds(47, 450, 130, 40);
 		contentPane.add(btnGuardar);
 
 		// Botón para cancelar la operación
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(207, 450, 130, 40);
 		contentPane.add(btnCancelar);
 		
@@ -120,7 +120,7 @@ public class NuevoCliente extends JFrame {
 		lblEstado.setBounds(20, 355, 100, 14);
 		contentPane.add(lblEstado);
 		
-		JComboBox<Object> cbEstado = new JComboBox<>(new Object[]{});
+		cbEstado = new JComboBox<>(new Object[]{"diseño", "costura", "pruebas"});
 		cbEstado.setBounds(20, 380, 340, 25);
 		contentPane.add(cbEstado);
 	}

@@ -123,13 +123,4 @@ public class NuevoTaller extends JFrame {
 	    cbTipoSala.setSelectedItem(taller.getTipo());
 	}
 	
-	public Taller devolverTallerViejo() {
-		String nombre = txtNomeSala.getText();
-	    String tipo = (String) cbTipoSala.getSelectedItem();
-	    
-	    Taller tviejo = new Taller(0, nombre, tipo);
-	    
-	    return tviejo;
-	}
-	
 }

@@ -5,12 +5,13 @@ import modelo.Cita;
 import modelo.Cliente;
 import modelo.Empleado;
 import modelo.Taller;
+import modelo.Traje;
 import vista.VentanaMaestro;
 import vista.InicioSesion;
 import vista.ListaCitas;
 import vista.ListaClientes;
 import vista.ListaTalleres;
-import vista.NuevaCitaMaestro;
+import vista.NuevaCita1;
 import vista.NuevoCliente;
 import vista.NuevoTaller;
 
@@ -78,6 +79,7 @@ public class ControladorMaestro {
             ListaCitas vistaLista = new ListaCitas();
             new ControladorListaCitas(vistaLista, acceso, c, citas, empleado, true);
             vistaLista.setVisible(true);
+            vista.dispose();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -85,18 +87,21 @@ public class ControladorMaestro {
 
     
     private void abrirNuevaCita() {
-        NuevaCitaMaestro vistaForm = new NuevaCitaMaestro();
-        new ControladorNuevaCitaMaestro(vistaForm, acceso, c, empleado);
+        NuevaCita1 vistaForm = new NuevaCita1();
+        new ControladorNuevaCita1(vistaForm, acceso, c, empleado);
         vistaForm.setVisible(true);
+        vista.dispose();
     }
 
    
     private void abrirListaClientes() {
         try {
-            ArrayList<Cliente> clientes = acceso.recogeClientes(c);
+        	ArrayList<Cliente> clientes = acceso.recogeClientes(c);
+            ArrayList<Traje> trajes = acceso.recogeTrajes(c);
             ListaClientes vistaLista = new ListaClientes();
-            new ControladorListaClientes(vistaLista, acceso, c, clientes, true);
+            new ControladorListaClientes(vistaLista, acceso, c, clientes, trajes, empleado, false);
             vistaLista.setVisible(true);
+            vista.dispose();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -104,9 +109,16 @@ public class ControladorMaestro {
 
    
     private void abrirNuevoCliente() {
-        NuevoCliente vistaForm = new NuevoCliente();
-        new ControladorNuevoCliente(vistaForm, acceso, c, null);
-        vistaForm.setVisible(true);
+    	try {
+    		NuevoCliente vistaForm = new NuevoCliente();
+            ArrayList<Cliente> clientes = acceso.recogeClientes(c);
+            ArrayList<Traje> trajes = acceso.recogeTrajes(c);
+            new ControladorNuevoCliente(vistaForm, acceso, c, null, null, clientes, trajes, empleado);
+            vistaForm.setVisible(true);
+            vista.dispose();
+    	} catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     // Lista de talleres — acceso completo (botones habilitados por defecto)
@@ -116,14 +128,16 @@ public class ControladorMaestro {
         vistaLista.recogerDatos(talleres);
         new ControladorListaTalleres(vistaLista, acceso, c, talleres, empleado);
         vistaLista.setVisible(true);
+        vista.dispose();
     }
 
     // Nuevo taller — acceso completo
     private void abrirNuevoTaller() {
         ArrayList<Taller> talleres = acceso.recogeTalleres(c);
         NuevoTaller vistaForm = new NuevoTaller();
-        new ControladorNuevoTaller(vistaForm, acceso, c, talleres, empleado);
+        new ControladorNuevoTaller(vistaForm, acceso, c, null, talleres, empleado);
         vistaForm.setVisible(true);
+        vista.dispose();
     }
 
     private void cerrarSesion() {

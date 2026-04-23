@@ -75,6 +75,7 @@ public class ControladorAprendiz {
             new ControladorListaCitas(vistaLista, acceso, c, citas, empleado, false);
             vistaLista.deshabilitarBotones(); // solo lectura para Aprendiz
             vistaLista.setVisible(true);
+            vista.dispose();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -90,6 +91,7 @@ public class ControladorAprendiz {
         new ControladorListaTalleres(vistaLista, acceso, c, talleres, empleado);
         vistaLista.deshabilitarBotones();
         vistaLista.setVisible(true);
+        vista.dispose();
     }
 
     private void cerrarSesion() {
@@ -104,6 +106,7 @@ public class ControladorAprendiz {
             InicioSesion inicioSesion = new InicioSesion();
             new ControladorInicioSesion(inicioSesion, acceso, empleados);
             inicioSesion.setVisible(true);
+            vista.dispose();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

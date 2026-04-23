@@ -408,6 +408,42 @@ public class AccesoBBDD {
 
 	}
 	
+	public void eliminarCliente(Connection c, int id_cliente) {
+		
+	    String query = "DELETE FROM Cliente WHERE id_cliente = ?";
+	    
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        
+	        pstmt.setInt(1, id_cliente); 
+	        pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        System.out.println("Error al eliminar el cliente: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	    
+	}
+	
+	public void actualizarCliente(Connection c, int id_cliente, String nombre, String tipo, String superpoder, String color) {
+	    String query = "UPDATE Cliente SET nombre_personaje = ?, tipo_heroe = ?, superpoder = ?, colores = ? WHERE id_cliente = ?";
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        
+	        pstmt.setString(1, nombre);
+	        pstmt.setString(2, tipo);
+	        pstmt.setString(3, superpoder);
+	        pstmt.setString(4, color);
+	        pstmt.setInt(5, id_cliente);
+	        
+	        pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        System.out.println("Error al actualizar el cliente " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	}
+	
 	//Al crear un nuevo taller y traje en la ventana NuevoTaller, añadimos la insercion de la nueva fila a la BBDD
 	public void insertarNuevoTaller(Connection c, Taller t) {
 
@@ -426,33 +462,33 @@ public class AccesoBBDD {
 
 	}
 	
-	public void borrarTaller(Connection c, Taller t) {
-		Statement st;
-		try {
-			st = c.createStatement();
-			String queryT = "DELETE FROM Taller WHERE nombre_sala = '" + t.getNombre() + "'  AND tipo_sala = '" + t.getTipo() + "'";
-			
-			st.executeUpdate(queryT);
-			st.close();
+	public void borrarTaller(Connection c, int id_sala) {
+		String queryT = "DELETE FROM Taller WHERE id_sala = ?";
+
+        try (PreparedStatement pstmt = c.prepareStatement(queryT)) {
+	        
+	        pstmt.setInt(1, id_sala); 
+	        pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void ActualizarTaller(Connection c, Taller tv, Taller tn) {
-		Statement st;
-		try {
-			st = c.createStatement();
-			String queryT = "UPDATE Taller SET nombre_Sala = '" + tn.getNombre() + "'  AND tipo_sala = '" + tn.getTipo() + "' " 
-					+ "WHERE id_sala = " + tv.getId_sala();
-			
-			st.executeUpdate(queryT);
-			st.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void ActualizarTaller(Connection c, int id_sala, Taller tn) {
+		// Usamos PreparedStatement para que sea más limpio y seguro
+	    String query = "UPDATE Taller SET nombre_sala = ?, tipo_sala = ? WHERE id_sala = ?";
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        pstmt.setString(1, tn.getNombre());
+	        pstmt.setString(2, tn.getTipo());
+	        pstmt.setInt(3, id_sala);
+	        
+	        pstmt.executeUpdate();
+	    } catch (SQLException e) {
+	        System.out.println("Error al actualizar el taller: " + e.getMessage());
+	        e.printStackTrace();
+	    }
 	}
 	
 	//Al crear un nuevo traje en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD
@@ -470,6 +506,40 @@ public class AccesoBBDD {
 			e.printStackTrace();
 		}
 
+	}
+	
+    public void eliminarTraje(Connection c, int id_cliente) {
+		
+	    String query = "DELETE FROM Traje WHERE id_cliente = ?";
+	    
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        
+	        pstmt.setInt(1, id_cliente); 
+	        pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        System.out.println("Error al eliminar el traje: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	    
+	}
+    
+    public void actualizarTraje(Connection c, int id_cliente, String nombre, String estado) {
+	    String query = "UPDATE Traje SET nombre_traje = ?, estado = ? WHERE id_cliente = ?";
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        
+	        pstmt.setString(1, nombre);
+	        pstmt.setString(2, estado);
+	        pstmt.setInt(3, id_cliente);
+	        
+	        pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        System.out.println("Error al actualizar el cliente " + e.getMessage());
+	        e.printStackTrace();
+	    }
 	}
 	
 	//Al crear una nueva cita ventana NuevaCitaMaestro, añadimos la insercion de la nueva fila a la BBDD
@@ -508,40 +578,6 @@ public class AccesoBBDD {
 
 	} 
 	
-	public void eliminarCliente(Connection c, int id_cliente) {
-		
-	    String query = "DELETE FROM Cliente WHERE id_cliente = ?";
-	    
-	    
-	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
-	        
-	        pstmt.setInt(1, id_cliente); 
-	        pstmt.executeUpdate();
-	        
-	    } catch (SQLException e) {
-	        System.out.println("Erro ao eliminar o cliente: " + e.getMessage());
-	        e.printStackTrace();
-	    }
-	    
-	}
 	
-	public void actualizarCliente(Connection c, int id_cliente, String nombre, String tipo, String superpoder, String color) {
-	    String query = "UPDATE Cliente SET nombre_personaje = ?, tipo_heroe = ?, superpoder = ?, colores = ? WHERE id_cliente = ?";
-	    
-	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
-	        
-	        pstmt.setString(1, nombre);
-	        pstmt.setString(2, tipo);
-	        pstmt.setString(3, superpoder);
-	        pstmt.setString(4, color);
-	        pstmt.setInt(5, id_cliente);
-	        
-	        pstmt.executeUpdate();
-	        
-	    } catch (SQLException e) {
-	        System.out.println("Erro ao atualizar o cliente: " + e.getMessage());
-	        e.printStackTrace();
-	    }
-	}
 
 }

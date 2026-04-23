@@ -5,8 +5,8 @@ import modelo.Cita;
 import modelo.Empleado;
 import vista.ListaCitas;
 import vista.DetalleCita;
-import vista.NuevaCitaMaestro;
-import vista.NuevaCitaOficial;
+import vista.NuevaCita1;
+import vista.NuevaCita2;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -117,6 +117,7 @@ public class ControladorListaCitas {
         DetalleCita vistaDetalle = new DetalleCita();
         new ControladorDetalleCita(vistaDetalle, cita);
         vistaDetalle.setVisible(true);
+        vista.dispose();
     }
 
     private void editarCita() {
@@ -130,27 +131,19 @@ public class ControladorListaCitas {
         }
         //usa citasFiltradas (lista visible), no la lista original
         Cita cita = citasFiltradas.get(fila);
-        NuevaCitaMaestro vistaForm = new NuevaCitaMaestro();
-        new ControladorNuevaCitaMaestro(vistaForm, acceso, c, empleado);
+        NuevaCita1 vistaForm = new NuevaCita1();
+        new ControladorNuevaCita1(vistaForm, acceso, c, empleado);
         vistaForm.setVisible(true);
+        vista.dispose();
     }
 
     private void nuevaCita() {
         if (!editable) return;
-        String rol = empleado.getCategoria();
         
-        switch(rol) {
-        case "maestro":
-        	NuevaCitaMaestro vistaFormM = new NuevaCitaMaestro();
-            new ControladorNuevaCitaMaestro(vistaFormM, acceso, c, empleado);
-            vistaFormM.setVisible(true);
-        break;
-        case "oficial":
-        	NuevaCitaOficial vistaFormO = new NuevaCitaOficial();
-//            new ControladorNuevaCitaOficial(vistaFormO, empleado);
-            vistaFormO.setVisible(true);
-        break;
-        	
-        }
+       	NuevaCita1 vistaForm = new NuevaCita1();
+        new ControladorNuevaCita1(vistaForm, acceso, c, empleado);
+        vistaForm.setVisible(true);
+        vista.dispose();
+
     }
 }
