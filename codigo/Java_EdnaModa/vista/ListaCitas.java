@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
  * Lista de citas — columnas con nombres, columna "Duración" en lugar de "Estado".
  * Filtros diseño/costura/pruebas mediante botones de tipo.
  */
-public class ListaCitas extends JFrame {
+public class ListaCitas extends JPanel {
 
     private JTable tableCitas;
     private JTextField textField;

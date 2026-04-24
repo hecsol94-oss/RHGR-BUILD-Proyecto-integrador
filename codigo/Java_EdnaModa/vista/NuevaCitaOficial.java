@@ -9,7 +9,7 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 
 // Clase que representa la ventana para crear o editar una cita
-public class NuevaCitaOficial extends JFrame {
+public class NuevaCitaOficial extends JPanel {
 
     // Botones de acción
 	private JButton btnGuardar;

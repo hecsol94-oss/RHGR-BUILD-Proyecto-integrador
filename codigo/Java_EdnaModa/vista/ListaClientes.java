@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JLabel;
 
 //Clase que representa la ventana de listado de clientes
-public class ListaClientes extends JFrame {
+public class ListaClientes extends JPanel {
 
 	// Panel principal
 	private JPanel contentPane;

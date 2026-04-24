@@ -20,7 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 // Clase principal que representa la ventana del usuario tipo "Oficial"
-public class VentanaOficial extends JFrame {
+public class VentanaOficial extends JPanel {
 
 	// Panel principal donde se colocan todos los componentes
 	private JPanel contentPane;
@@ -102,7 +102,7 @@ public class VentanaOficial extends JFrame {
 		contentPane.add(lblUsuario);
 		
 		// Etiqueta para acción de salir (logout)
-		lblSalir = new JLabel("");
+		lblSalir = new JLabel("SALIR");
 		lblSalir.setForeground(Color.BLUE); // Color azul
 		lblSalir.setFont(new Font("Tahoma", Font.BOLD, 11)); // Fuente en negrita
 		lblSalir.setBounds(625, 11, 40, 20);

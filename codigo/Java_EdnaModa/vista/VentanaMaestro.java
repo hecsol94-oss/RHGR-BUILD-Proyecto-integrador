@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 // Clase principal que representa la ventana del usuario tipo "Maestro"
-public class VentanaMaestro extends JFrame {
+public class VentanaMaestro extends JPanel{
 
 	// Panel principal donde se colocan todos los componentes
 	private JPanel contentPane;
@@ -106,7 +106,7 @@ public class VentanaMaestro extends JFrame {
 		lblSalir.setBounds(625, 11, 40, 20);
 		contentPane.add(lblSalir);
 
-		// --- SECCIÓN INFERIOR: ACCESOS DIRECTOS ---
+		// SECCIÓN INFERIOR: ACCESOS DIRECTOS
 		
 		// Texto: todas las citas
 		JLabel lblTodasCitas = new JLabel("TODAS LAS CITAS:");

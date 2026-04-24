@@ -13,7 +13,7 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 
 // Clase que representa la ventana de detalle de un cliente
-public class DetalleClientes extends JFrame {
+public class DetalleClientes extends JPanel {
 
     // Panel principal de la ventana
 	private JPanel contentPane;
