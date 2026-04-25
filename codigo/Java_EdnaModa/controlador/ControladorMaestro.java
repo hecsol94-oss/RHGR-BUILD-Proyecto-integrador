@@ -99,7 +99,7 @@ public class ControladorMaestro {
         	ArrayList<Cliente> clientes = acceso.recogeClientes(c);
             ArrayList<Traje> trajes = acceso.recogeTrajes(c);
             ListaClientes vistaLista = new ListaClientes();
-            new ControladorListaClientes(vistaLista, acceso, c, clientes, trajes, empleado, false);
+            new ControladorListaClientes(vistaLista, acceso, c, clientes, trajes, empleado);
             vistaLista.setVisible(true);
             vista.dispose();
         } catch (SQLException ex) {
@@ -113,7 +113,7 @@ public class ControladorMaestro {
     		NuevoCliente vistaForm = new NuevoCliente();
             ArrayList<Cliente> clientes = acceso.recogeClientes(c);
             ArrayList<Traje> trajes = acceso.recogeTrajes(c);
-            new ControladorNuevoCliente(vistaForm, acceso, c, null, null, clientes, trajes, empleado);
+            new ControladorNuevoCliente(vistaForm, acceso, c, null, clientes, empleado);
             vistaForm.setVisible(true);
             vista.dispose();
     	} catch (SQLException ex) {

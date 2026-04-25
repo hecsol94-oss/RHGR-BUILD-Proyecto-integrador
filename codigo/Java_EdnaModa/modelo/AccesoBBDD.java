@@ -266,6 +266,33 @@ public class AccesoBBDD {
 		st.close();
 		return trajes;
 	}
+	
+	public ArrayList<Traje> getTrajesPorCliente(Connection c, int idCliente) {
+	    ArrayList<Traje> trajes = new ArrayList<>();
+
+	    String query = "SELECT * FROM Traje WHERE id_cliente = ?";
+
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+
+	        pstmt.setInt(1, idCliente);
+	        ResultSet rs = pstmt.executeQuery();
+
+	        while (rs.next()) {
+	            int idTraje = rs.getInt("id_traje");
+	            String nombre = rs.getString("nombre_traje");
+	            String estado = rs.getString("estado");
+	            int idCli = rs.getInt("id_cliente");
+
+	            Traje t = new Traje(idTraje, nombre, estado, idCli);
+	            trajes.add(t);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return trajes;
+	}
 
 	public void insertarCitas(Connection c) throws SQLException {
 
@@ -508,14 +535,14 @@ public class AccesoBBDD {
 
 	}
 	
-    public void eliminarTraje(Connection c, int id_cliente) {
+    public void eliminarTraje(Connection c, int id_traje) {
 		
-	    String query = "DELETE FROM Traje WHERE id_cliente = ?";
+	    String query = "DELETE FROM Traje WHERE id_traje = ?";
 	    
 	    
 	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
 	        
-	        pstmt.setInt(1, id_cliente); 
+	        pstmt.setInt(1, id_traje); 
 	        pstmt.executeUpdate();
 	        
 	    } catch (SQLException e) {
@@ -525,14 +552,14 @@ public class AccesoBBDD {
 	    
 	}
     
-    public void actualizarTraje(Connection c, int id_cliente, String nombre, String estado) {
-	    String query = "UPDATE Traje SET nombre_traje = ?, estado = ? WHERE id_cliente = ?";
+    public void actualizarTraje(Connection c, int id_traje, String nombre, String estado) {
+	    String query = "UPDATE Traje SET nombre_traje = ?, estado = ? WHERE id_traje = ?";
 	    
 	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
 	        
 	        pstmt.setString(1, nombre);
 	        pstmt.setString(2, estado);
-	        pstmt.setInt(3, id_cliente);
+	        pstmt.setInt(3, id_traje);
 	        
 	        pstmt.executeUpdate();
 	        

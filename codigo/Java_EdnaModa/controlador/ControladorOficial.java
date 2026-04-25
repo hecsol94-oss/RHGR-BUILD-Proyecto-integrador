@@ -103,7 +103,7 @@ public class ControladorOficial {
             ArrayList<Cliente> clientes = acceso.recogeClientes(c);
             ArrayList<Traje> trajes = acceso.recogeTrajes(c);
             ListaClientes vistaLista = new ListaClientes();
-            new ControladorListaClientes(vistaLista, acceso, c, clientes, trajes, empleado, false);
+            new ControladorListaClientes(vistaLista, acceso, c, clientes, trajes, empleado);
             vistaLista.deshabilitarBotones(); // solo lectura para Oficial
             vistaLista.setVisible(true);
             vista.dispose();

@@ -2,15 +2,9 @@ package vista;
 
 //Importaciones necesarias para la interfaz gráfica
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JLabel;
 
 //Clase que representa la ventana de listado de clientes
 public class ListaClientes extends JFrame {
@@ -80,21 +74,6 @@ public class ListaClientes extends JFrame {
 		
 		// Se añade la tabla al scroll
 		scrollPane.setViewportView(table);
-
-		// Botón para ver detalle del cliente seleccionado
-		btnDetalle = new JButton("Ver detalle");
-		btnDetalle.setBounds(10, 320, 110, 30);
-		contentPane.add(btnDetalle);
-
-		// Botón para editar el cliente seleccionado
-		btnEditar = new JButton("Editar");
-		btnEditar.setBounds(127, 320, 110, 30);
-		contentPane.add(btnEditar);
-
-		// Botón para volver a la ventana anterior
-		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(364, 320, 110, 30);
-		contentPane.add(btnVolver);
 		
 		// Botón para mostrar todos los clientes
 		btnTodos = new JButton("Todos");
@@ -111,10 +90,25 @@ public class ListaClientes extends JFrame {
 		btnVillano.setBounds(330, 5, 89, 25);
 		contentPane.add(btnVillano);
 		
+		// Botón para ver detalle del cliente seleccionado
+		btnDetalle = new JButton("Ver detalle");
+		btnDetalle.setBounds(10, 320, 110, 30);
+		contentPane.add(btnDetalle);
+
+		// Botón para editar el cliente seleccionado
+		btnEditar = new JButton("Editar");
+		btnEditar.setBounds(127, 320, 110, 30);
+		contentPane.add(btnEditar);
+		
 		// Botón para eliminar el cliente seleccionado
 		btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(247, 320, 110, 30);
 		contentPane.add(btnEliminar);
+		
+		// Botón para volver a la ventana anterior
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(364, 320, 110, 30);
+		contentPane.add(btnVolver);
 	}
 	public JTextField getTxtBuscar() {
 		return txtBuscar; 
