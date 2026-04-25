@@ -10,7 +10,7 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 
 //Clase que representa la ventana para crear o editar un cliente
-public class NuevoCliente extends JFrame {
+public class NuevoCliente extends JPanel {
 
 	// Panel principal
 	private JPanel contentPane;

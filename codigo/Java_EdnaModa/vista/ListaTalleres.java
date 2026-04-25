@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 // Clase duplicada que también representa la ventana de listado de talleres
-public class ListaTalleres extends JFrame {
+public class ListaTalleres extends JPanel {
     
     // Tabla donde se mostrarán los datos
     private JTable table;

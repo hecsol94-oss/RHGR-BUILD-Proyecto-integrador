@@ -9,7 +9,7 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 
 // Clase que representa la ventana para crear o editar una cita
-public class NuevaCitaOficial extends JFrame {
+public class NuevaCitaOficial extends JPanel {
 
     // Botones de acción
 	private JButton btnGuardar;
@@ -49,11 +49,9 @@ public class NuevaCitaOficial extends JFrame {
         
         // textarea que contiene los detalles de la cita la cual le ha inscrito el maestro
         txtDetalles = new JTextArea();
-<<<<<<< HEAD:codigo/Java_EdnaModa/vista/NuevaCitaOficial.java
         txtDetalles.setText("Fecha:\nHora:\nCliente:\nTraje:\nTaller:\nDuracion:");
-=======
+
         txtDetalles.setText("Fecha: 24/03/2026\nHora: 10:00\nCliente: Mr. Increíble\nTraje: Classic Blue\nTaller: París\nDuracion: 1h");
->>>>>>> 1e4823f4ac8ca2c340b15af8eba49786a346af1a:codigo/Java_EdnaModa/src/vista/NuevaCitaOficial.java
         txtDetalles.setEditable(false);
         txtDetalles.setBounds(20, 69, 340, 112);
         getContentPane().add(txtDetalles);
@@ -104,8 +102,4 @@ public class NuevaCitaOficial extends JFrame {
     public JComboBox getCbAprendiz2() {
         return cbAprendiz2;
     }
-<<<<<<< HEAD:codigo/Java_EdnaModa/vista/NuevaCitaOficial.java
 }
-=======
-}
->>>>>>> 1e4823f4ac8ca2c340b15af8eba49786a346af1a:codigo/Java_EdnaModa/src/vista/NuevaCitaOficial.java

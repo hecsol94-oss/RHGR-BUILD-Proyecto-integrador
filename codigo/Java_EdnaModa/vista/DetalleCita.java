@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 
 // Clase que representa la ventana de detalle de una cita
-public class DetalleCita extends JFrame {
+public class DetalleCita extends JPanel {
 
     // componentes como campos privados para que el controlador pueda acceder mediante getters
     private JTextArea txtDetalles;

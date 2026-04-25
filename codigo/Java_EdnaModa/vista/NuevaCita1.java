@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 import java.awt.Font;
 
 // Clase que representa la ventana para crear o editar una cita (versión Maestro)
-public class NuevaCita1 extends JFrame {
+public class NuevaCita1 extends JPanel {
 
 	// Componentes de selección de datos
 	private JComboBox<String> cbCliente;

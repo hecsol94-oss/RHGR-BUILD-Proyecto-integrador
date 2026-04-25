@@ -17,7 +17,7 @@ import java.awt.Font;
 import java.awt.Color;
 
 // Clase que representa la ventana para crear un nuevo taller
-public class NuevoTaller extends JFrame {
+public class NuevoTaller extends JPanel {
 
 	private static final String String = null;
 
