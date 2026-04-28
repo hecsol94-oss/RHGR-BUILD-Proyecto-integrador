@@ -35,6 +35,13 @@ public class ControladorNuevaCita1 {
 
 	// Creamos el constructor
 
+	/**
+	 * 
+	 * @param vista
+	 * @param acceso
+	 * @param c
+	 * @param empleado
+	 */
 	public ControladorNuevaCita1(NuevaCita1 vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
 
 		this.vista = vista;
@@ -204,6 +211,12 @@ public class ControladorNuevaCita1 {
 	 * Devuelve el id_traje del traje que ocupa la posición dentro de los trajes
 	 * filtrados para el cliente dado.
 	 *
+	 */
+	/**
+	 * 
+	 * @param idCliente
+	 * @param indexEnCombo
+	 * @return
 	 */
 	private int obtenerIdTrajeSeleccionado(int idCliente, int indexEnCombo) {
 		int contador = 0;

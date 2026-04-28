@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 // Clase que representa la ventana para crear o editar una cita
-public class NuevaCita extends JPanel {
+public class NuevaCita extends JFrame {
     
     // Campos de texto para introducir datos de la cita
     private JTextField txtFecha, txtHora, txtDuracion;

@@ -29,6 +29,15 @@ public class ControladorListaCitas {
     private ArrayList<Traje>    listaTrajes;
     private ArrayList<Empleado> listaEmpleados;
 
+    /**
+     * 
+     * @param vista
+     * @param acceso
+     * @param c
+     * @param citas
+     * @param empleado
+     * @param editable
+     */
     public ControladorListaCitas(ListaCitas vista, AccesoBBDD acceso, Connection c,
                                   ArrayList<Cita> citas, Empleado empleado, boolean editable) {
         this.vista    = vista;
@@ -83,7 +92,11 @@ public class ControladorListaCitas {
         }
     }
 
-    /** Filtro real usando el tipo del taller asociado a la cita. */
+    // Filtro real usando el tipo del taller asociado a la cita. 
+    /**
+     * 
+     * @param tipo
+     */
     private void filtrarPorTipo(String tipo) {
         citasFiltradas = citas.stream()
             .filter(cita -> {
@@ -99,6 +112,9 @@ public class ControladorListaCitas {
         cargarTabla(citasFiltradas);
     }
 
+    /**
+     * 
+     */
     private void buscar() {
         String texto = vista.getTextField().getText().trim().toLowerCase();
         citasFiltradas = new ArrayList<>();
@@ -110,6 +126,9 @@ public class ControladorListaCitas {
         cargarTabla(citasFiltradas);
     }
 
+    /**
+     * 
+     */
     private void verDetalle() {
         int fila = vista.getTableCitas().getSelectedRow();
         if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
@@ -137,6 +156,11 @@ public class ControladorListaCitas {
     }
 
     // Resolución de nombres (punto 6)
+   /**
+    * 
+    * @param id
+    * @return
+    */
     private String nombreCliente(int id)  {
     	if(listaClientes==null) 
     		return ""+id; 
@@ -144,7 +168,11 @@ public class ControladorListaCitas {
     		if(x.getId_cliente()==id) 
     			return x.getNombre(); return ""+id; 
     			}
-    
+    /**
+     * 
+     * @param id
+     * @return
+     */
     private String nombreTraje(int id)    {
     	if(listaTrajes==null)   
     		return ""+id; 
@@ -153,7 +181,11 @@ public class ControladorListaCitas {
     			return x.getNombre_traje(); 
     	return ""+id; 
     	}
-    
+    /**
+     * 
+     * @param id
+     * @return
+     */
     private String nombreTaller(int id)   {
     	if(listaTalleres==null) 
     		return ""+id; 
@@ -162,7 +194,11 @@ public class ControladorListaCitas {
     			return x.getNombre(); 
     				return ""+id; 
     }
-    
+    /**
+     * 
+     * @param id
+     * @return
+     */
     private String nombreEmpleado(int id) {
     	if(listaEmpleados==null)
     		return ""+id; 

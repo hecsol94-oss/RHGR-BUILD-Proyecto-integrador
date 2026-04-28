@@ -1,80 +1,69 @@
 package vista;
 
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.border.EmptyBorder;
 
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-
+/**
+ * Formulario para crear un nuevo traje.
+ * Estado siempre "diseño" — al crear un traje nuevo lo lógico es empezar por el diseño.
+ */
 public class NuevoTraje extends JFrame {
-	
-    private JComboBox<Object> cbEstado;
+
+    private JTextField txtNombreTraje;
     private JButton btnGuardar;
     private JButton btnCancelar;
-	private JTextField txtNombre;
-	
-	public NuevoTraje() {
-		
-		setTitle("Editar / Nuevo traje");
-		getContentPane().setLayout(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Acción al cerrar
-		setBounds(100, 100, 400, 350); // Tamaño y posición
-		setResizable(false); // Evita que el usuario cambie el tamaño
-		
-		JLabel lblTitle_1 = new JLabel("DATOS DEL TRAJE");
-		lblTitle_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTitle_1.setBounds(21, 11, 200, 25);
-		getContentPane().add(lblTitle_1);
-		
-		JLabel lblNombre_1 = new JLabel("Nombre:");
-		lblNombre_1.setBounds(21, 50, 100, 14);
-		getContentPane().add(lblNombre_1);
-		
-		txtNombre = new JTextField();
-		txtNombre.setBounds(21, 70, 340, 25);
-		getContentPane().add(txtNombre);
-		
-		JLabel lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(21, 118, 100, 14);
-		getContentPane().add(lblEstado);
-		
-		cbEstado = new JComboBox<Object>(new Object[]{"diseño", "costura", "pruebas"});
-		cbEstado.setBounds(21, 143, 340, 25);
-		getContentPane().add(cbEstado);
-		
-	    btnGuardar = new JButton("Guardar Traje");
-		btnGuardar.setBounds(48, 213, 130, 40);
-		getContentPane().add(btnGuardar);
-		
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(208, 213, 130, 40);
-		getContentPane().add(btnCancelar);
-		
-	
-	}
-	
-	// --- MÉTODOS GETTER PARA EL CONTROLADOR ---
 
-    public JTextField getNombreTraje() {
-        return txtNombre;
+    public NuevoTraje() {
+        setTitle("Nuevo Traje");
+        setBounds(150, 150, 400, 220);
+        setResizable(false);
+        JPanel contentPane = new JPanel(null);
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+
+        JLabel titulo = new JLabel("DATOS DEL TRAJE");
+        titulo.setFont(new Font("Tahoma", Font.BOLD, 14));
+        titulo.setBounds(20, 10, 240, 25);
+        contentPane.add(titulo);
+
+        JLabel lblNombre = new JLabel("Nombre del traje:");
+        lblNombre.setBounds(20, 50, 140, 16);
+        contentPane.add(lblNombre);
+
+        txtNombreTraje = new JTextField();
+        txtNombreTraje.setBounds(20, 70, 340, 25);
+        contentPane.add(txtNombreTraje);
+
+        // Estado fijo: diseño (no se muestra combo)
+        JLabel lblEstado = new JLabel("Estado: diseño");
+        lblEstado.setFont(new Font("Tahoma", Font.ITALIC, 11));
+        lblEstado.setForeground(new Color(80, 80, 150));
+        lblEstado.setBounds(20, 105, 200, 16);
+        contentPane.add(lblEstado);
+
+        btnGuardar = new JButton("Guardar Traje");
+        btnGuardar.setBounds(60, 150, 130, 35);
+        contentPane.add(btnGuardar);
+
+        btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(210, 150, 130, 35);
+        contentPane.add(btnCancelar);
     }
 
-    public String getCbEstado() {
-        return (String) cbEstado.getSelectedItem();
-    }
-    
-    public void setCbEstado(String estado) {
-        cbEstado.setSelectedItem(estado);
-    }
-
-    public JButton getBtnGuardar() {
-        return btnGuardar;
-    }
-
+    public String getNombreTraje()  {
+    	return txtNombreTraje.getText().trim(); 
+    	}
+   
+    public String getEstadoTraje()  {
+    	return "diseño"; 
+    	}  // siempre diseño
+   
+    public JButton getBtnGuardar()  {
+    	return btnGuardar; 
+    	}
+   
     public JButton getBtnCancelar() {
-        return btnCancelar;
-    }
-	
+    	return btnCancelar; 
+    	}
 }

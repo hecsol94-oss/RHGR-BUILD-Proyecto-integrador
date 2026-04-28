@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 // Controlador de NuevaCitaOficial
+
 public class ControladorNuevaCita2 {
     private NuevaCita2 vista;
     private AccesoBBDD acceso;

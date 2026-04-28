@@ -19,6 +19,12 @@ public class ControladorInicioSesion {
     private ArrayList<Empleado> empleados;
 
     // Constructor: recibe la vista y la lista de empleados ya cargada desde la BBDD
+    /**
+     * 
+     * @param vista
+     * @param acceso
+     * @param empleados
+     */
     public ControladorInicioSesion(InicioSesion vista, AccesoBBDD acceso, ArrayList<Empleado> empleados) {
         this.vista = vista;
         this.acceso = acceso;
@@ -67,21 +73,18 @@ public class ControladorInicioSesion {
                 VentanaAprendiz vAprendiz = new VentanaAprendiz();
                 new ControladorAprendiz(vAprendiz, acceso, c, empleadoAutenticado);
                 vAprendiz.setVisible(true);
-                vista.dispose();
                 break;
 
             case "oficial":
                 VentanaOficial vOficial = new VentanaOficial();
                 new ControladorOficial(vOficial, acceso, c, empleadoAutenticado);
                 vOficial.setVisible(true);
-                vista.dispose();
                 break;
 
             case "maestro":
                 VentanaMaestro vMaestro = new VentanaMaestro();
                 new ControladorMaestro(vMaestro, acceso, c, empleadoAutenticado);
                 vMaestro.setVisible(true);
-                vista.dispose();
                 break;
 
             default:

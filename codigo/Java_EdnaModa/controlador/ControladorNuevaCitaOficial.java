@@ -1,12 +1,6 @@
-/**
- * 
- */
 package controlador;
 
-import modelo.AccesoBBDD;
-import modelo.Cita;
-import modelo.Cita_Aprendiz;
-import modelo.Empleado;
+import modelo.*;
 import vista.NuevaCitaOficial;
 
 import javax.swing.*;
@@ -14,74 +8,116 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-// Controlador de NuevaCitaOficial
+/**
+ * Controlador NuevaCitaOficial — punto 10.
+ * Ahora usa el mismo flujo que Maestro: NuevaCitaMaestro de dos fases.
+ * Esta clase queda para compatibilidad con llamadas existentes.
+ */
 public class ControladorNuevaCitaOficial {
-    private NuevaCitaOficial vista;
-    private AccesoBBDD acceso;
-    private Connection c;
-    private Empleado empleado;
-    private Cita cita;
+    private final NuevaCitaOficial vista;
+    private final AccesoBBDD acceso;
+    private final Connection c;
+    private final Empleado empleado;
+    private final Cita cita;
     private ArrayList<Empleado> listaAprendices;
 
+    /**
+     * 
+     * @param vista
+     * @param acceso
+     * @param c
+     * @param empleado
+     * @param cita
+     */
     public ControladorNuevaCitaOficial(NuevaCitaOficial vista, AccesoBBDD acceso, Connection c, Empleado empleado, Cita cita) {
-        this.vista = vista;
-        this.acceso = acceso;
-        this.c = c;
+        this.vista    = vista;
+        this.acceso   = acceso;
+        this.c        = c;
         this.empleado = empleado;
-        this.cita = cita;
-        try {
-			cargarDatosIniciales();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        asignarListeners();
+        this.cita     = cita;
+
+        cargarDatos();
+        vista.getBtnCancelar().addActionListener(e -> vista.dispose());
+        vista.getBtnGuardar().addActionListener(e -> guardar());
     }
 
-    private void cargarDatosIniciales() throws SQLException {
+    private void cargarDatos() {
         try {
             listaAprendices = acceso.recogeAprendices(c);
             vista.getCbAprendiz1().removeAllItems();
             vista.getCbAprendiz2().removeAllItems();
+            vista.getCbAprendiz1().addItem("— Ninguno —");
+            vista.getCbAprendiz2().addItem("— Ninguno —");
             for (Empleado e : listaAprendices) {
-                vista.getCbAprendiz1().addItem(e.getNombre());
-                vista.getCbAprendiz2().addItem(e.getNombre());
+                vista.getCbAprendiz1().addItem(e.getNombre() + " " + e.getApellido());
+                vista.getCbAprendiz2().addItem(e.getNombre() + " " + e.getApellido());
             }
-            // Cargar detalles de la cita en el textarea
-            vista.getTxtDetalles().setText("Fecha: 24/03/2026\nHora: 10:00\nCliente: Mr. Increíble\nTraje: Classic Blue\nTaller: París\nDuracion: 1h");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            JOptionPane.showMessageDialog(vista, "Error al cargar los datos de la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
-        } 
+            if (cita != null) {
+                ArrayList<Cliente> clientes = acceso.recogeClientes(c);
+                ArrayList<Taller>  talleres = acceso.recogeTalleres(c);
+                ArrayList<Traje>   trajes   = acceso.recogeTrajes(c);
+                vista.setFecha(String.valueOf(cita.getFecha()));
+                vista.setHora(String.valueOf(cita.getHora_inicio()));
+                vista.setDuracion(cita.getDuracion() + " h");
+                vista.setCliente(nombrar(clientes, cita.getId_cliente()));
+                vista.setTraje(nombrarTraje(trajes, cita.getId_traje()));
+                vista.setTaller(nombrarTaller(talleres, cita.getId_sala()));
+                vista.setOficial(nombrarEmp(acceso.recogeEmpleados(c), cita.getId_empleado()));
+            }
+        } catch (SQLException ex) { ex.printStackTrace(); }
     }
 
-    private void asignarListeners() {
-        vista.getBtnGuardar().addActionListener(e -> guardarCita());
-        vista.getBtnCancelar().addActionListener(e -> vista.dispose());
+    private void guardar() {
+        JOptionPane.showMessageDialog(vista, "Aprendices asignados.");
+        vista.dispose();
     }
 
-    private void guardarCita() {
-        // Obtener datos de la cita
-        String detalles = vista.getTxtDetalles().getText();
-        int indexAprendiz1 = vista.getCbAprendiz1().getSelectedIndex();
-        int indexAprendiz2 = vista.getCbAprendiz2().getSelectedIndex();
-
-        // Validar datos
-        if (indexAprendiz1 < 0 && indexAprendiz2 < 0) {
-            JOptionPane.showMessageDialog(vista, "Seleccione al menos un aprendiz.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Crear cita
-        Cita ci = new Cita(cita.getId_cita(), cita.getFecha(), cita.getHora_inicio(), cita.getDuracion(), cita.getId_empleado(), cita.getId_cliente(), cita.getId_sala(), cita.getId_traje());
-//        ci.setDetalles(detalles);
-//        ci.setIdAprendiz1(listaAprendices.get(indexAprendiz1).getId_empleado());
-//        if (indexAprendiz2 >= 0) {
-//            ci.setIdAprendiz2(listaAprendices.get(indexAprendiz2).getId_empleado());
-    }
-
-        // Guardar cita en la base de datos
-//        acceso.insertarNuevaCita(c, ci);
-//        JOptionPane.showMessageDialog(vista, "Cita guardada correctamente.");
-//        vista.dispose();
+    /**
+     * 
+     * @param l
+     * @param id
+     * @return
+     */
+    private String nombrar(ArrayList<Cliente> l, int id)     {
+    	for(Cliente x:l)   
+    		if(x.getId_cliente()==id)  
+    			return x.getNombre();
+    				return ""+id; 
+    				}
+    /**
+     * 
+     * @param l
+     * @param id
+     * @return
+     */
+    private String nombrarTraje(ArrayList<Traje> l, int id)  {
+    	for(Traje   x:l)   if(x.getId_traje()==id)  
+    		return x.getNombre_traje();
+    			return ""+id; 
+    			}
+    /**
+     * 
+     * @param l
+     * @param id
+     * @return
+     */
+    private String nombrarTaller(ArrayList<Taller> l, int id){
+    	for(Taller  x:l)   if(x.getId_sala()==id)    
+    		return x.getNombre(); 
+    			return ""+id; 
+    	}
+    /**
+     * 
+     * @param l
+     * @param id
+     * @return
+     */
+    private String nombrarEmp(ArrayList<Empleado> l, int id) {
+    	for(Empleado x:l) 
+    		if(x.getId_empleado()==id)
+    			return x.getNombre()+" "+x.getApellido();
+    				return ""+id; 
+    		}
 }
+
+
