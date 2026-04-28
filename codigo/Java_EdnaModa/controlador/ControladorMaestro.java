@@ -1,159 +1,358 @@
 package controlador;
 
-import modelo.AccesoBBDD;
-import modelo.Cita;
-import modelo.Cliente;
-import modelo.Empleado;
-import modelo.Taller;
-import modelo.Traje;
-import vista.VentanaMaestro;
-import vista.InicioSesion;
-import vista.ListaCitas;
-import vista.ListaClientes;
-import vista.ListaTalleres;
-import vista.NuevaCita1;
-import vista.NuevoCliente;
-import vista.NuevoTaller;
+import modelo.*;
+import vista.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.stream.Collectors;
 
-/**
- * Controlador de la ventana principal del MAESTRO (administrador).
- * Acceso total: Citas, Clientes y Talleres sin restricciones.
- */
 public class ControladorMaestro {
 
-    private VentanaMaestro vista;
-    private AccesoBBDD acceso;
-    private Connection c;
-    private Empleado empleado;
+    private final VentanaMaestro vista;
+    private final AccesoBBDD     acceso;
+    private final Connection     c;
+    private final Empleado       empleado;
+
+    // Datos en memoria para las listas embebidas
+    private ArrayList<Cita>    todasCitas;
+    private ArrayList<Cita>    citasFiltradas;
+    private ArrayList<Cliente> todosClientes;
+    private ArrayList<Cliente> clientesFiltrados;
+    private ArrayList<Taller>  todosTalleres;
+    private ArrayList<Empleado> listaEmpleados;
+    private ArrayList<Traje>   listaTrajes;
+    private boolean editable = true;
 
     public ControladorMaestro(VentanaMaestro vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
-        this.vista = vista;
-        this.acceso = acceso;
-        this.c = c;
+        this.vista    = vista;
+        this.acceso   = acceso;
+        this.c        = c;
         this.empleado = empleado;
 
-        vista.getLblUsuario().setText("Usuario: " + empleado.getApodo());
-
+        vista.getLblUsuario().setText("Usuario: " + empleado.getApodo() + " (" + empleado.getCategoria() + ")");
+        cargarDatosEnMemoria();
         cargarContadores();
 
-        // Acceso completo al menú
-        vista.getMenuItemListaCitas().addActionListener(e -> abrirListaCitas());
-        vista.getMenuItemNuevaCita().addActionListener(e -> abrirNuevaCita());
-        vista.getMenuItemListaClientes().addActionListener(e -> abrirListaClientes());
-        vista.getMenuItemNuevoCliente().addActionListener(e -> abrirNuevoCliente());
-        vista.getMenuItemListaTalleres().addActionListener(e -> abrirListaTalleres());
-        vista.getMenuItemNuevoTaller().addActionListener(e -> abrirNuevoTaller());
+        // Menú → listas embebidas (sin nueva ventana)
+        vista.getMenuItemListaCitas().addActionListener(e    -> mostrarListaCitas());
+        vista.getMenuItemListaClientes().addActionListener(e -> mostrarListaClientes());
+        vista.getMenuItemListaTalleres().addActionListener(e -> mostrarListaTalleres());
 
-        // Logout
-        vista.getLblSalir().setText("Salir");
+        // Menú → ventanas nuevas (solo estas tres)
+        vista.getMenuItemNuevaCita().addActionListener(e    -> abrirNuevaCita());
+        vista.getMenuItemNuevoCliente().addActionListener(e -> abrirNuevoCliente());
+        vista.getMenuItemNuevoTaller().addActionListener(e  -> abrirNuevoTaller());
+
+        // Botones "Volver" en los paneles embebidos
+        vista.getBtnVolverCitas().addActionListener(e     -> vista.mostrarCard(VentanaMaestro.CARD_DASHBOARD));
+        vista.getBtnVolverClientes().addActionListener(e  -> vista.mostrarCard(VentanaMaestro.CARD_DASHBOARD));
+        vista.getBtnVolverTalleres().addActionListener(e  -> vista.mostrarCard(VentanaMaestro.CARD_DASHBOARD));
+
+        // Listeners lista citas embebida
+        vista.getBtnTodasCitas().addActionListener(e   -> { citasFiltradas = new ArrayList<>(todasCitas); cargarTablaCitas(citasFiltradas); });
+        vista.getBtnDisenoCitas().addActionListener(e  -> filtrarCitasPorTipo("diseño"));
+        vista.getBtnCosturaCitas().addActionListener(e -> filtrarCitasPorTipo("costura"));
+        vista.getBtnPruebasCitas().addActionListener(e -> filtrarCitasPorTipo("pruebas"));
+        vista.getBtnBuscarCitas().addActionListener(e  -> buscarCitas());
+        vista.getBtnVerDetallesCitas().addActionListener(e -> verDetalleCita());
+        vista.getBtnEditarCitas().addActionListener(e  -> editarCita());
+        vista.getBtnNuevaCitaEmb().addActionListener(e -> abrirNuevaCita());
+
+        // Listeners lista clientes embebida
+        vista.getBtnTodosClientes().addActionListener(e   -> { clientesFiltrados = new ArrayList<>(todosClientes); cargarTablaClientes(clientesFiltrados); });
+        vista.getBtnHeroeClientes().addActionListener(e   -> filtrarClientesPorTipo("superhéroe"));
+        vista.getBtnVillanoClientes().addActionListener(e -> filtrarClientesPorTipo("villano"));
+        vista.getBtnBuscarClientes().addActionListener(e  -> buscarClientes());
+        vista.getBtnDetalleClientes().addActionListener(e -> verDetalleCliente());
+        vista.getBtnEditarClientes().addActionListener(e  -> editarCliente());
+        vista.getBtnEliminarClientes().addActionListener(e-> eliminarCliente());
+        vista.getBtnNuevoClienteEmb().addActionListener(e -> abrirNuevoCliente());
+
+        // Listeners lista talleres embebida
+        vista.getBtnNuevoTallerEmb().addActionListener(e    -> abrirNuevoTaller());
+        vista.getBtnEditarTalleres().addActionListener(e    -> pulsarEditarTaller());
+        vista.getBtnEliminarTalleres().addActionListener(e  -> pulsarEliminarTaller());
+        vista.getBtnConfirmarTalleres().addActionListener(e -> pulsarConfirmarTaller());
+
+        // Salir
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vista.getLblSalir().addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                cerrarSesion();
-            }
+            public void mouseClicked(java.awt.event.MouseEvent e) { cerrarSesion(); }
         });
+    }
+
+    // ── Carga inicial ────────────────────────────────────────────────────────
+    private void cargarDatosEnMemoria() {
+        try {
+            todasCitas     = acceso.recogeCitas(c);
+            todosTalleres  = acceso.recogeTalleres(c);
+            todosClientes  = acceso.recogeClientes(c);
+            listaEmpleados = acceso.recogeEmpleados(c);
+            listaTrajes    = acceso.recogeTrajes(c);
+            citasFiltradas    = new ArrayList<>(todasCitas);
+            clientesFiltrados = new ArrayList<>(todosClientes);
+        } catch (SQLException ex) { ex.printStackTrace(); }
     }
 
     private void cargarContadores() {
         try {
-            ArrayList<Cita> todasCitas = acceso.recogeCitas(c);
-            ArrayList<Taller> talleres = acceso.recogeTalleres(c);
-
             vista.getLblTodasLasCitas().setText(String.valueOf(todasCitas.size()));
-            vista.getLblNumeroDeTalleres().setText(String.valueOf(talleres.size()));
-            vista.getLblNumeroDeMisCitas().setText(String.valueOf(todasCitas.size()));
+            vista.getLblNumeroDeTalleres().setText(String.valueOf(todosTalleres.size()));
+            vista.getLblTotalClientes().setText(String.valueOf(todosClientes.size()));
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+            long misCitas = todasCitas.stream().filter(ci -> ci.getId_empleado() == empleado.getId_empleado()).count();
+            vista.getLblNumeroDeMisCitas().setText(String.valueOf(misCitas));
+
+            java.sql.Date hoy = new java.sql.Date(System.currentTimeMillis());
+            long citasHoy = todasCitas.stream().filter(ci -> ci.getFecha().toString().equals(hoy.toString())).count();
+            vista.getLblCitasHoy().setText(String.valueOf(citasHoy));
+
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
+            Date ini = cal.getTime(); cal.add(Calendar.DAY_OF_WEEK, 6); Date fin = cal.getTime();
+            long semana = todasCitas.stream().filter(ci -> !ci.getFecha().before(ini) && !ci.getFecha().after(fin)).count();
+            vista.getLblCitasSemana().setText(String.valueOf(semana));
+
+            String proxima = todasCitas.stream()
+                .filter(ci -> !ci.getFecha().before(hoy))
+                .map(ci -> ci.getFecha() + " " + ci.getHora_inicio())
+                .min(String::compareTo).orElse("—");
+            vista.getLblProximaCita().setText(proxima);
+        } catch (Exception ex) { ex.printStackTrace(); }
     }
 
-    
-    private void abrirListaCitas() {
+    // ── Mostrar listas embebidas ──────────────────────────────────────────────
+    private void mostrarListaCitas() {
         try {
-            ArrayList<Cita> citas = acceso.recogeCitas(c);
-            ListaCitas vistaLista = new ListaCitas();
-            new ControladorListaCitas(vistaLista, acceso, c, citas, empleado, true);
-            vistaLista.setVisible(true);
-            vista.dispose();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            todasCitas     = acceso.recogeCitas(c);
+            listaEmpleados = acceso.recogeEmpleados(c);
+            listaTrajes    = acceso.recogeTrajes(c);
+            todosTalleres  = acceso.recogeTalleres(c);
+        } catch (SQLException ex) { ex.printStackTrace(); }
+        citasFiltradas = new ArrayList<>(todasCitas);
+        cargarTablaCitas(citasFiltradas);
+        vista.mostrarCard(VentanaMaestro.CARD_LISTA_CITAS);
+    }
+
+    private void mostrarListaClientes() {
+        try { todosClientes = acceso.recogeClientes(c); } catch (SQLException ex) { ex.printStackTrace(); }
+        clientesFiltrados = new ArrayList<>(todosClientes);
+        cargarTablaClientes(clientesFiltrados);
+        vista.mostrarCard(VentanaMaestro.CARD_LISTA_CLIENTES);
+    }
+
+    private void mostrarListaTalleres() {
+        try { todosTalleres = acceso.recogeTalleres(c); } catch (Exception ex) { ex.printStackTrace(); }
+        cargarTablaTalleres();
+        vista.mostrarCard(VentanaMaestro.CARD_LISTA_TALLERES);
+    }
+
+    // ── Tablas embebidas ─────────────────────────────────────────────────────
+    private void cargarTablaCitas(ArrayList<Cita> lista) {
+        DefaultTableModel m = (DefaultTableModel) vista.getTableCitas().getModel();
+        m.setRowCount(0);
+        for (Cita cita : lista) {
+            m.addRow(new Object[]{
+                cita.getFecha() + " " + cita.getHora_inicio(),
+                nombreCliente(cita.getId_cliente()),
+                nombreTraje(cita.getId_traje()),
+                nombreTaller(cita.getId_sala()),
+                nombreEmpleado(cita.getId_empleado()),
+                cita.getDuracion() + " h"
+            });
         }
     }
 
-    
+    private void cargarTablaClientes(ArrayList<Cliente> lista) {
+        DefaultTableModel m = (DefaultTableModel) vista.getTableClientes().getModel();
+        m.setRowCount(0);
+        for (Cliente cl : lista)
+            m.addRow(new Object[]{ cl.getNombre(), cl.getSuperpoder(), cl.getTipo_heroe(), "-" });
+    }
+
+    private void cargarTablaTalleres() {
+        DefaultTableModel m = (DefaultTableModel) vista.getTableTalleres().getModel();
+        m.setRowCount(0);
+        vista.getModeloListaTalleres().clear();
+        for (Taller t : todosTalleres) {
+            m.addRow(new Object[]{ t.getNombre(), t.getTipo() });
+            vista.getModeloListaTalleres().addElement(t.getNombre() + " (" + t.getTipo() + ")");
+        }
+    }
+
+    // ── Filtros citas ────────────────────────────────────────────────────────
+    private void filtrarCitasPorTipo(String tipo) {
+        citasFiltradas = todasCitas.stream()
+            .filter(cita -> todosTalleres.stream().anyMatch(t -> t.getId_sala() == cita.getId_sala() && t.getTipo().equalsIgnoreCase(tipo)))
+            .collect(Collectors.toCollection(ArrayList::new));
+        if (citasFiltradas.isEmpty())
+            JOptionPane.showMessageDialog(vista, "No hay citas de tipo '" + tipo + "'.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        cargarTablaCitas(citasFiltradas);
+    }
+
+    private void buscarCitas() {
+        String texto = vista.getTxtBuscarCitas().getText().trim().toLowerCase();
+        citasFiltradas = new ArrayList<>();
+        for (Cita cita : todasCitas) {
+            if (cita.getFecha().toString().contains(texto) || nombreCliente(cita.getId_cliente()).toLowerCase().contains(texto))
+                citasFiltradas.add(cita);
+        }
+        cargarTablaCitas(citasFiltradas);
+    }
+
+    // ── Filtros clientes ──────────────────────────────────────────────────────
+    private void filtrarClientesPorTipo(String tipo) {
+        clientesFiltrados = new ArrayList<>();
+        for (Cliente cl : todosClientes)
+            if (cl.getTipo_heroe().equalsIgnoreCase(tipo)) clientesFiltrados.add(cl);
+        cargarTablaClientes(clientesFiltrados);
+    }
+
+    private void buscarClientes() {
+        String texto = vista.getTxtBuscarClientes().getText().trim().toLowerCase();
+        clientesFiltrados = new ArrayList<>();
+        for (Cliente cl : todosClientes)
+            if (cl.getNombre().toLowerCase().contains(texto)) clientesFiltrados.add(cl);
+        cargarTablaClientes(clientesFiltrados);
+    }
+
+    // ── Acciones citas ────────────────────────────────────────────────────────
+    private void verDetalleCita() {
+        int fila = vista.getTableCitas().getSelectedRow();
+        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        Cita cita = citasFiltradas.get(fila);
+        DetalleCita v = new DetalleCita();
+        new ControladorDetalleCita(v, cita, acceso, c);
+        v.setVisible(true);
+    }
+
+    private void editarCita() {
+        int fila = vista.getTableCitas().getSelectedRow();
+        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        NuevaCitaMaestro v = new NuevaCitaMaestro();
+        new ControladorNuevaCitaMaestro(v, acceso, c, empleado);
+        v.setVisible(true);
+    }
+
     private void abrirNuevaCita() {
-        NuevaCita1 vistaForm = new NuevaCita1();
-        new ControladorNuevaCita1(vistaForm, acceso, c, empleado);
-        vistaForm.setVisible(true);
-        vista.dispose();
+        NuevaCitaMaestro v = new NuevaCitaMaestro();
+        new ControladorNuevaCitaMaestro(v, acceso, c, empleado);
+        v.setVisible(true);
     }
 
-   
-    private void abrirListaClientes() {
-        try {
-        	ArrayList<Cliente> clientes = acceso.recogeClientes(c);
-            ArrayList<Traje> trajes = acceso.recogeTrajes(c);
-            ListaClientes vistaLista = new ListaClientes();
-            new ControladorListaClientes(vistaLista, acceso, c, clientes, trajes, empleado);
-            vistaLista.setVisible(true);
-            vista.dispose();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+    // ── Acciones clientes ─────────────────────────────────────────────────────
+    private void verDetalleCliente() {
+        int fila = vista.getTableClientes().getSelectedRow();
+        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona un cliente.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        Cliente cl = clientesFiltrados.get(fila);
+        DetalleClientes v = new DetalleClientes();
+        new ControladorDetalleClientes(v, acceso, c, cl, editable);
+        v.setVisible(true);
+    }
+
+    private void editarCliente() {
+        int fila = vista.getTableClientes().getSelectedRow();
+        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona un cliente.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        Cliente cl = clientesFiltrados.get(fila);
+        NuevoCliente v = new NuevoCliente();
+        new ControladorNuevoCliente(v, acceso, c, cl);
+        v.setVisible(true);
+    }
+
+    private void eliminarCliente() {
+        int fila = vista.getTableClientes().getSelectedRow();
+        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona un cliente.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        Cliente cl = clientesFiltrados.get(fila);
+        int ok = JOptionPane.showConfirmDialog(vista, "¿Eliminar a " + cl.getNombre() + "?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (ok == JOptionPane.YES_OPTION) {
+            acceso.eliminarCliente(c, cl.getId_cliente());
+            todosClientes.remove(cl); clientesFiltrados.remove(cl);
+            cargarTablaClientes(clientesFiltrados);
+            JOptionPane.showMessageDialog(vista, "Cliente eliminado.");
         }
     }
 
-   
     private void abrirNuevoCliente() {
-    	try {
-    		NuevoCliente vistaForm = new NuevoCliente();
-            ArrayList<Cliente> clientes = acceso.recogeClientes(c);
-            ArrayList<Traje> trajes = acceso.recogeTrajes(c);
-            new ControladorNuevoCliente(vistaForm, acceso, c, null, clientes, empleado);
-            vistaForm.setVisible(true);
-            vista.dispose();
-    	} catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+        NuevoCliente v = new NuevoCliente();
+        new ControladorNuevoCliente(v, acceso, c, null);
+        v.setVisible(true);
     }
 
-    // Lista de talleres — acceso completo (botones habilitados por defecto)
-    private void abrirListaTalleres() {
-        ArrayList<Taller> talleres = acceso.recogeTalleres(c);
-        ListaTalleres vistaLista = new ListaTalleres();
-        vistaLista.recogerDatos(talleres);
-        new ControladorListaTalleres(vistaLista, acceso, c, talleres, empleado);
-        vistaLista.setVisible(true);
-        vista.dispose();
+    // ── Acciones talleres ─────────────────────────────────────────────────────
+    private String opcionTaller = "";
+
+    private void pulsarEditarTaller() {
+        opcionTaller = "editar";
+        vista.getLista().setEnabled(true);
+        JOptionPane.showMessageDialog(vista, "Selecciona el taller a editar en la lista inferior.");
+        vista.getLista().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && opcionTaller.equals("editar")) {
+                int idx = vista.getLista().getSelectedIndex();
+                if (idx >= 0 && idx < todosTalleres.size()) {
+                    Taller t = todosTalleres.get(idx);
+                    NuevoTaller v = new NuevoTaller();
+                    new ControladorNuevoTaller(v, acceso, c, todosTalleres, empleado);
+                    v.setVisible(true);
+                    opcionTaller = "";
+                }
+            }
+        });
     }
 
-    // Nuevo taller — acceso completo
+    private void pulsarEliminarTaller() {
+        opcionTaller = "eliminar";
+        JOptionPane.showMessageDialog(vista, "Selecciona el taller a eliminar en la lista inferior.");
+        vista.getLista().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && opcionTaller.equals("eliminar")) {
+                int idx = vista.getLista().getSelectedIndex();
+                if (idx >= 0 && idx < todosTalleres.size()) {
+                    Taller t = todosTalleres.get(idx);
+                    int ok = JOptionPane.showConfirmDialog(vista, "¿Eliminar '" + t.getNombre() + "'?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                    if (ok == JOptionPane.YES_OPTION) {
+                        todosTalleres.remove(idx);
+                        cargarTablaTalleres();
+                        JOptionPane.showMessageDialog(vista, "Taller eliminado.");
+                    }
+                    opcionTaller = "";
+                }
+            }
+        });
+    }
+
+    private void pulsarConfirmarTaller() {
+        JOptionPane.showMessageDialog(vista, "Operación confirmada.");
+        opcionTaller = "";
+    }
+
     private void abrirNuevoTaller() {
-        ArrayList<Taller> talleres = acceso.recogeTalleres(c);
-        NuevoTaller vistaForm = new NuevoTaller();
-        new ControladorNuevoTaller(vistaForm, acceso, c, null, talleres, empleado);
-        vistaForm.setVisible(true);
-        vista.dispose();
+        NuevoTaller v = new NuevoTaller();
+        new ControladorNuevoTaller(v, acceso, c, todosTalleres, empleado);
+        v.setVisible(true);
     }
 
+    // ── Nombres ───────────────────────────────────────────────────────────────
+    private String nombreCliente(int id)  { if(todosClientes==null)  return ""+id; for(Cliente  x:todosClientes)  if(x.getId_cliente()==id)  return x.getNombre(); return ""+id; }
+    private String nombreTraje(int id)    { if(listaTrajes==null)    return ""+id; for(Traje    x:listaTrajes)    if(x.getId_traje()==id)    return x.getNombre_traje(); return ""+id; }
+    private String nombreTaller(int id)   { if(todosTalleres==null)  return ""+id; for(Taller   x:todosTalleres)  if(x.getId_sala()==id)     return x.getNombre(); return ""+id; }
+    private String nombreEmpleado(int id) { if(listaEmpleados==null) return ""+id; for(Empleado x:listaEmpleados) if(x.getId_empleado()==id) return x.getNombre()+" "+x.getApellido(); return ""+id; }
+
+    // ── Cerrar sesión ─────────────────────────────────────────────────────────
     private void cerrarSesion() {
         acceso.cerrarConexion(c);
         vista.dispose();
-
         try {
-            Connection nuevaConexion = acceso.abrirConexion();
-            ArrayList<Empleado> empleados = acceso.recogeEmpleados(nuevaConexion);
-            acceso.cerrarConexion(nuevaConexion);
-
-            InicioSesion inicioSesion = new InicioSesion();
-            new ControladorInicioSesion(inicioSesion, acceso, empleados);
-            inicioSesion.setVisible(true);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+            Connection nc = acceso.abrirConexion();
+            ArrayList<Empleado> empleados = acceso.recogeEmpleados(nc);
+            acceso.cerrarConexion(nc);
+            InicioSesion is = new InicioSesion();
+            new ControladorInicioSesion(is, acceso, empleados);
+            is.setVisible(true);
+        } catch (SQLException ex) { ex.printStackTrace(); }
     }
 }

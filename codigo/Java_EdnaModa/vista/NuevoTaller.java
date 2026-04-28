@@ -17,7 +17,7 @@ import java.awt.Font;
 import java.awt.Color;
 
 // Clase que representa la ventana para crear un nuevo taller
-public class NuevoTaller extends JPanel {
+public class NuevoTaller extends JFrame {
 
 	private static final String String = null;
 
@@ -121,6 +121,15 @@ public class NuevoTaller extends JPanel {
 	public void cargarDatos(Taller taller) {
 	    txtNomeSala.setText(taller.getNombre());
 	    cbTipoSala.setSelectedItem(taller.getTipo());
+	}
+	
+	public Taller devolverTallerViejo() {
+		String nombre = txtNomeSala.getText();
+	    String tipo = (String) cbTipoSala.getSelectedItem();
+	    
+	    Taller tviejo = new Taller(0, nombre, tipo);
+	    
+	    return tviejo;
 	}
 	
 }

@@ -10,7 +10,7 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 
 //Clase que representa la ventana para crear o editar un cliente
-public class NuevoCliente extends JPanel {
+public class NuevoCliente extends JFrame {
 
 	// Panel principal
 	private JPanel contentPane;
@@ -19,16 +19,18 @@ public class NuevoCliente extends JPanel {
 	private JTextField txtNombre;
 	private JTextField txtSuperpoder;
 	private JTextField txtColor;
-	private JComboBox cbTipo;
+	private JTextField txtTipo;
+	private JTextField txtNombreTraje;
 	private JButton btnGuardar;
 	private JButton btnCancelar;
+	private JComboBox<Object> cbEstado;
 
 	// Constructor de la ventana
 	public NuevoCliente() {
 		
 		// Configuración básica de la ventana
 		setTitle("Nuevo / Editar Cliente"); // Título
-		setBounds(100, 100, 400, 351); // Posición y tamaño
+		setBounds(100, 100, 400, 550); // Posición y tamaño
 		
 		// Creación del panel principal con layout absoluto
 		contentPane = new JPanel();
@@ -81,21 +83,46 @@ public class NuevoCliente extends JPanel {
 		
 		// Etiqueta del tipo
 		JLabel lblTipo = new JLabel("Tipo:");
-		lblTipo.setBounds(190, 173, 100, 14);
+		lblTipo.setBounds(200, 173, 100, 14);
 		contentPane.add(lblTipo);
 
 		// Campo de texto para el tipo
-		cbTipo = new JComboBox<Object>(new Object[]{"superheroe", "superheroina", "supervillano", "supervillana"});
-		cbTipo.setBounds(190, 193, 170, 25);
-		getContentPane().add(cbTipo);
+		txtTipo = new JTextField();
+		txtTipo.setBounds(200, 193, 160, 25); // Mitad del ancho
+		contentPane.add(txtTipo);
+
+		// --- Botones ---
 		
-		btnGuardar = new JButton("Guardar Traje");
-		btnGuardar.setBounds(41, 249, 130, 40);
+		// Botón para guardar el cliente
+		JButton btnGuardar = new JButton("Guardar Cliente");
+		btnGuardar.setBounds(47, 450, 130, 40);
 		contentPane.add(btnGuardar);
-		
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(201, 249, 130, 40);
+
+		// Botón para cancelar la operación
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(207, 450, 130, 40);
 		contentPane.add(btnCancelar);
+		
+		JLabel lblNombre_1 = new JLabel("Nombre:");
+		lblNombre_1.setBounds(20, 287, 100, 14);
+		contentPane.add(lblNombre_1);
+		
+		txtNombreTraje = new JTextField();
+		txtNombreTraje.setBounds(20, 307, 340, 25);
+		contentPane.add(txtNombreTraje);
+		
+		JLabel lblTitle_1 = new JLabel("DATOS DEL TRAJE");
+		lblTitle_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTitle_1.setBounds(20, 248, 200, 25);
+		contentPane.add(lblTitle_1);
+		
+		JLabel lblEstado = new JLabel("Estado:");
+		lblEstado.setBounds(20, 355, 100, 14);
+		contentPane.add(lblEstado);
+		
+		JComboBox<Object> cbEstado = new JComboBox<>(new Object[]{});
+		cbEstado.setBounds(20, 380, 340, 25);
+		contentPane.add(cbEstado);
 	}
 	
 	//getters para el controlador acessar los componentes de la vista
@@ -111,13 +138,17 @@ public class NuevoCliente extends JPanel {
 			return txtColor; 
 		}
 	
-		public String getCbTipo() {
-			return (String) cbTipo.getSelectedItem();
+		public JTextField getTxtTipo() {
+			return txtTipo; 
 		}
-		
-		public void setCbTipo(String tipo) {
-			cbTipo.setSelectedItem(tipo);
-	    }
+	
+		public JTextField getTxtNombreTraje() {
+			return txtNombreTraje; 
+		}
+	
+		public JComboBox<Object> getCbEstado() {
+			return cbEstado; 
+		}
 	
 		public JButton getBtnGuardar() {
 			return btnGuardar; 

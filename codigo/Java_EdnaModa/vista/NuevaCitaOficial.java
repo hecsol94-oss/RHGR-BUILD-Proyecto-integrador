@@ -1,105 +1,105 @@
 package vista;
 
-// Importaciones necesarias para la interfaz gráfica
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.border.*;
 
-// Clase que representa la ventana para crear o editar una cita
-public class NuevaCitaOficial extends JPanel {
+/**
+ * NuevaCitaOficial — punto 10: mismo proceso que Maestro (dos fases).
+ * Esta clase queda para compatibilidad; el controlador puede reutilizar NuevaCitaMaestro.
+ * Se elimina el JTextArea y se muestra el resumen con campos etiquetados (punto 8).
+ */
+public class NuevaCitaOficial extends JFrame {
 
-    // Botones de acción
-	private JButton btnGuardar;
-	private JButton btnCancelar;
+    private JLabel lblFechaVal, lblHoraVal, lblDuracionVal;
+    private JLabel lblClienteVal, lblTrajeVal, lblTallerVal, lblOficialVal;
+    private JComboBox<String> cbAprendiz1;
+    private JComboBox<String> cbAprendiz2;
+    private JButton btnGuardar;
+    private JButton btnCancelar;
 
-    // Campos de texto para datos de la cita
-    private JTextArea txtDetalles;
-
-    // Componentes de selección de datos
-    private JComboBox cbAprendiz1;
-    private JComboBox cbAprendiz2;
-    
-    // Constructor de la ventana
     public NuevaCitaOficial() {
-        
-        // Configuración básica de la ventana
-        setTitle("Nueva / Editar Cita"); // Título
-        setBounds(100, 100, 400, 349); // Tamaño y posición
-        
-        // Se utiliza layout absoluto
+        setTitle("Nueva Cita — Fase 2");
+        setBounds(100, 100, 450, 400);
         getContentPane().setLayout(null);
 
-        // Botón para guardar la cita
-        btnGuardar = new JButton("Guardar Cita");
-        btnGuardar.setBounds(20, 250, 150, 40);
-        getContentPane().add(btnGuardar);
-        
-        // Botón para cancelar la operación
-        btnCancelar = new JButton("Cancelar");
-        btnCancelar.setBounds(210, 250, 150, 40);
-        getContentPane().add(btnCancelar);
-        
-        // Etiqueta para los aprendices responsables
-        JLabel lblAprendiz1 = new JLabel("Aprendiz nº1:");
-        lblAprendiz1.setBounds(30, 196, 108, 14);
-        getContentPane().add(lblAprendiz1);
-        
-        // textarea que contiene los detalles de la cita la cual le ha inscrito el maestro
-        txtDetalles = new JTextArea();
-        txtDetalles.setText("Fecha:\nHora:\nCliente:\nTraje:\nTaller:\nDuracion:");
+        JLabel titulo = new JLabel("DATOS DE LA CITA");
+        titulo.setFont(new Font("Tahoma", Font.BOLD, 14));
+        titulo.setBounds(20, 10, 280, 25);
+        getContentPane().add(titulo);
 
-        txtDetalles.setText("Fecha: 24/03/2026\nHora: 10:00\nCliente: Mr. Increíble\nTraje: Classic Blue\nTaller: París\nDuracion: 1h");
-        txtDetalles.setEditable(false);
-        txtDetalles.setBounds(20, 69, 340, 112);
-        getContentPane().add(txtDetalles);
-        
-        // Titulo del formulario que contiene la ventana NuevaCita
-        JLabel lblDatosDeLaCita = new JLabel("DATOS DE LA CITA");
-        lblDatosDeLaCita.setFont(new Font("Tahoma", Font.BOLD, 14));
-        lblDatosDeLaCita.setBounds(20, 11, 200, 25);
-        getContentPane().add(lblDatosDeLaCita);
-        
-        // etiqueta para las citas asignadas por el maestro
-        JLabel lblCitaMaestro = new JLabel("Te han asignado a una nueva cita");
-        lblCitaMaestro.setBounds(20, 47, 219, 14);
-        getContentPane().add(lblCitaMaestro);
-        
-        JLabel lblAprendiz2 = new JLabel("Aprendiz nº2:");
-        lblAprendiz2.setBounds(30, 225, 108, 14);
-        getContentPane().add(lblAprendiz2);
-        
-        cbAprendiz1 = new JComboBox(new Object[]{"Ninguno"});
-        cbAprendiz1.setBounds(180, 191, 180, 25);
+        JLabel sub = new JLabel("Te han asignado a una nueva cita");
+        sub.setFont(new Font("Tahoma", Font.ITALIC, 11));
+        sub.setBounds(20, 32, 280, 16);
+        getContentPane().add(sub);
+
+        int y = 58, dy = 28;
+        lblFechaVal    = addField("Fecha:",    y); y += dy;
+        lblHoraVal     = addField("Hora:",     y); y += dy;
+        lblDuracionVal = addField("Duración:", y); y += dy;
+        lblClienteVal  = addField("Cliente:",  y); y += dy;
+        lblTrajeVal    = addField("Traje:",    y); y += dy;
+        lblTallerVal   = addField("Taller:",   y); y += dy;
+        lblOficialVal  = addField("Oficial:",  y); y += dy + 10;
+
+        JSeparator sep = new JSeparator(); sep.setBounds(20, y, 405, 2); getContentPane().add(sep); y += 10;
+
+        JLabel lblApr = new JLabel("APRENDICES (opcional)");
+        lblApr.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblApr.setBounds(20, y, 220, 18);
+        getContentPane().add(lblApr);
+        y += 24;
+
+        getContentPane().add(lbl("Aprendiz 1:", 20, y));
+        cbAprendiz1 = new JComboBox<>();
+        cbAprendiz1.setBounds(120, y, 295, 25);
         getContentPane().add(cbAprendiz1);
-        
-        cbAprendiz2 = new JComboBox(new Object[]{"Ninguno"});
-        cbAprendiz2.setBounds(180, 221, 180, 25);
+        y += 32;
+
+        getContentPane().add(lbl("Aprendiz 2:", 20, y));
+        cbAprendiz2 = new JComboBox<>();
+        cbAprendiz2.setBounds(120, y, 295, 25);
         getContentPane().add(cbAprendiz2);
-    
+        y += 45;
+
+        btnGuardar = new JButton("Guardar Cita");
+        btnGuardar.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnGuardar.setBounds(240, y, 160, 35);
+        getContentPane().add(btnGuardar);
+
+        btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(60, y, 140, 35);
+        getContentPane().add(btnCancelar);
     }
 
-    // Getters para que el controlador acceda a los componentes
+    private JLabel lbl(String t, int x, int y) { JLabel l = new JLabel(t); l.setBounds(x,y,100,22); return l; }
 
-    public JButton getBtnGuardar() {
-        return btnGuardar;
+    private JLabel addField(String etiqueta, int y) {
+        JLabel lbl = new JLabel(etiqueta);
+        lbl.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lbl.setBounds(20, y, 100, 22);
+        getContentPane().add(lbl);
+        JLabel val = new JLabel("—");
+        val.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        val.setBounds(125, y, 300, 22);
+        val.setBorder(new CompoundBorder(new LineBorder(new Color(200,200,200)), new EmptyBorder(0,4,0,0)));
+        val.setOpaque(true); val.setBackground(new Color(248,248,248));
+        getContentPane().add(val);
+        return val;
     }
 
-    public JButton getBtnCancelar() {
-        return btnCancelar;
-    }
+    public void setFecha(String v)    { lblFechaVal.setText(v); }
+    public void setHora(String v)     { lblHoraVal.setText(v); }
+    public void setDuracion(String v) { lblDuracionVal.setText(v); }
+    public void setCliente(String v)  { lblClienteVal.setText(v); }
+    public void setTraje(String v)    { lblTrajeVal.setText(v); }
+    public void setTaller(String v)   { lblTallerVal.setText(v); }
+    public void setOficial(String v)  { lblOficialVal.setText(v); }
 
-    public JTextArea getTxtDetalles() {
-        return txtDetalles;
-    }
-
-    public JComboBox getCbAprendiz1() {
-        return cbAprendiz1;
-    }
-
-    public JComboBox getCbAprendiz2() {
-        return cbAprendiz2;
-    }
+    public JComboBox<String> getCbAprendiz1() { return cbAprendiz1; }
+    public JComboBox<String> getCbAprendiz2() { return cbAprendiz2; }
+    public JButton getBtnGuardar()            { return btnGuardar; }
+    public JButton getBtnCancelar()           { return btnCancelar; }
+    // Legacy compat
+    public JTextArea getTxtDetalles() { return null; }
 }

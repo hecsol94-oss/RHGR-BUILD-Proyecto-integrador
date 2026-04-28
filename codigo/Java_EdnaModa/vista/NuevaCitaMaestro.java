@@ -1,173 +1,237 @@
-
 package vista;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.border.*;
 
-// Clase que representa la ventana para crear o editar una cita (versión Maestro)
-public class NuevaCitaMaestro extends JPanel {
+public class NuevaCitaMaestro extends JFrame {
 
-	// Componentes de selección de datos
-	private JComboBox<String> cbCliente;
-	private JComboBox<String> cbTraje;
-	private JComboBox<String> cbTaller;
+    // ---- Fase 1 ----
+    private JComboBox<String> cbCliente;
+    private JComboBox<String> cbTraje;
+    private JComboBox<String> cbTaller;
+    private JComboBox<String> cbOficial;   // ← ahora es combo, no texto libre
+    private JTextField txtFecha;
+    private JTextField txtHora;
+    private JTextField txtDuracion;
+    private JButton btnNuevoCliente;
+    private JButton btnNuevoTraje;
+    private JButton btnSiguiente;
+    private JButton btnCancelar;
 
-	// Campos de texto para datos de la cita
-	private JTextField txtOficial;
-	private JTextField txtFecha;
-	private JTextField txtHora;
-	private JTextField txtDuracion;
+    // ---- Fase 2 ----
+    private JPanel panelFase2;
+    private JLabel lblResumenFecha, lblResumenHora, lblResumenDuracion;
+    private JLabel lblResumenCliente, lblResumenTraje, lblResumenTaller, lblResumenOficial;
+    private JComboBox<String> cbAprendiz1;
+    private JComboBox<String> cbAprendiz2;
+    private JButton btnGuardar;
+    private JButton btnAtras;
 
-	// Botones de acción
-	private JButton btnGuardar;
-	private JButton btnCancelar;
-	private JButton btnCliente;
-	private JButton btnTaller;
+    private JPanel panelFase1;
+    private CardLayout cardLayout;
+    private JPanel panelContenedor;
 
-	// Constructor de la ventana
-	public NuevaCitaMaestro() {
+    public NuevaCitaMaestro() {
+        setTitle("Nueva / Editar Cita");
+        setBounds(100, 100, 500, 490);
+        getContentPane().setLayout(null);
 
-		setTitle("Nueva / Editar Cita");
-		setBounds(100, 100, 450, 450);
-		getContentPane().setLayout(null);
+        cardLayout = new CardLayout();
+        panelContenedor = new JPanel(cardLayout);
+        panelContenedor.setBounds(0, 0, 490, 470);
+        getContentPane().add(panelContenedor);
 
-		// ComboBox para seleccionar el cliente (se rellena desde el controlador)
-		cbCliente = new JComboBox<>(new String[] {});
-		cbCliente.setBounds(20, 66, 180, 25);
-		getContentPane().add(cbCliente);
+        buildFase1();
+        buildFase2();
 
-		// ComboBox para seleccionar el traje (se filtra según el cliente elegido)
-		cbTraje = new JComboBox<>(new String[] {});
-		cbTraje.setBounds(230, 66, 180, 25);
-		getContentPane().add(cbTraje);
+        panelContenedor.add(panelFase1, "FASE1");
+        panelContenedor.add(panelFase2, "FASE2");
+        cardLayout.show(panelContenedor, "FASE1");
+    }
 
-		// ComboBox para seleccionar el taller (se rellena desde la BBDD)
-		cbTaller = new JComboBox<>(new String[] {});
-		cbTaller.setBounds(20, 126, 180, 25);
-		getContentPane().add(cbTaller);
+    private void buildFase1() {
+        panelFase1 = new JPanel(null);
 
-		// Campo de texto para el oficial responsable
-		txtOficial = new JTextField();
-		txtOficial.setBounds(230, 126, 180, 25);
-		getContentPane().add(txtOficial);
+        JLabel titulo = new JLabel("DATOS DE LA CITA");
+        titulo.setFont(new Font("Tahoma", Font.BOLD, 14));
+        titulo.setBounds(20, 10, 250, 25);
+        panelFase1.add(titulo);
 
-		// Campo de texto para la fecha (formato yyyy-MM-dd)
-		txtFecha = new JTextField();
-		txtFecha.setBounds(20, 186, 100, 25);
-		getContentPane().add(txtFecha);
+        // Cliente
+        panelFase1.add(lbl("Cliente:", 20, 45));
+        cbCliente = new JComboBox<>();
+        cbCliente.setBounds(20, 62, 280, 25);
+        panelFase1.add(cbCliente);
+        btnNuevoCliente = new JButton("+ Nuevo cliente");
+        btnNuevoCliente.setBounds(310, 62, 155, 25);
+        panelFase1.add(btnNuevoCliente);
 
-		// Campo de texto para la hora (formato HH:mm)
-		txtHora = new JTextField();
-		txtHora.setBounds(167, 187, 100, 25);
-		getContentPane().add(txtHora);
+        // Traje
+        panelFase1.add(lbl("Traje:", 20, 98));
+        cbTraje = new JComboBox<>();
+        cbTraje.setBounds(20, 115, 280, 25);
+        panelFase1.add(cbTraje);
+        btnNuevoTraje = new JButton("+ Nuevo traje");
+        btnNuevoTraje.setBounds(310, 115, 155, 25);
+        panelFase1.add(btnNuevoTraje);
 
-		// Campo de texto para la duración en horas
-		txtDuracion = new JTextField();
-		txtDuracion.setBounds(310, 187, 100, 25);
-		getContentPane().add(txtDuracion);
+        // Taller — solo combo, ancho completo
+        panelFase1.add(lbl("Taller:", 20, 151));
+        cbTaller = new JComboBox<>();
+        cbTaller.setBounds(20, 168, 445, 25);
+        panelFase1.add(cbTaller);
 
-		// Botón para guardar la cita
-		btnGuardar = new JButton("Guardar Cita");
-		btnGuardar.setBounds(20, 344, 150, 40);
-		getContentPane().add(btnGuardar);
+        // Oficial responsable — ahora combo
+        panelFase1.add(lbl("Oficial responsable:", 20, 204));
+        cbOficial = new JComboBox<>();
+        cbOficial.setBounds(20, 221, 445, 25);
+        panelFase1.add(cbOficial);
 
-		// Botón para cancelar la operación
-		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(260, 344, 150, 40);
-		getContentPane().add(btnCancelar);
+        // Fecha / Hora / Duración
+        panelFase1.add(lbl("Fecha (yyyy-MM-dd):", 20, 257));
+        txtFecha = new JTextField();
+        txtFecha.setBounds(20, 274, 130, 25);
+        panelFase1.add(txtFecha);
 
-		// Botón para registrar un cliente nuevo si no existe en el combo
-		btnCliente = new JButton("¿Existe el cliente? Regístralo");
-		btnCliente.setBounds(22, 247, 388, 25);
-		getContentPane().add(btnCliente);
+        panelFase1.add(lbl("Hora (HH:mm):", 165, 257));
+        txtHora = new JTextField();
+        txtHora.setBounds(165, 274, 100, 25);
+        panelFase1.add(txtHora);
 
-		// Botón para añadir un taller nuevo si no existe en el combo
-		btnTaller = new JButton("¿Existe el taller? Añádelo");
-		btnTaller.setBounds(24, 283, 386, 25);
-		getContentPane().add(btnTaller);
+        panelFase1.add(lbl("Duración (h):", 280, 257));
+        txtDuracion = new JTextField();
+        txtDuracion.setBounds(280, 274, 90, 25);
+        panelFase1.add(txtDuracion);
 
-		JLabel lblDatosDeLa = new JLabel("DATOS DE LA CITA");
-		lblDatosDeLa.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDatosDeLa.setBounds(20, 11, 200, 25);
-		getContentPane().add(lblDatosDeLa);
+        JSeparator sep = new JSeparator();
+        sep.setBounds(20, 315, 455, 2);
+        panelFase1.add(sep);
 
-		JLabel lblCliente = new JLabel("Cliente:");
-		lblCliente.setBounds(20, 41, 100, 14);
-		getContentPane().add(lblCliente);
+        btnSiguiente = new JButton("Siguiente →");
+        btnSiguiente.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnSiguiente.setBounds(280, 330, 185, 35);
+        panelFase1.add(btnSiguiente);
 
-		JLabel lblTraje = new JLabel("Traje:");
-		lblTraje.setBounds(230, 41, 100, 14);
-		getContentPane().add(lblTraje);
+        btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBounds(90, 330, 150, 35);
+        panelFase1.add(btnCancelar);
+    }
 
-		JLabel lblTaller = new JLabel("Taller:");
-		lblTaller.setBounds(20, 101, 100, 14);
-		getContentPane().add(lblTaller);
+    private void buildFase2() {
+        panelFase2 = new JPanel(null);
 
-		JLabel lblOficialResponsable = new JLabel("Oficial responsable:");
-		lblOficialResponsable.setBounds(230, 101, 155, 14);
-		getContentPane().add(lblOficialResponsable);
+        JLabel titulo = new JLabel("RESUMEN DE LA CITA");
+        titulo.setFont(new Font("Tahoma", Font.BOLD, 14));
+        titulo.setBounds(20, 10, 300, 25);
+        panelFase2.add(titulo);
 
-		JLabel lblFecha = new JLabel("Fecha:");
-		lblFecha.setBounds(20, 161, 140, 14);
-		getContentPane().add(lblFecha);
+        JLabel subTitulo = new JLabel("Revisa los datos y asigna aprendices (opcional)");
+        subTitulo.setFont(new Font("Tahoma", Font.ITALIC, 11));
+        subTitulo.setBounds(20, 32, 380, 18);
+        panelFase2.add(subTitulo);
 
-		JLabel lblHora = new JLabel("Hora:");
-		lblHora.setBounds(167, 162, 110, 14);
-		getContentPane().add(lblHora);
+        int y = 58, dy = 28;
+        lblResumenFecha    = addResumenField(panelFase2, "Fecha:",    y); y += dy;
+        lblResumenHora     = addResumenField(panelFase2, "Hora:",     y); y += dy;
+        lblResumenDuracion = addResumenField(panelFase2, "Duración:", y); y += dy;
+        lblResumenCliente  = addResumenField(panelFase2, "Cliente:",  y); y += dy;
+        lblResumenTraje    = addResumenField(panelFase2, "Traje:",    y); y += dy;
+        lblResumenTaller   = addResumenField(panelFase2, "Taller:",   y); y += dy;
+        lblResumenOficial  = addResumenField(panelFase2, "Oficial:",  y); y += dy + 10;
 
-		JLabel lblDuracion = new JLabel("Duración:");
-		lblDuracion.setBounds(310, 162, 100, 14);
-		getContentPane().add(lblDuracion);
+        JSeparator sep = new JSeparator();
+        sep.setBounds(20, y, 450, 2);
+        panelFase2.add(sep);
+        y += 10;
 
-	}
+        JLabel lblApr = new JLabel("APRENDICES (opcional)");
+        lblApr.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblApr.setBounds(20, y, 200, 18);
+        panelFase2.add(lblApr);
+        y += 24;
 
-	// Getters para que el controlador acceda a los componentes
+        panelFase2.add(lbl("Aprendiz 1:", 20, y));
+        cbAprendiz1 = new JComboBox<>();
+        cbAprendiz1.setBounds(130, y, 310, 25);
+        panelFase2.add(cbAprendiz1);
+        y += 32;
 
-	public JComboBox<String> getCbCliente() {
-		return cbCliente;
-	}
+        panelFase2.add(lbl("Aprendiz 2:", 20, y));
+        cbAprendiz2 = new JComboBox<>();
+        cbAprendiz2.setBounds(130, y, 310, 25);
+        panelFase2.add(cbAprendiz2);
+        y += 45;
 
-	public JComboBox<String> getCbTraje() {
-		return cbTraje;
-	}
+        btnAtras = new JButton("← Atrás");
+        btnAtras.setBounds(20, y, 140, 35);
+        panelFase2.add(btnAtras);
 
-	public JComboBox<String> getCbTaller() {
-		return cbTaller;
-	}
+        btnGuardar = new JButton("Guardar Cita");
+        btnGuardar.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnGuardar.setBounds(310, y, 155, 35);
+        panelFase2.add(btnGuardar);
+    }
 
-	public JTextField getTxtOficial() {
-		return txtOficial;
-	}
+    private JLabel lbl(String texto, int x, int y) {
+        JLabel l = new JLabel(texto);
+        l.setBounds(x, y, 200, 16);
+        return l;
+    }
 
-	public JTextField getTxtFecha() {
-		return txtFecha;
-	}
+    private JLabel addResumenField(JPanel p, String etiqueta, int y) {
+        JLabel lbl = new JLabel(etiqueta);
+        lbl.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lbl.setBounds(20, y, 110, 22);
+        p.add(lbl);
+        JLabel val = new JLabel("—");
+        val.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        val.setBounds(135, y, 310, 22);
+        val.setBorder(new CompoundBorder(
+            new LineBorder(new Color(200, 200, 200)),
+            new EmptyBorder(0, 4, 0, 0)));
+        val.setOpaque(true);
+        val.setBackground(new Color(248, 248, 248));
+        p.add(val);
+        return val;
+    }
 
-	public JTextField getTxtHora() {
-		return txtHora;
-	}
+    public void mostrarFase2(String fecha, String hora, String duracion,
+                              String cliente, String traje, String taller, String oficial) {
+        lblResumenFecha.setText(fecha);
+        lblResumenHora.setText(hora);
+        lblResumenDuracion.setText(duracion);
+        lblResumenCliente.setText(cliente);
+        lblResumenTraje.setText(traje);
+        lblResumenTaller.setText(taller);
+        lblResumenOficial.setText(oficial);
+        cardLayout.show(panelContenedor, "FASE2");
+    }
 
-	public JTextField getTxtDuracion() {
-		return txtDuracion;
-	}
+    public void volverFase1() { cardLayout.show(panelContenedor, "FASE1"); }
 
-	public JButton getBtnGuardar() {
-		return btnGuardar;
-	}
+    // Getters Fase 1
+    public JComboBox<String> getCbCliente()   { return cbCliente; }
+    public JComboBox<String> getCbTraje()     { return cbTraje; }
+    public JComboBox<String> getCbTaller()    { return cbTaller; }
+    public JComboBox<String> getCbOficial()   { return cbOficial; }
+    public JTextField getTxtFecha()           { return txtFecha; }
+    public JTextField getTxtHora()            { return txtHora; }
+    public JTextField getTxtDuracion()        { return txtDuracion; }
+    public JButton getBtnNuevoCliente()       { return btnNuevoCliente; }
+    public JButton getBtnNuevoTraje()         { return btnNuevoTraje; }
+    public JButton getBtnSiguiente()          { return btnSiguiente; }
+    public JButton getBtnCancelar()           { return btnCancelar; }
 
-	public JButton getBtnCancelar() {
-		return btnCancelar;
-	}
+    // Getters Fase 2
+    public JComboBox<String> getCbAprendiz1() { return cbAprendiz1; }
+    public JComboBox<String> getCbAprendiz2() { return cbAprendiz2; }
+    public JButton getBtnGuardar()            { return btnGuardar; }
+    public JButton getBtnAtras()              { return btnAtras; }
 
-	public JButton getBtnCliente() {
-		return btnCliente;
-	}
-
-	public JButton getBtnTaller() {
-		return btnTaller;
-	}
+    // Compatibilidad
+    public JButton getBtnCliente() { return btnNuevoCliente; }
+    public JButton getBtnTaller()  { return null; }
+    // Compatibilidad: getTxtOficial() devuelve null — ya no se usa
+    public JTextField getTxtOficial() { return null; }
 }

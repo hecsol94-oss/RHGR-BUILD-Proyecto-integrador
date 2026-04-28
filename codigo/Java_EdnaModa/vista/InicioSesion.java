@@ -12,7 +12,7 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 
 // Clase que representa la ventana de inicio de sesión
-public class InicioSesion extends JPanel {
+public class InicioSesion extends JFrame {
     
     // Campo de texto para el nombre de usuario
     private JTextField NomUsuario;
