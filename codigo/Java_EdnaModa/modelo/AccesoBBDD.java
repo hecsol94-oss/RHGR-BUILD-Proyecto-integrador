@@ -526,6 +526,27 @@ public class AccesoBBDD {
 	    
 	}
 	
+	public void eliminarCita(Connection c, int id_cita) {
+	    // Primero eliminar los registros relacionados en cita_aprendiz (FK)
+	    String queryAprendiz = "DELETE FROM Cita_Aprendiz WHERE id_cita = ?";
+	    try (PreparedStatement pstmt = c.prepareStatement(queryAprendiz)) {
+	        pstmt.setInt(1, id_cita);
+	        pstmt.executeUpdate();
+	    } catch (SQLException e) {
+	        System.out.println("Error al eliminar aprendices de la cita: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	    // Luego eliminar la cita
+	    String queryCita = "DELETE FROM Citas WHERE id_cita = ?";
+	    try (PreparedStatement pstmt = c.prepareStatement(queryCita)) {
+	        pstmt.setInt(1, id_cita);
+	        pstmt.executeUpdate();
+	    } catch (SQLException e) {
+	        System.out.println("Error al eliminar la cita: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	}
+	
 	public void actualizarCliente(Connection c, int id_cliente, String nombre, String tipo, String superpoder, String color) {
 	    String query = "UPDATE Cliente SET nombre_personaje = ?, tipo_heroe = ?, superpoder = ?, colores = ? WHERE id_cliente = ?";
 	    

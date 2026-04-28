@@ -24,6 +24,7 @@ public class ControladorAprendiz {
     private ArrayList<Traje>   listaTrajes;
     private ArrayList<Cliente> todosClientes;
 
+
     /**
      * 
      * @param vista
@@ -31,6 +32,7 @@ public class ControladorAprendiz {
      * @param c
      * @param empleado
      */
+
     public ControladorAprendiz(VentanaAprendiz vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
         this.vista    = vista;
         this.acceso   = acceso;

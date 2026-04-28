@@ -1,3 +1,15 @@
+
+package controlador;
+
+import modelo.*;
+import vista.*;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.stream.Collectors;
 
@@ -49,6 +61,7 @@ public class ControladorOficial {
         vista.getBtnBuscarCitas().addActionListener(e  -> buscarCitas());
         vista.getBtnVerDetallesCitas().addActionListener(e -> verDetalleCita());
         vista.getBtnEditarCitas().addActionListener(e  -> editarCita());
+        vista.getBtnEliminarCitas().addActionListener(e -> eliminarCita());
         vista.getBtnNuevaCitaEmb().addActionListener(e -> abrirNuevaCita());
 
         vista.getBtnTodosClientes().addActionListener(e   -> { clientesFiltrados = new ArrayList<>(todosClientes); cargarTablaClientes(clientesFiltrados); });
@@ -184,6 +197,23 @@ public class ControladorOficial {
         cargarTablaClientes(clientesFiltrados);
     }
 
+    private void eliminarCita() {
+        int fila = vista.getTableCitas().getSelectedRow();
+        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        Cita cita = citasFiltradas.get(fila);
+        int ok = JOptionPane.showConfirmDialog(vista,
+            "¿Eliminar la cita del " + cita.getFecha() + " a las " + cita.getHora_inicio() + "?",
+            "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (ok == JOptionPane.YES_OPTION) {
+            acceso.eliminarCita(c, cita.getId_cita());
+            todasCitas.remove(cita);
+            citasFiltradas.remove(fila);
+            cargarTablaCitas(citasFiltradas);
+            cargarContadores();
+            JOptionPane.showMessageDialog(vista, "Cita eliminada correctamente.");
+        }
+    }
+
     private void verDetalleCita() {
         int fila = vista.getTableCitas().getSelectedRow();
         if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
@@ -268,6 +298,36 @@ public class ControladorOficial {
     				return ""+id; 
     				}
 
+         if(todosClientes==null)  
+            return ""+id; for(Cliente  x:todosClientes) 
+                 if(x.getId_cliente()==id) 
+                     return x.getNombre();
+                     return ""+id; 
+                    }
+    private String nombreTraje(int id)    {
+         if(listaTrajes==null)   
+             return ""+id; for(Traje    x:listaTrajes)  
+              if(x.getId_traje()==id)   
+                 return x.getNombre_traje();
+                 return ""+id; 
+                }
+    private String nombreTaller(int id)   {
+         if(todosTalleres==null)  
+            return ""+id; for(Taller   x:todosTalleres) 
+                if(x.getId_sala()==id) 
+                        return x.getNombre(); 
+                    return ""+id; 
+                }
+    private String nombreEmpleado(int id) { 
+        if(listaEmpleados==null) 
+            return ""+id; 
+        for(Empleado x:listaEmpleados)
+             if(x.getId_empleado()==id) 
+                return x.getNombre()+" "+x.getApellido();
+             return ""+id; 
+            }
+
+
     private void cerrarSesion() {
         acceso.cerrarConexion(c);
         vista.dispose();
@@ -281,3 +341,4 @@ public class ControladorOficial {
         } catch (SQLException ex) { ex.printStackTrace(); }
     }
 }
+
