@@ -1,124 +1,101 @@
 package controlador;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import modelo.AccesoBBDD;
+import modelo.Cliente;
+import modelo.Traje;
+import vista.DetalleClientes;
+import vista.NuevoCliente;
+
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-import modelo.AccesoBBDD;
-import modelo.Cliente;
-import modelo.Empleado;
-import modelo.Traje;
-import vista.DetalleClientes;
-import vista.ListaClientes;
-import vista.NuevoTraje;
-
+// Controlador de la ventana DetalleClientes
+// Muestra la información completa de un cliente y su traje asociado
 public class ControladorDetalleClientes {
 
     private DetalleClientes vista;
     private AccesoBBDD acceso;
     private Connection c;
     private Cliente cliente;
-    private ArrayList<Traje> trajes;
-    private Empleado empleado;
+    private boolean editable;
 
-    public ControladorDetalleClientes(DetalleClientes vista, AccesoBBDD acceso, Connection c, Cliente cliente, ArrayList<Traje> trajes, Empleado empleado) {
+    // Constructor: rellena los campos con los datos del cliente y asigna los listeners
+    public ControladorDetalleClientes(DetalleClientes vista, AccesoBBDD acceso, Connection c, Cliente cliente, boolean editable) {
         this.vista = vista;
         this.acceso = acceso;
         this.c = c;
         this.cliente = cliente;
-        this.trajes = trajes;
-        this.empleado = empleado;
-        
-        // Inicializar listeners en el constructor
-        this.vista.getBtnEditar().addActionListener(e -> irAEditarTraje());
-        this.vista.getBtnEliminar().addActionListener(e -> eliminarTrajeSeleccionado());
-        this.vista.getBtnVolver().addActionListener(e -> volverALista());
-        this.vista.getBtnNuevoTraje().addActionListener(e -> abrirNuevoTraje());
-        
-        vista.getNombreCliente().setText(cliente.getNombre());
-        vista.getTipoHeroeCliente().setText(cliente.getTipo_heroe());
-        vista.getSuperpoderCliente().setText(cliente.getSuperpoder());
-        vista.getColorCliente().setText(cliente.getColor());
-        // Botón "Nuevo Traje" (aunque no esté físicamente, se define la lógica)
-        // Si lo añades a la vista, descomenta la siguiente línea:
-        // this.vista.getBtnNuevo().addActionListener(e -> abrirNuevoTraje());
-    }
+        this.editable = editable;
 
-    private void irAEditarTraje() {
+        // Rellena la sección de información personal
+        vista.getTxtInfoPersonal().setText(
+            "Nombre:            " + cliente.getNombre() + "\n" +
+            "Superpoder:        " + cliente.getSuperpoder() + "\n" +
+            "Colores:           " + cliente.getColor() + "\n" +
+            "Tipo (Héroe/Villano): " + cliente.getTipo_heroe()
+        );
 
-    	Traje trajeSeleccionado = new Traje(0, "", "", 0);
-    	String seleccionado = vista.getListTrajes().getSelectedValue();
+        // Busca el traje del cliente y rellena la sección correspondiente
+        cargarTraje();
 
-    	for (Traje t : trajes) {
-    	    String texto = t.getNombre_traje() + " - " + t.getEstado();
-    	    
-    	    if (texto.equals(seleccionado)) {
-    	        trajeSeleccionado = t;
-    	        break;
-    	    }
-    	}
-
-        if (trajeSeleccionado != null) {
-
-            NuevoTraje vistaNuevo = new NuevoTraje();
-
-            new ControladorNuevoTraje(vistaNuevo, acceso, c, cliente, trajes, trajeSeleccionado, empleado, vista);
-
-            vistaNuevo.setVisible(true);
-            
-            vista.dispose();
-
-        } else {
-            JOptionPane.showMessageDialog(vista, "Selecciona un traje para editar.");
+        // Oculta los botones de edición/eliminación si no tiene permisos
+        if (!editable) {
+            vista.getBtnEditar().setVisible(false);
+            vista.getBtnEliminar().setVisible(false);
         }
-        
+
+        // Listener del botón "Editar"
+        vista.getBtnEditar().addActionListener(e -> editarCliente());
+
+        // Listener del botón "Eliminar"
+        vista.getBtnEliminar().addActionListener(e -> eliminarCliente());
+
+        // Listener del botón "Volver"
+        vista.getBtnVolver().addActionListener(e -> vista.dispose());
     }
 
-    private void eliminarTrajeSeleccionado() {
-        int index = vista.getListTrajes().getSelectedIndex();
-        if (index != -1) {
-        	
-        	int confirmacion = JOptionPane.showConfirmDialog(vista, "¿Estas seguro de que quieres eliminar este traje?",
-					"Confirmar eliminación", JOptionPane.YES_NO_OPTION);
-
-			if (confirmacion == JOptionPane.YES_OPTION) {
-				vista.getModeloLista().remove(index);
-	            Traje traje = trajes.get(index);
-	            acceso.eliminarTraje(c, traje.getId_traje());
-	            trajes = acceso.getTrajesPorCliente(c, cliente.getId_cliente());
-	            vista.recogerDatos(trajes);
-	        } 
-		} else {
-            JOptionPane.showMessageDialog(vista, "Selecciona un traje para eliminar.");
-        }   
+    // Busca el traje del cliente en la BBDD y lo muestra
+    private void cargarTraje() {
+        try {
+            ArrayList<Traje> trajes = acceso.recogeTrajes(c);
+            StringBuilder sb = new StringBuilder();
+            for (Traje traje : trajes) {
+                if (traje.getId_cliente() == cliente.getId_cliente()) {
+                    sb.append("Nombre del traje: ").append(traje.getNombre_traje()).append("\n");
+                    sb.append("Estado:           ").append(traje.getEstado()).append("\n\n");
+                }
+            }
+            if (sb.length() == 0) {
+                sb.append("No hay trajes registrados para este cliente.");
+            }
+            vista.getTxtInfoTrajes().setText(sb.toString().trim());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            vista.getTxtInfoTrajes().setText("Error al cargar los trajes.");
+        }
     }
 
-    private void abrirNuevoTraje() {
-        NuevoTraje vistaNuevo = new NuevoTraje();
-        // Pasamos la vista actual al siguiente controlador para poder actualizar la lista
-        new ControladorNuevoTraje(vistaNuevo, acceso, c, cliente, trajes, null, empleado, this.vista);
-        vistaNuevo.setVisible(true);
+    // Abre el formulario de edición para este cliente
+    private void editarCliente() {
+        NuevoCliente vistaForm = new NuevoCliente();
+        new ControladorNuevoCliente(vistaForm, acceso, c, cliente);
+        vistaForm.setVisible(true);
         vista.dispose();
     }
 
-    private void volverALista() {
-    	ArrayList<Cliente> clientes;
-    	ArrayList<Traje> trajesPorCliente;
-		try {
-			clientes = acceso.recogeClientes(c);
-			trajesPorCliente = acceso.recogeTrajes(c);
-			ListaClientes lista = new ListaClientes();
-	        new ControladorListaClientes(lista, acceso, c, clientes, trajesPorCliente, empleado);
-	        // Aquí se instanciaría su controlador correspondiente si fuera necesario
-	        lista.setVisible(true);
-	        vista.dispose();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
+    // Elimina el cliente tras confirmación
+    private void eliminarCliente() {
+        int confirmacion = JOptionPane.showConfirmDialog(vista,
+            "¿Estás seguro de que quieres eliminar a " + cliente.getNombre() + "?",
+            "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            acceso.eliminarCliente(c, cliente.getId_cliente());
+            JOptionPane.showMessageDialog(vista, "Cliente eliminado correctamente.");
+            vista.dispose();
+            
+        }
     }
 }
