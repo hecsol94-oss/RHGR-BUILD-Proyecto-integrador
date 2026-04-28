@@ -24,6 +24,8 @@ public class ControladorAprendiz {
     private ArrayList<Traje>   listaTrajes;
     private ArrayList<Cliente> todosClientes;
 
+    
+    
     public ControladorAprendiz(VentanaAprendiz vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
         this.vista    = vista;
         this.acceso   = acceso;
