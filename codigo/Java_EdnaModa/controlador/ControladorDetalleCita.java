@@ -17,6 +17,13 @@ public class ControladorDetalleCita {
     private final AccesoBBDD acceso;
     private final Connection c;
 
+    /**
+     * 
+     * @param vista
+     * @param cita
+     * @param acceso
+     * @param c
+     */
     public ControladorDetalleCita(DetalleCita vista, Cita cita, AccesoBBDD acceso, Connection c) {
         this.vista  = vista;
         this.cita   = cita;
@@ -48,6 +55,7 @@ public class ControladorDetalleCita {
 
         try {
             // Resolución de nombres (punto 6)
+        
             ArrayList<Cliente>  clientes  = acceso.recogeClientes(c);
             ArrayList<Traje>    trajes    = acceso.recogeTrajes(c);
             ArrayList<Taller>   talleres  = acceso.recogeTalleres(c);
@@ -71,18 +79,42 @@ public class ControladorDetalleCita {
         }
     }
 
+    /**
+     * 
+     * @param lista
+     * @param id
+     * @return
+     */
     private String nombreCliente(ArrayList<Cliente> lista, int id) {
         for (Cliente x : lista) if (x.getId_cliente() == id) return x.getNombre();
         return "ID " + id;
     }
+    /**
+     * 
+     * @param lista
+     * @param id
+     * @return
+     */
     private String nombreTraje(ArrayList<Traje> lista, int id) {
         for (Traje x : lista) if (x.getId_traje() == id) return x.getNombre_traje();
         return "ID " + id;
     }
+    /**
+     * 
+     * @param lista
+     * @param id
+     * @return
+     */
     private String nombreTaller(ArrayList<Taller> lista, int id) {
         for (Taller x : lista) if (x.getId_sala() == id) return x.getNombre() + " (" + x.getTipo() + ")";
         return "ID " + id;
     }
+    /**
+     * 
+     * @param lista
+     * @param id
+     * @return
+     */
     private String nombreEmpleado(ArrayList<Empleado> lista, int id) {
         for (Empleado x : lista) if (x.getId_empleado() == id) return x.getNombre() + " " + x.getApellido();
         return "ID " + id;

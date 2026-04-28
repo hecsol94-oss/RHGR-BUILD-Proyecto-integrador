@@ -19,6 +19,12 @@ public class ControladorInicioSesion {
     private ArrayList<Empleado> empleados;
 
     // Constructor: recibe la vista y la lista de empleados ya cargada desde la BBDD
+    /**
+     * 
+     * @param vista
+     * @param acceso
+     * @param empleados
+     */
     public ControladorInicioSesion(InicioSesion vista, AccesoBBDD acceso, ArrayList<Empleado> empleados) {
         this.vista = vista;
         this.acceso = acceso;

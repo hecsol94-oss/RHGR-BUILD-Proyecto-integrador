@@ -1,15 +1,3 @@
-package controlador;
-package controlador;
-
-import modelo.*;
-import vista.*;
-
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.stream.Collectors;
 
@@ -28,6 +16,13 @@ public class ControladorOficial {
     private ArrayList<Empleado> listaEmpleados;
     private ArrayList<Traje>   listaTrajes;
 
+    /**
+     * 
+     * @param vista
+     * @param acceso
+     * @param c
+     * @param empleado
+     */
     public ControladorOficial(VentanaOficial vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
         this.vista    = vista;
         this.acceso   = acceso;
@@ -128,6 +123,10 @@ public class ControladorOficial {
         vista.mostrarCard(VentanaOficial.CARD_LISTA_TALLERES);
     }
 
+    /**
+     * 
+     * @param lista
+     */
     private void cargarTablaCitas(ArrayList<Cita> lista) {
         DefaultTableModel m = (DefaultTableModel) vista.getTableCitas().getModel();
         m.setRowCount(0);
@@ -135,6 +134,10 @@ public class ControladorOficial {
             m.addRow(new Object[]{ cita.getFecha() + " " + cita.getHora_inicio(), nombreCliente(cita.getId_cliente()), nombreTraje(cita.getId_traje()), nombreTaller(cita.getId_sala()), nombreEmpleado(cita.getId_empleado()), cita.getDuracion() + " h" });
     }
 
+    /**
+     * 
+     * @param lista
+     */
     private void cargarTablaClientes(ArrayList<Cliente> lista) {
         DefaultTableModel m = (DefaultTableModel) vista.getTableClientes().getModel();
         m.setRowCount(0);
@@ -212,7 +215,11 @@ public class ControladorOficial {
         new ControladorDetalleClientes(v, acceso, c, cl, false);
         v.setVisible(true);
     }
-
+/**
+ * 
+ * @param id
+ * @return
+ */
     private String nombreCliente(int id)  {
     	if(todosClientes==null) 
     		return ""+id; 
@@ -221,7 +228,11 @@ public class ControladorOficial {
     			return x.getNombre();
     				return ""+id; 
     				}
-    
+    /**
+     * 
+     * @param id
+     * @return
+     */
     private String nombreTraje(int id)    {
     	if(listaTrajes==null)   
     		return ""+id; 
@@ -230,7 +241,11 @@ public class ControladorOficial {
     			return x.getNombre_traje();
     				return ""+id;
     				}
-    
+    /**
+     * 
+     * @param id
+     * @return
+     */
     private String nombreTaller(int id)   { 
     	if(todosTalleres==null) 
     		return ""+id; 
@@ -239,7 +254,11 @@ public class ControladorOficial {
     			return x.getNombre();
     				return ""+id; 
     				}
-    
+    /**
+     * 
+     * @param id
+     * @return
+     */
     private String nombreEmpleado(int id) {
     	if(listaEmpleados==null)
     		return ""+id; 

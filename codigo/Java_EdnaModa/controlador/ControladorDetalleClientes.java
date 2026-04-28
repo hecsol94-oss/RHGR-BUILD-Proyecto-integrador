@@ -22,6 +22,14 @@ public class ControladorDetalleClientes {
     private boolean editable;
 
     // Constructor: rellena los campos con los datos del cliente y asigna los listeners
+    /**
+     * 
+     * @param vista
+     * @param acceso
+     * @param c
+     * @param cliente
+     * @param editable
+     */
     public ControladorDetalleClientes(DetalleClientes vista, AccesoBBDD acceso, Connection c, Cliente cliente, boolean editable) {
         this.vista = vista;
         this.acceso = acceso;

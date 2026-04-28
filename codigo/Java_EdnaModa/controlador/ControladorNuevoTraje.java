@@ -18,6 +18,13 @@ public class ControladorNuevoTraje {
     private final Connection c;
     private final Cliente cliente;
 
+    /**
+     * 
+     * @param vista
+     * @param acceso
+     * @param c
+     * @param cliente
+     */
     public ControladorNuevoTraje(NuevoTraje vista, AccesoBBDD acceso, Connection c, Cliente cliente) {
         this.vista   = vista;
         this.acceso  = acceso;

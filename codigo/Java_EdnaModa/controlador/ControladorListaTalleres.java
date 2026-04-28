@@ -30,6 +30,14 @@ public class ControladorListaTalleres {
     private String opcion;
     
     // Constructor que vincula vista y datos, y configura los listeners
+    /**
+     * 
+     * @param vista
+     * @param acceso
+     * @param c
+     * @param talleres
+     * @param emp
+     */
     public ControladorListaTalleres(ListaTalleres vista, AccesoBBDD acceso, Connection c, ArrayList<Taller> talleres, Empleado emp) {
     	this.vista  = vista;
     	this.acceso = acceso;

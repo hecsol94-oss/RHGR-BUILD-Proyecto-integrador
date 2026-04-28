@@ -1,4 +1,3 @@
-package controlador;
 
 import modelo.*;
 import vista.*;
@@ -29,6 +28,13 @@ public class ControladorMaestro {
     private ArrayList<Traje>   listaTrajes;
     private boolean editable = true;
 
+    /**
+     * 
+     * @param vista
+     * @param acceso
+     * @param c
+     * @param empleado
+     */
     public ControladorMaestro(VentanaMaestro vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
         this.vista    = vista;
         this.acceso   = acceso;
@@ -154,6 +160,10 @@ public class ControladorMaestro {
     }
 
     // ── Tablas embebidas ─────────────────────────────────────────────────────
+    /**
+     * 
+     * @param lista
+     */
     private void cargarTablaCitas(ArrayList<Cita> lista) {
         DefaultTableModel m = (DefaultTableModel) vista.getTableCitas().getModel();
         m.setRowCount(0);
@@ -169,6 +179,10 @@ public class ControladorMaestro {
         }
     }
 
+    /**
+     * 
+     * @param lista
+     */
     private void cargarTablaClientes(ArrayList<Cliente> lista) {
         DefaultTableModel m = (DefaultTableModel) vista.getTableClientes().getModel();
         m.setRowCount(0);
@@ -187,6 +201,10 @@ public class ControladorMaestro {
     }
 
     // ── Filtros citas ────────────────────────────────────────────────────────
+    /**
+     * 
+     * @param tipo
+     */
     private void filtrarCitasPorTipo(String tipo) {
         citasFiltradas = todasCitas.stream()
             .filter(cita -> todosTalleres.stream().anyMatch(t -> t.getId_sala() == cita.getId_sala() && t.getTipo().equalsIgnoreCase(tipo)))
@@ -207,6 +225,10 @@ public class ControladorMaestro {
     }
 
     // ── Filtros clientes ──────────────────────────────────────────────────────
+    /**
+     * 
+     * @param tipo
+     */
     private void filtrarClientesPorTipo(String tipo) {
         clientesFiltrados = new ArrayList<>();
         for (Cliente cl : todosClientes)
@@ -305,6 +327,7 @@ public class ControladorMaestro {
         });
     }
 
+   
     private void pulsarEliminarTaller() {
         opcionTaller = "eliminar";
         JOptionPane.showMessageDialog(vista, "Selecciona el taller a eliminar en la lista inferior.");
@@ -337,9 +360,29 @@ public class ControladorMaestro {
     }
 
     // ── Nombres ───────────────────────────────────────────────────────────────
+    /**
+     * 
+     * @param id
+     * @return
+     */
     private String nombreCliente(int id)  { if(todosClientes==null)  return ""+id; for(Cliente  x:todosClientes)  if(x.getId_cliente()==id)  return x.getNombre(); return ""+id; }
+    /**
+     * 
+     * @param id
+     * @return
+     */
     private String nombreTraje(int id)    { if(listaTrajes==null)    return ""+id; for(Traje    x:listaTrajes)    if(x.getId_traje()==id)    return x.getNombre_traje(); return ""+id; }
+    /**
+     * 
+     * @param id
+     * @return
+     */
     private String nombreTaller(int id)   { if(todosTalleres==null)  return ""+id; for(Taller   x:todosTalleres)  if(x.getId_sala()==id)     return x.getNombre(); return ""+id; }
+    /**
+     * 
+     * @param id
+     * @return
+     */
     private String nombreEmpleado(int id) { if(listaEmpleados==null) return ""+id; for(Empleado x:listaEmpleados) if(x.getId_empleado()==id) return x.getNombre()+" "+x.getApellido(); return ""+id; }
 
     // ── Cerrar sesión ─────────────────────────────────────────────────────────

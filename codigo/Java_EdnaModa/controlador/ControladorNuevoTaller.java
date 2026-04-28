@@ -29,6 +29,14 @@ public class ControladorNuevoTaller {
 	private Empleado emp;
 
 	// Constructor: vincula la vista con el modelo y asigna los eventos a los botones
+	/**
+	 * 
+	 * @param vista
+	 * @param acceso
+	 * @param conexion
+	 * @param talleres
+	 * @param emp
+	 */
 	public ControladorNuevoTaller(NuevoTaller vista, AccesoBBDD acceso, Connection conexion, ArrayList<Taller> talleres, Empleado emp) {
 		this.vista = vista;
 		this.acceso = acceso;

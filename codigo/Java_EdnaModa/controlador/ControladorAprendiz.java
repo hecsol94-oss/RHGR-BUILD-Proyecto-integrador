@@ -24,6 +24,13 @@ public class ControladorAprendiz {
     private ArrayList<Traje>   listaTrajes;
     private ArrayList<Cliente> todosClientes;
 
+    /**
+     * 
+     * @param vista
+     * @param acceso
+     * @param c
+     * @param empleado
+     */
     public ControladorAprendiz(VentanaAprendiz vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
         this.vista    = vista;
         this.acceso   = acceso;
@@ -97,6 +104,10 @@ public class ControladorAprendiz {
         vista.mostrarCard(VentanaAprendiz.CARD_LISTA_TALLERES);
     }
 
+    /**
+     * 
+     * @param lista
+     */
     private void cargarTablaCitas(ArrayList<Cita> lista) {
         DefaultTableModel m = (DefaultTableModel) vista.getTableCitas().getModel();
         m.setRowCount(0);
@@ -114,6 +125,10 @@ public class ControladorAprendiz {
         }
     }
 
+    /**
+     * 
+     * @param tipo
+     */
     private void filtrarCitasPorTipo(String tipo) {
         citasFiltradas = todasCitas.stream()
             .filter(cita -> todosTalleres.stream().anyMatch(t -> t.getId_sala() == cita.getId_sala() && t.getTipo().equalsIgnoreCase(tipo)))
@@ -138,7 +153,11 @@ public class ControladorAprendiz {
         new ControladorDetalleCita(v, cita, acceso, c);
         v.setVisible(true);
     }
-
+   /**
+    * 
+    * @param id
+    * @return
+    */
     private String nombreCliente(int id)  {
     	if(todosClientes==null)  
     		return ""+id; 
@@ -149,6 +168,11 @@ public class ControladorAprendiz {
     	return ""+id; 
     }
     
+    /**
+     * 
+     * @param id
+     * @return
+     */
     private String nombreTraje(int id)    {
     	if(listaTrajes==null)   
     		return ""+id; 
@@ -158,7 +182,11 @@ public class ControladorAprendiz {
     			return x.getNombre_traje();
     				return ""+id; 
     				}
-    
+    /**
+     * 
+     * @param id
+     * @return
+     */
     private String nombreTaller(int id)   {
     	if(todosTalleres==null) 
     		return ""+id; 
@@ -167,7 +195,11 @@ public class ControladorAprendiz {
     					return x.getNombre(); 
     						return ""+id; 
     				}
-    
+    /**
+     * 
+     * @param id
+     * @return
+     */
     private String nombreEmpleado(int id) {
     	if(listaEmpleados==null) 
     		return ""+id; 

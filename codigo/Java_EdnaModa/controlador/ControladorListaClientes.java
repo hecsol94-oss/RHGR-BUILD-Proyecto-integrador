@@ -25,6 +25,14 @@ public class ControladorListaClientes {
     private boolean editable;
 
     // Constructor: carga la tabla y asigna los listeners
+    /**
+     * 
+     * @param vista
+     * @param acceso
+     * @param c
+     * @param clientes
+     * @param editable
+     */
     public ControladorListaClientes(ListaClientes vista, AccesoBBDD acceso, Connection c, ArrayList<Cliente> clientes, boolean editable) {
         this.vista = vista;
         this.acceso = acceso;
@@ -71,6 +79,10 @@ public class ControladorListaClientes {
     }
 
     // Carga la lista de clientes en la tabla
+    /**
+     * 
+     * @param lista
+     */
     private void cargarTabla(ArrayList<Cliente> lista) {
         DefaultTableModel modelo = (DefaultTableModel) vista.getTable().getModel();
         modelo.setRowCount(0);
@@ -86,6 +98,10 @@ public class ControladorListaClientes {
     }
 
     // Filtra los clientes por tipo (superhéroe / villano)
+    /**
+     * 
+     * @param tipo
+     */
     private void filtrarPorTipo(String tipo) {
         clientesFiltrados = new ArrayList<>();
         for (Cliente cliente : clientes) {
@@ -97,6 +113,7 @@ public class ControladorListaClientes {
     }
 
     // Filtra los clientes por nombre introducido en el campo de búsqueda
+   
     private void buscar() {
         String texto = vista.getTxtBuscar().getText().trim().toLowerCase();
         ArrayList<Cliente> resultado = new ArrayList<>();
@@ -155,6 +172,9 @@ public class ControladorListaClientes {
                 "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        /**
+         * 
+         */
         Cliente cliente = clientesFiltrados.get(fila);
         int confirmacion = JOptionPane.showConfirmDialog(vista,
             "¿Estás seguro de que quieres eliminar a " + cliente.getNombre() + "?",

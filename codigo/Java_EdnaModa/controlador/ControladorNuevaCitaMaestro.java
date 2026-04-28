@@ -24,6 +24,13 @@ public class ControladorNuevaCitaMaestro {
     // true cuando el traje seleccionado fue RECIÉN creado (estado=diseño), false si ya existía
     private boolean trajeRecienCreado = false;
 
+    /**
+     * 
+     * @param vista
+     * @param acceso
+     * @param c
+     * @param empleado
+     */
     public ControladorNuevaCitaMaestro(NuevaCitaMaestro vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
         this.vista    = vista;
         this.acceso   = acceso;
@@ -298,6 +305,12 @@ public class ControladorNuevaCitaMaestro {
         vista.dispose();
     }
 
+    /**
+     * 
+     * @param idCliente
+     * @param indexCombo
+     * @return
+     */
     private int obtenerIdTraje(int idCliente, int indexCombo) {
         int contador = 0;
         for (Traje t : listaTrajes) {

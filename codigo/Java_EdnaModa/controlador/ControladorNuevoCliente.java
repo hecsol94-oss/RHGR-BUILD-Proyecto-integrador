@@ -18,6 +18,13 @@ public class ControladorNuevoCliente {
     private Cliente clienteEditar; // null si es un cliente nuevo
 
     // Constructor: si clienteEditar es null, se crea un cliente nuevo
+    /**
+     * 
+     * @param vista
+     * @param acceso
+     * @param c
+     * @param clienteEditar
+     */
     public ControladorNuevoCliente(NuevoCliente vista, AccesoBBDD acceso, Connection c, Cliente clienteEditar) {
         this.vista = vista;
         this.acceso = acceso;

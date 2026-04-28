@@ -21,6 +21,14 @@ public class ControladorNuevaCitaOficial {
     private final Cita cita;
     private ArrayList<Empleado> listaAprendices;
 
+    /**
+     * 
+     * @param vista
+     * @param acceso
+     * @param c
+     * @param empleado
+     * @param cita
+     */
     public ControladorNuevaCitaOficial(NuevaCitaOficial vista, AccesoBBDD acceso, Connection c, Empleado empleado, Cita cita) {
         this.vista    = vista;
         this.acceso   = acceso;
@@ -64,25 +72,46 @@ public class ControladorNuevaCitaOficial {
         vista.dispose();
     }
 
+    /**
+     * 
+     * @param l
+     * @param id
+     * @return
+     */
     private String nombrar(ArrayList<Cliente> l, int id)     {
     	for(Cliente x:l)   
     		if(x.getId_cliente()==id)  
     			return x.getNombre();
     				return ""+id; 
     				}
-    
+    /**
+     * 
+     * @param l
+     * @param id
+     * @return
+     */
     private String nombrarTraje(ArrayList<Traje> l, int id)  {
     	for(Traje   x:l)   if(x.getId_traje()==id)  
     		return x.getNombre_traje();
     			return ""+id; 
     			}
-    
+    /**
+     * 
+     * @param l
+     * @param id
+     * @return
+     */
     private String nombrarTaller(ArrayList<Taller> l, int id){
     	for(Taller  x:l)   if(x.getId_sala()==id)    
     		return x.getNombre(); 
     			return ""+id; 
     	}
-    
+    /**
+     * 
+     * @param l
+     * @param id
+     * @return
+     */
     private String nombrarEmp(ArrayList<Empleado> l, int id) {
     	for(Empleado x:l) 
     		if(x.getId_empleado()==id)
@@ -90,4 +119,5 @@ public class ControladorNuevaCitaOficial {
     				return ""+id; 
     		}
 }
+
 
