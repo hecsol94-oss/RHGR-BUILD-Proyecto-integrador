@@ -38,8 +38,7 @@ public class ControladorListaCitas {
      * @param empleado
      * @param editable
      */
-    public ControladorListaCitas(ListaCitas vista, AccesoBBDD acceso, Connection c,
-                                  ArrayList<Cita> citas, Empleado empleado, boolean editable) {
+    public ControladorListaCitas(ListaCitas vista, AccesoBBDD acceso, Connection c, ArrayList<Cita> citas, Empleado empleado, boolean editable) {
         this.vista    = vista;
         this.acceso   = acceso;
         this.c        = c;
@@ -74,7 +73,9 @@ public class ControladorListaCitas {
             listaTalleres  = acceso.recogeTalleres(c);
             listaTrajes    = acceso.recogeTrajes(c);
             listaEmpleados = acceso.recogeEmpleados(c);
-        } catch (SQLException ex) { ex.printStackTrace(); }
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
     }
 
     private void cargarTabla(ArrayList<Cita> lista) {
@@ -131,7 +132,10 @@ public class ControladorListaCitas {
      */
     private void verDetalle() {
         int fila = vista.getTableCitas().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        if (fila < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        	return;
+        }
         Cita cita = citasFiltradas.get(fila);
         DetalleCita vistaDetalle = new DetalleCita();
         new ControladorDetalleCita(vistaDetalle, cita, acceso, c);
@@ -141,7 +145,10 @@ public class ControladorListaCitas {
     private void editarCita() {
         if (!editable) return;
         int fila = vista.getTableCitas().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        if (fila < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        	return;
+        }
         NuevaCitaMaestro vistaForm = new NuevaCitaMaestro();
         new ControladorNuevaCitaMaestro(vistaForm, acceso, c, empleado);
         vistaForm.setVisible(true);
