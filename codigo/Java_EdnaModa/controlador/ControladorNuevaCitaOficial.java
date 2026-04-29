@@ -64,7 +64,9 @@ public class ControladorNuevaCitaOficial {
                 vista.setTaller(nombrarTaller(talleres, cita.getId_sala()));
                 vista.setOficial(nombrarEmp(acceso.recogeEmpleados(c), cita.getId_empleado()));
             }
-        } catch (SQLException ex) { ex.printStackTrace(); }
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
     }
 
     private void guardar() {
