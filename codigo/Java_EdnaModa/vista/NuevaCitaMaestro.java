@@ -196,8 +196,7 @@ public class NuevaCitaMaestro extends JFrame {
         return val;
     }
 
-    public void mostrarFase2(String fecha, String hora, String duracion,
-                              String cliente, String traje, String taller, String oficial) {
+    public void mostrarFase2(String fecha, String hora, String duracion, String cliente, String traje, String taller, String oficial) {
         lblResumenFecha.setText(fecha);
         lblResumenHora.setText(hora);
         lblResumenDuracion.setText(duracion);
@@ -208,30 +207,68 @@ public class NuevaCitaMaestro extends JFrame {
         cardLayout.show(panelContenedor, "FASE2");
     }
 
-    public void volverFase1() { cardLayout.show(panelContenedor, "FASE1"); }
+    public void volverFase1() {
+    	cardLayout.show(panelContenedor, "FASE1");
+    }
 
     // Getters Fase 1
-    public JComboBox<String> getCbCliente()   { return cbCliente; }
-    public JComboBox<String> getCbTraje()     { return cbTraje; }
-    public JComboBox<String> getCbTaller()    { return cbTaller; }
-    public JComboBox<String> getCbOficial()   { return cbOficial; }
-    public JTextField getTxtFecha()           { return txtFecha; }
-    public JTextField getTxtHora()            { return txtHora; }
-    public JTextField getTxtDuracion()        { return txtDuracion; }
-    public JButton getBtnNuevoCliente()       { return btnNuevoCliente; }
-    public JButton getBtnNuevoTraje()         { return btnNuevoTraje; }
-    public JButton getBtnSiguiente()          { return btnSiguiente; }
-    public JButton getBtnCancelar()           { return btnCancelar; }
+    public JComboBox<String> getCbCliente() {
+    	return cbCliente;
+    }
+    public JComboBox<String> getCbTraje() {
+    	return cbTraje;
+    }
+    public JComboBox<String> getCbTaller() {
+    	return cbTaller;
+    }
+    public JComboBox<String> getCbOficial() {
+    	return cbOficial;
+    }
+    public JTextField getTxtFecha() {
+    	return txtFecha;
+    }
+    public JTextField getTxtHora() {
+    	return txtHora;
+    }
+    public JTextField getTxtDuracion() {
+    	return txtDuracion;
+    }
+    public JButton getBtnNuevoCliente() {
+    	return btnNuevoCliente;
+    }
+    public JButton getBtnNuevoTraje() {
+    	return btnNuevoTraje;
+    }
+    public JButton getBtnSiguiente() {
+    	return btnSiguiente;
+    }
+    public JButton getBtnCancelar() {
+    	return btnCancelar;
+    }
 
     // Getters Fase 2
-    public JComboBox<String> getCbAprendiz1() { return cbAprendiz1; }
-    public JComboBox<String> getCbAprendiz2() { return cbAprendiz2; }
-    public JButton getBtnGuardar()            { return btnGuardar; }
-    public JButton getBtnAtras()              { return btnAtras; }
+    public JComboBox<String> getCbAprendiz1() {
+    	return cbAprendiz1;
+    }
+    public JComboBox<String> getCbAprendiz2() {
+    	return cbAprendiz2;
+    }
+    public JButton getBtnGuardar() {
+    	return btnGuardar;
+    }
+    public JButton getBtnAtras() {
+    	return btnAtras;
+    }
 
     // Compatibilidad
-    public JButton getBtnCliente() { return btnNuevoCliente; }
-    public JButton getBtnTaller()  { return null; }
+    public JButton getBtnCliente() {
+    	return btnNuevoCliente;
+    }
+    public JButton getBtnTaller()  {
+    	return null;
+    }
     // Compatibilidad: getTxtOficial() devuelve null — ya no se usa
-    public JTextField getTxtOficial() { return null; }
+    public JTextField getTxtOficial() {
+    	return null;
+    }
 }
