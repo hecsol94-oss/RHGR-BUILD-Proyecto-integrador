@@ -51,19 +51,19 @@ public class NuevoTraje extends JFrame {
         contentPane.add(btnCancelar);
     }
 
-    public String getNombreTraje()  {
+    public String getNombreTraje() {
     	return txtNombreTraje.getText().trim(); 
-    	}
+    }
    
-    public String getEstadoTraje()  {
+    public String getEstadoTraje() {
     	return "diseño"; 
-    	}  // siempre diseño
+    }  // siempre diseño
    
-    public JButton getBtnGuardar()  {
+    public JButton getBtnGuardar() {
     	return btnGuardar; 
-    	}
+    }
    
     public JButton getBtnCancelar() {
     	return btnCancelar; 
-    	}
+    }
 }
