@@ -338,7 +338,9 @@ public class ControladorOficial {
             InicioSesion is = new InicioSesion();
             new ControladorInicioSesion(is, acceso, emps);
             is.setVisible(true);
-        } catch (SQLException ex) { ex.printStackTrace(); }
+        } catch (SQLException ex) { 
+        	ex.printStackTrace();
+        }
     }
 }
 
