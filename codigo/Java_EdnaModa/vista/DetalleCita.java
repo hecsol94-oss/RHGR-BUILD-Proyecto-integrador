@@ -85,33 +85,33 @@ public class DetalleCita extends JFrame {
         return val;
     }
 
-    public void setFecha(String v)      {
+    public void setFecha(String v) {
     	lblFechaVal.setText(v); 
-    	}
+    }
     
-    public void setHora(String v)       {
+    public void setHora(String v) {
     	lblHoraVal.setText(v); 
-    	}
+    }
     
-    public void setDuracion(String v)   {
+    public void setDuracion(String v) {
     	lblDuracionVal.setText(v); 
-    	}
+    }
     
-    public void setCliente(String v)    {
+    public void setCliente(String v) {
     	lblClienteVal.setText(v); 
-    	}
+    }
     
-    public void setTraje(String v)      {
+    public void setTraje(String v) {
     	lblTrajeVal.setText(v); 
-    	}
+    }
     
-    public void setTaller(String v)     {
+    public void setTaller(String v) {
     	lblTallerVal.setText(v); 
-    	}
+    }
     
-    public void setOficial(String v)    {
+    public void setOficial(String v) {
     	lblOficialVal.setText(v); 
-    	}
+    }
 
     /**
      * Acepta una cadena con los aprendices separados por "  " o "\n".
@@ -128,5 +128,5 @@ public class DetalleCita extends JFrame {
 
     public JButton getBtnVolver() { 
     	return btnVolver; 
-    	}
+    }
 }
