@@ -27,11 +27,11 @@ public class ListaCitas extends JFrame {
         getContentPane().setLayout(null);
 
         // Filtros tipo de taller
-        btnTodas   = new JButton("Todas");  
-        btnTodas.setBounds(10,   11, 100, 28); 
+        btnTodas = new JButton("Todas");  
+        btnTodas.setBounds(10, 11, 100, 28); 
         getContentPane().add(btnTodas);
-        btnDiseno  = new JButton("Diseño");  
-        btnDiseno.setBounds(120,  11, 100, 28); 
+        btnDiseno = new JButton("Diseño");  
+        btnDiseno.setBounds(120, 11, 100, 28); 
         getContentPane().add(btnDiseno);
         btnCostura = new JButton("Costura"); 
         btnCostura.setBounds(230, 11, 100, 28); 
@@ -65,13 +65,13 @@ public class ListaCitas extends JFrame {
         scrollPane.setViewportView(tableCitas);
 
         btnVerDetalles = new JButton("Ver detalles"); 
-        btnVerDetalles.setBounds(10,  348, 120, 30); 
+        btnVerDetalles.setBounds(10, 348, 120, 30); 
         getContentPane().add(btnVerDetalles);
-        btnEditar      = new JButton("Editar");      
-        btnEditar.setBounds(140,      348, 100, 30); 
+        btnEditar = new JButton("Editar");      
+        btnEditar.setBounds(140, 348, 100, 30); 
         getContentPane().add(btnEditar);
-        btnVolver      = new JButton("Volver");      
-        btnVolver.setBounds(504,      348, 100, 30); 
+        btnVolver = new JButton("Volver");      
+        btnVolver.setBounds(504, 348, 100, 30); 
         getContentPane().add(btnVolver);
     }
 
