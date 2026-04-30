@@ -90,7 +90,9 @@ public class ControladorMaestro {
         // Salir
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vista.getLblSalir().addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent e) { cerrarSesion(); }
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+            	cerrarSesion();
+            }
         });
     }
 
@@ -104,7 +106,9 @@ public class ControladorMaestro {
             listaTrajes    = acceso.recogeTrajes(c);
             citasFiltradas    = new ArrayList<>(todasCitas);
             clientesFiltrados = new ArrayList<>(todosClientes);
-        } catch (SQLException ex) { ex.printStackTrace(); }
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
     }
 
     private void cargarContadores() {
@@ -131,7 +135,9 @@ public class ControladorMaestro {
                 .map(ci -> ci.getFecha() + " " + ci.getHora_inicio())
                 .min(String::compareTo).orElse("—");
             vista.getLblProximaCita().setText(proxima);
-        } catch (Exception ex) { ex.printStackTrace(); }
+        } catch (Exception ex) {
+        	ex.printStackTrace();
+        }
     }
 
     // ── Mostrar listas embebidas ──────────────────────────────────────────────
@@ -141,21 +147,31 @@ public class ControladorMaestro {
             listaEmpleados = acceso.recogeEmpleados(c);
             listaTrajes    = acceso.recogeTrajes(c);
             todosTalleres  = acceso.recogeTalleres(c);
-        } catch (SQLException ex) { ex.printStackTrace(); }
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
         citasFiltradas = new ArrayList<>(todasCitas);
         cargarTablaCitas(citasFiltradas);
         vista.mostrarCard(VentanaMaestro.CARD_LISTA_CITAS);
     }
 
     private void mostrarListaClientes() {
-        try { todosClientes = acceso.recogeClientes(c); } catch (SQLException ex) { ex.printStackTrace(); }
+        try {
+        	todosClientes = acceso.recogeClientes(c);
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
         clientesFiltrados = new ArrayList<>(todosClientes);
         cargarTablaClientes(clientesFiltrados);
         vista.mostrarCard(VentanaMaestro.CARD_LISTA_CLIENTES);
     }
 
     private void mostrarListaTalleres() {
-        try { todosTalleres = acceso.recogeTalleres(c); } catch (Exception ex) { ex.printStackTrace(); }
+        try {
+        	todosTalleres = acceso.recogeTalleres(c);
+        } catch (Exception ex) {
+        	ex.printStackTrace();
+        }
         cargarTablaTalleres();
         vista.mostrarCard(VentanaMaestro.CARD_LISTA_TALLERES);
     }
@@ -248,7 +264,10 @@ public class ControladorMaestro {
     // ── Acciones citas ────────────────────────────────────────────────────────
     private void eliminarCita() {
         int fila = vista.getTableCitas().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        if (fila < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        	return;
+        }
         Cita cita = citasFiltradas.get(fila);
         int ok = JOptionPane.showConfirmDialog(vista,
             "¿Eliminar la cita del " + cita.getFecha() + " a las " + cita.getHora_inicio() + "?",
@@ -265,7 +284,10 @@ public class ControladorMaestro {
 
     private void verDetalleCita() {
         int fila = vista.getTableCitas().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        if (fila < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        	return;
+        }
         Cita cita = citasFiltradas.get(fila);
         DetalleCita v = new DetalleCita();
         new ControladorDetalleCita(v, cita, acceso, c);
@@ -274,7 +296,10 @@ public class ControladorMaestro {
 
     private void editarCita() {
         int fila = vista.getTableCitas().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        if (fila < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        	return;
+        }
         NuevaCitaMaestro v = new NuevaCitaMaestro();
         new ControladorNuevaCitaMaestro(v, acceso, c, empleado);
         v.setVisible(true);
@@ -289,7 +314,10 @@ public class ControladorMaestro {
     // ── Acciones clientes ─────────────────────────────────────────────────────
     private void verDetalleCliente() {
         int fila = vista.getTableClientes().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona un cliente.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        if (fila < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona un cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        	return;
+        }
         Cliente cl = clientesFiltrados.get(fila);
         DetalleClientes v = new DetalleClientes();
         new ControladorDetalleClientes(v, acceso, c, cl, editable);
@@ -298,7 +326,10 @@ public class ControladorMaestro {
 
     private void editarCliente() {
         int fila = vista.getTableClientes().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona un cliente.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        if (fila < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona un cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        	return;
+        }
         Cliente cl = clientesFiltrados.get(fila);
         NuevoCliente v = new NuevoCliente();
         new ControladorNuevoCliente(v, acceso, c, cl);
@@ -307,7 +338,10 @@ public class ControladorMaestro {
 
     private void eliminarCliente() {
         int fila = vista.getTableClientes().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona un cliente.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        if (fila < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona un cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        	return;
+        }
         Cliente cl = clientesFiltrados.get(fila);
         int ok = JOptionPane.showConfirmDialog(vista, "¿Eliminar a " + cl.getNombre() + "?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (ok == JOptionPane.YES_OPTION) {
@@ -384,54 +418,82 @@ public class ControladorMaestro {
      * @param id
      * @return
      */
-    private String nombreCliente(int id)  { if(todosClientes==null)  return ""+id; for(Cliente  x:todosClientes)  if(x.getId_cliente()==id)  return x.getNombre(); return ""+id; }
+    private String nombreCliente(int id) {
+    	if(todosClientes==null)
+    		return ""+id;
+    	for(Cliente x:todosClientes)
+    		if(x.getId_cliente()==id)
+    			return x.getNombre();
+    	return ""+id;
+    }
     /**
      * 
      * @param id
      * @return
      */
-    private String nombreTraje(int id)    { if(listaTrajes==null)    return ""+id; for(Traje    x:listaTrajes)    if(x.getId_traje()==id)    return x.getNombre_traje(); return ""+id; }
+    private String nombreTraje(int id) {
+    	if(listaTrajes==null)
+    		return ""+id;
+    	for(Traje x:listaTrajes)
+    		if(x.getId_traje()==id)
+    			return x.getNombre_traje();
+    	return ""+id;
+    }
     /**
      * 
      * @param id
      * @return
      */
-    private String nombreTaller(int id)   { if(todosTalleres==null)  return ""+id; for(Taller   x:todosTalleres)  if(x.getId_sala()==id)     return x.getNombre(); return ""+id; }
+    private String nombreTaller(int id) {
+    	if(todosTalleres==null)
+    		return ""+id;
+    	for(Taller   x:todosTalleres)
+    		if(x.getId_sala()==id) 
+    			return x.getNombre();
+    	return ""+id;
+    }
     /**
      * 
      * @param id
      * @return
      */
-    private String nombreEmpleado(int id) { if(listaEmpleados==null) return ""+id; for(Empleado x:listaEmpleados) if(x.getId_empleado()==id) return x.getNombre()+" "+x.getApellido(); return ""+id; }
+    private String nombreEmpleado(int id) {
+    	if(listaEmpleados==null)
+    		return ""+id;
+    	for(Empleado x:listaEmpleados)
+    		if(x.getId_empleado()==id)
+    			return x.getNombre()+" "+x.getApellido();
+    	return ""+id;
+    }
 
-    private String nombreCliente(int id)  { 
+    private String nombreCliente(int id) { 
         if(todosClientes==null) 
-             return ""+id; for(Cliente  x:todosClientes) 
+             return ""+id; for(Cliente x:todosClientes) 
                  if(x.getId_cliente()==id)
                       return x.getNombre(); 
                     return ""+id; 
-                }
-    private String nombreTraje(int id)    { 
+    }
+    private String nombreTraje(int id) { 
         if(listaTrajes==null)    
-            return ""+id; for(Traje    x:listaTrajes)    
+            return ""+id; for(Traje x:listaTrajes)    
                 if(x.getId_traje()==id)    
                     return x.getNombre_traje();
                  return ""+id; 
-                }
-    private String nombreTaller(int id)   { 
+    }
+    private String nombreTaller(int id) { 
         if(todosTalleres==null)  
-            return ""+id; for(Taller   x:todosTalleres) 
+            return ""+id; for(Taller x:todosTalleres) 
                  if(x.getId_sala()==id)    
                      return x.getNombre(); 
                     return ""+id;
-                 }
+    }
     private String nombreEmpleado(int id) { 
         if(listaEmpleados==null)
              return ""+id; for(Empleado x:listaEmpleados)
                  if(x.getId_empleado()==id)
                      return x.getNombre()+" "+x.getApellido();
                      return ""+id; 
-                    }
+    }
 
 
     // ── Cerrar sesión ─────────────────────────────────────────────────────────
@@ -445,6 +507,8 @@ public class ControladorMaestro {
             InicioSesion is = new InicioSesion();
             new ControladorInicioSesion(is, acceso, empleados);
             is.setVisible(true);
-        } catch (SQLException ex) { ex.printStackTrace(); }
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
     }
 }
