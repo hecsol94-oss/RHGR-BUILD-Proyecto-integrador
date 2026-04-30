@@ -80,7 +80,9 @@ public class ControladorOficial {
 
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vista.getLblSalir().addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent e) { cerrarSesion(); }
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+            	cerrarSesion();
+            }
         });
     }
 
@@ -93,7 +95,9 @@ public class ControladorOficial {
             listaTrajes    = acceso.recogeTrajes(c);
             citasFiltradas    = new ArrayList<>(todasCitas);
             clientesFiltrados = new ArrayList<>(todosClientes);
-        } catch (SQLException ex) { ex.printStackTrace(); }
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
     }
 
     private void cargarContadores() {
@@ -113,25 +117,39 @@ public class ControladorOficial {
             String proxima = todasCitas.stream().filter(ci -> !ci.getFecha().before(hoy))
                 .map(ci -> ci.getFecha() + " " + ci.getHora_inicio()).min(String::compareTo).orElse("—");
             vista.getLblProximaCita().setText(proxima);
-        } catch (Exception ex) { ex.printStackTrace(); }
+        } catch (Exception ex) {
+        	ex.printStackTrace();
+        }
     }
 
     private void mostrarListaCitas() {
-        try { todasCitas = acceso.recogeCitas(c); listaEmpleados = acceso.recogeEmpleados(c); listaTrajes = acceso.recogeTrajes(c); todosTalleres = acceso.recogeTalleres(c); } catch (SQLException ex) { ex.printStackTrace(); }
+        try {
+        	todasCitas = acceso.recogeCitas(c); listaEmpleados = acceso.recogeEmpleados(c); listaTrajes = acceso.recogeTrajes(c); todosTalleres = acceso.recogeTalleres(c);
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
         citasFiltradas = new ArrayList<>(todasCitas);
         cargarTablaCitas(citasFiltradas);
         vista.mostrarCard(VentanaOficial.CARD_LISTA_CITAS);
     }
 
     private void mostrarListaClientes() {
-        try { todosClientes = acceso.recogeClientes(c); } catch (SQLException ex) { ex.printStackTrace(); }
+        try {
+        	todosClientes = acceso.recogeClientes(c);
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
         clientesFiltrados = new ArrayList<>(todosClientes);
         cargarTablaClientes(clientesFiltrados);
         vista.mostrarCard(VentanaOficial.CARD_LISTA_CLIENTES);
     }
 
     private void mostrarListaTalleres() {
-        try { todosTalleres = acceso.recogeTalleres(c); } catch (Exception ex) { ex.printStackTrace(); }
+        try {
+        	todosTalleres = acceso.recogeTalleres(c);
+        } catch (Exception ex) {
+        	ex.printStackTrace();
+        }
         cargarTablaTalleres();
         vista.mostrarCard(VentanaOficial.CARD_LISTA_TALLERES);
     }
@@ -219,7 +237,10 @@ public class ControladorOficial {
 
     private void verDetalleCita() {
         int fila = vista.getTableCitas().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        if (fila < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        	return;
+        }
         Cita cita = citasFiltradas.get(fila);
         DetalleCita v = new DetalleCita();
         new ControladorDetalleCita(v, cita, acceso, c);
@@ -228,7 +249,10 @@ public class ControladorOficial {
 
     private void editarCita() {
         int fila = vista.getTableCitas().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        if (fila < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        	return;
+        }
         NuevaCitaMaestro v = new NuevaCitaMaestro();
         new ControladorNuevaCitaMaestro(v, acceso, c, empleado);
         v.setVisible(true);
@@ -242,7 +266,10 @@ public class ControladorOficial {
 
     private void verDetalleCliente() {
         int fila = vista.getTableClientes().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona un cliente.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        if (fila < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona un cliente.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        	return;
+        }
         Cliente cl = clientesFiltrados.get(fila);
         DetalleClientes v = new DetalleClientes();
         new ControladorDetalleClientes(v, acceso, c, cl, false);
