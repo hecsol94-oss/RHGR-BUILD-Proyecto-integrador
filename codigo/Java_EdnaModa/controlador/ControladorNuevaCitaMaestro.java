@@ -147,7 +147,9 @@ public class ControladorNuevaCitaMaestro {
             new ControladorNuevoCliente(vc, acceso, c, null);
             vc.setVisible(true);
             vc.addWindowListener(new java.awt.event.WindowAdapter() {
-                public void windowClosed(java.awt.event.WindowEvent ev) { cargarDatosIniciales(); }
+                public void windowClosed(java.awt.event.WindowEvent ev) {
+                	cargarDatosIniciales();
+                }
             });
         });
 
@@ -165,7 +167,11 @@ public class ControladorNuevaCitaMaestro {
             vt.addWindowListener(new java.awt.event.WindowAdapter() {
                 public void windowClosed(java.awt.event.WindowEvent ev) {
                     // Recargar trajes y marcar que el traje es nuevo → solo talleres diseño
-                    try { listaTrajes = acceso.recogeTrajes(c); } catch (SQLException ex) { ex.printStackTrace(); }
+                    try {
+                    	listaTrajes = acceso.recogeTrajes(c);
+                    } catch (SQLException ex) {
+                    	ex.printStackTrace();
+                    }
                     trajeRecienCreado = true;
                     actualizarComboTrajes();
                     // Seleccionar el último traje del cliente (el recién creado)
@@ -174,7 +180,10 @@ public class ControladorNuevaCitaMaestro {
                         int idCli = listaClientes.get(idxCli).getId_cliente();
                         int ultimoIdx = -1, contador = 0;
                         for (Traje t : listaTrajes) {
-                            if (t.getId_cliente() == idCli) { ultimoIdx = contador; contador++; }
+                            if (t.getId_cliente() == idCli) {
+                            	ultimoIdx = contador;
+                            	contador++;
+                            }
                         }
                         if (ultimoIdx >= 0) vista.getCbTraje().setSelectedIndex(ultimoIdx);
                     }
@@ -220,12 +229,25 @@ public class ControladorNuevaCitaMaestro {
         int idxOficial  = vista.getCbOficial().getSelectedIndex();
 
         if (fecha.isEmpty() || hora.isEmpty() || duracion.isEmpty()) {
-            JOptionPane.showMessageDialog(vista, "Rellena Fecha, Hora y Duración.", "Campos incompletos", JOptionPane.WARNING_MESSAGE); return;
+            JOptionPane.showMessageDialog(vista, "Rellena Fecha, Hora y Duración.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-        if (idxCliente < 0) { JOptionPane.showMessageDialog(vista, "Selecciona un cliente."); return; }
-        if (idxTraje   < 0) { JOptionPane.showMessageDialog(vista, "El cliente no tiene trajes. Créa uno primero."); return; }
-        if (idxTaller  < 0) { JOptionPane.showMessageDialog(vista, "Selecciona un taller."); return; }
-        if (idxOficial < 0) { JOptionPane.showMessageDialog(vista, "Selecciona un oficial responsable."); return; }
+        if (idxCliente < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona un cliente.");
+        	return;
+        }
+        if (idxTraje   < 0) {
+        	JOptionPane.showMessageDialog(vista, "El cliente no tiene trajes. Créa uno primero.");
+        	return;
+        }
+        if (idxTaller  < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona un taller.");
+        	return;
+        }
+        if (idxOficial < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona un oficial responsable.");
+        	return;
+        }
 
         String clienteNombre = listaClientes.get(idxCliente).getNombre();
         String trajeNombre   = (String) vista.getCbTraje().getSelectedItem();
@@ -247,20 +269,33 @@ public class ControladorNuevaCitaMaestro {
         int idxOficial = vista.getCbOficial().getSelectedIndex();
 
         Date fecha; Time hora; int duracion;
-        try { fecha = Date.valueOf(strFecha); } catch (Exception ex) {
-            JOptionPane.showMessageDialog(vista, "Formato de fecha incorrecto (yyyy-MM-dd).", "Error", JOptionPane.ERROR_MESSAGE); return;
+        try {
+        	fecha = Date.valueOf(strFecha);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(vista, "Formato de fecha incorrecto (yyyy-MM-dd).", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        try { hora = Time.valueOf(strHora + ":00"); } catch (Exception ex) {
-            JOptionPane.showMessageDialog(vista, "Formato de hora incorrecto (HH:mm).", "Error", JOptionPane.ERROR_MESSAGE); return;
+        try {
+        	hora = Time.valueOf(strHora + ":00");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(vista, "Formato de hora incorrecto (HH:mm).", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        try { duracion = Integer.parseInt(strDuracion); if (duracion <= 0) throw new NumberFormatException(); } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(vista, "Duración debe ser un entero positivo.", "Error", JOptionPane.ERROR_MESSAGE); return;
+        try {
+        	duracion = Integer.parseInt(strDuracion);
+        	if (duracion <= 0) throw new NumberFormatException();
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(vista, "Duración debe ser un entero positivo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         int idCliente = listaClientes.get(idxCliente).getId_cliente();
         int idSala    = listaTalleresFiltrados.get(idxTaller).getId_sala();
         int idTraje   = obtenerIdTraje(idCliente, idxTraje);
-        if (idTraje == -1) { JOptionPane.showMessageDialog(vista, "No se pudo identificar el traje."); return; }
+        if (idTraje == -1) {
+        	JOptionPane.showMessageDialog(vista, "No se pudo identificar el traje.");
+        	return;
+        }
 
         // Usar el id_empleado del oficial seleccionado (NO el del empleado logado)
         int idOficial = listaOficiales.get(idxOficial).getId_empleado();
@@ -288,7 +323,10 @@ public class ControladorNuevaCitaMaestro {
                 for (int i = 0; i < listaAprendices.size(); i++) {
                     if (i == excluido) continue;
                     contador++;
-                    if (contador == idxApr2) { realIdx = i; break; }
+                    if (contador == idxApr2) {
+                    	realIdx = i;
+                    	break;
+                    }
                 }
                 if (realIdx >= 0) {
                     Empleado apr2 = listaAprendices.get(realIdx);
@@ -299,7 +337,9 @@ public class ControladorNuevaCitaMaestro {
                     }
                 }
             }
-        } catch (SQLException ex) { ex.printStackTrace(); }
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
 
         JOptionPane.showMessageDialog(vista, "Cita guardada correctamente.");
         vista.dispose();

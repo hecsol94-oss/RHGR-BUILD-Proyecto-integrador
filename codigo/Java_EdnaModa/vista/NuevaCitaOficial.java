@@ -34,13 +34,13 @@ public class NuevaCitaOficial extends JFrame {
         getContentPane().add(sub);
 
         int y = 58, dy = 28;
-        lblFechaVal    = addField("Fecha:",    y); y += dy;
-        lblHoraVal     = addField("Hora:",     y); y += dy;
+        lblFechaVal = addField("Fecha:", y); y += dy;
+        lblHoraVal = addField("Hora:", y); y += dy;
         lblDuracionVal = addField("Duración:", y); y += dy;
-        lblClienteVal  = addField("Cliente:",  y); y += dy;
-        lblTrajeVal    = addField("Traje:",    y); y += dy;
-        lblTallerVal   = addField("Taller:",   y); y += dy;
-        lblOficialVal  = addField("Oficial:",  y); y += dy + 10;
+        lblClienteVal = addField("Cliente:", y); y += dy;
+        lblTrajeVal = addField("Traje:", y); y += dy;
+        lblTallerVal = addField("Taller:", y); y += dy;
+        lblOficialVal = addField("Oficial:", y); y += dy + 10;
 
         JSeparator sep = new JSeparator(); sep.setBounds(20, y, 405, 2); getContentPane().add(sep); y += 10;
 
@@ -88,18 +88,42 @@ public class NuevaCitaOficial extends JFrame {
         return val;
     }
 
-    public void setFecha(String v)    { lblFechaVal.setText(v); }
-    public void setHora(String v)     { lblHoraVal.setText(v); }
-    public void setDuracion(String v) { lblDuracionVal.setText(v); }
-    public void setCliente(String v)  { lblClienteVal.setText(v); }
-    public void setTraje(String v)    { lblTrajeVal.setText(v); }
-    public void setTaller(String v)   { lblTallerVal.setText(v); }
-    public void setOficial(String v)  { lblOficialVal.setText(v); }
+    public void setFecha(String v) {
+    	lblFechaVal.setText(v);
+    }
+    public void setHora(String v) {
+    	lblHoraVal.setText(v);
+    }
+    public void setDuracion(String v) {
+    	lblDuracionVal.setText(v);
+    }
+    public void setCliente(String v) {
+    	lblClienteVal.setText(v);
+    }
+    public void setTraje(String v) {
+    	lblTrajeVal.setText(v);
+    }
+    public void setTaller(String v) {
+    	lblTallerVal.setText(v);
+    }
+    public void setOficial(String v) {
+    	lblOficialVal.setText(v);
+    }
 
-    public JComboBox<String> getCbAprendiz1() { return cbAprendiz1; }
-    public JComboBox<String> getCbAprendiz2() { return cbAprendiz2; }
-    public JButton getBtnGuardar()            { return btnGuardar; }
-    public JButton getBtnCancelar()           { return btnCancelar; }
+    public JComboBox<String> getCbAprendiz1() {
+    	return cbAprendiz1;
+    }
+    public JComboBox<String> getCbAprendiz2() {
+    	return cbAprendiz2;
+    }
+    public JButton getBtnGuardar() {
+    	return btnGuardar;
+    }
+    public JButton getBtnCancelar() {
+    	return btnCancelar;
+    }
     // Legacy compat
-    public JTextArea getTxtDetalles() { return null; }
+    public JTextArea getTxtDetalles() {
+    	return null;
+    }
 }
