@@ -34,13 +34,13 @@ public class NuevaCitaOficial extends JFrame {
         getContentPane().add(sub);
 
         int y = 58, dy = 28;
-        lblFechaVal    = addField("Fecha:",    y); y += dy;
-        lblHoraVal     = addField("Hora:",     y); y += dy;
+        lblFechaVal = addField("Fecha:", y); y += dy;
+        lblHoraVal = addField("Hora:", y); y += dy;
         lblDuracionVal = addField("Duración:", y); y += dy;
-        lblClienteVal  = addField("Cliente:",  y); y += dy;
-        lblTrajeVal    = addField("Traje:",    y); y += dy;
-        lblTallerVal   = addField("Taller:",   y); y += dy;
-        lblOficialVal  = addField("Oficial:",  y); y += dy + 10;
+        lblClienteVal = addField("Cliente:", y); y += dy;
+        lblTrajeVal = addField("Traje:", y); y += dy;
+        lblTallerVal = addField("Taller:", y); y += dy;
+        lblOficialVal = addField("Oficial:", y); y += dy + 10;
 
         JSeparator sep = new JSeparator(); sep.setBounds(20, y, 405, 2); getContentPane().add(sep); y += 10;
 
