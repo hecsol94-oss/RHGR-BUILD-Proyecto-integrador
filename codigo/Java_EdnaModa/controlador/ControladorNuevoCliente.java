@@ -63,8 +63,7 @@ public class ControladorNuevoCliente {
 
         // Validación básica de campos obligatorios
         if (nombre.isEmpty() || superpoder.isEmpty() || color.isEmpty() || tipo.isEmpty()) {
-            JOptionPane.showMessageDialog(vista, "Por favor, rellena todos los campos del cliente.",
-                "Campos incompletos", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(vista, "Por favor, rellena todos los campos del cliente.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -89,8 +88,7 @@ public class ControladorNuevoCliente {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(vista, "Error al guardar el cliente en la base de datos.",
-                "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(vista, "Error al guardar el cliente en la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
