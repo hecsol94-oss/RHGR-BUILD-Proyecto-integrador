@@ -1,4 +1,3 @@
-
 package controlador;
 
 import modelo.*;
@@ -9,9 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.util.stream.Collectors;
 
 public class ControladorOficial {
 
@@ -28,13 +24,6 @@ public class ControladorOficial {
     private ArrayList<Empleado> listaEmpleados;
     private ArrayList<Traje>   listaTrajes;
 
-    /**
-     * 
-     * @param vista
-     * @param acceso
-     * @param c
-     * @param empleado
-     */
     public ControladorOficial(VentanaOficial vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
         this.vista    = vista;
         this.acceso   = acceso;
@@ -44,39 +33,11 @@ public class ControladorOficial {
         vista.getLblUsuario().setText("Usuario: " + empleado.getApodo() + " (" + empleado.getCategoria() + ")");
         cargarDatosEnMemoria();
         cargarContadores();
-
-        vista.getMenuItemListaCitas().addActionListener(e    -> mostrarListaCitas());
-        vista.getMenuItemListaClientes().addActionListener(e -> mostrarListaClientes());
-        vista.getMenuItemListaTalleres().addActionListener(e -> mostrarListaTalleres());
-        vista.getMenuItemNuevaCita().addActionListener(e     -> abrirNuevaCita());
-
-        vista.getBtnVolverCitas().addActionListener(e    -> vista.mostrarCard(VentanaOficial.CARD_DASHBOARD));
-        vista.getBtnVolverClientes().addActionListener(e -> vista.mostrarCard(VentanaOficial.CARD_DASHBOARD));
-        vista.getBtnVolverTalleres().addActionListener(e -> vista.mostrarCard(VentanaOficial.CARD_DASHBOARD));
-
-        vista.getBtnTodasCitas().addActionListener(e   -> { citasFiltradas = new ArrayList<>(todasCitas); cargarTablaCitas(citasFiltradas); });
-        vista.getBtnDisenoCitas().addActionListener(e  -> filtrarCitasPorTipo("diseño"));
-        vista.getBtnCosturaCitas().addActionListener(e -> filtrarCitasPorTipo("costura"));
-        vista.getBtnPruebasCitas().addActionListener(e -> filtrarCitasPorTipo("pruebas"));
-        vista.getBtnBuscarCitas().addActionListener(e  -> buscarCitas());
-        vista.getBtnVerDetallesCitas().addActionListener(e -> verDetalleCita());
-        vista.getBtnEditarCitas().addActionListener(e  -> editarCita());
-        vista.getBtnEliminarCitas().addActionListener(e -> eliminarCita());
-        vista.getBtnNuevaCitaEmb().addActionListener(e -> abrirNuevaCita());
-
-        vista.getBtnTodosClientes().addActionListener(e   -> { clientesFiltrados = new ArrayList<>(todosClientes); cargarTablaClientes(clientesFiltrados); });
-        vista.getBtnHeroeClientes().addActionListener(e   -> filtrarClientesPorTipo("superhéroe"));
-        vista.getBtnVillanoClientes().addActionListener(e -> filtrarClientesPorTipo("villano"));
-        vista.getBtnBuscarClientes().addActionListener(e  -> buscarClientes());
-        vista.getBtnDetalleClientes().addActionListener(e -> verDetalleCliente());
-        // Oficial no puede editar/eliminar/crear clientes
-        vista.deshabilitarBotonesClientes();
-
-        vista.getBtnNuevoTallerEmb().addActionListener(e    -> { /* Oficial no crea talleres */ });
-        vista.getBtnEditarTalleres().addActionListener(e    -> { /* no permitido */ });
-        vista.getBtnEliminarTalleres().addActionListener(e  -> { /* no permitido */ });
-        vista.getBtnConfirmarTalleres().addActionListener(e -> { /* no permitido */ });
-        vista.deshabilitarBotonesTalleres();
+        
+        vista.getMenuItemListaCitas().addActionListener(e -> abrirListaCitas());
+        vista.getMenuItemNuevaCita().addActionListener(e -> abrirNuevaCita());
+        vista.getMenuItemListaClientes().addActionListener(e -> abrirListaClientes());
+        vista.getMenuItemListaTalleres().addActionListener(e -> abrirListaTalleres());
 
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vista.getLblSalir().addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,217 +77,58 @@ public class ControladorOficial {
         } catch (Exception ex) { ex.printStackTrace(); }
     }
 
-    private void mostrarListaCitas() {
-        try { todasCitas = acceso.recogeCitas(c); listaEmpleados = acceso.recogeEmpleados(c); listaTrajes = acceso.recogeTrajes(c); todosTalleres = acceso.recogeTalleres(c); } catch (SQLException ex) { ex.printStackTrace(); }
-        citasFiltradas = new ArrayList<>(todasCitas);
-        cargarTablaCitas(citasFiltradas);
-        vista.mostrarCard(VentanaOficial.CARD_LISTA_CITAS);
-    }
-
-    private void mostrarListaClientes() {
-        try { todosClientes = acceso.recogeClientes(c); } catch (SQLException ex) { ex.printStackTrace(); }
-        clientesFiltrados = new ArrayList<>(todosClientes);
-        cargarTablaClientes(clientesFiltrados);
-        vista.mostrarCard(VentanaOficial.CARD_LISTA_CLIENTES);
-    }
-
-    private void mostrarListaTalleres() {
-        try { todosTalleres = acceso.recogeTalleres(c); } catch (Exception ex) { ex.printStackTrace(); }
-        cargarTablaTalleres();
-        vista.mostrarCard(VentanaOficial.CARD_LISTA_TALLERES);
-    }
-
-    /**
-     * 
-     * @param lista
-     */
-    private void cargarTablaCitas(ArrayList<Cita> lista) {
-        DefaultTableModel m = (DefaultTableModel) vista.getTableCitas().getModel();
-        m.setRowCount(0);
-        for (Cita cita : lista)
-            m.addRow(new Object[]{ cita.getFecha() + " " + cita.getHora_inicio(), nombreCliente(cita.getId_cliente()), nombreTraje(cita.getId_traje()), nombreTaller(cita.getId_sala()), nombreEmpleado(cita.getId_empleado()), cita.getDuracion() + " h" });
-    }
-
-    /**
-     * 
-     * @param lista
-     */
-    private void cargarTablaClientes(ArrayList<Cliente> lista) {
-        DefaultTableModel m = (DefaultTableModel) vista.getTableClientes().getModel();
-        m.setRowCount(0);
-        for (Cliente cl : lista)
-            m.addRow(new Object[]{ cl.getNombre(), cl.getSuperpoder(), cl.getTipo_heroe(), "-" });
-    }
-
-    private void cargarTablaTalleres() {
-        DefaultTableModel m = (DefaultTableModel) vista.getTableTalleres().getModel();
-        m.setRowCount(0);
-        vista.getModeloListaTalleres().clear();
-        for (Taller t : todosTalleres) {
-            m.addRow(new Object[]{ t.getNombre(), t.getTipo() });
-            vista.getModeloListaTalleres().addElement(t.getNombre() + " (" + t.getTipo() + ")");
+    private void abrirListaCitas() {
+        try {
+            ArrayList<Cita> citas = acceso.recogeCitas(c);
+            ArrayList<Cita_Aprendiz> aprendices = acceso.recogeCitasAprendiz(c);
+            ListaCitas vistaLista = new ListaCitas();
+            new ControladorListaCitas(vistaLista, acceso, c, citas, aprendices, empleado);
+            vistaLista.setVisible(true);
+            vista.dispose();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 
-    private void filtrarCitasPorTipo(String tipo) {
-        citasFiltradas = todasCitas.stream()
-            .filter(cita -> todosTalleres.stream().anyMatch(t -> t.getId_sala() == cita.getId_sala() && t.getTipo().equalsIgnoreCase(tipo)))
-            .collect(Collectors.toCollection(ArrayList::new));
-        if (citasFiltradas.isEmpty()) JOptionPane.showMessageDialog(vista, "No hay citas de tipo '" + tipo + "'.", "Información", JOptionPane.INFORMATION_MESSAGE);
-        cargarTablaCitas(citasFiltradas);
-    }
-
-    private void buscarCitas() {
-        String texto = vista.getTxtBuscarCitas().getText().trim().toLowerCase();
-        citasFiltradas = new ArrayList<>();
-        for (Cita cita : todasCitas)
-            if (cita.getFecha().toString().contains(texto) || nombreCliente(cita.getId_cliente()).toLowerCase().contains(texto)) citasFiltradas.add(cita);
-        cargarTablaCitas(citasFiltradas);
-    }
-
-    private void filtrarClientesPorTipo(String tipo) {
-        clientesFiltrados = new ArrayList<>();
-        for (Cliente cl : todosClientes) if (cl.getTipo_heroe().equalsIgnoreCase(tipo)) clientesFiltrados.add(cl);
-        cargarTablaClientes(clientesFiltrados);
-    }
-
-    private void buscarClientes() {
-        String texto = vista.getTxtBuscarClientes().getText().trim().toLowerCase();
-        clientesFiltrados = new ArrayList<>();
-        for (Cliente cl : todosClientes) if (cl.getNombre().toLowerCase().contains(texto)) clientesFiltrados.add(cl);
-        cargarTablaClientes(clientesFiltrados);
-    }
-
-    private void eliminarCita() {
-        int fila = vista.getTableCitas().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
-        Cita cita = citasFiltradas.get(fila);
-        int ok = JOptionPane.showConfirmDialog(vista,
-            "¿Eliminar la cita del " + cita.getFecha() + " a las " + cita.getHora_inicio() + "?",
-            "Confirmar eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (ok == JOptionPane.YES_OPTION) {
-            acceso.eliminarCita(c, cita.getId_cita());
-            todasCitas.remove(cita);
-            citasFiltradas.remove(fila);
-            cargarTablaCitas(citasFiltradas);
-            cargarContadores();
-            JOptionPane.showMessageDialog(vista, "Cita eliminada correctamente.");
-        }
-    }
-
-    private void verDetalleCita() {
-        int fila = vista.getTableCitas().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
-        Cita cita = citasFiltradas.get(fila);
-        DetalleCita v = new DetalleCita();
-        new ControladorDetalleCita(v, cita, acceso, c);
-        v.setVisible(true);
-    }
-
-    private void editarCita() {
-        int fila = vista.getTableCitas().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
-        NuevaCitaMaestro v = new NuevaCitaMaestro();
-        new ControladorNuevaCitaMaestro(v, acceso, c, empleado);
-        v.setVisible(true);
-    }
-
+    /**
+     * Formulario para que el Oficial complete/gestione su cita asignada.
+     */
     private void abrirNuevaCita() {
-        NuevaCitaMaestro v = new NuevaCitaMaestro();
-        new ControladorNuevaCitaMaestro(v, acceso, c, empleado);
-        v.setVisible(true);
+        NuevaCita vistaForm = new NuevaCita();
+        new ControladorNuevaCita(vistaForm, acceso, c, empleado, null, null, null, null, null, null, null);
+        vistaForm.setVisible(true);
+        vista.dispose();
     }
 
-    private void verDetalleCliente() {
-        int fila = vista.getTableClientes().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona un cliente.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
-        Cliente cl = clientesFiltrados.get(fila);
-        DetalleClientes v = new DetalleClientes();
-        new ControladorDetalleClientes(v, acceso, c, cl, false);
-        v.setVisible(true);
+    /**
+     * Lista de clientes en modo solo lectura.
+     */
+    private void abrirListaClientes() {
+        try {
+            ArrayList<Cliente> clientes = acceso.recogeClientes(c);
+            ArrayList<Traje> trajes = acceso.recogeTrajes(c);
+            ListaClientes vistaLista = new ListaClientes();
+            new ControladorListaClientes(vistaLista, acceso, c, clientes, trajes, empleado);
+            vistaLista.deshabilitarBotones(); // solo lectura para Oficial
+            vistaLista.setVisible(true);
+            vista.dispose();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
-/**
- * 
- * @param id
- * @return
- */
-    private String nombreCliente(int id)  {
-    	if(todosClientes==null) 
-    		return ""+id; 
-    	for(Cliente  x:todosClientes)  
-    		if(x.getId_cliente()==id)  
-    			return x.getNombre();
-    				return ""+id; 
-    				}
-    /**
-     * 
-     * @param id
-     * @return
-     */
-    private String nombreTraje(int id)    {
-    	if(listaTrajes==null)   
-    		return ""+id; 
-    	for(Traje    x:listaTrajes)    
-    		if(x.getId_traje()==id)   
-    			return x.getNombre_traje();
-    				return ""+id;
-    				}
-    /**
-     * 
-     * @param id
-     * @return
-     */
-    private String nombreTaller(int id)   { 
-    	if(todosTalleres==null) 
-    		return ""+id; 
-    	for(Taller   x:todosTalleres)
-    		if(x.getId_sala()==id)   
-    			return x.getNombre();
-    				return ""+id; 
-    				}
-    /**
-     * 
-     * @param id
-     * @return
-     */
-    private String nombreEmpleado(int id) {
-    	if(listaEmpleados==null)
-    		return ""+id; 
-    	for(Empleado x:listaEmpleados)
-    		if(x.getId_empleado()==id) 
-    			return x.getNombre()+" "+x.getApellido();
-    				return ""+id; 
-    				}
 
-         if(todosClientes==null)  
-            return ""+id; for(Cliente  x:todosClientes) 
-                 if(x.getId_cliente()==id) 
-                     return x.getNombre();
-                     return ""+id; 
-                    }
-    private String nombreTraje(int id)    {
-         if(listaTrajes==null)   
-             return ""+id; for(Traje    x:listaTrajes)  
-              if(x.getId_traje()==id)   
-                 return x.getNombre_traje();
-                 return ""+id; 
-                }
-    private String nombreTaller(int id)   {
-         if(todosTalleres==null)  
-            return ""+id; for(Taller   x:todosTalleres) 
-                if(x.getId_sala()==id) 
-                        return x.getNombre(); 
-                    return ""+id; 
-                }
-    private String nombreEmpleado(int id) { 
-        if(listaEmpleados==null) 
-            return ""+id; 
-        for(Empleado x:listaEmpleados)
-             if(x.getId_empleado()==id) 
-                return x.getNombre()+" "+x.getApellido();
-             return ""+id; 
-            }
-
+    /**
+     * Lista de talleres en modo solo lectura.
+     */
+    private void abrirListaTalleres() {
+        ArrayList<Taller> talleres = acceso.recogeTalleres(c);
+        ListaTalleres vistaLista = new ListaTalleres();
+        vistaLista.recogerDatos(talleres);
+        new ControladorListaTalleres(vistaLista, acceso, c, talleres, empleado);
+        vistaLista.deshabilitarBotones(); // solo lectura para Oficial
+        vistaLista.setVisible(true);
+        vista.dispose();
+    }
 
     private void cerrarSesion() {
         acceso.cerrarConexion(c);
@@ -341,4 +143,3 @@ public class ControladorOficial {
         } catch (SQLException ex) { ex.printStackTrace(); }
     }
 }
-

@@ -88,6 +88,12 @@ INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña)
 INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Diego', 'Fernández', 'CorteMaestro', 'diego', 'CorteMaestro55');
 INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Elena', 'Rivas', 'DamaAguja', 'elena', 'DamaAguja66');
 INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Tomás', 'Villalba', 'GranSastre', 'tomas', 'GranSastre77');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Laura', 'Sánchez', 'Dedal', 'laura', 'Dedal2026');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Miguel', 'Ortega', 'Puntada', 'miguel', 'Puntada123');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Carmen', 'Vega', 'HiloRojo', 'carmen', 'HiloRojo456');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Álvaro', 'Castro', 'Costurero', 'alvaro', 'Costurero789');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Raquel', 'Molina', 'PatrónPro', 'raquel', 'PatronPro321');
+INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Fernando', 'Ibáñez', 'AltaCostura', 'fernando', 'AltaCostura999');
 
 INSERT INTO Taller (nombre_sala, tipo_sala) VALUES ('Milán', 'diseño');
 INSERT INTO Taller (nombre_sala, tipo_sala) VALUES ('París', 'diseño');
@@ -128,24 +134,24 @@ INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de impacto p
 INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje de protección auditiva', 'costura', 16);
 INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje amplificador de ondas sonoras', 'diseño', 16);
 
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '09:00', 1, 1, 3, 6, 1);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '10:00', 1, 2, 1, 5, 3);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '11:00', 1, 3, 3, 6, 5);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '09:00', 1, 1, 3, 4, 1);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '10:00', 1, 2, 1, 3, 3);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '11:00', 1, 3, 3, 4, 5);
 INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '12:00', 1, 4, 5, 7, 7);
 INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '15:00', 1, 5, 1, 8, 9);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '16:00', 1, 8, 4, 8, 13);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '17:00', 1, 9, 4, 8, 15);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '09:00', 1, 6, 5, 6, 11);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '10:00', 1, 7, 3, 7, 12);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '11:00', 1, 11, 5, 7, 17);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '12:00', 1, 12, 3, 6, 19);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '15:00', 1, 10, 1, 8, 14);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '16:00', 1, 8, 4, 8, 15);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '17:00', 1, 9, 4, 8, 17);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '09:00', 1, 6, 5, 3, 11);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '10:00', 1, 7, 3, 7, 13);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '11:00', 1, 11, 5, 7, 21);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '12:00', 1, 12, 3, 9, 24);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '15:00', 1, 10, 1, 8, 19);
 INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '16:00', 1, 16, 4, 8, 31);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '09:00', 1, 13, 3, 7, 21);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '10:00', 1, 14, 5, 7, 23);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '11:00', 1, 15, 4, 6, 25);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '09:00', 1, 13, 3, 7, 26);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '10:00', 1, 14, 5, 7, 27);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '11:00', 1, 15, 4, 10, 30);
 INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '15:00', 1, 5, 1, 8, 10);
-INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '16:00', 1, 8, 4, 8, 14);
+INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '16:00', 1, 8, 4, 8, 16);
 
 INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (1, 1);
 INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (2, 1);

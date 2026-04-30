@@ -1,51 +1,117 @@
 package controlador;
 
-import modelo.AccesoBBDD;
-import modelo.Cliente;
-import vista.NuevoTraje;
+import java.sql.Connection;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import java.sql.Connection;
 
-/**
- * Controlador del formulario NuevoTraje.
- * Crea un traje asociado al cliente indicado.
- */
-public class ControladorNuevoTraje {
+import modelo.AccesoBBDD;
+import modelo.Cliente;
+import modelo.Empleado;
+import modelo.Taller;
+import modelo.Traje;
+import vista.DetalleClientes;
+import vista.ListaTalleres;
+import vista.NuevaCita;
+import vista.NuevoTraje;
 
-    private final NuevoTraje vista;
-    private final AccesoBBDD acceso;
-    private final Connection c;
-    private final Cliente cliente;
+	public class ControladorNuevoTraje {
 
-    /**
-     * 
-     * @param vista
-     * @param acceso
-     * @param c
-     * @param cliente
-     */
-    public ControladorNuevoTraje(NuevoTraje vista, AccesoBBDD acceso, Connection c, Cliente cliente) {
-        this.vista   = vista;
-        this.acceso  = acceso;
-        this.c       = c;
-        this.cliente = cliente;
+	    private NuevoTraje vista;
+	    private AccesoBBDD acceso;
+	    private Connection c;
+	    private Cliente cliente;
+		private ArrayList<Traje> trajes;
+	    private Traje trajeAEditar;
+	    private Empleado empleado;
+	    private DetalleClientes vistaCliente;
+	    private NuevaCita vistaCita;
 
-        vista.getBtnGuardar().addActionListener(e -> guardar());
-        vista.getBtnCancelar().addActionListener(e -> vista.dispose());
-    }
+	    public ControladorNuevoTraje(NuevoTraje vista, AccesoBBDD acceso, Connection c, Cliente cliente, ArrayList<Traje> trajes, Traje trajeAEditar, Empleado empleado, DetalleClientes vistaCliente, NuevaCita vistaCita) {
+	        this.vista = vista;
+	        this.acceso = acceso;
+	        this.c = c;
+	        this.cliente = cliente;
+	        this.trajes = trajes;
+	        this.trajeAEditar = trajeAEditar;
+	        this.empleado = empleado;
+	        this.vistaCliente = vistaCliente;
+	        this.vistaCita = vistaCita;
 
-    private void guardar() {
-        String nombre = vista.getNombreTraje();
-        String estado = vista.getEstadoTraje();
+	        if (trajeAEditar != null) {
+	            vista.getNombreTraje().setText(trajeAEditar.getNombre_traje());
+	            vista.setCbEstado(trajeAEditar.getEstado());
 
-        if (nombre.isEmpty()) {
-            JOptionPane.showMessageDialog(vista, "El nombre del traje no puede estar vacío.", "Aviso", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        acceso.insertarNuevoTraje(c, nombre, estado, cliente.getId_cliente());
-        JOptionPane.showMessageDialog(vista, "Traje \"" + nombre + "\" creado para " + cliente.getNombre() + ".");
-        vista.dispose();
-    }
+	        }
+	        
+	        // Listeners en el constructor
+	        this.vista.getBtnGuardar().addActionListener(e -> guardarTraje());
+	        this.vista.getBtnCancelar().addActionListener(e -> cancelar());
+	    }
+
+	    private void guardarTraje() {
+	    	String nombre = vista.getNombreTraje().getText();
+	        String estado = vista.getCbEstado().toString();
+	        if (!nombre.isEmpty()) {
+	        	if (trajeAEditar == null) {
+		            // NUEVO
+		            acceso.insertarNuevoTraje(c, nombre, estado, cliente.getId_cliente());
+		            
+		            trajes = acceso.getTrajesPorCliente(c, cliente.getId_cliente());
+
+					// Crea la vista de la lista para mostrar los cambios
+		            
+		            if (vistaCliente != null && vistaCita == null) {
+		            	DetalleClientes dt = new DetalleClientes();
+						dt.recogerDatos(trajes); // Carga la tabla/lista con los datos actualizados
+					
+						// Inicializa el controlador de la lista y muestra la ventana
+						new ControladorDetalleClientes(dt, acceso, c, cliente, trajes, empleado);
+						dt.setVisible(true);
+					
+						// Cierra la ventana actual de formulario
+						vista.dispose();
+						
+		            } else if (vistaCliente == null && vistaCita != null) {
+		            	vista.dispose();
+
+		            }
+					
+		        } else {
+		            // EDITAR
+		            acceso.actualizarTraje(c, trajeAEditar.getId_traje(), nombre, estado);
+		            
+		            trajes = acceso.getTrajesPorCliente(c, cliente.getId_cliente());
+
+					// Crea la vista de la lista para mostrar los cambios
+					DetalleClientes dt = new DetalleClientes();
+					dt.recogerDatos(trajes); // Carga la tabla/lista con los datos actualizados
+				
+					// Inicializa el controlador de la lista y muestra la ventana
+					new ControladorDetalleClientes(dt, acceso, c, cliente, trajes, empleado);
+					dt.setVisible(true);
+				
+					// Cierra la ventana actual de formulario
+					vista.dispose();
+		        }
+
+		        JOptionPane.showMessageDialog(vista, "Traje creado correctamente");
+		        vista.dispose();
+		    } else {
+		    	JOptionPane.showMessageDialog(vista, "Por favor, rellene los campos obligatorios",
+		    			"Error", JOptionPane.ERROR_MESSAGE);
+		    }
+	    } 
+
+	        
+
+	    private void cancelar() {
+	    	if (vistaCliente != null && vistaCita == null) {
+		        // Volver sin hacer cambios
+	    		vistaCliente.setVisible(true);
+		        vista.dispose();
+	    	} else if (vistaCliente == null && vistaCita != null) {
+		        vista.dispose();
+	    	}	        
+	    }
 }
-

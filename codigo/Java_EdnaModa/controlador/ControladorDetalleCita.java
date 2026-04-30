@@ -16,27 +16,22 @@ public class ControladorDetalleCita {
     private final Cita cita;
     private final AccesoBBDD acceso;
     private final Connection c;
+    private final String[] aprendices;
 
-    /**
-     * 
-     * @param vista
-     * @param cita
-     * @param acceso
-     * @param c
-     */
-    public ControladorDetalleCita(DetalleCita vista, Cita cita, AccesoBBDD acceso, Connection c) {
+    public ControladorDetalleCita(DetalleCita vista, Cita cita, AccesoBBDD acceso, Connection c, String[] aprendices) {
         this.vista  = vista;
         this.cita   = cita;
         this.acceso = acceso;
         this.c      = c;
+        this.aprendices = aprendices;
 
         rellenarCampos();
         vista.getBtnVolver().addActionListener(e -> vista.dispose());
     }
 
     /** Constructor legacy sin acceso BBDD (muestra IDs como fallback). */
-    public ControladorDetalleCita(DetalleCita vista, Cita cita) {
-        this(vista, cita, null, null);
+    public ControladorDetalleCita(DetalleCita vista, Cita cita, String[] aprendices) {
+        this(vista, cita, null, null, aprendices);
     }
 
     private void rellenarCampos() {
@@ -49,13 +44,13 @@ public class ControladorDetalleCita {
             vista.setTraje("ID " + cita.getId_traje());
             vista.setTaller("ID " + cita.getId_sala());
             vista.setOficial("ID " + cita.getId_empleado());
-            vista.setAprendices("—");
+            vista.setAprendices("ID" + aprendices[0]);
+            vista.setAprendices("ID" + aprendices[1]);
             return;
         }
 
         try {
             // Resolución de nombres (punto 6)
-        
             ArrayList<Cliente>  clientes  = acceso.recogeClientes(c);
             ArrayList<Traje>    trajes    = acceso.recogeTrajes(c);
             ArrayList<Taller>   talleres  = acceso.recogeTalleres(c);
@@ -67,54 +62,34 @@ public class ControladorDetalleCita {
             vista.setOficial(nombreEmpleado(empleados, cita.getId_empleado()));
 
             // Aprendices
-            ArrayList<Cita_Aprendiz> aprendizRel = acceso.recogeCitasAprendiz(c);
-            StringBuilder sb = new StringBuilder();
-            for (Cita_Aprendiz ca : aprendizRel)
-                if (ca.getId_cita() == cita.getId_cita())
-                    sb.append(nombreEmpleado(empleados, ca.getId_empleado())).append("  ");
-            vista.setAprendices(sb.length() > 0 ? sb.toString().trim() : "—");
+            String texto = "";
+
+            if (!aprendices[0].isEmpty()) {
+            	texto += aprendices[0];
+            }
+            if (!aprendices[1].isEmpty()) {
+            	texto += "\n" + aprendices[1];
+            }
+
+            vista.setAprendices(texto.isEmpty() ? "—" : texto);
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
-    /**
-     * 
-     * @param lista
-     * @param id
-     * @return
-     */
     private String nombreCliente(ArrayList<Cliente> lista, int id) {
         for (Cliente x : lista) if (x.getId_cliente() == id) return x.getNombre();
         return "ID " + id;
     }
-    /**
-     * 
-     * @param lista
-     * @param id
-     * @return
-     */
     private String nombreTraje(ArrayList<Traje> lista, int id) {
         for (Traje x : lista) if (x.getId_traje() == id) return x.getNombre_traje();
         return "ID " + id;
     }
-    /**
-     * 
-     * @param lista
-     * @param id
-     * @return
-     */
     private String nombreTaller(ArrayList<Taller> lista, int id) {
         for (Taller x : lista) if (x.getId_sala() == id) return x.getNombre() + " (" + x.getTipo() + ")";
         return "ID " + id;
     }
-    /**
-     * 
-     * @param lista
-     * @param id
-     * @return
-     */
     private String nombreEmpleado(ArrayList<Empleado> lista, int id) {
         for (Empleado x : lista) if (x.getId_empleado() == id) return x.getNombre() + " " + x.getApellido();
         return "ID " + id;

@@ -1,5 +1,8 @@
 package modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Traje {
 	
 	// Atributos del traje y su vinculación con el cliente (FK id_cliente)
@@ -7,6 +10,7 @@ public class Traje {
 	private String nombre_traje;
 	private String estado;
 	private int id_cliente;
+	private List<Cliente> clientes;
 	
 	// Constructor que permite asociar un traje específico a un superhéroe
 	public Traje (int id_traje, String nombre, String estado, int id_cliente) {
@@ -14,6 +18,7 @@ public class Traje {
 		this.nombre_traje = nombre;
 		this.estado = estado;
 		this.id_cliente = id_cliente;
+		this.clientes = new ArrayList<>();
 	}
 
 	// Getters y Setters para monitorizar el estado y dueño de la prenda

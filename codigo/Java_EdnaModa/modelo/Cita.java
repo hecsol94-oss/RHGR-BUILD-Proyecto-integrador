@@ -1,7 +1,9 @@
 package modelo;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Cita {
 	
@@ -11,15 +13,14 @@ public class Cita {
 	private Time hora_inicio;
 	private int duracion;
 	private int id_empleado;
+	private List<Empleado> empleados;
 	private int id_cliente;
+	private List<Cliente> clientes;
 	private int id_sala;
+	private List<Taller> talleres;
 	private int id_traje;
-	
-	Cliente cliente;
-	Traje traje;
-	Taller taller;
-	Empleado empleado;
-	
+	private List<Traje> trajes;
+	private List<Cita_Aprendiz> aprendices;
 	
 	// Constructor completo para gestionar la agenda del taller
 	public Cita(int id_cita, Date fecha, Time hora_inicio, int duracion, int id_empleado, int id_cliente, int id_sala, int id_traje) {
@@ -28,9 +29,14 @@ public class Cita {
 		this.hora_inicio = hora_inicio;
 		this.duracion = duracion;
 		this.id_empleado = id_empleado;
+		this.empleados = new ArrayList<>();
 		this.id_cliente = id_cliente;
+		this.clientes = new ArrayList<>();
 		this.id_sala = id_sala;
+		this.talleres = new ArrayList<>();
 		this.id_traje = id_traje;
+		this.trajes = new ArrayList<>();
+		this.aprendices = new ArrayList<>();
 	}
 
 	// Métodos de acceso para la gestión temporal y espacial de la cita
@@ -97,19 +103,5 @@ public class Cita {
 	public void setId_traje(int id_traje) {
 		this.id_traje = id_traje;
 	}
-	
-//	public String setDetalles(String detalles) {
-//		return detalles = "Fecha: " + fecha +"\nHora: "+ hora_inicio + "\nCliente: " + cliente.getNombre() + "\nTraje: " + traje.getNombre_traje()+ "\nTaller: " + taller.getNombre() + "\nDuracion: " + duracion;
-//	}
-//
-//	public int setIdAprendiz1(int id_emp1) {
-//		return empleado.getId_empleado();	
-//	}
-//	
-//	public int setIdAprendiz2(int id_emp2) {
-//		return empleado.getId_empleado();	
-//	}
-	
-	
 	
 }

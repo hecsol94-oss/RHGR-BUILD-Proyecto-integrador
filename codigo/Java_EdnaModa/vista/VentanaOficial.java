@@ -36,7 +36,6 @@ public class VentanaOficial extends JFrame {
     private JButton    btnNuevaCitaEmb;
     private JButton    btnVerDetallesCitas;
     private JButton    btnEditarCitas;
-    private JButton    btnEliminarCitas;
     private JButton    btnBuscarCitas;
     private JButton    btnTodasCitas;
     private JButton    btnDisenoCitas;
@@ -184,9 +183,8 @@ public class VentanaOficial extends JFrame {
         tableCitas.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"Fecha/Hora","Cliente","Traje","Taller","Oficial","Duración (h)"}));
         tableCitas.setRowHeight(22); scroll.setViewportView(tableCitas);
         btnVerDetallesCitas = new JButton("Ver detalles"); btnVerDetallesCitas.setBounds(10, 458, 120, 28); p.add(btnVerDetallesCitas);
-        btnEditarCitas      = new JButton("Editar");       btnEditarCitas.setBounds(138,     458, 90,  28); p.add(btnEditarCitas);
-        btnEliminarCitas    = new JButton("Eliminar");     btnEliminarCitas.setBounds(236,   458, 90,  28); p.add(btnEliminarCitas);
-        btnVolverCitas      = new JButton("\u2190 Volver");btnVolverCitas.setBounds(630,     458, 110, 28); p.add(btnVolverCitas);
+        btnEditarCitas      = new JButton("Editar");       btnEditarCitas.setBounds(138,      458, 90,  28); p.add(btnEditarCitas);
+        btnVolverCitas      = new JButton("\u2190 Volver");btnVolverCitas.setBounds(630,      458, 110, 28); p.add(btnVolverCitas);
         return p;
     }
 
@@ -234,148 +232,145 @@ public class VentanaOficial extends JFrame {
 
     public void mostrarCard(String card) { cardLayout.show(cardPane, card); }
 
-    public JMenuItem getMenuItemListaCitas()    {
-         return menuItemListaCitas; 
-        }
-    public JMenuItem getMenuItemNuevaCita()     {
-         return menuItemNuevaCita; 
-        }
-    public JMenuItem getMenuItemListaClientes() {
-         return menuItemListaClientes; 
-        }
-    public JMenuItem getMenuItemListaTalleres() {
-         return menuItemListaTalleres; 
-        }
     public JLabel getLblUsuario()               {
-         return lblUsuario; 
-        }
+    	return lblUsuario; 
+    }
     public JLabel getLblSalir()                 {
-         return lblSalir;
-        }
-    public JLabel getLblTodasLasCitas()         {
-         return lblTodasLasCitas;
-         }
-    public JLabel getLblNumeroDeMisCitas()      {
-         return lblNumeroDeMisCitas; 
-        }
+    	return lblSalir; 
+    }
+    public JLabel getLblTodasLasCitas()         { 
+    	return lblTodasLasCitas; 
+    }
+    public JLabel getLblNumeroDeMisCitas()      { 
+    	return lblNumeroDeMisCitas; 
+    }
     public JLabel getLblNumeroDeTalleres()      {
-         return lblNumeroDeTalleres; 
-        }
+    	return lblNumeroDeTalleres; 
+    }
     public JLabel getLblCitasHoy()              {
-         return lblCitasHoy;
-         }
+    	return lblCitasHoy; 
+    }
     public JLabel getLblCitasSemana()           {
-         return lblCitasSemana; 
-        }
+    	return lblCitasSemana; 
+    }
     public JLabel getLblProximaCita()           {
-         return lblProximaCita; 
-        }
+    	return lblProximaCita;
+    }
     public JTable     getTableCitas()           {
-         return tableCitas;
-        }
+    	return tableCitas;
+    }
     public JTextField getTxtBuscarCitas()       {
-         return txtBuscarCitas; 
-        }
+    	return txtBuscarCitas; 
+    }
     public JButton    getBtnNuevaCitaEmb()      {
-         return btnNuevaCitaEmb; 
-        }
+    	return btnNuevaCitaEmb; 
+    }
     public JButton    getBtnVerDetallesCitas()  {
-         return btnVerDetallesCitas; 
-        }
-    public JButton    getBtnEditarCitas()       {
-         return btnEditarCitas;
-         }
-    public JButton    getBtnEliminarCitas()     {
-         return btnEliminarCitas; 
-        }
+    	return btnVerDetallesCitas; 
+    }
+    public JButton    getBtnEditarCitas()       { 
+    	return btnEditarCitas; 
+    }
     public JButton    getBtnBuscarCitas()       {
-         return btnBuscarCitas;
-         }
-    public JButton    getBtnTodasCitas()        {
-         return btnTodasCitas;
-         }
-    public JButton    getBtnDisenoCitas()       {
-         return btnDisenoCitas; 
-        }
-    public JButton    getBtnCosturaCitas()      {
-         return btnCosturaCitas; 
-        }
-    public JButton    getBtnPruebasCitas()      {
-         return btnPruebasCitas;
-         }
+    	return btnBuscarCitas; 
+    }
+    public JButton    getBtnTodasCitas()        { 
+    	return btnTodasCitas;
+    }
+    public JButton    getBtnDisenoCitas()       { 
+    	return btnDisenoCitas;
+    }
+    public JButton    getBtnCosturaCitas()      { 
+    	return btnCosturaCitas; 
+    }
+    public JButton    getBtnPruebasCitas()      { 
+    	return btnPruebasCitas; 
+    }
     public JButton    getBtnVolverCitas()       {
-         return btnVolverCitas;
-         }
+    	return btnVolverCitas;
+    }
     public JTable     getTableClientes()        {
-         return tableClientes;
-         }
+    	return tableClientes;
+    }
     public JTextField getTxtBuscarClientes()    {
-         return txtBuscarClientes;
-         }
-    public JButton    getBtnNuevoClienteEmb()   {
-         return btnNuevoClienteEmb; 
-        }
-    public JButton    getBtnDetalleClientes()   {
-         return btnDetalleClientes;
-         }
+    	return txtBuscarClientes; 
+    }
+    public JButton    getBtnNuevoClienteEmb()   { 
+    	return btnNuevoClienteEmb;
+    }
+    public JButton    getBtnDetalleClientes()   { 
+    	return btnDetalleClientes; 
+    }
     public JButton    getBtnEditarClientes()    {
-         return btnEditarClientes;
-         }
-    public JButton    getBtnBuscarClientes()    {
-         return btnBuscarClientes;
-         }
-    public JButton    getBtnTodosClientes()     {
-         return btnTodosClientes; 
-        }
-    public JButton    getBtnHeroeClientes()     {
-         return btnHeroeClientes;
-         }
+    	return btnEditarClientes;
+    }
+    public JButton    getBtnBuscarClientes()    { 
+    	return btnBuscarClientes;
+    }
+    public JButton    getBtnTodosClientes()     { 
+    	return btnTodosClientes; 
+    }
+    public JButton    getBtnHeroeClientes()     { 
+    	return btnHeroeClientes; 
+    }
     public JButton    getBtnVillanoClientes()   {
-         return btnVillanoClientes; 
-        }
-    public JButton    getBtnEliminarClientes()  {
-         return btnEliminarClientes; 
-        }
-    public JButton    getBtnVolverClientes()    {
-         return btnVolverClientes; 
-        }
+    	return btnVillanoClientes;
+    }
+    public JButton    getBtnEliminarClientes()  { 
+    	return btnEliminarClientes; 
+    }
+    public JButton    getBtnVolverClientes()    { 
+    	return btnVolverClientes; 
+    }
     public JTable                   getTableTalleres()       {
-         return tableTalleres; 
-        }
-    public JList<String>            getLista()               {
-         return listaTalleres; 
-        }
+    	return tableTalleres; 
+    }
+    public JList<String>            getLista()               { 
+    	return listaTalleres; 
+    }
     public DefaultListModel<String> getModeloListaTalleres() {
-         return modeloListaTalleres; 
-        }
+    	return modeloListaTalleres;
+    }
     public JButton getBtnNuevoTallerEmb()    {
-         return btnNuevoTallerEmb;
-         }
+    	return btnNuevoTallerEmb; 
+    }
     public JButton getBtnEditarTalleres()    {
-         return btnEditarTalleres; 
-        }
-    public JButton getBtnEliminarTalleres()  {
-         return btnEliminarTalleres;
-         }
-    public JButton getBtnConfirmarTalleres() {
-         return btnConfirmarTalleres;
-         }
-    public JButton getBtnVolverTalleres()    {
-         return btnVolverTalleres; 
-        }
+    	return btnEditarTalleres;
+    }
+    public JButton getBtnEliminarTalleres()  { 
+    	return btnEliminarTalleres; 
+    }
+    public JButton getBtnConfirmarTalleres() { 
+    	return btnConfirmarTalleres; 
+    }
+    public JButton getBtnVolverTalleres()    { 
+    	return btnVolverTalleres;
+    }
     public void deshabilitarBotonesCitas()    {
-         btnEditarCitas.setEnabled(false); 
-         btnNuevaCitaEmb.setEnabled(false); 
-        }
+    	btnEditarCitas.setEnabled(false);
+    btnNuevaCitaEmb.setEnabled(false); 
+    }
     public void deshabilitarBotonesClientes() {
-
-         btnEditarClientes.setEnabled(false);
-          btnEliminarClientes.setEnabled(false); 
-          btnNuevoClienteEmb.setEnabled(false); 
-        }
-    public void deshabilitarBotonesTalleres() {
-         btnEditarTalleres.setEnabled(false);
-          btnEliminarTalleres.setEnabled(false);
-           btnNuevoTallerEmb.setEnabled(false); 
-        }
+    	btnEditarClientes.setEnabled(false); btnEliminarClientes.setEnabled(false); 
+    	btnNuevoClienteEmb.setEnabled(false); 
+    }
+    public void deshabilitarBotonesTalleres() { 
+    	btnEditarTalleres.setEnabled(false);
+    	btnEliminarTalleres.setEnabled(false);
+    	btnNuevoTallerEmb.setEnabled(false);
+    }
+    
+ // Getters para los items de menú
+ 	public JMenuItem getMenuItemListaCitas() { 
+ 		return menuItemListaCitas; 
+ 	}
+ 	public JMenuItem getMenuItemNuevaCita() { 
+ 		return menuItemNuevaCita; 
+ 	}
+ 	public JMenuItem getMenuItemListaClientes() { 
+ 		return menuItemListaClientes; 
+ 	}
+ 	public JMenuItem getMenuItemListaTalleres() { 
+ 		return menuItemListaTalleres; 
+ 	}
 }

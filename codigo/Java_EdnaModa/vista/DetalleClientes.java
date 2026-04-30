@@ -1,104 +1,162 @@
 package vista;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import javax.swing.JSeparator;
-import java.awt.Color;
-import javax.swing.border.LineBorder;
+import javax.swing.*;
+import javax.swing.border.*;
 
-// Clase que representa la ventana de detalle de un cliente
+import modelo.Taller;
+import modelo.Traje;
+import java.awt.*;
+import java.util.ArrayList;
+
 public class DetalleClientes extends JFrame {
 
-    // Panel principal de la ventana
-	private JPanel contentPane;
-	private JTextArea txtInfoPersonal;
-	private JTextArea txtInfoTrajes;
-	private JButton btnEditar;
-	private JButton btnEliminar;
-	private JButton btnVolver;
-	
-    // Constructor
-	public DetalleClientes() {
-	    // Configuración básica de la ventana
-		setTitle("Detalles del Cliente - EDNA MODA"); // Título de la ventana
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Se cierra solo esta ventana
-		setBounds(100, 100, 450, 450); // Tamaño y posición inicial
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5)); // Bordes internos
-		setContentPane(contentPane);
-		contentPane.setLayout(null); // Layout absoluto
+    private JPanel contentPane;
+    // --- CAMBIO: Declarar componentes como atributos de clase ---
+    private JTextField txtNombreCliente, txtHeroeCliente, txtSuperpoderCliente, txtColorCliente;
+    private JList<String> listTrajes;
+    private DefaultListModel<String> modeloLista;
+    private JButton btnEditar, btnEliminar, btnVolver, btnNuevoTraje;
 
-        // Título principal de la ventana
-		JLabel lblTitulo = new JLabel("INFORMACIÓN DEL CLIENTE");
-		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTitulo.setBounds(20, 11, 250, 25);
-		contentPane.add(lblTitulo);
+    public DetalleClientes() {
+        setTitle("Detalles del Cliente");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setBounds(100, 100, 450, 450);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
 
-		// Bloque de información personal (Nombre, Superpoder, Colores, Tipo)
-		JTextArea txtInfoPersonal = new JTextArea();
-		txtInfoPersonal.setBorder(new LineBorder(new Color(192, 192, 192))); // Borde gris
-		txtInfoPersonal.setEditable(false); // Solo lectura
-		txtInfoPersonal.setText("Nombre: \nSuperpoder: \nColores: \nTipo (Héroe/Villano): "); // Texto por defecto
-		txtInfoPersonal.setBounds(20, 47, 390, 100); // Posición y tamaño
-		contentPane.add(txtInfoPersonal);
-
-		// Botón para editar la información del cliente
-		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(20, 350, 100, 30);
-		contentPane.add(btnEditar);
-
-		// Botón para eliminar al cliente (en rojo)
-		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setForeground(Color.RED);
-		btnEliminar.setBounds(130, 350, 100, 30);
-		contentPane.add(btnEliminar);
-
-		// Botón para volver a la ventana anterior
-		JButton btnVolver = new JButton("Volver");
-		btnVolver.setBounds(310, 350, 100, 30);
-		contentPane.add(btnVolver);
+        // --- PANEL INFORMACIÓN PERSONAL ---
+        JPanel panelInfo = new JPanel();
+        panelInfo.setBorder(new TitledBorder(null, "Información personal del cliente", TitledBorder.LEADING, TitledBorder.TOP));
+        panelInfo.setBounds(20, 33, 390, 140);
+        contentPane.add(panelInfo);
+        panelInfo.setLayout(null);
         
-        // Separador visual para separar botones de la información
-		JSeparator separator = new JSeparator();
-		separator.setBounds(20, 320, 390, 2);
-		contentPane.add(separator);
-		
-		JTextArea txtInfoTrajes = new JTextArea();
-		txtInfoTrajes.setText("Nombre del traje: \r\nEstado:");
-		txtInfoTrajes.setEditable(false);
-		txtInfoTrajes.setBorder(new LineBorder(new Color(192, 192, 192)));
-		txtInfoTrajes.setBounds(20, 194, 390, 100);
-		contentPane.add(txtInfoTrajes);
-		
-		JLabel lblTitulo_1 = new JLabel("INFORMACIÓN DEL TRAJE");
-		lblTitulo_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTitulo_1.setBounds(20, 158, 250, 25);
-		contentPane.add(lblTitulo_1);
-	}
-	
-		public JTextArea getTxtInfoPersonal() {
-			return txtInfoPersonal; 
-		}
-	
-		public JTextArea getTxtInfoTrajes() {
-			return txtInfoTrajes; 
-		}
-	
-		public JButton getBtnEditar() {
-			return btnEditar; 
-		}
-	
-		public JButton getBtnEliminar() {
-			return btnEliminar; 
-		}
-	
-		public JButton getBtnVolver() {
-			return btnVolver; 
-		}
+        // (Labels omitidos para brevedad, se mantienen igual que en tu código)
+        
+        txtNombreCliente = new JTextField();
+        txtNombreCliente.setBounds(144, 22, 215, 20);
+        panelInfo.add(txtNombreCliente);
+        txtNombreCliente.setEditable(false);
+        
+        txtHeroeCliente = new JTextField();
+        txtHeroeCliente.setBounds(144, 47, 215, 20);
+        panelInfo.add(txtHeroeCliente);
+        txtHeroeCliente.setEditable(false);
+        
+        txtSuperpoderCliente = new JTextField();
+        txtSuperpoderCliente.setBounds(144, 72, 215, 20);
+        panelInfo.add(txtSuperpoderCliente);
+        txtSuperpoderCliente.setEditable(false);
+
+        txtColorCliente = new JTextField();
+        txtColorCliente.setBounds(144, 97, 215, 20);
+        panelInfo.add(txtColorCliente);
+        txtColorCliente.setEditable(false);
+        
+        JLabel lblNombre = new JLabel("Nombre:");
+        lblNombre.setBounds(33, 25, 62, 14);
+        panelInfo.add(lblNombre);
+        
+        JLabel lblTipo_Heroe = new JLabel("Tipo de heroe:");
+        lblTipo_Heroe.setBounds(33, 50, 89, 14);
+        panelInfo.add(lblTipo_Heroe);
+        
+        JLabel lblSuperopder = new JLabel("Superpoder:");
+        lblSuperopder.setBounds(33, 75, 89, 14);
+        panelInfo.add(lblSuperopder);
+        
+        JLabel lblColores = new JLabel("Colores:");
+        lblColores.setBounds(33, 100, 62, 14);
+        panelInfo.add(lblColores);
+
+        // --- PANEL INFORMACIÓN TRAJES ---
+        JPanel panelTraje = new JPanel();
+        panelTraje.setBorder(new TitledBorder(null, "Información sobre los trajes", TitledBorder.LEADING, TitledBorder.TOP));
+        panelTraje.setBounds(20, 180, 390, 150); 
+        contentPane.add(panelTraje);
+        panelTraje.setLayout(null);
+
+        // --- CAMBIO: Usar los atributos de clase en lugar de variables locales ---
+        modeloLista = new DefaultListModel<>();
+
+        listTrajes = new JList<>(modeloLista);
+        listTrajes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        JScrollPane scrollPane = new JScrollPane(listTrajes);
+        scrollPane.setBounds(15, 25, 360, 110); 
+        panelTraje.add(scrollPane);
+
+        // --- BOTONES INFERIORES ---
+        btnEditar = new JButton("Editar traje");
+        btnEditar.setBounds(30, 350, 100, 30);
+        contentPane.add(btnEditar);
+
+        btnEliminar = new JButton("Eliminar traje");
+        btnEliminar.setBounds(140, 350, 150, 30);
+        contentPane.add(btnEliminar);
+
+        btnVolver = new JButton("Volver");
+        btnVolver.setBounds(300, 350, 100, 30);
+        contentPane.add(btnVolver);
+        
+        btnNuevoTraje = new JButton("+ Nuevo traje");
+        btnNuevoTraje.setBounds(280, 11, 130, 22);
+        contentPane.add(btnNuevoTraje);
+    }
+
+    // --- MÉTODOS GETTER PARA EL CONTROLADOR ---
+
+    public JTextField getNombreCliente() {
+    	return txtNombreCliente;
+    }
+    
+    public JTextField getTipoHeroeCliente() {
+    	return txtHeroeCliente;
+    }
+    
+    public JTextField getSuperpoderCliente() {
+    	return txtSuperpoderCliente;
+    }
+    
+    public JTextField getColorCliente() {
+    	return txtColorCliente;
+    }
+    
+    public JList<String> getListTrajes() {
+        return listTrajes;
+    }
+
+    public DefaultListModel<String> getModeloLista() {
+        return modeloLista;
+    }
+
+    public JButton getBtnEditar() {
+        return btnEditar;
+    }
+
+    public JButton getBtnEliminar() {
+        return btnEliminar;
+    }
+
+    public JButton getBtnVolver() {
+        return btnVolver;
+    }
+    
+    public JButton getBtnNuevoTraje() {
+        return btnNuevoTraje;
+    }
+    
+    public void agregarOpcion(Traje t) {
+        modeloLista.addElement(t.getNombre_traje() + " - " +t.getEstado());       
+    }
+    
+    public void recogerDatos(ArrayList<Traje> trajes) {
+        modeloLista.clear();
+
+        for (Traje t : trajes) {
+            agregarOpcion(t);
+        }
+    }
 }

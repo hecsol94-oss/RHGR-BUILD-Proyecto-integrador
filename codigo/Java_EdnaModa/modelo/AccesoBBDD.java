@@ -9,7 +9,7 @@ public class AccesoBBDD {
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	private String url = "jdbc:mysql://localhost/tallerednamoda";
 	private String usuario = "root";
-	private String pword = "1234";
+	private String pword = "12345678";
 
 	public Connection abrirConexion() {
 
@@ -126,6 +126,12 @@ public class AccesoBBDD {
 		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Diego', 'Fernández', 'CorteMaestro', 'diego', 'CorteMaestro55')");
 		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Elena', 'Rivas', 'DamaAguja', 'elena', 'DamaAguja66')");
 		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Tomás', 'Villalba', 'GranSastre', 'tomas', 'GranSastre77')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Laura', 'Sánchez', 'Dedal', 'laura', 'Dedal2026')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Miguel', 'Ortega', 'Puntada', 'miguel', 'Puntada123')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Carmen', 'Vega', 'HiloRojo', 'carmen', 'HiloRojo456')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Álvaro', 'Castro', 'Costurero', 'alvaro', 'Costurero789')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Raquel', 'Molina', 'PatrónPro', 'raquel', 'PatronPro321')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Fernando', 'Ibáñez', 'AltaCostura', 'fernando', 'AltaCostura999')");
 
 		for (String q : queryE) {
 			st.executeUpdate(q);
@@ -266,33 +272,58 @@ public class AccesoBBDD {
 		st.close();
 		return trajes;
 	}
+	
+	public ArrayList<Traje> getTrajesPorCliente(Connection c, int idCliente) {
+	    ArrayList<Traje> trajes = new ArrayList<>();
+
+	    String query = "SELECT * FROM Traje WHERE id_cliente = ?";
+
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+
+	        pstmt.setInt(1, idCliente);
+	        ResultSet rs = pstmt.executeQuery();
+
+	        while (rs.next()) {
+	            int idTraje = rs.getInt("id_traje");
+	            String nombre = rs.getString("nombre_traje");
+	            String estado = rs.getString("estado");
+	            int idCli = rs.getInt("id_cliente");
+
+	            Traje t = new Traje(idTraje, nombre, estado, idCli);
+	            trajes.add(t);
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return trajes;
+	}
 
 	public void insertarCitas(Connection c) throws SQLException {
 
 		Statement st = c.createStatement();
 
 		ArrayList<String> queryCi = new ArrayList<>();
-		// Lista de sentencias SQL para dar de alta a las citas (10-04-2026)
-		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '09:00', 1, 1, 3, 6, 1);");
-		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '10:00', 1, 2, 1, 5, 3);");
-		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '11:00', 1, 3, 3, 6, 5);");
+
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '09:00', 1, 1, 3, 4, 1);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '10:00', 1, 2, 1, 3, 3);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '11:00', 1, 3, 3, 4, 5);");
 		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '12:00', 1, 4, 5, 7, 7);");
 		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '15:00', 1, 5, 1, 8, 9);");
-		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '16:00', 1, 8, 4, 8, 13);");
-		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '17:00', 1, 9, 4, 8, 15);");
-		// Lista de sentencias SQL para dar de alta a las citas (11-04-2026)
-		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '09:00', 1, 6, 5, 6, 11);");
-		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '10:00', 1, 7, 3, 7, 12);");
-		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '11:00', 1, 11, 5, 7, 17);");
-		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '12:00', 1, 12, 3, 6, 19);");
-		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '15:00', 1, 10, 1, 8, 14);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '16:00', 1, 8, 4, 8, 15);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-10', '17:00', 1, 9, 4, 8, 17);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '09:00', 1, 6, 5, 3, 11);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '10:00', 1, 7, 3, 7, 13);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '11:00', 1, 11, 5, 7, 21);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '12:00', 1, 12, 3, 9, 24);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '15:00', 1, 10, 1, 8, 19);");
 		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-11', '16:00', 1, 16, 4, 8, 31);");
-		// Lista de sentencias SQL para dar de alta a las citas (12-04-2026)
-		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '09:00', 1, 13, 3, 7, 21);");
-		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '10:00', 1, 14, 5, 7, 23);");
-		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '11:00', 1, 15, 4, 6, 25);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '09:00', 1, 13, 3, 7, 26);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '10:00', 1, 14, 5, 7, 27);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '11:00', 1, 15, 4, 10, 30);");
 		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '15:00', 1, 5, 1, 8, 10);");
-		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '16:00', 1, 8, 4, 8, 14);");
+		queryCi.add("INSERT INTO Citas (fecha, hora_inicio, duracion, id_cliente, id_sala, id_empleado, id_traje) VALUES ('2026-04-12', '16:00', 1, 8, 4, 8, 16);");
 
 		for (String q : queryCi) {
 			st.executeUpdate(q);
@@ -353,11 +384,10 @@ public class AccesoBBDD {
 		while (resultados.next()) {
 			// Extraemos el ID que MySQL creó automáticamente
 			int idAprendiz = resultados.getInt("id_aprendiz");
-			int idEmpleado = resultados.getInt("id_empleado");
 			int idCita = resultados.getInt("id_cita");
+			int idEmpleado = resultados.getInt("id_empleado");
 
 			// Se lo pasamos al constructor de tu clase Cita
-			// Constructor: Cita_Aprendiz(id_aprendiz, id_cita, id_empleado)
 			Cita_Aprendiz citaAprendiz = new Cita_Aprendiz(idAprendiz, idCita, idEmpleado);
 			citasAprendiz.add(citaAprendiz);
 		}
@@ -409,6 +439,42 @@ public class AccesoBBDD {
 
 	}
 	
+	public void eliminarCliente(Connection c, int id_cliente) {
+		
+	    String query = "DELETE FROM Cliente WHERE id_cliente = ?";
+	    
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        
+	        pstmt.setInt(1, id_cliente); 
+	        pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        System.out.println("Error al eliminar el cliente: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	    
+	}
+	
+	public void actualizarCliente(Connection c, int id_cliente, String nombre, String tipo, String superpoder, String color) {
+	    String query = "UPDATE Cliente SET nombre_personaje = ?, tipo_heroe = ?, superpoder = ?, colores = ? WHERE id_cliente = ?";
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        
+	        pstmt.setString(1, nombre);
+	        pstmt.setString(2, tipo);
+	        pstmt.setString(3, superpoder);
+	        pstmt.setString(4, color);
+	        pstmt.setInt(5, id_cliente);
+	        
+	        pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        System.out.println("Error al actualizar el cliente " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	}
+	
 	//Al crear un nuevo taller y traje en la ventana NuevoTaller, añadimos la insercion de la nueva fila a la BBDD
 	public void insertarNuevoTaller(Connection c, Taller t) {
 
@@ -427,33 +493,33 @@ public class AccesoBBDD {
 
 	}
 	
-	public void borrarTaller(Connection c, Taller t) {
-		Statement st;
-		try {
-			st = c.createStatement();
-			String queryT = "DELETE FROM Taller WHERE nombre_sala = '" + t.getNombre() + "'  AND tipo_sala = '" + t.getTipo() + "'";
-			
-			st.executeUpdate(queryT);
-			st.close();
+	public void borrarTaller(Connection c, int id_sala) {
+		String queryT = "DELETE FROM Taller WHERE id_sala = ?";
+
+        try (PreparedStatement pstmt = c.prepareStatement(queryT)) {
+	        
+	        pstmt.setInt(1, id_sala); 
+	        pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void ActualizarTaller(Connection c, Taller tv, Taller tn) {
-		Statement st;
-		try {
-			st = c.createStatement();
-			String queryT = "UPDATE Taller SET nombre_Sala = '" + tn.getNombre() + "'  AND tipo_sala = '" + tn.getTipo() + "' " 
-					+ "WHERE id_sala = " + tv.getId_sala();
-			
-			st.executeUpdate(queryT);
-			st.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void ActualizarTaller(Connection c, int id_sala, Taller tn) {
+		// Usamos PreparedStatement para que sea más limpio y seguro
+	    String query = "UPDATE Taller SET nombre_sala = ?, tipo_sala = ? WHERE id_sala = ?";
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        pstmt.setString(1, tn.getNombre());
+	        pstmt.setString(2, tn.getTipo());
+	        pstmt.setInt(3, id_sala);
+	        
+	        pstmt.executeUpdate();
+	    } catch (SQLException e) {
+	        System.out.println("Error al actualizar el taller: " + e.getMessage());
+	        e.printStackTrace();
+	    }
 	}
 	
 	//Al crear un nuevo traje en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD
@@ -473,6 +539,40 @@ public class AccesoBBDD {
 
 	}
 	
+    public void eliminarTraje(Connection c, int id_traje) {
+		
+	    String query = "DELETE FROM Traje WHERE id_traje = ?";
+	    
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        
+	        pstmt.setInt(1, id_traje); 
+	        pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        System.out.println("Error al eliminar el traje: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	    
+	}
+    
+    public void actualizarTraje(Connection c, int id_traje, String nombre, String estado) {
+	    String query = "UPDATE Traje SET nombre_traje = ?, estado = ? WHERE id_traje = ?";
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        
+	        pstmt.setString(1, nombre);
+	        pstmt.setString(2, estado);
+	        pstmt.setInt(3, id_traje);
+	        
+	        pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        System.out.println("Error al actualizar el traje " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	}
+	
 	//Al crear una nueva cita ventana NuevaCitaMaestro, añadimos la insercion de la nueva fila a la BBDD
 	public void insertarNuevaCita(Connection c, Cita ci) {
 
@@ -489,41 +589,6 @@ public class AccesoBBDD {
 			e.printStackTrace();
 		}
 
-	}
-	
-	//Al asignar la cita a el/los aprendiz/es en la ventana NuevaCitaOficial, añadimos la insercion de la nueva fila a la BBDD
-	public void insertarNuevaCita_Aprendiz(Connection c, Cita_Aprendiz ca) {
-
-		Statement st;
-		try {
-			st = c.createStatement();
-			String queryCa = "INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (" +ca.getId_cita() + ", " +ca.getId_empleado() + ");";
-			
-
-			st.executeUpdate(queryCa);
-			st.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	} 
-	
-	public void eliminarCliente(Connection c, int id_cliente) {
-		
-	    String query = "DELETE FROM Cliente WHERE id_cliente = ?";
-	    
-	    
-	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
-	        
-	        pstmt.setInt(1, id_cliente); 
-	        pstmt.executeUpdate();
-	        
-	    } catch (SQLException e) {
-	        System.out.println("Erro ao eliminar o cliente: " + e.getMessage());
-	        e.printStackTrace();
-	    }
-	    
 	}
 	
 	public void eliminarCita(Connection c, int id_cita) {
@@ -547,23 +612,62 @@ public class AccesoBBDD {
 	    }
 	}
 	
-	public void actualizarCliente(Connection c, int id_cliente, String nombre, String tipo, String superpoder, String color) {
-	    String query = "UPDATE Cliente SET nombre_personaje = ?, tipo_heroe = ?, superpoder = ?, colores = ? WHERE id_cliente = ?";
+	public void actualizarCita(Connection c, int id_cita, Cita ci) {
+	    String query = "UPDATE Citas SET fecha = ?, hora_inicio = ?, duracion = ?, id_cliente = ?, id_sala = ?, id_empleado = ?, id_traje = ? WHERE id_cita = ?";
 	    
 	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
 	        
-	        pstmt.setString(1, nombre);
-	        pstmt.setString(2, tipo);
-	        pstmt.setString(3, superpoder);
-	        pstmt.setString(4, color);
-	        pstmt.setInt(5, id_cliente);
+	        pstmt.setDate(1, (Date) ci.getFecha());
+	        pstmt.setTime(2, ci.getHora_inicio());
+	        pstmt.setInt(3, ci.getDuracion());
+	        pstmt.setInt(4, ci.getId_cliente());
+	        pstmt.setInt(5, ci.getId_sala());
+	        pstmt.setInt(6, ci.getId_empleado());
+	        pstmt.setInt(7, ci.getId_traje());
+	        pstmt.setInt(8, id_cita);
+	        
 	        
 	        pstmt.executeUpdate();
 	        
 	    } catch (SQLException e) {
-	        System.out.println("Erro ao atualizar o cliente: " + e.getMessage());
+	        System.out.println("Error al actualizar la cita" + e.getMessage());
 	        e.printStackTrace();
 	    }
 	}
+	
+	//Al asignar la cita a el/los aprendiz/es en la ventana NuevaCitaOficial, añadimos la insercion de la nueva fila a la BBDD
+	public void insertarNuevaCita_Aprendiz(Connection c, Cita_Aprendiz ca) {
 
+		Statement st;
+		try {
+			st = c.createStatement();
+			String queryCa = "INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (" +ca.getId_cita() + ", " +ca.getId_empleado() + ");";
+			
+
+			st.executeUpdate(queryCa);
+			st.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	} 
+	
+	public void actualizarCitaAprendiz(Connection c, int id_aprendiz, Cita_Aprendiz ca) {
+	    String query = "UPDATE Cita_Aprendiz SET id_cita = ?, id_empleado = ? WHERE id_aprendiz = ?";
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        
+	        pstmt.setInt(1, ca.getId_cita());
+	        pstmt.setInt(2, ca.getId_empleado());
+	        pstmt.setInt(3, id_aprendiz);
+	        
+	        pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        System.out.println("Error al actualizar el aprendiz " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	    
+	}
 }

@@ -68,7 +68,7 @@ public class InicioSesion extends JFrame {
         
         // Etiqueta descriptiva del sistema
         JLabel lblNewLabel = new JLabel("Sistema de Gestion de citas");
-        lblNewLabel.setBounds(129, 168, 176, 14);
+        lblNewLabel.setBounds(115, 168, 176, 14);
         getContentPane().add(lblNewLabel);
         
         // Logo

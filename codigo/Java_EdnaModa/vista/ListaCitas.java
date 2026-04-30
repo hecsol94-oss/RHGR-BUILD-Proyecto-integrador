@@ -14,6 +14,7 @@ public class ListaCitas extends JFrame {
     private JButton btnNuevaCita;
     private JButton btnVerDetalles;
     private JButton btnEditar;
+    private JButton btnEliminar;
     private JButton btnBuscar;
     private JButton btnTodas;
     private JButton btnDiseno;
@@ -60,8 +61,9 @@ public class ListaCitas extends JFrame {
         tableCitas = new JTable();
         tableCitas.setModel(new DefaultTableModel(
             new Object[][] {},
-            new String[] {"Fecha/Hora", "Cliente", "Traje", "Taller", "Oficial", "Duración (h)"}
+            new String[] {"Fecha/Hora", "Cliente", "Traje", "Taller", "Oficial/Maestro", "Duración (h)"}
         ));
+        tableCitas.setDefaultEditor(Object.class, null);
         scrollPane.setViewportView(tableCitas);
 
         btnVerDetalles = new JButton("Ver detalles"); 
@@ -73,6 +75,9 @@ public class ListaCitas extends JFrame {
         btnVolver      = new JButton("Volver");      
         btnVolver.setBounds(504,      348, 100, 30); 
         getContentPane().add(btnVolver);
+        btnEliminar = new JButton("Eiminar");
+        btnEliminar.setBounds(250, 348, 100, 30);
+        getContentPane().add(btnEliminar);
     }
 
     public JTable getTableCitas()      {
@@ -93,6 +98,10 @@ public class ListaCitas extends JFrame {
     
     public JButton getBtnEditar()      {
     	return btnEditar; 
+    	}
+    
+    public JButton getBtnEliminar()      {
+    	return btnEliminar; 
     	}
     
     public JButton getBtnBuscar()      {
@@ -122,5 +131,6 @@ public class ListaCitas extends JFrame {
     public void deshabilitarBotones() {
         btnEditar.setEnabled(false);
         btnNuevaCita.setEnabled(false);
+        btnEliminar.setEnabled(false);
     }
 }

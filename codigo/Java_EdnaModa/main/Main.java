@@ -1,8 +1,7 @@
 package main;
 
 import modelo.*;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 import controlador.ControladorInicioSesion;
@@ -44,7 +43,7 @@ public class Main {
 	        
 	        acceso.insertarCitasAprendiz(c);
 	        citasAprendiz = acceso.recogeCitasAprendiz(c);
-	        	        
+	        
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }

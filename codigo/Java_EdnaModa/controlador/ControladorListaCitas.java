@@ -20,8 +20,8 @@ public class ControladorListaCitas {
     private final Connection c;
     private ArrayList<Cita> citas;
     private ArrayList<Cita> citasFiltradas;
+    private ArrayList<Cita_Aprendiz> aprendices;
     private final Empleado empleado;
-    private final boolean editable;
 
     // Listas para resolver nombres
     private ArrayList<Cliente>  listaClientes;
@@ -29,32 +29,17 @@ public class ControladorListaCitas {
     private ArrayList<Traje>    listaTrajes;
     private ArrayList<Empleado> listaEmpleados;
 
-    /**
-     * 
-     * @param vista
-     * @param acceso
-     * @param c
-     * @param citas
-     * @param empleado
-     * @param editable
-     */
     public ControladorListaCitas(ListaCitas vista, AccesoBBDD acceso, Connection c,
-                                  ArrayList<Cita> citas, Empleado empleado, boolean editable) {
+                                  ArrayList<Cita> citas, ArrayList<Cita_Aprendiz> aprendices, Empleado empleado) {
         this.vista    = vista;
         this.acceso   = acceso;
         this.c        = c;
         this.citas    = citas;
         this.citasFiltradas = new ArrayList<>(citas);
+        this.aprendices = aprendices;
         this.empleado = empleado;
-        this.editable = editable;
 
         cargarListas();
-
-        if (!editable) {
-            vista.getBtnNuevaCita().setVisible(false);
-            vista.getBtnEditar().setVisible(false);
-        }
-
         cargarTabla(citasFiltradas);
 
         vista.getBtnTodas().addActionListener(e  -> { citasFiltradas = new ArrayList<>(citas); cargarTabla(citasFiltradas); });
@@ -64,8 +49,9 @@ public class ControladorListaCitas {
         vista.getBtnBuscar().addActionListener(e  -> buscar());
         vista.getBtnVerDetalles().addActionListener(e -> verDetalle());
         vista.getBtnEditar().addActionListener(e  -> editarCita());
+        vista.getBtnEliminar().addActionListener(e -> eliminarCita());
         vista.getBtnNuevaCita().addActionListener(e -> nuevaCita());
-        vista.getBtnVolver().addActionListener(e  -> vista.dispose());
+        vista.getBtnVolver().addActionListener(e  -> volver());
     }
 
     private void cargarListas() {
@@ -74,6 +60,7 @@ public class ControladorListaCitas {
             listaTalleres  = acceso.recogeTalleres(c);
             listaTrajes    = acceso.recogeTrajes(c);
             listaEmpleados = acceso.recogeEmpleados(c);
+            aprendices = acceso.recogeCitasAprendiz(c);
         } catch (SQLException ex) { ex.printStackTrace(); }
     }
 
@@ -92,11 +79,7 @@ public class ControladorListaCitas {
         }
     }
 
-    // Filtro real usando el tipo del taller asociado a la cita. 
-    /**
-     * 
-     * @param tipo
-     */
+    /** Filtro real usando el tipo del taller asociado a la cita. */
     private void filtrarPorTipo(String tipo) {
         citasFiltradas = citas.stream()
             .filter(cita -> {
@@ -112,9 +95,6 @@ public class ControladorListaCitas {
         cargarTabla(citasFiltradas);
     }
 
-    /**
-     * 
-     */
     private void buscar() {
         String texto = vista.getTextField().getText().trim().toLowerCase();
         citasFiltradas = new ArrayList<>();
@@ -126,41 +106,145 @@ public class ControladorListaCitas {
         cargarTabla(citasFiltradas);
     }
 
-    /**
-     * 
-     */
     private void verDetalle() {
         int fila = vista.getTableCitas().getSelectedRow();
         if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
         Cita cita = citasFiltradas.get(fila);
+        int contadorAprendices = 0;
+        
+        String[] aprs = new String[2];
+        aprs[0] = "";
+        aprs[1] = "";
+        
+        for (Cita_Aprendiz aprendiz : aprendices) {
+        	if (aprendiz.getId_cita() == cita.getId_cita()) {
+        		for (Empleado empleado : listaEmpleados) {
+        			if (aprendiz.getId_empleado() == empleado.getId_empleado()) {
+        				if (contadorAprendices == 0) {
+        				    aprs[0] = empleado.getNombre() + " " + empleado.getApellido();
+        				} else if (contadorAprendices == 1) {
+        				    aprs[1] = empleado.getNombre() + " " + empleado.getApellido();
+        				}
+        				contadorAprendices++;
+        			}
+        		}
+        	}
+        }
         DetalleCita vistaDetalle = new DetalleCita();
-        new ControladorDetalleCita(vistaDetalle, cita, acceso, c);
+        new ControladorDetalleCita(vistaDetalle, cita, acceso, c, aprs);
         vistaDetalle.setVisible(true);
     }
 
     private void editarCita() {
-        if (!editable) return;
         int fila = vista.getTableCitas().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
-        NuevaCitaMaestro vistaForm = new NuevaCitaMaestro();
-        new ControladorNuevaCitaMaestro(vistaForm, acceso, c, empleado);
-        vistaForm.setVisible(true);
+        if (fila <= -1) {
+            JOptionPane.showMessageDialog(null, "Selecciona una fila");
+        } else {
+        	Cita citaEditable = citas.get(fila);
+            
+            String clienteEditable = (String) vista.getTableCitas().getValueAt(fila, 1);
+            String trajeEditable = (String) vista.getTableCitas().getValueAt(fila, 2); 
+            
+            String tallerEditable = "";
+            
+            for (Taller taller : listaTalleres) {
+            	if (taller.getNombre().equals((String) vista.getTableCitas().getValueAt(fila, 3))) {
+            		tallerEditable = tallerEditable + taller.getNombre() + " (" + taller.getTipo() + ")";
+            	}
+            }
+            
+            String empleadoEditable = "";
+            
+            for (Empleado empleado : listaEmpleados) {
+            	if ((empleado.getNombre() + " " + empleado.getApellido()).equals((String) vista.getTableCitas().getValueAt(fila, 4))) {
+            		empleadoEditable = empleadoEditable + empleado.getNombre() + " " + empleado.getApellido() + " (" + empleado.getCategoria() + ")";
+            	}
+            }
+            
+            Cita_Aprendiz aprendizEditable1 = new Cita_Aprendiz(0, 0, 0);            
+            Cita_Aprendiz aprendizEditable2 = new Cita_Aprendiz(0, 0, 0);
+            
+            for (Cita_Aprendiz aprendiz1 : aprendices) {
+            	if (aprendiz1.getId_cita() == citaEditable.getId_cita()) {
+            		aprendizEditable1 = aprendiz1;
+            		for (Cita_Aprendiz aprendiz2 : aprendices) {
+                    	if (aprendiz2.getId_cita() == citaEditable.getId_cita() && aprendiz2.getId_empleado() != aprendizEditable1.getId_empleado()) {
+                    		aprendizEditable2 = aprendiz2;
+                    	}
+                    }
+            	}
+            }
+            
+            NuevaCita vistaForm = new NuevaCita();
+    	    new ControladorNuevaCita(vistaForm, acceso, c, empleado, citaEditable, clienteEditable, trajeEditable, tallerEditable, empleadoEditable, aprendizEditable1, aprendizEditable2);
+    	    vistaForm.setVisible(true);
+    	    vista.dispose();
+        }
+    }
+    
+    private void eliminarCita() {
+    	int fila = vista.getTableCitas().getSelectedRow();
+        if (fila <= -1) {
+            JOptionPane.showMessageDialog(null, "Selecciona una fila");
+        } else {
+        	Cita citaAEliminar = citas.get(fila);
+        	int confirmacion = JOptionPane.showConfirmDialog(vista,
+                    "¿Estás seguro de que quieres eliminar esta cita?.",
+                    "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+                if (confirmacion == JOptionPane.YES_OPTION) {
+                	try {
+                		acceso.eliminarCita(c, citaAEliminar.getId_cita());
+						citas = acceso.recogeCitas(c);
+						cargarTabla(citas);
+		                JOptionPane.showMessageDialog(vista, "Cita eliminada correctamente.");
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+                }
+        }
     }
 
     private void nuevaCita() {
-        if (!editable) return;
         // Maestro y Oficial usan el mismo proceso de dos fases
-        NuevaCitaMaestro vistaForm = new NuevaCitaMaestro();
-        new ControladorNuevaCitaMaestro(vistaForm, acceso, c, empleado);
+        NuevaCita vistaForm = new NuevaCita();
+        new ControladorNuevaCita(vistaForm, acceso, c, empleado, null, null, null, null, null, null, null);
         vistaForm.setVisible(true);
+        vista.dispose();
+    }
+    
+    private void volver() {
+		try {
+			String rol = empleado.getCategoria().toLowerCase();
+
+			switch (rol) {
+			case "maestro":
+				VentanaMaestro vMaestro = new VentanaMaestro();
+				new ControladorMaestro(vMaestro, acceso, c, empleado);
+				vMaestro.setVisible(true);
+				vista.dispose();
+				break;
+			case "oficial":
+				VentanaOficial vOficial = new VentanaOficial();
+				new ControladorOficial(vOficial, acceso, c, empleado);
+				vOficial.setVisible(true);
+				vista.dispose();
+				break;
+			case "aprendiz":
+				VentanaAprendiz vAprendiz = new VentanaAprendiz();
+				new ControladorAprendiz(vAprendiz, acceso, c, empleado);
+				vAprendiz.setVisible(true);
+				vista.dispose();
+				break;
+			}
+						
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
     }
 
     // Resolución de nombres (punto 6)
-   /**
-    * 
-    * @param id
-    * @return
-    */
     private String nombreCliente(int id)  {
     	if(listaClientes==null) 
     		return ""+id; 
@@ -168,11 +252,7 @@ public class ControladorListaCitas {
     		if(x.getId_cliente()==id) 
     			return x.getNombre(); return ""+id; 
     			}
-    /**
-     * 
-     * @param id
-     * @return
-     */
+    
     private String nombreTraje(int id)    {
     	if(listaTrajes==null)   
     		return ""+id; 
@@ -181,11 +261,7 @@ public class ControladorListaCitas {
     			return x.getNombre_traje(); 
     	return ""+id; 
     	}
-    /**
-     * 
-     * @param id
-     * @return
-     */
+    
     private String nombreTaller(int id)   {
     	if(listaTalleres==null) 
     		return ""+id; 
@@ -194,11 +270,7 @@ public class ControladorListaCitas {
     			return x.getNombre(); 
     				return ""+id; 
     }
-    /**
-     * 
-     * @param id
-     * @return
-     */
+    
     private String nombreEmpleado(int id) {
     	if(listaEmpleados==null)
     		return ""+id; 
@@ -207,4 +279,7 @@ public class ControladorListaCitas {
     			return x.getNombre()+" "+x.getApellido();
     	return ""+id; 
     	}
+    
+    
+    
 }
