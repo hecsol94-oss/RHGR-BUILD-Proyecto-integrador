@@ -74,8 +74,7 @@ public class ControladorNuevaCita1 {
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
-			JOptionPane.showMessageDialog(vista, "Error al cargar los datos de la base de datos.", "Error",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(vista, "Error al cargar los datos de la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -133,8 +132,7 @@ public class ControladorNuevaCita1 {
 		int indexTaller = vista.getCbTaller().getSelectedIndex();
 
 		if (strFecha.isEmpty() || strHora.isEmpty() || strDuracion.isEmpty()) {
-			JOptionPane.showMessageDialog(vista, "Por favor, rellena los campos de : Fecha, Hora y Duración.",
-					"Campos incompletos", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(vista, "Por favor, rellena los campos de : Fecha, Hora y Duración.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
 			return;
 		}
 
@@ -144,8 +142,7 @@ public class ControladorNuevaCita1 {
 		}
 
 		if (indexTraje < 0) {
-			JOptionPane.showMessageDialog(vista, "El cliente seleccionado no tiene trajes disponibles.", "Sin traje",
-					JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(vista, "El cliente seleccionado no tiene trajes disponibles.", "Sin traje", JOptionPane.WARNING_MESSAGE);
 			return;
 		}
 
@@ -161,16 +158,14 @@ public class ControladorNuevaCita1 {
 		try {
 			fecha = Date.valueOf(strFecha);
 		} catch (IllegalArgumentException ex) {
-			JOptionPane.showMessageDialog(vista, "Formato de fecha incorrecto. Usa yyyy-MM-dd.", "Error de formato",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(vista, "Formato de fecha incorrecto. Usa yyyy-MM-dd.", "Error de formato", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
 		try {
 			hora = Time.valueOf(strHora + ":00");
 		} catch (IllegalArgumentException ex) {
-			JOptionPane.showMessageDialog(vista, "Formato de hora incorrecto. Usa HH:mm.", "Error de formato",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(vista, "Formato de hora incorrecto. Usa HH:mm.", "Error de formato", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
@@ -179,8 +174,7 @@ public class ControladorNuevaCita1 {
 			if (duracion <= 0)
 				throw new NumberFormatException();
 		} catch (NumberFormatException ex) {
-			JOptionPane.showMessageDialog(vista, "La duración debe ser un número entero positivo.", "Error de formato",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(vista, "La duración debe ser un número entero positivo.", "Error de formato", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
@@ -189,8 +183,7 @@ public class ControladorNuevaCita1 {
 
 		int idTraje = obtenerIdTrajeSeleccionado(idCliente, indexTraje);
 		if (idTraje == -1) {
-			JOptionPane.showMessageDialog(vista, "No se pudo identificar el traje seleccionado.", "Error",
-					JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(vista, "No se pudo identificar el traje seleccionado.", "Error", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
