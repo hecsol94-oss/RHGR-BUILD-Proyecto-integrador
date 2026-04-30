@@ -102,8 +102,7 @@ public class ControladorNuevoTaller {
 		} else {
 			
 			JOptionPane.showConfirmDialog(vista, 
-		            "por favor, rellene los campos necesarios para crear un nuevo taller", 
-		            "Error", JOptionPane.ERROR_MESSAGE);
+		            "por favor, rellene los campos necesarios para crear un nuevo taller", "Error", JOptionPane.ERROR_MESSAGE);
 			
 		}
 
