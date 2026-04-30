@@ -132,13 +132,13 @@ public class NuevaCitaMaestro extends JFrame {
         panelFase2.add(subTitulo);
 
         int y = 58, dy = 28;
-        lblResumenFecha    = addResumenField(panelFase2, "Fecha:",    y); y += dy;
-        lblResumenHora     = addResumenField(panelFase2, "Hora:",     y); y += dy;
+        lblResumenFecha = addResumenField(panelFase2, "Fecha:", y); y += dy;
+        lblResumenHora = addResumenField(panelFase2, "Hora:", y); y += dy;
         lblResumenDuracion = addResumenField(panelFase2, "Duración:", y); y += dy;
-        lblResumenCliente  = addResumenField(panelFase2, "Cliente:",  y); y += dy;
-        lblResumenTraje    = addResumenField(panelFase2, "Traje:",    y); y += dy;
-        lblResumenTaller   = addResumenField(panelFase2, "Taller:",   y); y += dy;
-        lblResumenOficial  = addResumenField(panelFase2, "Oficial:",  y); y += dy + 10;
+        lblResumenCliente = addResumenField(panelFase2, "Cliente:", y); y += dy;
+        lblResumenTraje = addResumenField(panelFase2, "Traje:", y); y += dy;
+        lblResumenTaller = addResumenField(panelFase2, "Taller:", y); y += dy;
+        lblResumenOficial = addResumenField(panelFase2, "Oficial:", y); y += dy + 10;
 
         JSeparator sep = new JSeparator();
         sep.setBounds(20, y, 450, 2);
