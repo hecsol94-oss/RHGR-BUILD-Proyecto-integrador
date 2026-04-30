@@ -80,23 +80,24 @@ public class ControladorNuevaCitaOficial {
      * @param id
      * @return
      */
-    private String nombrar(ArrayList<Cliente> l, int id)     {
+    private String nombrar(ArrayList<Cliente> l, int id) {
     	for(Cliente x:l)   
     		if(x.getId_cliente()==id)  
     			return x.getNombre();
     				return ""+id; 
-    				}
+    }
     /**
      * 
      * @param l
      * @param id
      * @return
      */
-    private String nombrarTraje(ArrayList<Traje> l, int id)  {
-    	for(Traje   x:l)   if(x.getId_traje()==id)  
+    private String nombrarTraje(ArrayList<Traje> l, int id) {
+    	for(Traje   x:l)
+    		if(x.getId_traje()==id)  
     		return x.getNombre_traje();
     			return ""+id; 
-    			}
+    }
     /**
      * 
      * @param l
@@ -119,7 +120,7 @@ public class ControladorNuevaCitaOficial {
     		if(x.getId_empleado()==id)
     			return x.getNombre()+" "+x.getApellido();
     				return ""+id; 
-    		}
+    }
 }
 
 
