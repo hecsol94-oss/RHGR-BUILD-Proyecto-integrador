@@ -415,8 +415,7 @@ public class AccesoBBDD {
 		Statement st;
 		try {
 			st = c.createStatement();
-			String queryT = "INSERT INTO Taller (nombre_sala, tipo_sala) VALUES (' " + t.getNombre() + "', '"
-					+ t.getTipo() + "');";
+			String queryT = "INSERT INTO Taller (nombre_sala, tipo_sala) VALUES (' " + t.getNombre() + "', '" + t.getTipo() + "');";
 
 			st.executeUpdate(queryT);
 			st.close();
@@ -445,8 +444,7 @@ public class AccesoBBDD {
 		Statement st;
 		try {
 			st = c.createStatement();
-			String queryT = "UPDATE Taller SET nombre_Sala = '" + tn.getNombre() + "'  AND tipo_sala = '" + tn.getTipo() + "' " 
-					+ "WHERE id_sala = " + tv.getId_sala();
+			String queryT = "UPDATE Taller SET nombre_Sala = '" + tn.getNombre() + "'  AND tipo_sala = '" + tn.getTipo() + "' " + "WHERE id_sala = " + tv.getId_sala();
 			
 			st.executeUpdate(queryT);
 			st.close();
