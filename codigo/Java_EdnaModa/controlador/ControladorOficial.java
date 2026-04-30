@@ -199,7 +199,10 @@ public class ControladorOficial {
 
     private void eliminarCita() {
         int fila = vista.getTableCitas().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        if (fila < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        	return;
+        }
         Cita cita = citasFiltradas.get(fila);
         int ok = JOptionPane.showConfirmDialog(vista,
             "¿Eliminar la cita del " + cita.getFecha() + " a las " + cita.getHora_inicio() + "?",
