@@ -12,8 +12,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VentanaMaestro extends JFrame {
 
-    private CardLayout  cardLayout;
-    private JPanel      cardPane;
+    private CardLayout cardLayout;
+    private JPanel cardPane;
 
     // Menú
     private JMenuItem menuItemListaCitas;
@@ -37,35 +37,35 @@ public class VentanaMaestro extends JFrame {
     private JLabel lblProximaCita;
 
     // Lista Citas embebida
-    private JTable     tableCitas;
+    private JTable tableCitas;
     private JTextField txtBuscarCitas;
-    private JButton    btnNuevaCitaEmb;
-    private JButton    btnVerDetallesCitas;
-    private JButton    btnEditarCitas;
-    private JButton    btnEliminarCitas;
-    private JButton    btnBuscarCitas;
-    private JButton    btnTodasCitas;
-    private JButton    btnDisenoCitas;
-    private JButton    btnCosturaCitas;
-    private JButton    btnPruebasCitas;
-    private JButton    btnVolverCitas;
+    private JButton btnNuevaCitaEmb;
+    private JButton btnVerDetallesCitas;
+    private JButton btnEditarCitas;
+    private JButton btnEliminarCitas;
+    private JButton btnBuscarCitas;
+    private JButton btnTodasCitas;
+    private JButton btnDisenoCitas;
+    private JButton btnCosturaCitas;
+    private JButton btnPruebasCitas;
+    private JButton btnVolverCitas;
 
     // Lista Clientes embebida
-    private JTable     tableClientes;
+    private JTable tableClientes;
     private JTextField txtBuscarClientes;
-    private JButton    btnNuevoClienteEmb;
-    private JButton    btnDetalleClientes;
-    private JButton    btnEditarClientes;
-    private JButton    btnBuscarClientes;
-    private JButton    btnTodosClientes;
-    private JButton    btnHeroeClientes;
-    private JButton    btnVillanoClientes;
-    private JButton    btnEliminarClientes;
-    private JButton    btnVolverClientes;
+    private JButton btnNuevoClienteEmb;
+    private JButton btnDetalleClientes;
+    private JButton btnEditarClientes;
+    private JButton btnBuscarClientes;
+    private JButton btnTodosClientes;
+    private JButton btnHeroeClientes;
+    private JButton btnVillanoClientes;
+    private JButton btnEliminarClientes;
+    private JButton btnVolverClientes;
 
     // Lista Talleres embebida
-    private JTable                   tableTalleres;
-    private JList<String>            listaTalleres;
+    private JTable tableTalleres;
+    private JList<String> listaTalleres;
     private DefaultListModel<String> modeloListaTalleres;
     private JButton btnNuevoTallerEmb;
     private JButton btnEditarTalleres;
@@ -73,10 +73,10 @@ public class VentanaMaestro extends JFrame {
     private JButton btnConfirmarTalleres;
     private JButton btnVolverTalleres;
 
-    public static final String CARD_DASHBOARD       = "DASHBOARD";
-    public static final String CARD_LISTA_CITAS     = "LISTA_CITAS";
-    public static final String CARD_LISTA_CLIENTES  = "LISTA_CLIENTES";
-    public static final String CARD_LISTA_TALLERES  = "LISTA_TALLERES";
+    public static final String CARD_DASHBOARD = "DASHBOARD";
+    public static final String CARD_LISTA_CITAS = "LISTA_CITAS";
+    public static final String CARD_LISTA_CLIENTES = "LISTA_CLIENTES";
+    public static final String CARD_LISTA_TALLERES = "LISTA_TALLERES";
 
     public VentanaMaestro() {
         setTitle("RGHR EDNA MODA - Sistema de Gestión");
@@ -86,15 +86,24 @@ public class VentanaMaestro extends JFrame {
         // Barra de menú
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
-        JMenu menuCitas = new JMenu("Citas");       menuBar.add(menuCitas);
-        menuItemListaCitas  = new JMenuItem("Lista de citas");  menuCitas.add(menuItemListaCitas);
-        menuItemNuevaCita   = new JMenuItem("Nueva cita");      menuCitas.add(menuItemNuevaCita);
-        JMenu menuClientes = new JMenu("Clientes"); menuBar.add(menuClientes);
-        menuItemListaClientes = new JMenuItem("Lista de clientes"); menuClientes.add(menuItemListaClientes);
-        menuItemNuevoCliente  = new JMenuItem("Nuevo cliente");      menuClientes.add(menuItemNuevoCliente);
-        JMenu menuTalleres = new JMenu("Talleres"); menuBar.add(menuTalleres);
-        menuItemListaTalleres = new JMenuItem("Lista de talleres"); menuTalleres.add(menuItemListaTalleres);
-        menuItemNuevoTaller   = new JMenuItem("Nuevo taller");       menuTalleres.add(menuItemNuevoTaller);
+        JMenu menuCitas = new JMenu("Citas");
+        menuBar.add(menuCitas);
+        menuItemListaCitas = new JMenuItem("Lista de citas");
+        menuCitas.add(menuItemListaCitas);
+        menuItemNuevaCita = new JMenuItem("Nueva cita");
+        menuCitas.add(menuItemNuevaCita);
+        JMenu menuClientes = new JMenu("Clientes");
+        menuBar.add(menuClientes);
+        menuItemListaClientes = new JMenuItem("Lista de clientes");
+        menuClientes.add(menuItemListaClientes);
+        menuItemNuevoCliente = new JMenuItem("Nuevo cliente");
+        menuClientes.add(menuItemNuevoCliente);
+        JMenu menuTalleres = new JMenu("Talleres");
+        menuBar.add(menuTalleres);
+        menuItemListaTalleres = new JMenuItem("Lista de talleres");
+        menuTalleres.add(menuItemListaTalleres);
+        menuItemNuevoTaller = new JMenuItem("Nuevo taller");
+        menuTalleres.add(menuItemNuevoTaller);
 
         // Estructura raiz
         JPanel rootPane = new JPanel(new BorderLayout());
@@ -121,11 +130,11 @@ public class VentanaMaestro extends JFrame {
 
         // CardLayout
         cardLayout = new CardLayout();
-        cardPane   = new JPanel(cardLayout);
+        cardPane = new JPanel(cardLayout);
         rootPane.add(cardPane, BorderLayout.CENTER);
 
-        cardPane.add(construirDashboard(),          CARD_DASHBOARD);
-        cardPane.add(construirPanelListaCitas(),    CARD_LISTA_CITAS);
+        cardPane.add(construirDashboard(), CARD_DASHBOARD);
+        cardPane.add(construirPanelListaCitas(), CARD_LISTA_CITAS);
         cardPane.add(construirPanelListaClientes(), CARD_LISTA_CLIENTES);
         cardPane.add(construirPanelListaTalleres(), CARD_LISTA_TALLERES);
 
@@ -152,14 +161,14 @@ public class VentanaMaestro extends JFrame {
         sep.setBounds(20, 252, 720, 2);
         p.add(sep);
 
-        crearTarjeta(p, "CITAS TOTALES", 20,  265, 158, 78, lblTodasLasCitas    = new JLabel(""));
-        crearTarjeta(p, "MIS CITAS",     193, 265, 158, 78, lblNumeroDeMisCitas = new JLabel(""));
-        crearTarjeta(p, "TALLERES",      366, 265, 158, 78, lblNumeroDeTalleres = new JLabel(""));
-        crearTarjeta(p, "CLIENTES",      539, 265, 158, 78, lblTotalClientes    = new JLabel(""));
+        crearTarjeta(p, "CITAS TOTALES", 20, 265, 158, 78, lblTodasLasCitas = new JLabel(""));
+        crearTarjeta(p, "MIS CITAS", 193, 265, 158, 78, lblNumeroDeMisCitas = new JLabel(""));
+        crearTarjeta(p, "TALLERES", 366, 265, 158, 78, lblNumeroDeTalleres = new JLabel(""));
+        crearTarjeta(p, "CLIENTES", 539, 265, 158, 78, lblTotalClientes = new JLabel(""));
 
-        crearTarjeta(p, "CITAS HOY",          20,  358, 218, 78, lblCitasHoy    = new JLabel(""));
-        crearTarjeta(p, "CITAS ESTA SEMANA", 253,  358, 218, 78, lblCitasSemana = new JLabel(""));
-        crearTarjeta(p, "PRÓXIMA CITA",      486,  358, 218, 78, lblProximaCita = new JLabel(""));
+        crearTarjeta(p, "CITAS HOY", 20, 358, 218, 78, lblCitasHoy = new JLabel(""));
+        crearTarjeta(p, "CITAS ESTA SEMANA", 253, 358, 218, 78, lblCitasSemana = new JLabel(""));
+        crearTarjeta(p, "PRÓXIMA CITA", 486, 358, 218, 78, lblProximaCita = new JLabel(""));
 
         return p;
     }
@@ -194,14 +203,29 @@ public class VentanaMaestro extends JFrame {
         titulo.setBounds(10, 8, 300, 22);
         p.add(titulo);
 
-        btnTodasCitas   = new JButton("Todas");   btnTodasCitas.setBounds(10,  38, 90, 26); p.add(btnTodasCitas);
-        btnDisenoCitas  = new JButton("Diseño");  btnDisenoCitas.setBounds(108, 38, 90, 26); p.add(btnDisenoCitas);
-        btnCosturaCitas = new JButton("Costura"); btnCosturaCitas.setBounds(206, 38, 90, 26); p.add(btnCosturaCitas);
-        btnPruebasCitas = new JButton("Pruebas"); btnPruebasCitas.setBounds(304, 38, 90, 26); p.add(btnPruebasCitas);
+        btnTodasCitas = new JButton("Todas");
+        btnTodasCitas.setBounds(10, 38, 90, 26);
+        p.add(btnTodasCitas);
+        btnDisenoCitas = new JButton("Diseño");
+        btnDisenoCitas.setBounds(108, 38, 90, 26);
+        p.add(btnDisenoCitas);
+        btnCosturaCitas = new JButton("Costura");
+        btnCosturaCitas.setBounds(206, 38, 90, 26);
+        p.add(btnCosturaCitas);
+        btnPruebasCitas = new JButton("Pruebas");
+        btnPruebasCitas.setBounds(304, 38, 90, 26);
+        p.add(btnPruebasCitas);
 
-        txtBuscarCitas  = new JTextField(); txtBuscarCitas.setColumns(10); txtBuscarCitas.setBounds(10, 72, 220, 25); p.add(txtBuscarCitas);
-        btnBuscarCitas  = new JButton("Buscar");      btnBuscarCitas.setBounds(238, 72, 80,  25); p.add(btnBuscarCitas);
-        btnNuevaCitaEmb = new JButton("+ Nueva Cita");btnNuevaCitaEmb.setBounds(600, 72, 130, 25); p.add(btnNuevaCitaEmb);
+        txtBuscarCitas  = new JTextField();
+        txtBuscarCitas.setColumns(10);
+        txtBuscarCitas.setBounds(10, 72, 220, 25);
+        p.add(txtBuscarCitas);
+        btnBuscarCitas = new JButton("Buscar");
+        btnBuscarCitas.setBounds(238, 72, 80, 25);
+        p.add(btnBuscarCitas);
+        btnNuevaCitaEmb = new JButton("+ Nueva Cita");
+        btnNuevaCitaEmb.setBounds(600, 72, 130, 25);
+        p.add(btnNuevaCitaEmb);
 
         JScrollPane scroll = new JScrollPane();
         scroll.setBounds(10, 105, 730, 340);
@@ -212,10 +236,18 @@ public class VentanaMaestro extends JFrame {
         tableCitas.setRowHeight(22);
         scroll.setViewportView(tableCitas);
 
-        btnVerDetallesCitas = new JButton("Ver detalles"); btnVerDetallesCitas.setBounds(10,  458, 120, 28); p.add(btnVerDetallesCitas);
-        btnEditarCitas      = new JButton("Editar");       btnEditarCitas.setBounds(138,      458, 90,  28); p.add(btnEditarCitas);
-        btnEliminarCitas    = new JButton("Eliminar");     btnEliminarCitas.setBounds(236,    458, 90,  28); p.add(btnEliminarCitas);
-        btnVolverCitas      = new JButton("\u2190 Volver");btnVolverCitas.setBounds(630,      458, 110, 28); p.add(btnVolverCitas);
+        btnVerDetallesCitas = new JButton("Ver detalles");
+        btnVerDetallesCitas.setBounds(10, 458, 120, 28);
+        p.add(btnVerDetallesCitas);
+        btnEditarCitas = new JButton("Editar");
+        btnEditarCitas.setBounds(138, 458, 90, 28);
+        p.add(btnEditarCitas);
+        btnEliminarCitas = new JButton("Eliminar");
+        btnEliminarCitas.setBounds(236, 458, 90, 28);
+        p.add(btnEliminarCitas);
+        btnVolverCitas = new JButton("\u2190 Volver");
+        btnVolverCitas.setBounds(630, 458, 110, 28);
+        p.add(btnVolverCitas);
 
         return p;
     }
@@ -230,13 +262,26 @@ public class VentanaMaestro extends JFrame {
         titulo.setBounds(10, 8, 300, 22);
         p.add(titulo);
 
-        btnTodosClientes   = new JButton("Todos");   btnTodosClientes.setBounds(10,  38, 90, 26); p.add(btnTodosClientes);
-        btnHeroeClientes   = new JButton("Héroe");   btnHeroeClientes.setBounds(108, 38, 90, 26); p.add(btnHeroeClientes);
-        btnVillanoClientes = new JButton("Villano"); btnVillanoClientes.setBounds(206, 38, 90, 26); p.add(btnVillanoClientes);
+        btnTodosClientes = new JButton("Todos");
+        btnTodosClientes.setBounds(10, 38, 90, 26);
+        p.add(btnTodosClientes);
+        btnHeroeClientes = new JButton("Héroe");
+        btnHeroeClientes.setBounds(108, 38, 90, 26);
+        p.add(btnHeroeClientes);
+        btnVillanoClientes = new JButton("Villano");
+        btnVillanoClientes.setBounds(206, 38, 90, 26);
+        p.add(btnVillanoClientes);
 
-        txtBuscarClientes  = new JTextField(); txtBuscarClientes.setColumns(10); txtBuscarClientes.setBounds(10, 72, 220, 25); p.add(txtBuscarClientes);
-        btnBuscarClientes  = new JButton("Buscar");  btnBuscarClientes.setBounds(238, 72, 80,  25); p.add(btnBuscarClientes);
-        btnNuevoClienteEmb = new JButton("+ Nuevo"); btnNuevoClienteEmb.setBounds(600, 72, 130, 25); p.add(btnNuevoClienteEmb);
+        txtBuscarClientes = new JTextField();
+        txtBuscarClientes.setColumns(10);
+        txtBuscarClientes.setBounds(10, 72, 220, 25);
+        p.add(txtBuscarClientes);
+        btnBuscarClientes = new JButton("Buscar");
+        btnBuscarClientes.setBounds(238, 72, 80, 25);
+        p.add(btnBuscarClientes);
+        btnNuevoClienteEmb = new JButton("+ Nuevo");
+        btnNuevoClienteEmb.setBounds(600, 72, 130, 25);
+        p.add(btnNuevoClienteEmb);
 
         JScrollPane scroll = new JScrollPane();
         scroll.setBounds(10, 105, 730, 340);
@@ -247,10 +292,18 @@ public class VentanaMaestro extends JFrame {
         tableClientes.setRowHeight(22);
         scroll.setViewportView(tableClientes);
 
-        btnDetalleClientes  = new JButton("Ver detalle"); btnDetalleClientes.setBounds(10,  458, 110, 28); p.add(btnDetalleClientes);
-        btnEditarClientes   = new JButton("Editar");      btnEditarClientes.setBounds(128,  458, 90,  28); p.add(btnEditarClientes);
-        btnEliminarClientes = new JButton("Eliminar");    btnEliminarClientes.setBounds(226, 458, 90,  28); p.add(btnEliminarClientes);
-        btnVolverClientes   = new JButton("\u2190 Volver");btnVolverClientes.setBounds(630, 458, 110, 28); p.add(btnVolverClientes);
+        btnDetalleClientes = new JButton("Ver detalle");
+        btnDetalleClientes.setBounds(10, 458, 110, 28);
+        p.add(btnDetalleClientes);
+        btnEditarClientes = new JButton("Editar");
+        btnEditarClientes.setBounds(128, 458, 90, 28);
+        p.add(btnEditarClientes);
+        btnEliminarClientes = new JButton("Eliminar");
+        btnEliminarClientes.setBounds(226, 458, 90, 28);
+        p.add(btnEliminarClientes);
+        btnVolverClientes = new JButton("\u2190 Volver");
+        btnVolverClientes.setBounds(630, 458, 110, 28);
+        p.add(btnVolverClientes);
 
         return p;
     }
@@ -265,10 +318,18 @@ public class VentanaMaestro extends JFrame {
         titulo.setBounds(10, 8, 300, 22);
         p.add(titulo);
 
-        btnNuevoTallerEmb    = new JButton("+ Nuevo");   btnNuevoTallerEmb.setBounds(10,  38, 90, 26);  p.add(btnNuevoTallerEmb);
-        btnEditarTalleres    = new JButton("Editar");    btnEditarTalleres.setBounds(108, 38, 90, 26);  p.add(btnEditarTalleres);
-        btnEliminarTalleres  = new JButton("Eliminar");  btnEliminarTalleres.setBounds(206, 38, 90, 26); p.add(btnEliminarTalleres);
-        btnConfirmarTalleres = new JButton("Confirmar"); btnConfirmarTalleres.setBounds(304, 38, 90, 26);p.add(btnConfirmarTalleres);
+        btnNuevoTallerEmb = new JButton("+ Nuevo");
+        btnNuevoTallerEmb.setBounds(10, 38, 90, 26);
+        p.add(btnNuevoTallerEmb);
+        btnEditarTalleres = new JButton("Editar");
+        btnEditarTalleres.setBounds(108, 38, 90, 26);
+        p.add(btnEditarTalleres);
+        btnEliminarTalleres = new JButton("Eliminar");
+        btnEliminarTalleres.setBounds(206, 38, 90, 26);
+        p.add(btnEliminarTalleres);
+        btnConfirmarTalleres = new JButton("Confirmar");
+        btnConfirmarTalleres.setBounds(304, 38, 90, 26);
+        p.add(btnConfirmarTalleres);
 
         JScrollPane scrollTabla = new JScrollPane();
         scrollTabla.setBounds(10, 75, 730, 230);
@@ -285,20 +346,24 @@ public class VentanaMaestro extends JFrame {
         scrollLista.setBounds(10, 320, 730, 130);
         p.add(scrollLista);
 
-        btnVolverTalleres = new JButton("\u2190 Volver"); btnVolverTalleres.setBounds(630, 462, 110, 28); p.add(btnVolverTalleres);
+        btnVolverTalleres = new JButton("\u2190 Volver");
+        btnVolverTalleres.setBounds(630, 462, 110, 28);
+        p.add(btnVolverTalleres);
 
         return p;
     }
 
     // Navegación
-    public void mostrarCard(String card) { cardLayout.show(cardPane, card); }
+    public void mostrarCard(String card) {
+    	cardLayout.show(cardPane, card);
+    }
 
     // Getters menú
-    public JMenuItem getMenuItemListaCitas()    {
+    public JMenuItem getMenuItemListaCitas() {
          return menuItemListaCitas; 
 
     }
-    public JMenuItem getMenuItemNuevaCita()     {
+    public JMenuItem getMenuItemNuevaCita() {
          return menuItemNuevaCita; 
 
     }
@@ -306,7 +371,7 @@ public class VentanaMaestro extends JFrame {
          return menuItemListaClientes; 
 
     }
-    public JMenuItem getMenuItemNuevoCliente()  { 
+    public JMenuItem getMenuItemNuevoCliente() { 
         return menuItemNuevoCliente; 
 
     }
@@ -314,7 +379,7 @@ public class VentanaMaestro extends JFrame {
          return menuItemListaTalleres; 
 
     }
-    public JMenuItem getMenuItemNuevoTaller()   { 
+    public JMenuItem getMenuItemNuevoTaller() { 
         return menuItemNuevoTaller; 
 
     }
@@ -322,13 +387,13 @@ public class VentanaMaestro extends JFrame {
     // Getters header
     public JLabel getLblUsuario() {
          return lblUsuario;
-         }
-    public JLabel getLblSalir()   {
+    }
+    public JLabel getLblSalir() {
          return lblSalir; 
-        }
+    }
 
     // Getters dashboard
-    public JLabel getLblTodasLasCitas()    {
+    public JLabel getLblTodasLasCitas() {
          return lblTodasLasCitas; 
 
     }
@@ -340,117 +405,120 @@ public class VentanaMaestro extends JFrame {
          return lblNumeroDeTalleres; 
 
     }
-    public JLabel getLblTotalClientes()    {
+    public JLabel getLblTotalClientes() {
          return lblTotalClientes; 
 
     }
 
-    public JLabel getLblCitasHoy()         {
+    public JLabel getLblCitasHoy() {
          return lblCitasHoy;
 
-     }
-    public JLabel getLblCitasSemana()      {
+    }
+    public JLabel getLblCitasSemana() {
          return lblCitasSemana;
 
-     }
-    public JLabel getLblProximaCita()      {
+    }
+    public JLabel getLblProximaCita() {
          return lblProximaCita; 
 
     }
 
     // Getters lista citas
-    public JTable     getTableCitas()          {
+    public JTable getTableCitas() {
          return tableCitas; 
-        }
-    public JTextField getTxtBuscarCitas()      {
+    }
+    public JTextField getTxtBuscarCitas() {
          return txtBuscarCitas; 
-        }
-    public JButton    getBtnNuevaCitaEmb()     {
+    }
+    public JButton getBtnNuevaCitaEmb() {
          return btnNuevaCitaEmb; 
-        }
-    public JButton    getBtnVerDetallesCitas() {
+    }
+    public JButton getBtnVerDetallesCitas() {
          return btnVerDetallesCitas; 
-        }
-    public JButton    getBtnEditarCitas()      {
+    }
+    public JButton getBtnEditarCitas() {
          return btnEditarCitas;
-         }
-    public JButton    getBtnEliminarCitas()    {
+    }
+    public JButton getBtnEliminarCitas() {
          return btnEliminarCitas; 
-        }
-    public JButton    getBtnBuscarCitas()      {
+    }
+    public JButton getBtnBuscarCitas() {
          return btnBuscarCitas; 
-        }
-    public JButton    getBtnTodasCitas()       {
+    }
+    public JButton getBtnTodasCitas() {
          return btnTodasCitas; 
-        }
-    public JButton    getBtnDisenoCitas()      {
+    }
+    public JButton getBtnDisenoCitas() {
          return btnDisenoCitas; 
-        }
-    public JButton    getBtnCosturaCitas()     {
+    }
+    public JButton getBtnCosturaCitas() {
          return btnCosturaCitas; 
-        }
-    public JButton    getBtnPruebasCitas()     {
+    }
+    public JButton getBtnPruebasCitas() {
          return btnPruebasCitas; 
-        }
-    public JButton    getBtnVolverCitas()      {
+    }
+    public JButton getBtnVolverCitas() {
          return btnVolverCitas; 
-        }
+    }
 
 
     // Getters lista clientes
-    public JTable     getTableClientes()       {
+    public JTable getTableClientes() {
          return tableClientes; 
-        }
-    public JTextField getTxtBuscarClientes()   {
+    }
+    public JTextField getTxtBuscarClientes() {
          return txtBuscarClientes; 
-        }
-    public JButton    getBtnNuevoClienteEmb()  {
+    }
+    public JButton getBtnNuevoClienteEmb() {
          return btnNuevoClienteEmb; 
-        }
-    public JButton    getBtnDetalleClientes()  {
+    }
+    public JButton getBtnDetalleClientes() {
          return btnDetalleClientes; 
-        }
-    public JButton    getBtnEditarClientes()   {
+    }
+    public JButton getBtnEditarClientes() {
          return btnEditarClientes; 
-        }
-    public JButton    getBtnBuscarClientes()   {
+    }
+    public JButton getBtnBuscarClientes() {
          return btnBuscarClientes; 
-        }
-    public JButton    getBtnTodosClientes()    {
+    }
+    public JButton getBtnTodosClientes() {
          return btnTodosClientes;
-        }
-    public JButton    getBtnHeroeClientes()    {
+    }
+    public JButton getBtnHeroeClientes() {
          return btnHeroeClientes; 
-        }
-    public JButton    getBtnVillanoClientes()  {
+    }
+    public JButton getBtnVillanoClientes() {
          return btnVillanoClientes; 
-        }
-    public JButton    getBtnEliminarClientes() {
+    }
+    public JButton getBtnEliminarClientes() {
          return btnEliminarClientes; 
-        }
-    public JButton    getBtnVolverClientes()   {
+    }
+    public JButton getBtnVolverClientes() {
          return btnVolverClientes; 
-        }
+    }
 
     // Getters lista talleres
-    public JTable                   getTableTalleres()        { return tableTalleres; 
+    public JTable getTableTalleres() {
+    	return tableTalleres; 
 
     }
-    public JList<String>            getLista()                { return listaTalleres; 
+    public JList<String> getLista() {
+    	return listaTalleres; 
 
     }
-    public DefaultListModel<String> getModeloListaTalleres()  { return modeloListaTalleres; 
+    public DefaultListModel<String> getModeloListaTalleres() {
+    	return modeloListaTalleres; 
 
     }
-    public JButton getBtnNuevoTallerEmb()    { 
+    public JButton getBtnNuevoTallerEmb() { 
         return btnNuevoTallerEmb; 
 
     }
-    public JButton getBtnEditarTalleres()    {
+    public JButton getBtnEditarTalleres() {
          return btnEditarTalleres; 
 
     }
-    public JButton getBtnEliminarTalleres()  { 
+    public JButton getBtnEliminarTalleres() { 
         return btnEliminarTalleres; 
 
     }
@@ -458,23 +526,23 @@ public class VentanaMaestro extends JFrame {
          return btnConfirmarTalleres; 
 
     }
-    public JButton getBtnVolverTalleres()    {
+    public JButton getBtnVolverTalleres() {
          return btnVolverTalleres; 
 
     }
 
-    public void deshabilitarBotonesCitas()    {
-         btnEditarCitas.setEnabled(false);
-          btnNuevaCitaEmb.setEnabled(false); 
-        }
+    public void deshabilitarBotonesCitas() {
+        btnEditarCitas.setEnabled(false);
+        btnNuevaCitaEmb.setEnabled(false); 
+    }
     public void deshabilitarBotonesClientes() { 
         btnEditarClientes.setEnabled(false); 
         btnEliminarClientes.setEnabled(false); 
         btnNuevoClienteEmb.setEnabled(false);
-        }
+    }
     public void deshabilitarBotonesTalleres() {
-         btnEditarTalleres.setEnabled(false);
-          btnEliminarTalleres.setEnabled(false); 
-          btnNuevoTallerEmb.setEnabled(false); 
-        }
+        btnEditarTalleres.setEnabled(false);
+        btnEliminarTalleres.setEnabled(false); 
+        btnNuevoTallerEmb.setEnabled(false); 
+    }
 }
