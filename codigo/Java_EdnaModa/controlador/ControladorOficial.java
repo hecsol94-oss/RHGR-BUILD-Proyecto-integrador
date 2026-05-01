@@ -12,22 +12,22 @@ import java.util.Date;
 public class ControladorOficial {
 
     private final VentanaOficial vista;
-    private final AccesoBBDD     acceso;
-    private final Connection     c;
-    private final Empleado       empleado;
+    private final AccesoBBDD acceso;
+    private final Connection c;
+    private final Empleado empleado;
 
-    private ArrayList<Cita>    todasCitas;
-    private ArrayList<Cita>    citasFiltradas;
+    private ArrayList<Cita> todasCitas;
+    private ArrayList<Cita> citasFiltradas;
     private ArrayList<Cliente> todosClientes;
     private ArrayList<Cliente> clientesFiltrados;
-    private ArrayList<Taller>  todosTalleres;
+    private ArrayList<Taller> todosTalleres;
     private ArrayList<Empleado> listaEmpleados;
-    private ArrayList<Traje>   listaTrajes;
+    private ArrayList<Traje> listaTrajes;
 
     public ControladorOficial(VentanaOficial vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
-        this.vista    = vista;
-        this.acceso   = acceso;
-        this.c        = c;
+        this.vista = vista;
+        this.acceso = acceso;
+        this.c = c;
         this.empleado = empleado;
 
         vista.getLblUsuario().setText("Usuario: " + empleado.getApodo() + " (" + empleado.getCategoria() + ")");
@@ -41,20 +41,24 @@ public class ControladorOficial {
 
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vista.getLblSalir().addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent e) { cerrarSesion(); }
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+            	cerrarSesion();
+            }
         });
     }
 
     private void cargarDatosEnMemoria() {
         try {
-            todasCitas     = acceso.recogeCitas(c);
-            todosTalleres  = acceso.recogeTalleres(c);
-            todosClientes  = acceso.recogeClientes(c);
+            todasCitas = acceso.recogeCitas(c);
+            todosTalleres = acceso.recogeTalleres(c);
+            todosClientes = acceso.recogeClientes(c);
             listaEmpleados = acceso.recogeEmpleados(c);
-            listaTrajes    = acceso.recogeTrajes(c);
-            citasFiltradas    = new ArrayList<>(todasCitas);
+            listaTrajes = acceso.recogeTrajes(c);
+            citasFiltradas = new ArrayList<>(todasCitas);
             clientesFiltrados = new ArrayList<>(todosClientes);
-        } catch (SQLException ex) { ex.printStackTrace(); }
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
     }
 
     private void cargarContadores() {
@@ -74,7 +78,9 @@ public class ControladorOficial {
             String proxima = todasCitas.stream().filter(ci -> !ci.getFecha().before(hoy))
                 .map(ci -> ci.getFecha() + " " + ci.getHora_inicio()).min(String::compareTo).orElse("—");
             vista.getLblProximaCita().setText(proxima);
-        } catch (Exception ex) { ex.printStackTrace(); }
+        } catch (Exception ex) {
+        	ex.printStackTrace();
+        }
     }
 
     private void abrirListaCitas() {
@@ -140,6 +146,8 @@ public class ControladorOficial {
             InicioSesion is = new InicioSesion();
             new ControladorInicioSesion(is, acceso, emps);
             is.setVisible(true);
-        } catch (SQLException ex) { ex.printStackTrace(); }
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
     }
 }
