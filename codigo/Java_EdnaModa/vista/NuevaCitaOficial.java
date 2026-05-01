@@ -72,7 +72,11 @@ public class NuevaCitaOficial extends JFrame {
         getContentPane().add(btnCancelar);
     }
 
-    private JLabel lbl(String t, int x, int y) { JLabel l = new JLabel(t); l.setBounds(x,y,100,22); return l; }
+    private JLabel lbl(String t, int x, int y) {
+    	JLabel l = new JLabel(t);
+    	l.setBounds(x,y,100,22);
+    	return l;
+    }
 
     private JLabel addField(String etiqueta, int y) {
         JLabel lbl = new JLabel(etiqueta);
