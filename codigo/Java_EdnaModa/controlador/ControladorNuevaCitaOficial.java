@@ -30,11 +30,11 @@ public class ControladorNuevaCitaOficial {
      * @param cita
      */
     public ControladorNuevaCitaOficial(NuevaCitaOficial vista, AccesoBBDD acceso, Connection c, Empleado empleado, Cita cita) {
-        this.vista    = vista;
-        this.acceso   = acceso;
-        this.c        = c;
+        this.vista = vista;
+        this.acceso = acceso;
+        this.c = c;
         this.empleado = empleado;
-        this.cita     = cita;
+        this.cita = cita;
 
         cargarDatos();
         vista.getBtnCancelar().addActionListener(e -> vista.dispose());
@@ -54,8 +54,8 @@ public class ControladorNuevaCitaOficial {
             }
             if (cita != null) {
                 ArrayList<Cliente> clientes = acceso.recogeClientes(c);
-                ArrayList<Taller>  talleres = acceso.recogeTalleres(c);
-                ArrayList<Traje>   trajes   = acceso.recogeTrajes(c);
+                ArrayList<Taller> talleres = acceso.recogeTalleres(c);
+                ArrayList<Traje> trajes = acceso.recogeTrajes(c);
                 vista.setFecha(String.valueOf(cita.getFecha()));
                 vista.setHora(String.valueOf(cita.getHora_inicio()));
                 vista.setDuracion(cita.getDuracion() + " h");
