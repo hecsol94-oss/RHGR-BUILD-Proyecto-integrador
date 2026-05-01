@@ -10,7 +10,7 @@ public class NuevaCitaMaestro extends JFrame {
     private JComboBox<String> cbCliente;
     private JComboBox<String> cbTraje;
     private JComboBox<String> cbTaller;
-    private JComboBox<String> cbOficial;   // ← ahora es combo, no texto libre
+    private JComboBox<String> cbOficial; // ← ahora es combo, no texto libre
     private JTextField txtFecha;
     private JTextField txtHora;
     private JTextField txtDuracion;
@@ -264,7 +264,7 @@ public class NuevaCitaMaestro extends JFrame {
     public JButton getBtnCliente() {
     	return btnNuevoCliente;
     }
-    public JButton getBtnTaller()  {
+    public JButton getBtnTaller() {
     	return null;
     }
     // Compatibilidad: getTxtOficial() devuelve null — ya no se usa
