@@ -81,8 +81,7 @@ public class ControladorDetalleClientes {
         int index = vista.getListTrajes().getSelectedIndex();
         if (index != -1) {
         	
-        	int confirmacion = JOptionPane.showConfirmDialog(vista, "¿Estas seguro de que quieres eliminar este traje?, \nSi lo llegas a eliminar, las citas asociadas a el se eliminan tambien",
-					"Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+        	int confirmacion = JOptionPane.showConfirmDialog(vista, "¿Estas seguro de que quieres eliminar este traje?, \nSi lo llegas a eliminar, las citas asociadas a el se eliminan tambien", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
 			if (confirmacion == JOptionPane.YES_OPTION) {
 				vista.getModeloLista().remove(index);
