@@ -19,10 +19,10 @@ public class ControladorDetalleCita {
     private final String[] aprendices;
 
     public ControladorDetalleCita(DetalleCita vista, Cita cita, AccesoBBDD acceso, Connection c, String[] aprendices) {
-        this.vista  = vista;
-        this.cita   = cita;
+        this.vista = vista;
+        this.cita = cita;
         this.acceso = acceso;
-        this.c      = c;
+        this.c = c;
         this.aprendices = aprendices;
 
         rellenarCampos();
@@ -51,9 +51,9 @@ public class ControladorDetalleCita {
 
         try {
             // Resolución de nombres (punto 6)
-            ArrayList<Cliente>  clientes  = acceso.recogeClientes(c);
-            ArrayList<Traje>    trajes    = acceso.recogeTrajes(c);
-            ArrayList<Taller>   talleres  = acceso.recogeTalleres(c);
+            ArrayList<Cliente> clientes = acceso.recogeClientes(c);
+            ArrayList<Traje> trajes = acceso.recogeTrajes(c);
+            ArrayList<Taller> talleres = acceso.recogeTalleres(c);
             ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
 
             vista.setCliente(nombreCliente(clientes, cita.getId_cliente()));
