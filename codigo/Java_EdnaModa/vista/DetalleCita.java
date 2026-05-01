@@ -13,7 +13,7 @@ public class DetalleCita extends JFrame {
     private JLabel lblFechaVal, lblHoraVal, lblDuracionVal;
     private JLabel lblClienteVal, lblTrajeVal, lblTallerVal;
     private JLabel lblOficialVal;
-    private JTextArea txtAprendices;   // ← cambiado a JTextArea para múltiples nombres
+    private JTextArea txtAprendices; // ← cambiado a JTextArea para múltiples nombres
     private JButton btnVolver;
 
     public DetalleCita() {
@@ -31,13 +31,13 @@ public class DetalleCita extends JFrame {
         getContentPane().add(sep);
 
         int y = 50, dy = 32;
-        lblFechaVal    = addField("Fecha:",        20, y); y += dy;
-        lblHoraVal     = addField("Hora inicio:",  20, y); y += dy;
+        lblFechaVal = addField("Fecha:", 20, y); y += dy;
+        lblHoraVal = addField("Hora inicio:", 20, y); y += dy;
         lblDuracionVal = addField("Duración (h):", 20, y); y += dy;
-        lblClienteVal  = addField("Cliente:",      20, y); y += dy;
-        lblTrajeVal    = addField("Traje:",         20, y); y += dy;
-        lblTallerVal   = addField("Taller:",        20, y); y += dy;
-        lblOficialVal  = addField("Oficial:",       20, y); y += dy;
+        lblClienteVal = addField("Cliente:", 20, y); y += dy;
+        lblTrajeVal = addField("Traje:", 20, y); y += dy;
+        lblTallerVal = addField("Taller:", 20, y); y += dy;
+        lblOficialVal = addField("Oficial:", 20, y); y += dy;
 
         // Etiqueta fija "Aprendices:"
         JLabel lblAprEtiq = new JLabel("Aprendices:");
