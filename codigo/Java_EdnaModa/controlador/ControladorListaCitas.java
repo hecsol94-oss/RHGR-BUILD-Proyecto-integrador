@@ -24,17 +24,16 @@ public class ControladorListaCitas {
     private final Empleado empleado;
 
     // Listas para resolver nombres
-    private ArrayList<Cliente>  listaClientes;
-    private ArrayList<Taller>   listaTalleres;
-    private ArrayList<Traje>    listaTrajes;
+    private ArrayList<Cliente> listaClientes;
+    private ArrayList<Taller> listaTalleres;
+    private ArrayList<Traje> listaTrajes;
     private ArrayList<Empleado> listaEmpleados;
 
-    public ControladorListaCitas(ListaCitas vista, AccesoBBDD acceso, Connection c,
-                                  ArrayList<Cita> citas, ArrayList<Cita_Aprendiz> aprendices, Empleado empleado) {
-        this.vista    = vista;
-        this.acceso   = acceso;
-        this.c        = c;
-        this.citas    = citas;
+    public ControladorListaCitas(ListaCitas vista, AccesoBBDD acceso, Connection c, ArrayList<Cita> citas, ArrayList<Cita_Aprendiz> aprendices, Empleado empleado) {
+        this.vista = vista;
+        this.acceso = acceso;
+        this.c = c;
+        this.citas = citas;
         this.citasFiltradas = new ArrayList<>(citas);
         this.aprendices = aprendices;
         this.empleado = empleado;
@@ -42,26 +41,28 @@ public class ControladorListaCitas {
         cargarListas();
         cargarTabla(citasFiltradas);
 
-        vista.getBtnTodas().addActionListener(e  -> { citasFiltradas = new ArrayList<>(citas); cargarTabla(citasFiltradas); });
-        vista.getBtnDiseno().addActionListener(e  -> filtrarPorTipo("diseño"));
+        vista.getBtnTodas().addActionListener(e -> { citasFiltradas = new ArrayList<>(citas); cargarTabla(citasFiltradas); });
+        vista.getBtnDiseno().addActionListener(e -> filtrarPorTipo("diseño"));
         vista.getBtnCostura().addActionListener(e -> filtrarPorTipo("costura"));
         vista.getBtnPruebas().addActionListener(e -> filtrarPorTipo("pruebas"));
-        vista.getBtnBuscar().addActionListener(e  -> buscar());
+        vista.getBtnBuscar().addActionListener(e -> buscar());
         vista.getBtnVerDetalles().addActionListener(e -> verDetalle());
-        vista.getBtnEditar().addActionListener(e  -> editarCita());
+        vista.getBtnEditar().addActionListener(e -> editarCita());
         vista.getBtnEliminar().addActionListener(e -> eliminarCita());
         vista.getBtnNuevaCita().addActionListener(e -> nuevaCita());
-        vista.getBtnVolver().addActionListener(e  -> volver());
+        vista.getBtnVolver().addActionListener(e -> volver());
     }
 
     private void cargarListas() {
         try {
-            listaClientes  = acceso.recogeClientes(c);
-            listaTalleres  = acceso.recogeTalleres(c);
-            listaTrajes    = acceso.recogeTrajes(c);
+            listaClientes = acceso.recogeClientes(c);
+            listaTalleres = acceso.recogeTalleres(c);
+            listaTrajes = acceso.recogeTrajes(c);
             listaEmpleados = acceso.recogeEmpleados(c);
             aprendices = acceso.recogeCitasAprendiz(c);
-        } catch (SQLException ex) { ex.printStackTrace(); }
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
     }
 
     private void cargarTabla(ArrayList<Cita> lista) {
@@ -108,7 +109,10 @@ public class ControladorListaCitas {
 
     private void verDetalle() {
         int fila = vista.getTableCitas().getSelectedRow();
-        if (fila < 0) { JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE); return; }
+        if (fila < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona una cita.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        	return;
+        }
         Cita cita = citasFiltradas.get(fila);
         int contadorAprendices = 0;
         
@@ -245,24 +249,24 @@ public class ControladorListaCitas {
     }
 
     // Resolución de nombres (punto 6)
-    private String nombreCliente(int id)  {
+    private String nombreCliente(int id) {
     	if(listaClientes==null) 
     		return ""+id; 
     	for(Cliente x:listaClientes) 
     		if(x.getId_cliente()==id) 
     			return x.getNombre(); return ""+id; 
-    			}
+    }
     
-    private String nombreTraje(int id)    {
+    private String nombreTraje(int id) {
     	if(listaTrajes==null)   
     		return ""+id; 
     	for(Traje   x:listaTrajes)   
     		if(x.getId_traje()==id)    
     			return x.getNombre_traje(); 
     	return ""+id; 
-    	}
+    }
     
-    private String nombreTaller(int id)   {
+    private String nombreTaller(int id) {
     	if(listaTalleres==null) 
     		return ""+id; 
     	for(Taller  x:listaTalleres) 
@@ -278,7 +282,7 @@ public class ControladorListaCitas {
     		if(x.getId_empleado()==id)
     			return x.getNombre()+" "+x.getApellido();
     	return ""+id; 
-    	}
+    }
     
     
     
