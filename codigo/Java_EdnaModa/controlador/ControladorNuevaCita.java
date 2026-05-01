@@ -23,25 +23,25 @@ public class ControladorNuevaCita {
     private final Cita_Aprendiz aprendizAEditar2;
 
 
-    private ArrayList<Cliente>  listaClientes;
-    private ArrayList<Taller>   listaTalleres;       // todos los talleres
-    private ArrayList<Taller>   listaTalleresFiltrados; // los que se muestran en el combo
-    private ArrayList<Traje>    listaTrajes;
+    private ArrayList<Cliente> listaClientes;
+    private ArrayList<Taller> listaTalleres; // todos los talleres
+    private ArrayList<Taller> listaTalleresFiltrados; // los que se muestran en el combo
+    private ArrayList<Traje> listaTrajes;
     private ArrayList<Empleado> listaAprendices;
-    private ArrayList<Empleado> listaOficiales;      // maestros + oficiales
+    private ArrayList<Empleado> listaOficiales; // maestros + oficiales
     private ArrayList<Empleado> listaEmpleados;
 
     // true cuando el traje seleccionado fue RECIÉN creado (estado=diseño), false si ya existía
     private boolean trajeRecienCreado = false;
 
     public ControladorNuevaCita(NuevaCita vista, AccesoBBDD acceso, Connection c, Empleado empleado, Cita citaAEditar, String clienteEditable, String trajeEditable, String tallerEditable, String empleadoEditable, Cita_Aprendiz aprendizAEditar1, Cita_Aprendiz aprendizAEditar2) {
-        this.vista    = vista;
-        this.acceso   = acceso;
-        this.c        = c;
+        this.vista = vista;
+        this.acceso = acceso;
+        this.c = c;
         this.empleado = empleado;
         this.citaAEditar = citaAEditar;
         this.clienteEditable = clienteEditable;
-        this.trajeEditable= trajeEditable;
+        this.trajeEditable = trajeEditable;
         this.tallerEditable = tallerEditable;
         this.empleadoEditable = empleadoEditable;
         this.aprendizAEditar1 = aprendizAEditar1;
@@ -176,7 +176,9 @@ public class ControladorNuevaCita {
             new ControladorNuevoCliente(vc, null, null, vista, acceso, c, null, listaClientes, empleado);
             vc.setVisible(true);
             vc.addWindowListener(new java.awt.event.WindowAdapter() {
-                public void windowClosed(java.awt.event.WindowEvent ev) { cargarDatosIniciales(); }
+                public void windowClosed(java.awt.event.WindowEvent ev) {
+                	cargarDatosIniciales();
+                }
             });
         });
 
@@ -196,7 +198,10 @@ public class ControladorNuevaCita {
             vt.addWindowListener(new java.awt.event.WindowAdapter() {
                 public void windowClosed(java.awt.event.WindowEvent ev) {
                     // Recargar trajes y marcar que el traje es nuevo → solo talleres diseño
-                    try { listaTrajes = acceso.recogeTrajes(c); } catch (SQLException ex) { ex.printStackTrace(); }
+                    try { listaTrajes = acceso.recogeTrajes(c);
+                    } catch (SQLException ex) {
+                    	ex.printStackTrace();
+                    }
                     trajeRecienCreado = true;
                     actualizarComboTrajes();
                     // Seleccionar el último traje del cliente (el recién creado)
@@ -205,7 +210,9 @@ public class ControladorNuevaCita {
                         int idCli = listaClientes.get(idxCli).getId_cliente();
                         int ultimoIdx = -1, contador = 0;
                         for (Traje t : listaTrajes) {
-                            if (t.getId_cliente() == idCli) { ultimoIdx = contador; contador++; }
+                            if (t.getId_cliente() == idCli) {
+                            	ultimoIdx = contador; contador++;
+                            }
                         }
                         if (ultimoIdx >= 0) vista.getCbTraje().setSelectedIndex(ultimoIdx);
                     }
@@ -242,25 +249,37 @@ public class ControladorNuevaCita {
 
     // ── Avanzar a fase 2 ──────────────────────────────────────────────────────
     private void avanzarFase2() {
-        String fecha    = vista.getTxtFecha().getText().trim();
-        String hora     = vista.getTxtHora().getText().trim();
+        String fecha = vista.getTxtFecha().getText().trim();
+        String hora = vista.getTxtHora().getText().trim();
         String duracion = vista.getTxtDuracion().getText().trim();
-        int idxCliente  = vista.getCbCliente().getSelectedIndex();
-        int idxTraje    = vista.getCbTraje().getSelectedIndex();
-        int idxTaller   = vista.getCbTaller().getSelectedIndex();
-        int idxOficial  = vista.getCbOficial().getSelectedIndex();
+        int idxCliente = vista.getCbCliente().getSelectedIndex();
+        int idxTraje = vista.getCbTraje().getSelectedIndex();
+        int idxTaller = vista.getCbTaller().getSelectedIndex();
+        int idxOficial = vista.getCbOficial().getSelectedIndex();
 
         if (fecha.isEmpty() || hora.isEmpty() || duracion.isEmpty()) {
-            JOptionPane.showMessageDialog(vista, "Rellena Fecha, Hora y Duración.", "Campos incompletos", JOptionPane.WARNING_MESSAGE); return;
+            JOptionPane.showMessageDialog(vista, "Rellena Fecha, Hora y Duración.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-        if (idxCliente < 0) { JOptionPane.showMessageDialog(vista, "Selecciona un cliente."); return; }
-        if (idxTraje   < 0) { JOptionPane.showMessageDialog(vista, "El cliente no tiene trajes. Créa uno primero."); return; }
-        if (idxTaller  < 0) { JOptionPane.showMessageDialog(vista, "Selecciona un taller."); return; }
-        if (idxOficial < 0) { JOptionPane.showMessageDialog(vista, "Selecciona un oficial responsable."); return; }
+        if (idxCliente < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona un cliente.");
+        	return;
+        }
+        if (idxTraje < 0) {
+        	JOptionPane.showMessageDialog(vista, "El cliente no tiene trajes. Créa uno primero.");
+        	return;
+        }
+        if (idxTaller < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona un taller.");
+        	return; }
+        if (idxOficial < 0) {
+        	JOptionPane.showMessageDialog(vista, "Selecciona un oficial responsable.");
+        	return;
+        }
 
         String clienteNombre = listaClientes.get(idxCliente).getNombre();
-        String trajeNombre   = (String) vista.getCbTraje().getSelectedItem();
-        String tallerNombre  = listaTalleresFiltrados.get(idxTaller).getNombre();
+        String trajeNombre = (String) vista.getCbTraje().getSelectedItem();
+        String tallerNombre = listaTalleresFiltrados.get(idxTaller).getNombre();
         String oficialNombre = listaOficiales.get(idxOficial).getNombre() + " " + listaOficiales.get(idxOficial).getApellido();
 
         cargarCombosAprendices(-1);
@@ -269,15 +288,17 @@ public class ControladorNuevaCita {
 
     // ── Guardar cita ──────────────────────────────────────────────────────────
     private void guardarCita() {
-        String strFecha    = vista.getTxtFecha().getText().trim();
-        String strHora     = vista.getTxtHora().getText().trim();
+        String strFecha = vista.getTxtFecha().getText().trim();
+        String strHora = vista.getTxtHora().getText().trim();
         String strDuracion = vista.getTxtDuracion().getText().trim();
         int idxCliente = vista.getCbCliente().getSelectedIndex();
-        int idxTraje   = vista.getCbTraje().getSelectedIndex();
-        int idxTaller  = vista.getCbTaller().getSelectedIndex();
+        int idxTraje = vista.getCbTraje().getSelectedIndex();
+        int idxTaller = vista.getCbTaller().getSelectedIndex();
         int idxOficial = vista.getCbOficial().getSelectedIndex();
 
-        Date fecha; Time hora; int duracion;
+        Date fecha;
+        Time hora;
+        int duracion;
         try { 
             fecha = Date.valueOf(strFecha); 
             hora = Time.valueOf(strHora + ":00");
@@ -308,17 +329,26 @@ public class ControladorNuevaCita {
             JOptionPane.showMessageDialog(vista, "Formato de fecha incorrecto (yyyy-MM-dd).", "Error", JOptionPane.ERROR_MESSAGE); 
             return;
         }
-        try { hora = Time.valueOf(strHora + ":00"); } catch (Exception ex) {
-            JOptionPane.showMessageDialog(vista, "Formato de hora incorrecto (HH:mm).", "Error", JOptionPane.ERROR_MESSAGE); return;
+        try { hora = Time.valueOf(strHora + ":00");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(vista, "Formato de hora incorrecto (HH:mm).", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        try { duracion = Integer.parseInt(strDuracion); if (duracion <= 0) throw new NumberFormatException(); } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(vista, "Duración debe ser un entero positivo.", "Error", JOptionPane.ERROR_MESSAGE); return;
+        try { 
+        	duracion = Integer.parseInt(strDuracion);
+        	if (duracion <= 0) throw new NumberFormatException();
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(vista, "Duración debe ser un entero positivo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         int idCliente = listaClientes.get(idxCliente).getId_cliente();
-        int idSala    = listaTalleresFiltrados.get(idxTaller).getId_sala();
-        int idTraje   = obtenerIdTraje(idCliente, idxTraje);
-        if (idTraje == -1) { JOptionPane.showMessageDialog(vista, "No se pudo identificar el traje."); return; }
+        int idSala = listaTalleresFiltrados.get(idxTaller).getId_sala();
+        int idTraje = obtenerIdTraje(idCliente, idxTraje);
+        if (idTraje == -1) {
+        	JOptionPane.showMessageDialog(vista, "No se pudo identificar el traje.");
+        	return;
+        }
 
         // Usar el id_empleado del oficial seleccionado (NO el del empleado logado)
         int idOficial = listaOficiales.get(idxOficial).getId_empleado();
