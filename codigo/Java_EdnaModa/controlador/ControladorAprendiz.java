@@ -10,21 +10,21 @@ import java.util.ArrayList;
 public class ControladorAprendiz {
 
     private final VentanaAprendiz vista;
-    private final AccesoBBDD      acceso;
-    private final Connection      c;
-    private final Empleado        empleado;
+    private final AccesoBBDD acceso;
+    private final Connection c;
+    private final Empleado empleado;
 
-    private ArrayList<Cita>    todasCitas;
-    private ArrayList<Cita>    citasFiltradas;
-    private ArrayList<Taller>  todosTalleres;
+    private ArrayList<Cita> todasCitas;
+    private ArrayList<Cita> citasFiltradas;
+    private ArrayList<Taller> todosTalleres;
     private ArrayList<Empleado> listaEmpleados;
-    private ArrayList<Traje>   listaTrajes;
+    private ArrayList<Traje> listaTrajes;
     private ArrayList<Cliente> todosClientes;
 
     public ControladorAprendiz(VentanaAprendiz vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
-        this.vista    = vista;
-        this.acceso   = acceso;
-        this.c        = c;
+        this.vista = vista;
+        this.acceso = acceso;
+        this.c = c;
         this.empleado = empleado;
 
         vista.getLblUsuario().setText("Usuario: " + empleado.getApodo() + " (" + empleado.getCategoria() + ")");
@@ -36,19 +36,23 @@ public class ControladorAprendiz {
 
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vista.getLblSalir().addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent e) { cerrarSesion(); }
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+            	cerrarSesion();
+            }
         });
     }
 
     private void cargarDatosEnMemoria() {
         try {
-            todasCitas     = acceso.recogeCitas(c);
-            todosTalleres  = acceso.recogeTalleres(c);
-            todosClientes  = acceso.recogeClientes(c);
+            todasCitas = acceso.recogeCitas(c);
+            todosTalleres = acceso.recogeTalleres(c);
+            todosClientes = acceso.recogeClientes(c);
             listaEmpleados = acceso.recogeEmpleados(c);
-            listaTrajes    = acceso.recogeTrajes(c);
+            listaTrajes = acceso.recogeTrajes(c);
             citasFiltradas = new ArrayList<>(todasCitas);
-        } catch (SQLException ex) { ex.printStackTrace(); }
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
     }
 
     private void cargarContadores() {
@@ -64,7 +68,9 @@ public class ControladorAprendiz {
             String proxima = todasCitas.stream().filter(ci -> !ci.getFecha().before(hoy))
                 .map(ci -> ci.getFecha() + " " + ci.getHora_inicio()).min(String::compareTo).orElse("—");
             vista.getLblProximaCita().setText(proxima);
-        } catch (Exception ex) { ex.printStackTrace(); }
+        } catch (Exception ex) {
+        	ex.printStackTrace();
+        }
     }
 
     private void abrirListaCitas() {
@@ -105,6 +111,8 @@ public class ControladorAprendiz {
             InicioSesion is = new InicioSesion();
             new ControladorInicioSesion(is, acceso, emps);
             is.setVisible(true);
-        } catch (SQLException ex) { ex.printStackTrace(); }
+        } catch (SQLException ex) {
+        	ex.printStackTrace();
+        }
     }
 }
