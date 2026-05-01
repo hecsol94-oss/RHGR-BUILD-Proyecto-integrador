@@ -14,12 +14,12 @@ public class ControladorNuevaCitaMaestro {
     private final Connection c;
     private final Empleado empleado;
 
-    private ArrayList<Cliente>  listaClientes;
-    private ArrayList<Taller>   listaTalleres;       // todos los talleres
-    private ArrayList<Taller>   listaTalleresFiltrados; // los que se muestran en el combo
-    private ArrayList<Traje>    listaTrajes;
+    private ArrayList<Cliente> listaClientes;
+    private ArrayList<Taller> listaTalleres; // todos los talleres
+    private ArrayList<Taller> listaTalleresFiltrados; // los que se muestran en el combo
+    private ArrayList<Traje> listaTrajes;
     private ArrayList<Empleado> listaAprendices;
-    private ArrayList<Empleado> listaOficiales;      // maestros + oficiales
+    private ArrayList<Empleado> listaOficiales; // maestros + oficiales
 
     // true cuando el traje seleccionado fue RECIÉN creado (estado=diseño), false si ya existía
     private boolean trajeRecienCreado = false;
@@ -32,9 +32,9 @@ public class ControladorNuevaCitaMaestro {
      * @param empleado
      */
     public ControladorNuevaCitaMaestro(NuevaCitaMaestro vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
-        this.vista    = vista;
-        this.acceso   = acceso;
-        this.c        = c;
+        this.vista = vista;
+        this.acceso = acceso;
+        this.c = c;
         this.empleado = empleado;
 
         cargarDatosIniciales();
@@ -220,13 +220,13 @@ public class ControladorNuevaCitaMaestro {
 
     // ── Avanzar a fase 2 ──────────────────────────────────────────────────────
     private void avanzarFase2() {
-        String fecha    = vista.getTxtFecha().getText().trim();
-        String hora     = vista.getTxtHora().getText().trim();
+        String fecha = vista.getTxtFecha().getText().trim();
+        String hora = vista.getTxtHora().getText().trim();
         String duracion = vista.getTxtDuracion().getText().trim();
-        int idxCliente  = vista.getCbCliente().getSelectedIndex();
-        int idxTraje    = vista.getCbTraje().getSelectedIndex();
-        int idxTaller   = vista.getCbTaller().getSelectedIndex();
-        int idxOficial  = vista.getCbOficial().getSelectedIndex();
+        int idxCliente = vista.getCbCliente().getSelectedIndex();
+        int idxTraje = vista.getCbTraje().getSelectedIndex();
+        int idxTaller = vista.getCbTaller().getSelectedIndex();
+        int idxOficial = vista.getCbOficial().getSelectedIndex();
 
         if (fecha.isEmpty() || hora.isEmpty() || duracion.isEmpty()) {
             JOptionPane.showMessageDialog(vista, "Rellena Fecha, Hora y Duración.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
@@ -250,8 +250,8 @@ public class ControladorNuevaCitaMaestro {
         }
 
         String clienteNombre = listaClientes.get(idxCliente).getNombre();
-        String trajeNombre   = (String) vista.getCbTraje().getSelectedItem();
-        String tallerNombre  = listaTalleresFiltrados.get(idxTaller).getNombre();
+        String trajeNombre = (String) vista.getCbTraje().getSelectedItem();
+        String tallerNombre = listaTalleresFiltrados.get(idxTaller).getNombre();
         String oficialNombre = listaOficiales.get(idxOficial).getNombre() + " " + listaOficiales.get(idxOficial).getApellido();
 
         cargarCombosAprendices(-1);
@@ -260,15 +260,17 @@ public class ControladorNuevaCitaMaestro {
 
     // ── Guardar cita ──────────────────────────────────────────────────────────
     private void guardarCita() {
-        String strFecha    = vista.getTxtFecha().getText().trim();
-        String strHora     = vista.getTxtHora().getText().trim();
+        String strFecha = vista.getTxtFecha().getText().trim();
+        String strHora = vista.getTxtHora().getText().trim();
         String strDuracion = vista.getTxtDuracion().getText().trim();
         int idxCliente = vista.getCbCliente().getSelectedIndex();
-        int idxTraje   = vista.getCbTraje().getSelectedIndex();
-        int idxTaller  = vista.getCbTaller().getSelectedIndex();
+        int idxTraje = vista.getCbTraje().getSelectedIndex();
+        int idxTaller = vista.getCbTaller().getSelectedIndex();
         int idxOficial = vista.getCbOficial().getSelectedIndex();
 
-        Date fecha; Time hora; int duracion;
+        Date fecha;
+        Time hora;
+        int duracion;
         try {
         	fecha = Date.valueOf(strFecha);
         } catch (Exception ex) {
@@ -290,8 +292,8 @@ public class ControladorNuevaCitaMaestro {
         }
 
         int idCliente = listaClientes.get(idxCliente).getId_cliente();
-        int idSala    = listaTalleresFiltrados.get(idxTaller).getId_sala();
-        int idTraje   = obtenerIdTraje(idCliente, idxTraje);
+        int idSala = listaTalleresFiltrados.get(idxTaller).getId_sala();
+        int idTraje = obtenerIdTraje(idCliente, idxTraje);
         if (idTraje == -1) {
         	JOptionPane.showMessageDialog(vista, "No se pudo identificar el traje.");
         	return;
