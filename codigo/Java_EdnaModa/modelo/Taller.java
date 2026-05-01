@@ -8,7 +8,7 @@ public class Taller {
 	private String tipo;
 
 	// Constructor para mapear los datos de las salas de la BBDD
-	public Taller(int id_sala, String nombre, String tipo){
+	public Taller(int id_sala, String nombre, String tipo) {
 		this.id_sala = id_sala;
 		this.nombre = nombre;
 		this.tipo = tipo;	
