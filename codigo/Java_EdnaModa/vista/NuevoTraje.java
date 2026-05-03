@@ -57,22 +57,42 @@ public class NuevoTraje extends JFrame {
 	
 	// --- MÉTODOS GETTER PARA EL CONTROLADOR ---
 
+	/**
+	 * 
+	 * @return
+	 */
     public JTextField getNombreTraje() {
         return txtNombre;
     }
 
+   /**
+    * 
+    * @return
+    */
     public String getCbEstado() {
         return (String) cbEstado.getSelectedItem();
     }
     
+    /**
+     * 
+     * @param estado
+     */
     public void setCbEstado(String estado) {
         cbEstado.setSelectedItem(estado);
     }
 
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnGuardar() {
         return btnGuardar;
     }
 
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnCancelar() {
         return btnCancelar;
     }

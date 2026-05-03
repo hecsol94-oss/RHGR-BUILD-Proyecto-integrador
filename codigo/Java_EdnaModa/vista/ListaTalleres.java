@@ -84,36 +84,64 @@ public class ListaTalleres extends JFrame {
     }
     
     // Getter del botón nuevo taller
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnNuevoTaller() {
     	return btnNuevoTaller;
     }
     
     // Getter del botón editar
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnEditar() {
     	return btnEditar;
     }
     
     // Getter del botón eliminar
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnEliminar() {
     	return btnEliminar;
     }
     
     // Getter del botón volver
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnVolver() {
     	return btnVolver;
     }
     
     // Devuelve la tabla
+    /**
+     * 
+     * @return
+     */
     public JTable getTable() {
     	return table;
     }
     
     // Añade una fila a tabla y lista
+    /**
+     * 
+     * @param t
+     */
     public void agregarFila(Taller t) {
         modeloTabla.addRow(new Object[]{t.getNombre(), t.getTipo() });       
     }
     
     // Carga datos desde lista de talleres
+    /**
+     * 
+     * @param talleres
+     */
     public void recogerDatos(ArrayList<Taller> talleres) {
     	
     	modeloTabla.setRowCount(0);

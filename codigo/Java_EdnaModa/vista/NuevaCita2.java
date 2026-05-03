@@ -82,22 +82,42 @@ public class NuevaCita2 extends JPanel {
 
     // Getters para que el controlador acceda a los componentes
 
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnGuardar() {
         return btnGuardar;
     }
 
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnCancelar() {
         return btnCancelar;
     }
 
+    /**
+     * 
+     * @return
+     */
     public JTextArea getTxtDetalles() {
         return txtDetalles;
     }
 
+    /**
+     * 
+     * @return
+     */
     public JComboBox getCbAprendiz1() {
         return cbAprendiz1;
     }
 
+    /**
+     * 
+     * @return
+     */
     public JComboBox getCbAprendiz2() {
         return cbAprendiz2;
     }

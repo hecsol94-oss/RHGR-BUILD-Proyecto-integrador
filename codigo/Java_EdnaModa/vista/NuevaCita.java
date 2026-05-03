@@ -215,75 +215,163 @@ public class NuevaCita extends JFrame {
     }
 
     // Getters Fase 1
+    /**
+     * 
+     * @return
+     */
     public JComboBox<String> getCbCliente() {
     	return cbCliente;
     }
+    /**
+     * 
+     * @return
+     */
     public JComboBox<String> getCbTraje() {
     	return cbTraje;
     }
+    /**
+     * 
+     * @return
+     */
     public JComboBox<String> getCbTaller() {
     	return cbTaller;
     }
+    /**
+     * 
+     * @return
+     */
     public JComboBox<String> getCbOficial() {
     	return cbOficial;
     }
+    /**
+     * 
+     * @return
+     */
     public JTextField getTxtFecha() {
     	return txtFecha;
     }
+    /**
+     * 
+     * @return
+     */
     public JTextField getTxtHora() {
     	return txtHora;
     }
+    /**
+     * 
+     * @return
+     */
     public JTextField getTxtDuracion() {
     	return txtDuracion;
     }
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnNuevoCliente() {
     	return btnNuevoCliente;
     }
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnNuevoTraje() {
     	return btnNuevoTraje;
     }
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnSiguiente() {
     	return btnSiguiente;
     }
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnCancelar() {
     	return btnCancelar;
     }
     
+    /**
+     * 
+     * @param tipo
+     */
     public void setCbCliente(String tipo) {
     	cbCliente.setSelectedItem(tipo);
     }
+    /**
+     * 
+     * @param tipo
+     */
     public void setCbTraje(String tipo) {
     	cbTraje.setSelectedItem(tipo);
     }
+    /**
+     * 
+     * @param tipo
+     */
     public void setCbTaller(String tipo) {
     	cbTaller.setSelectedItem(tipo);
     }
+    /**
+     * 
+     * @param tipo
+     */
     public void setCbOficial(String tipo) {
     	cbOficial.setSelectedItem(tipo);
     }
 
     // Getters Fase 2
+    /**
+     * 
+     * @return
+     */
     public JComboBox<String> getCbAprendiz1() {
     	return cbAprendiz1;
     }
+    /**
+     * 
+     * @return
+     */
     public JComboBox<String> getCbAprendiz2() {
     	return cbAprendiz2;
     }
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnGuardar() {
     	return btnGuardar;
     }
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnAtras() {
     	return btnAtras;
     }
 
     // Compatibilidad
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnCliente() {
     	return btnNuevoCliente;
     }
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnTaller() {
     	return null;
     }
     // Compatibilidad: getTxtOficial() devuelve null — ya no se usa
+    /**
+     * 
+     * @return
+     */
     public JTextField getTxtOficial() {
     	return null;
     }

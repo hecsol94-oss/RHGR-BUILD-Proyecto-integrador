@@ -127,46 +127,90 @@ public class NuevaCita1 extends JPanel {
 
 	// Getters para que el controlador acceda a los componentes
 
+	/**
+	 * 
+	 * @return
+	 */
 	public JComboBox<String> getCbCliente() {
 		return cbCliente;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public JComboBox<String> getCbTraje() {
 		return cbTraje;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public JComboBox<String> getCbTaller() {
 		return cbTaller;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public JTextField getTxtOficial() {
 		return txtOficial;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public JTextField getTxtFecha() {
 		return txtFecha;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public JTextField getTxtHora() {
 		return txtHora;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public JTextField getTxtDuracion() {
 		return txtDuracion;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnGuardar() {
 		return btnGuardar;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnCancelar() {
 		return btnCancelar;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnCliente() {
 		return btnCliente;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnTaller() {
 		return btnTaller;
 	}

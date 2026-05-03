@@ -111,50 +111,96 @@ public class ListaClientes extends JFrame {
 		btnVolver.setBounds(364, 320, 110, 30);
 		contentPane.add(btnVolver);
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public JTextField getTxtBuscar() {
 		return txtBuscar; 
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public JTable getTable() {
 		return table; 
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnBuscar() {
 		return btnBuscar; 
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnNuevo() {
 		return btnNuevo; 
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnDetalle() {
 		return btnDetalle; 
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnEditar() {
 		return btnEditar; 
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnVolver() {
 		return btnVolver; 
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnTodos() {
 		return btnTodos; 
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnHeroe() {
 		return btnHeroe; 
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnVillano() {
 		return btnVillano; 
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnEliminar() {
 		return btnEliminar; 
 	}
 	
+	/**
+	 * 
+	 */
 	public void deshabilitarBotones() {
     	btnEditar.setEnabled(false);
     	btnEliminar.setEnabled(false);

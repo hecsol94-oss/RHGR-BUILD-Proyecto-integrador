@@ -56,6 +56,7 @@ public class DetalleCita extends JFrame {
             new LineBorder(new Color(200, 200, 200)),
             new EmptyBorder(2, 4, 2, 4)));
 
+        
         JScrollPane scrollApr = new JScrollPane(txtAprendices);
         scrollApr.setBorder(null);
         scrollApr.setBounds(155, y, 260, 48);
@@ -67,6 +68,13 @@ public class DetalleCita extends JFrame {
         getContentPane().add(btnVolver);
     }
 
+    /**
+     * 
+     * @param etiqueta
+     * @param x
+     * @param y
+     * @return
+     */
     private JLabel addField(String etiqueta, int x, int y) {
         JLabel lbl = new JLabel(etiqueta);
         lbl.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -85,35 +93,66 @@ public class DetalleCita extends JFrame {
         return val;
     }
 
+    /**
+     * 
+     * @param v
+     */
     public void setFecha(String v) {
     	lblFechaVal.setText(v); 
     }
     
+    /**
+     * 
+     * @param v
+     */
     public void setHora(String v) {
     	lblHoraVal.setText(v); 
     }
     
+    /**
+     * 
+     * @param v
+     */
     public void setDuracion(String v) {
     	lblDuracionVal.setText(v); 
     }
     
+    /**
+     * 
+     * @param v
+     */
     public void setCliente(String v) {
     	lblClienteVal.setText(v); 
     }
     
+    /**
+     * 
+     * @param v
+     */
     public void setTraje(String v) {
     	lblTrajeVal.setText(v); 
     }
     
+    /**
+     * 
+     * @param v
+     */
     public void setTaller(String v) {
     	lblTallerVal.setText(v); 
     }
     
+    /**
+     * 
+     * @param v
+     */
     public void setOficial(String v) {
     	lblOficialVal.setText(v); 
     }
 
+
     /**
+     * 
+     * @param v
      * Acepta una cadena con los aprendices separados por "  " o "\n".
      * Normaliza a líneas para mostrarlas en el JTextArea.
      */

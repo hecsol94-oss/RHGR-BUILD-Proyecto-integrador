@@ -11,6 +11,10 @@ public class AccesoBBDD {
 	private String usuario = "root";
 	private String pword = "12345678";
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Connection abrirConexion() {
 
 		Connection conexion = null;
@@ -28,6 +32,10 @@ public class AccesoBBDD {
 		return conexion;
 	}
 
+	/**
+	 * 
+	 * @param c
+	 */
 	public void cerrarConexion(Connection c) {
 		try {
 			c.close();
@@ -36,6 +44,11 @@ public class AccesoBBDD {
 		}
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @throws SQLException
+	 */
 	public void limpiarTablas(Connection c) throws SQLException {
 		Statement st = c.createStatement();
 
@@ -55,6 +68,11 @@ public class AccesoBBDD {
 		st.close();
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @throws SQLException
+	 */
 	public void insertarClientes(Connection c) throws SQLException {
 		Statement st = c.createStatement();
 		ArrayList<String> queryC = new ArrayList<>();
@@ -84,6 +102,12 @@ public class AccesoBBDD {
 		st.close();
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Cliente> recogeClientes(Connection c) throws SQLException {
 		ArrayList<Cliente> clientes = new ArrayList<>();
 		Statement st = c.createStatement();
@@ -110,6 +134,11 @@ public class AccesoBBDD {
 	// (El resto de métodos insertar y recoge siguen la misma lógica comentada
 	// arriba)
 
+	/**
+	 * 
+	 * @param c
+	 * @throws SQLException
+	 */
 	public void insertarEmpleados(Connection c) throws SQLException {
 
 		Statement st = c.createStatement();
@@ -139,6 +168,12 @@ public class AccesoBBDD {
 		st.close();
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Empleado> recogeEmpleados(Connection c) throws SQLException {
 		ArrayList<Empleado> empleados = new ArrayList<>();
 		Statement st = c.createStatement();
@@ -164,6 +199,11 @@ public class AccesoBBDD {
 		return empleados;
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @throws SQLException
+	 */
 	public void insertarTalleres(Connection c) throws SQLException {
 
 		Statement st = c.createStatement();
@@ -182,6 +222,11 @@ public class AccesoBBDD {
 		st.close();
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 */
 	public ArrayList<Taller> recogeTalleres(Connection c) {
 		ArrayList<Taller> talleres = new ArrayList<>();
 		Statement st;
@@ -208,6 +253,11 @@ public class AccesoBBDD {
 		return talleres;
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @throws SQLException
+	 */
 	public void insertarTrajes(Connection c) throws SQLException {
 
 		Statement st = c.createStatement();
@@ -253,6 +303,12 @@ public class AccesoBBDD {
 		st.close();
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Traje> recogeTrajes(Connection c) throws SQLException {
 		ArrayList<Traje> trajes = new ArrayList<>();
 		Statement st = c.createStatement();
@@ -273,6 +329,12 @@ public class AccesoBBDD {
 		return trajes;
 	}
 	
+	/**
+	 * 
+	 * @param c
+	 * @param idCliente
+	 * @return
+	 */
 	public ArrayList<Traje> getTrajesPorCliente(Connection c, int idCliente) {
 	    ArrayList<Traje> trajes = new ArrayList<>();
 
@@ -300,6 +362,11 @@ public class AccesoBBDD {
 	    return trajes;
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @throws SQLException
+	 */
 	public void insertarCitas(Connection c) throws SQLException {
 
 		Statement st = c.createStatement();
@@ -331,6 +398,12 @@ public class AccesoBBDD {
 		st.close();
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Cita> recogeCitas(Connection c) throws SQLException {
 		ArrayList<Cita> citas = new ArrayList<>();
 		Statement st = c.createStatement();
@@ -357,6 +430,11 @@ public class AccesoBBDD {
 		return citas;
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @throws SQLException
+	 */
 	public void insertarCitasAprendiz(Connection c) throws SQLException {
 
 		Statement st = c.createStatement();
@@ -376,6 +454,12 @@ public class AccesoBBDD {
 		st.close();
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Cita_Aprendiz> recogeCitasAprendiz(Connection c) throws SQLException {
 		ArrayList<Cita_Aprendiz> citasAprendiz = new ArrayList<>();
 		Statement st = c.createStatement();
@@ -397,6 +481,12 @@ public class AccesoBBDD {
 		return citasAprendiz;
 	}
 
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Empleado> recogeAprendices(Connection c) throws SQLException {
 		ArrayList<Empleado> empleados = new ArrayList<>();
 		Statement st = c.createStatement();
@@ -423,6 +513,14 @@ public class AccesoBBDD {
 	}
 	
 	//Al crear un nuevo cliente en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD
+	/**
+	 * 
+	 * @param c
+	 * @param nombre
+	 * @param tipo
+	 * @param superpoder
+	 * @param color
+	 */
 	public void insertarNuevoCliente(Connection c, String nombre, String tipo, String superpoder, String color) {
 
 		Statement st;
@@ -439,6 +537,11 @@ public class AccesoBBDD {
 
 	}
 	
+	/**
+	 * 
+	 * @param c
+	 * @param id_cliente
+	 */
 	public void eliminarCliente(Connection c, int id_cliente) {
 		
 	    String query = "DELETE FROM Cliente WHERE id_cliente = ?";
@@ -456,6 +559,15 @@ public class AccesoBBDD {
 	    
 	}
 	
+	/**
+	 * 
+	 * @param c
+	 * @param id_cliente
+	 * @param nombre
+	 * @param tipo
+	 * @param superpoder
+	 * @param color
+	 */
 	public void actualizarCliente(Connection c, int id_cliente, String nombre, String tipo, String superpoder, String color) {
 	    String query = "UPDATE Cliente SET nombre_personaje = ?, tipo_heroe = ?, superpoder = ?, colores = ? WHERE id_cliente = ?";
 	    
@@ -476,6 +588,11 @@ public class AccesoBBDD {
 	}
 	
 	//Al crear un nuevo taller y traje en la ventana NuevoTaller, añadimos la insercion de la nueva fila a la BBDD
+	/**
+	 * 
+	 * @param c
+	 * @param t
+	 */
 	public void insertarNuevoTaller(Connection c, Taller t) {
 
 		Statement st;
@@ -493,6 +610,11 @@ public class AccesoBBDD {
 
 	}
 	
+	/**
+	 * 
+	 * @param c
+	 * @param id_sala
+	 */
 	public void borrarTaller(Connection c, int id_sala) {
 		String queryT = "DELETE FROM Taller WHERE id_sala = ?";
 
@@ -506,6 +628,12 @@ public class AccesoBBDD {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param c
+	 * @param id_sala
+	 * @param tn
+	 */
 	public void ActualizarTaller(Connection c, int id_sala, Taller tn) {
 		// Usamos PreparedStatement para que sea más limpio y seguro
 	    String query = "UPDATE Taller SET nombre_sala = ?, tipo_sala = ? WHERE id_sala = ?";
@@ -523,6 +651,13 @@ public class AccesoBBDD {
 	}
 	
 	//Al crear un nuevo traje en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD
+	/**
+	 * 
+	 * @param c
+	 * @param nombre
+	 * @param estado
+	 * @param id_cliente
+	 */
 	public void insertarNuevoTraje(Connection c, String nombre, String estado, int id_cliente) {
 
 		Statement st;
@@ -539,6 +674,11 @@ public class AccesoBBDD {
 
 	}
 	
+	/**
+	 * 
+	 * @param c
+	 * @param id_traje
+	 */
     public void eliminarTraje(Connection c, int id_traje) {
 		
 	    String query = "DELETE FROM Traje WHERE id_traje = ?";
@@ -556,6 +696,13 @@ public class AccesoBBDD {
 	    
 	}
     
+    /**
+     * 
+     * @param c
+     * @param id_traje
+     * @param nombre
+     * @param estado
+     */
     public void actualizarTraje(Connection c, int id_traje, String nombre, String estado) {
 	    String query = "UPDATE Traje SET nombre_traje = ?, estado = ? WHERE id_traje = ?";
 	    
@@ -574,6 +721,11 @@ public class AccesoBBDD {
 	}
 	
 	//Al crear una nueva cita ventana NuevaCitaMaestro, añadimos la insercion de la nueva fila a la BBDD
+    /**
+     * 
+     * @param c
+     * @param ci
+     */
 	public void insertarNuevaCita(Connection c, Cita ci) {
 
 		Statement st;
@@ -591,6 +743,11 @@ public class AccesoBBDD {
 
 	}
 	
+	/**
+	 * 
+	 * @param c
+	 * @param id_cita
+	 */
 	public void eliminarCita(Connection c, int id_cita) {
 	    // Primero eliminar los registros relacionados en cita_aprendiz (FK)
 	    String queryAprendiz = "DELETE FROM Cita_Aprendiz WHERE id_cita = ?";
@@ -612,6 +769,12 @@ public class AccesoBBDD {
 	    }
 	}
 	
+	/**
+	 * 
+	 * @param c
+	 * @param id_cita
+	 * @param ci
+	 */
 	public void actualizarCita(Connection c, int id_cita, Cita ci) {
 	    String query = "UPDATE Citas SET fecha = ?, hora_inicio = ?, duracion = ?, id_cliente = ?, id_sala = ?, id_empleado = ?, id_traje = ? WHERE id_cita = ?";
 	    
@@ -636,6 +799,11 @@ public class AccesoBBDD {
 	}
 	
 	//Al asignar la cita a el/los aprendiz/es en la ventana NuevaCitaOficial, añadimos la insercion de la nueva fila a la BBDD
+	/**
+	 * 
+	 * @param c
+	 * @param ca
+	 */
 	public void insertarNuevaCita_Aprendiz(Connection c, Cita_Aprendiz ca) {
 
 		Statement st;
@@ -653,6 +821,12 @@ public class AccesoBBDD {
 
 	} 
 	
+	/**
+	 * 
+	 * @param c
+	 * @param id_aprendiz
+	 * @param ca
+	 */
 	public void actualizarCitaAprendiz(Connection c, int id_aprendiz, Cita_Aprendiz ca) {
 	    String query = "UPDATE Cita_Aprendiz SET id_cita = ?, id_empleado = ? WHERE id_aprendiz = ?";
 	    

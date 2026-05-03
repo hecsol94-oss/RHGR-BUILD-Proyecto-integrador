@@ -98,26 +98,46 @@ public class NuevoTaller extends JFrame {
 	}
 	
 	// Método para obtener el texto del campo nombre
+	/**
+	 * 
+	 * @return
+	 */
 	public String getNombreSala() {
 		return txtNomeSala.getText();
 	}
 	
 	// Método para obtener el valor seleccionado del combo
+	/**
+	 * 
+	 * @return
+	 */
 	public String getTipoSala() {
 		return (String) cbTipoSala.getSelectedItem();
 	}
 	
 	// Getter del botón guardar para el controlador
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnGuardar() {
 		return btnGuardar;
 	}
 	
 	// Getter del botón cancelar para el controlador
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getBtnCancelar() {
 		return btnCancelar;
 	}
 	
 	// Método para rellenar los campos al editar un taller existente
+	/**
+	 * 
+	 * @param taller
+	 */
 	public void cargarDatos(Taller taller) {
 	    txtNomeSala.setText(taller.getNombre());
 	    cbTipoSala.setSelectedItem(taller.getTipo());

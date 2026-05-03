@@ -108,50 +108,98 @@ public class DetalleClientes extends JFrame {
 
     // --- MÉTODOS GETTER PARA EL CONTROLADOR ---
 
+    /**
+     * 
+     * @return
+     */
     public JTextField getNombreCliente() {
     	return txtNombreCliente;
     }
     
+    /**
+     * 
+     * @return
+     */
     public JTextField getTipoHeroeCliente() {
     	return txtHeroeCliente;
     }
     
+    /**
+     * 
+     * @return
+     */
     public JTextField getSuperpoderCliente() {
     	return txtSuperpoderCliente;
     }
     
+    /**
+     * 
+     * @return
+     */
     public JTextField getColorCliente() {
     	return txtColorCliente;
     }
     
+    /**
+     * 
+     * @return
+     */
     public JList<String> getListTrajes() {
         return listTrajes;
     }
 
+    /**
+     * 
+     * @return
+     */
     public DefaultListModel<String> getModeloLista() {
         return modeloLista;
     }
 
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnEditar() {
         return btnEditar;
     }
 
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnEliminar() {
         return btnEliminar;
     }
 
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnVolver() {
         return btnVolver;
     }
     
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnNuevoTraje() {
         return btnNuevoTraje;
     }
     
+    /**
+     * 
+     * @param t
+     */
     public void agregarOpcion(Traje t) {
         modeloLista.addElement(t.getNombre_traje() + " - " +t.getEstado());       
     }
     
+    /**
+     * 
+     * @param trajes
+     */
     public void recogerDatos(ArrayList<Traje> trajes) {
         modeloLista.clear();
 

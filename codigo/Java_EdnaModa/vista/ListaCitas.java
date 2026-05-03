@@ -80,54 +80,105 @@ public class ListaCitas extends JFrame {
         getContentPane().add(btnEliminar);
     }
 
+    /**
+     * 
+     * @return
+     */
     public JTable getTableCitas() {
     	return tableCitas; 
     }
     
+    /**
+     * 
+     * @return
+     */
     public JTextField getTextField() {
     	return textField;
     }
     
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnNuevaCita() {
     	return btnNuevaCita;
     }
     
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnVerDetalles() {
     	return btnVerDetalles; 
     }
     
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnEditar() {
     	return btnEditar; 
     }
     
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnEliminar() {
     	return btnEliminar; 
     }
     
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnBuscar() {
     	return btnBuscar;
     }
     
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnTodas() {
     	return btnTodas; 
     }
     
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnDiseno() {
     	return btnDiseno; 
     }
     
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnCostura() {
     	return btnCostura; 
     }
     
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnPruebas() {
     	return btnPruebas; 
     }
     
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnVolver() {
     	return btnVolver; 
     }
 
+    /**
+     * 
+     */
     public void deshabilitarBotones() {
         btnEditar.setEnabled(false);
         btnNuevaCita.setEnabled(false);

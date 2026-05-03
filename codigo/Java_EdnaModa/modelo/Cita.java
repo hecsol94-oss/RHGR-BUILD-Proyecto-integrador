@@ -23,6 +23,17 @@ public class Cita {
 	private List<Cita_Aprendiz> aprendices;
 	
 	// Constructor completo para gestionar la agenda del taller
+	/**
+	 * 
+	 * @param id_cita
+	 * @param fecha
+	 * @param hora_inicio
+	 * @param duracion
+	 * @param id_empleado
+	 * @param id_cliente
+	 * @param id_sala
+	 * @param id_traje
+	 */
 	public Cita(int id_cita, Date fecha, Time hora_inicio, int duracion, int id_empleado, int id_cliente, int id_sala, int id_traje) {
 		this.id_cita = id_cita;
 		this.fecha = fecha;
@@ -40,22 +51,42 @@ public class Cita {
 	}
 
 	// Métodos de acceso para la gestión temporal y espacial de la cita
+	/**
+	 * 
+	 * @return
+	 */
 	public Date getFecha() {
 		return fecha;
 	}
 
+	/**
+	 * 
+	 * @param fecha
+	 */
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getDuracion() {
 		return duracion;
 	}
 
+	/**
+	 * 
+	 * @param duracion
+	 */
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Time getHora_inicio() {
 		return hora_inicio;
 	}
@@ -64,42 +95,82 @@ public class Cita {
 		this.hora_inicio = hora_inicio;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getId_cliente() {
 		return id_cliente;
 	}
 
+	/**
+	 * 
+	 * @param id_cliente
+	 */
 	public void setId_cliente(int id_cliente) {
 		this.id_cliente = id_cliente;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getId_sala() {
 		return id_sala;
 	}
 
+	/**
+	 * 
+	 * @param id_sala
+	 */
 	public void setId_sala(int id_sala) {
 		this.id_sala = id_sala;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getId_cita() {
 		return id_cita;
 	}
 
+	/**
+	 * 
+	 * @param id_cita
+	 */
 	public void setId_cita(int id_cita) {
 		this.id_cita = id_cita;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getId_empleado() {
 		return id_empleado;
 	}
 
+	/**
+	 * 
+	 * @param id_empleado
+	 */
 	public void setId_empleado(int id_empleado) {
 		this.id_empleado = id_empleado;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getId_traje() {
 		return id_traje;
 	}
 
+	/**
+	 * 
+	 * @param id_traje
+	 */
 	public void setId_traje(int id_traje) {
 		this.id_traje = id_traje;
 	}

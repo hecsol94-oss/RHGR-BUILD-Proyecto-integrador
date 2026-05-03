@@ -9,6 +9,10 @@ import vista.InicioSesion;
 
 public class Main {
 
+	/**
+	 * 
+	 * @param args
+	 */
     public static void main(String[] args) {
     	
     	AccesoBBDD acceso = new AccesoBBDD();
@@ -57,4 +61,5 @@ public class Main {
         
         sesion.setVisible(true);
     }
+}
 }

@@ -99,30 +99,58 @@ public class NuevoCliente extends JFrame {
 	}
 	
 	//getters para el controlador acessar los componentes de la vista
+	/**
+	 * 
+	 * @return
+	 */
 		public JTextField getTxtNombre() {
 			return txtNombre; 
 		}
 		
+		/**
+		 * 
+		 * @return
+		 */
 		public JTextField getTxtSuperpoder() {
 			return txtSuperpoder; 
 		}
 	
+		/**
+		 * 
+		 * @return
+		 */
 		public JTextField getTxtColor() {
 			return txtColor; 
 		}
 	 
+		/**
+		 * 
+		 * @return
+		 */
 		public String getCbTipo() {
 			return (String) cbTipo.getSelectedItem();
 		}
 		
+		/**
+		 * 
+		 * @param tipo
+		 */
 		public void setCbTipo(String tipo) {
 			cbTipo.setSelectedItem(tipo);
 	    }
 	
+		/**
+		 * 
+		 * @return
+		 */
 		public JButton getBtnGuardar() {
 			return btnGuardar; 
 		}
 	
+		/**
+		 * 
+		 * @return
+		 */
 		public JButton getBtnCancelar() {
 			return btnCancelar; 
 		}
