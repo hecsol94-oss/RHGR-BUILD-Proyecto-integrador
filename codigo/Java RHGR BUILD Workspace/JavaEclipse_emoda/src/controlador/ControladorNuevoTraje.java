@@ -15,6 +15,11 @@ import vista.ListaTalleres;
 import vista.NuevaCita;
 import vista.NuevoTraje;
 
+/**
+ * Controlador para la gestión de la creación y edición de trajes.
+ * Maneja la lógica de validación, persistencia en base de datos y la 
+ * navegación de retorno a las vistas de origen.
+ */
 public class ControladorNuevoTraje {
 
     // Vista del formulario de trajes
@@ -44,6 +49,20 @@ public class ControladorNuevoTraje {
     // Vista origen: nueva cita
     private NuevaCita vistaCita;
 
+    /**
+     * Constructor de la clase ControladorNuevoTraje.
+     * Inicializa los componentes, carga datos si se trata de una edición y configura los eventos.
+     * 
+     * @param vista Ventana del formulario de nuevo traje.
+     * @param acceso Objeto para la gestión de la persistencia de datos.
+     * @param c Conexión activa a la base de datos SQL.
+     * @param cliente Cliente al que se le asocia el traje.
+     * @param trajes Lista actual de trajes del cliente.
+     * @param trajeAEditar Objeto Traje si se desea modificar, o null para creación.
+     * @param empleado Empleado que realiza la operación.
+     * @param vistaCliente Referencia a la ventana de origen de Detalle de Clientes (opcional).
+     * @param vistaCita Referencia a la ventana de origen de Nueva Cita (opcional).
+     */
     public ControladorNuevoTraje(NuevoTraje vista, AccesoBBDD acceso, Connection c,
                                   Cliente cliente, ArrayList<Traje> trajes,
                                   Traje trajeAEditar, Empleado empleado,
@@ -62,7 +81,7 @@ public class ControladorNuevoTraje {
         // Si estamos editando un traje, cargamos datos en la vista
         if (trajeAEditar != null) {
             vista.getNombreTraje().setText(trajeAEditar.getNombre_traje());
-            vista.setCbEstado(trajeAEditar.getEstado());
+            vista.setCbEstado(trajeAEditar.getNombre_traje());
         }
 
         // Eventos de botones
@@ -70,7 +89,11 @@ public class ControladorNuevoTraje {
         this.vista.getBtnCancelar().addActionListener(e -> cancelar());
     }
 
-    // Guarda un traje nuevo o actualiza uno existente
+    /**
+     * Gestiona el guardado del traje. 
+     * Realiza una validación básica del nombre, inserta o actualiza en la base de datos 
+     * según corresponda y recarga la interfaz de origen.
+     */
     private void guardarTraje() {
 
         // Obtener datos introducidos por el usuario
@@ -145,7 +168,10 @@ public class ControladorNuevoTraje {
         }
     }
 
-    // Cancela la operación actual
+    /**
+     * Cancela la operación en curso.
+     * Cierra la ventana actual sin realizar cambios ni persistir datos.
+     */
     private void cancelar() {
 
         // Cierra la ventana sin guardar cambios

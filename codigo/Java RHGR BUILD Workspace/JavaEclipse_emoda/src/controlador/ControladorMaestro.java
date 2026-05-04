@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Controlador para la VentanaMaestro.
+ * Gestiona el panel principal para usuarios con rol de Maestro, mostrando estadísticas,
+ * contadores de citas y permitiendo el acceso total a todas las funciones del sistema.
+ */
 public class ControladorMaestro {
 
     private final VentanaMaestro vista;
@@ -28,6 +33,15 @@ public class ControladorMaestro {
     private ArrayList<Traje> trajesFiltrados;
     private boolean editable = true;
 
+    /**
+     * Constructor del controlador Maestro.
+     * Inicializa la interfaz con los datos del usuario logado y configura los eventos de menú.
+     * 
+     * @param vista Ventana principal del maestro.
+     * @param acceso Objeto de acceso a la base de datos.
+     * @param c Conexión activa a la base de datos.
+     * @param empleado Instancia del empleado maestro que ha iniciado sesión.
+     */
     public ControladorMaestro(VentanaMaestro vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
         this.vista = vista;
         this.acceso = acceso;
@@ -50,12 +64,15 @@ public class ControladorMaestro {
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vista.getLblSalir().addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
-            	cerrarSesion();
+                cerrarSesion();
             }
         });
     }
 
-    // ── Carga inicial ────────────────────────────────────────────────────────
+    /**
+     * Recupera todos los datos necesarios de la base de datos (citas, talleres, clientes, etc.)
+     * y los almacena en listas locales para agilizar el procesamiento de estadísticas.
+     */
     private void cargarDatosEnMemoria() {
         try {
             todasCitas = acceso.recogeCitas(c);
@@ -67,10 +84,15 @@ public class ControladorMaestro {
             citasMias = new ArrayList<>();
             clientesFiltrados = new ArrayList<>(todosClientes);
         } catch (SQLException ex) {
-        	ex.printStackTrace();
+            ex.printStackTrace();
         }
     }
 
+    /**
+     * Calcula y muestra los contadores estadísticos en la vista principal:
+     * total de clientes, talleres, citas globales, citas propias de hoy, 
+     * citas de la semana y la fecha de la próxima cita programada.
+     */
     private void cargarContadores() {
         try {
             vista.getLblTodasLasCitas().setText(String.valueOf(todasCitas.size()));
@@ -81,9 +103,9 @@ public class ControladorMaestro {
             vista.getLblNumeroDeMisCitas().setText(String.valueOf(misCitas));
 
             for (Cita proximaCita : todasCitas) {
-            	if (proximaCita.getId_empleado() == empleado.getId_empleado()) {
-            		citasMias.add(proximaCita);
-            		java.sql.Date hoy = new java.sql.Date(System.currentTimeMillis());
+                if (proximaCita.getId_empleado() == empleado.getId_empleado()) {
+                    citasMias.add(proximaCita);
+                    java.sql.Date hoy = new java.sql.Date(System.currentTimeMillis());
                     long citasHoy = citasMias.stream().filter(ci -> ci.getFecha().toString().equals(hoy.toString())).count();
                     vista.getLblCitasHoy().setText(String.valueOf(citasHoy));
 
@@ -99,16 +121,17 @@ public class ControladorMaestro {
                           .map(ci -> ci.getFecha() + " " + ci.getHora_inicio())
                           .min(String::compareTo).orElse("—");
                     vista.getLblProximaCita().setText(proxima);
-            	}
-            }	
+                }
+            }    
         } catch (Exception ex) { ex.printStackTrace(); }
     }
 
-    // ── Mostrar listas embebidas ──────────────────────────────────────────────
-    
+    /**
+     * Abre la ventana de gestión de citas y cierra la ventana actual.
+     */
     private void abrirListaCitas() {
         try {
-        	ArrayList<Cita> citas = acceso.recogeCitas(c);
+            ArrayList<Cita> citas = acceso.recogeCitas(c);
             ArrayList<Cita_Aprendiz> aprendices = acceso.recogeCitasAprendiz(c);
             ListaCitas vistaLista = new ListaCitas();
             new ControladorListaCitas(vistaLista, acceso, c, citas, aprendices, empleado);
@@ -119,17 +142,21 @@ public class ControladorMaestro {
         }
     }
 
-    
+    /**
+     * Abre el formulario para la creación de una nueva cita.
+     */
     private void abrirNuevaCita() {
         NuevaCita vistaForm = new NuevaCita();
         new ControladorNuevaCita(vistaForm,  acceso, null, vista, null, c, empleado, null, null, null, null, null, null, null);
         vistaForm.setVisible(true);
     }
 
-   
+    /**
+     * Abre la ventana de gestión de clientes y cierra la ventana actual.
+     */
     private void abrirListaClientes() {
         try {
-        	ArrayList<Cliente> clientes = acceso.recogeClientes(c);
+            ArrayList<Cliente> clientes = acceso.recogeClientes(c);
             ArrayList<Traje> trajes = acceso.recogeTrajes(c);
             ListaClientes vistaLista = new ListaClientes();
             new ControladorListaClientes(vistaLista, acceso, c, clientes, trajes, empleado);
@@ -140,19 +167,23 @@ public class ControladorMaestro {
         }
     }
 
-   
+    /**
+     * Abre el formulario para registrar un nuevo cliente.
+     */
     private void abrirNuevoCliente() {
-    	try {
-    		NuevoCliente vistaForm = new NuevoCliente();
+        try {
+            NuevoCliente vistaForm = new NuevoCliente();
             ArrayList<Cliente> clientes = acceso.recogeClientes(c);
             new ControladorNuevoCliente(vistaForm, null, vista, null, acceso, c, null, clientes, empleado);
             vistaForm.setVisible(true);
-    	} catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
-    // Lista de talleres — acceso completo (botones habilitados por defecto)
+    /**
+     * Abre la ventana de gestión de talleres y cierra la ventana actual.
+     */
     private void abrirListaTalleres() {
         ArrayList<Taller> talleres = acceso.recogeTalleres(c);
         ListaTalleres vistaLista = new ListaTalleres();
@@ -162,7 +193,9 @@ public class ControladorMaestro {
         vista.dispose();
     }
 
-    // Nuevo taller — acceso completo
+    /**
+     * Abre el formulario para registrar un nuevo taller.
+     */
     private void abrirNuevoTaller() {
         ArrayList<Taller> talleres = acceso.recogeTalleres(c);
         NuevoTaller vistaForm = new NuevoTaller();
@@ -170,8 +203,10 @@ public class ControladorMaestro {
         vistaForm.setVisible(true);
     }
 
-    
-    // ── Cerrar sesión ─────────────────────────────────────────────────────────
+    /**
+     * Cierra la conexión actual y la ventana principal, redirigiendo al usuario
+     * a la pantalla de Inicio de Sesión.
+     */
     private void cerrarSesion() {
         acceso.cerrarConexion(c);
         vista.dispose();
@@ -183,7 +218,7 @@ public class ControladorMaestro {
             new ControladorInicioSesion(is, acceso, empleados);
             is.setVisible(true);
         } catch (SQLException ex) {
-        	ex.printStackTrace();
+            ex.printStackTrace();
         }
     }
 }

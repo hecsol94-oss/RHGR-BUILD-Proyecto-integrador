@@ -10,7 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-// Controlador ListaCitas
+/**
+ * Controlador para la gestión y visualización de la lista de citas.
+ * Administra el filtrado por tipo de taller (diseño, costura, pruebas), la búsqueda
+ * de citas por fecha o cliente, y coordina las operaciones CRUD (Crear, Leer, Actualizar, Borrar).
+ */
 public class ControladorListaCitas {
 
     private final ListaCitas vista;
@@ -21,12 +25,23 @@ public class ControladorListaCitas {
     private ArrayList<Cita_Aprendiz> aprendices;
     private final Empleado empleado;
 
-    // Listas para resolver nombres
+    // Listas auxiliares para la resolución de nombres (IDs -> Strings legibles)
     private ArrayList<Cliente> listaClientes;
     private ArrayList<Taller> listaTalleres;
     private ArrayList<Traje> listaTrajes;
     private ArrayList<Empleado> listaEmpleados;
 
+    /**
+     * Constructor del controlador de la lista de citas.
+     * Inicializa los datos, carga las listas auxiliares de la BD y configura los eventos de la vista.
+     * 
+     * @param vista     Ventana que contiene la tabla de citas.
+     * @param acceso    Objeto de acceso a la base de datos.
+     * @param c         Conexión activa.
+     * @param citas     Lista inicial de citas.
+     * @param aprendices Relación de aprendices asignados a las citas.
+     * @param empleado  Usuario actualmente logado en el sistema.
+     */
     public ControladorListaCitas(ListaCitas vista, AccesoBBDD acceso, Connection c,
                                   ArrayList<Cita> citas, ArrayList<Cita_Aprendiz> aprendices, Empleado empleado) {
         this.vista = vista;
@@ -40,6 +55,7 @@ public class ControladorListaCitas {
         cargarListas();
         cargarTabla(citasFiltradas);
 
+        // Configuración de botones de filtrado rápido
         vista.getBtnTodas().addActionListener(e -> {
             citasFiltradas = new ArrayList<>(citas);
             cargarTabla(citasFiltradas);
@@ -48,6 +64,8 @@ public class ControladorListaCitas {
         vista.getBtnDiseno().addActionListener(e -> filtrarPorTipo("diseño"));
         vista.getBtnCostura().addActionListener(e -> filtrarPorTipo("costura"));
         vista.getBtnPruebas().addActionListener(e -> filtrarPorTipo("pruebas"));
+
+        // Configuración de acciones y navegación
         vista.getBtnBuscar().addActionListener(e -> buscar());
         vista.getBtnVerDetalles().addActionListener(e -> verDetalle());
         vista.getBtnEditar().addActionListener(e -> editarCita());
@@ -56,7 +74,10 @@ public class ControladorListaCitas {
         vista.getBtnVolver().addActionListener(e -> volver());
     }
 
-    // Carga de listas desde BD
+    /**
+     * Recupera de la base de datos todas las entidades necesarias (clientes, talleres, trajes, empleados)
+     * para poder mostrar nombres en lugar de IDs numéricos en la tabla.
+     */
     private void cargarListas() {
         try {
             listaClientes = acceso.recogeClientes(c);
@@ -69,7 +90,12 @@ public class ControladorListaCitas {
         }
     }
 
-    // Cargar tabla principal
+    /**
+     * Rellena el modelo de la tabla en la vista con la lista de citas proporcionada.
+     * Realiza la traducción de IDs a nombres en tiempo real para cada fila.
+     * 
+     * @param lista Lista de citas a visualizar.
+     */
     private void cargarTabla(ArrayList<Cita> lista) {
         DefaultTableModel modelo = (DefaultTableModel) vista.getTableCitas().getModel();
         modelo.setRowCount(0);
@@ -86,7 +112,11 @@ public class ControladorListaCitas {
         }
     }
 
-    // Filtrar por tipo de taller
+    /**
+     * Filtra las citas basándose en la especialidad del taller (sala) asignado.
+     * 
+     * @param tipo El tipo de taller por el que filtrar (diseño, costura o pruebas).
+     */
     private void filtrarPorTipo(String tipo) {
         citasFiltradas = citas.stream()
                 .filter(cita -> {
@@ -107,7 +137,10 @@ public class ControladorListaCitas {
         cargarTabla(citasFiltradas);
     }
 
-    // Buscar citas
+    /**
+     * Realiza una búsqueda en la lista de citas comparando el texto ingresado
+     * con la fecha de la cita o el nombre del cliente.
+     */
     private void buscar() {
         String texto = vista.getTextField().getText().trim().toLowerCase();
         citasFiltradas = new ArrayList<>();
@@ -123,7 +156,10 @@ public class ControladorListaCitas {
         cargarTabla(citasFiltradas);
     }
 
-    // Ver detalle de cita
+    /**
+     * Abre una ventana de detalle para la cita seleccionada, mostrando información
+     * extendida incluyendo los nombres de los aprendices asignados.
+     */
     private void verDetalle() {
         int fila = vista.getTableCitas().getSelectedRow();
 
@@ -134,7 +170,6 @@ public class ControladorListaCitas {
         }
 
         Cita cita = citasFiltradas.get(fila);
-
         int contador = 0;
         String[] aprs = new String[]{"", ""};
 
@@ -142,11 +177,7 @@ public class ControladorListaCitas {
             if (a.getId_cita() == cita.getId_cita()) {
                 for (Empleado e : listaEmpleados) {
                     if (a.getId_empleado() == e.getId_empleado()) {
-                        if (contador == 0) {
-                            aprs[0] = e.getNombre() + " " + e.getApellido();
-                        } else if (contador == 1) {
-                            aprs[1] = e.getNombre() + " " + e.getApellido();
-                        }
+                        if (contador < 2) aprs[contador] = e.getNombre() + " " + e.getApellido();
                         contador++;
                     }
                 }
@@ -158,7 +189,10 @@ public class ControladorListaCitas {
         vistaDetalle.setVisible(true);
     }
 
-    // Editar cita
+    /**
+     * Prepara y abre el formulario de edición (NuevaCita) cargando los datos
+     * de la cita seleccionada y sus aprendices relacionados.
+     */
     private void editarCita() {
         int fila = vista.getTableCitas().getSelectedRow();
 
@@ -167,24 +201,21 @@ public class ControladorListaCitas {
             return;
         }
 
-        Cita citaEditable = citas.get(fila);
-
-        String clienteEditable = (String) vista.getTableCitas().getValueAt(fila, 1);
-        String trajeEditable = (String) vista.getTableCitas().getValueAt(fila, 2);
+        Cita citaEditable = citasFiltradas.get(fila);
+        String clienteEditable = nombreCliente(citaEditable.getId_cliente());
+        String trajeEditable = nombreTraje(citaEditable.getId_traje());
 
         String tallerEditable = "";
         for (Taller t : listaTalleres) {
-            if (t.getNombre().equals(vista.getTableCitas().getValueAt(fila, 3))) {
+            if (t.getId_sala() == citaEditable.getId_sala()) {
                 tallerEditable = t.getNombre() + " (" + t.getTipo() + ")";
             }
         }
 
         String empleadoEditable = "";
         for (Empleado e : listaEmpleados) {
-            if ((e.getNombre() + " " + e.getApellido())
-                    .equals(vista.getTableCitas().getValueAt(fila, 4))) {
-                empleadoEditable = e.getNombre() + " " + e.getApellido()
-                        + " (" + e.getCategoria() + ")";
+            if (e.getId_empleado() == citaEditable.getId_empleado()) {
+                empleadoEditable = e.getNombre() + " " + e.getApellido() + " (" + e.getCategoria() + ")";
             }
         }
 
@@ -193,27 +224,22 @@ public class ControladorListaCitas {
 
         for (Cita_Aprendiz a : aprendices) {
             if (a.getId_cita() == citaEditable.getId_cita()) {
-                a1 = a;
-                for (Cita_Aprendiz b : aprendices) {
-                    if (b.getId_cita() == citaEditable.getId_cita()
-                            && b.getId_empleado() != a1.getId_empleado()) {
-                        a2 = b;
-                    }
-                }
+                if (a1.getId_empleado() == 0) a1 = a;
+                else a2 = a;
             }
         }
 
         NuevaCita vistaForm = new NuevaCita();
         new ControladorNuevaCita(vistaForm, acceso, vista, null, null, c,
-                empleado, citaEditable,
-                clienteEditable, trajeEditable,
-                tallerEditable, empleadoEditable,
-                a1, a2);
+                empleado, citaEditable, clienteEditable, trajeEditable,
+                tallerEditable, empleadoEditable, a1, a2);
 
         vistaForm.setVisible(true);
     }
 
-    // Eliminar cita
+    /**
+     * Elimina la cita seleccionada de la base de datos y actualiza la vista.
+     */
     private void eliminarCita() {
         int fila = vista.getTableCitas().getSelectedRow();
 
@@ -222,95 +248,84 @@ public class ControladorListaCitas {
             return;
         }
 
-        Cita cita = citas.get(fila);
-
-        int confirmacion = JOptionPane.showConfirmDialog(
-                vista,
-                "¿Eliminar esta cita?",
-                "Confirmar",
-                JOptionPane.YES_NO_OPTION
-        );
+        Cita cita = citasFiltradas.get(fila);
+        int confirmacion = JOptionPane.showConfirmDialog(vista, "¿Eliminar esta cita?", "Confirmar", JOptionPane.YES_NO_OPTION);
 
         if (confirmacion == JOptionPane.YES_OPTION) {
             try {
                 acceso.eliminarCita(c, cita.getId_cita());
                 citas = acceso.recogeCitas(c);
-                cargarTabla(citas);
+                citasFiltradas = new ArrayList<>(citas);
+                cargarTabla(citasFiltradas);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    // Nueva cita
+    /**
+     * Abre un formulario vacío para crear una nueva cita.
+     */
     private void nuevaCita() {
         NuevaCita vistaForm = new NuevaCita();
-        new ControladorNuevaCita(vistaForm, acceso, vista,
-                null, null, c, empleado,
+        new ControladorNuevaCita(vistaForm, acceso, vista, null, null, c, empleado,
                 null, null, null, null, null, null, null);
-
         vistaForm.setVisible(true);
     }
 
-    // Volver según rol
+    /**
+     * Cierra la vista actual y redirige a la ventana principal del empleado
+     * dependiendo de su categoría (Maestro, Oficial o Aprendiz).
+     */
     private void volver() {
         try {
             String rol = empleado.getCategoria().toLowerCase();
-
             switch (rol) {
                 case "maestro":
                     VentanaMaestro vm = new VentanaMaestro();
                     new ControladorMaestro(vm, acceso, c, empleado);
                     vm.setVisible(true);
                     break;
-
                 case "oficial":
                     VentanaOficial vo = new VentanaOficial();
                     new ControladorOficial(vo, acceso, c, empleado);
                     vo.setVisible(true);
                     break;
-
                 case "aprendiz":
                     VentanaAprendiz va = new VentanaAprendiz();
                     new ControladorAprendiz(va, acceso, c, empleado);
                     va.setVisible(true);
                     break;
             }
-
             vista.dispose();
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    // Resolución de nombres
+    // --- Métodos de resolución de nombres (Traducción ID -> String) ---
+
     private String nombreCliente(int id) {
-        if (listaClientes == null) return "" + id;
-        for (Cliente x : listaClientes)
-            if (x.getId_cliente() == id) return x.getNombre();
-        return "" + id;
+        if (listaClientes == null) return String.valueOf(id);
+        for (Cliente x : listaClientes) if (x.getId_cliente() == id) return x.getNombre();
+        return String.valueOf(id);
     }
 
     private String nombreTraje(int id) {
-        if (listaTrajes == null) return "" + id;
-        for (Traje x : listaTrajes)
-            if (x.getId_traje() == id) return x.getNombre_traje();
-        return "" + id;
+        if (listaTrajes == null) return String.valueOf(id);
+        for (Traje x : listaTrajes) if (x.getId_traje() == id) return x.getNombre_traje();
+        return String.valueOf(id);
     }
 
     private String nombreTaller(int id) {
-        if (listaTalleres == null) return "" + id;
-        for (Taller x : listaTalleres)
-            if (x.getId_sala() == id) return x.getNombre();
-        return "" + id;
+        if (listaTalleres == null) return String.valueOf(id);
+        for (Taller x : listaTalleres) if (x.getId_sala() == id) return x.getNombre();
+        return String.valueOf(id);
     }
 
     private String nombreEmpleado(int id) {
-        if (listaEmpleados == null) return "" + id;
-        for (Empleado x : listaEmpleados)
-            if (x.getId_empleado() == id)
-                return x.getNombre() + " " + x.getApellido();
-        return "" + id;
+        if (listaEmpleados == null) return String.valueOf(id);
+        for (Empleado x : listaEmpleados) if (x.getId_empleado() == id) return x.getNombre() + " " + x.getApellido();
+        return String.valueOf(id);
     }
 }

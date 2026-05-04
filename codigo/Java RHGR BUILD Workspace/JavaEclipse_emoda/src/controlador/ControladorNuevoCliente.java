@@ -14,8 +14,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-// Controlador del formulario NuevoCliente
-// Permite crear un cliente nuevo o editar uno existente
+/**
+ * Controlador del formulario NuevoCliente.
+ * Permite gestionar la creación de un cliente nuevo o la edición de uno existente,
+ * manejando la persistencia en la base de datos y la navegación entre vistas.
+ */
 public class ControladorNuevoCliente {
 
     // Referencias a vistas y capa de datos
@@ -34,7 +37,20 @@ public class ControladorNuevoCliente {
 
     private Empleado empleado;
 
-    // Constructor principal del controlador
+    /**
+     * Constructor principal del controlador.
+     * Inicializa las referencias, carga los datos si es edición y configura los listeners de la vista.
+     * 
+     * @param vista Ventana del formulario NuevoCliente.
+     * @param vistaClientes Referencia a la lista de clientes (ventana origen).
+     * @param vistaMaestro Referencia a la ventana del maestro (ventana origen).
+     * @param vistaCita Referencia al formulario de nueva cita (ventana origen).
+     * @param acceso Capa de acceso a la base de datos.
+     * @param c Conexión activa a la base de datos.
+     * @param clienteEditar Instancia del cliente a editar, o null si se crea uno nuevo.
+     * @param clientes Lista actual de clientes en memoria.
+     * @param empleado Empleado que está realizando la operación.
+     */
     public ControladorNuevoCliente(NuevoCliente vista, ListaClientes vistaClientes, VentanaMaestro vistaMaestro,
                                     NuevaCita vistaCita, AccesoBBDD acceso, Connection c,
                                     Cliente clienteEditar, ArrayList<Cliente> clientes, Empleado empleado) {
@@ -59,7 +75,10 @@ public class ControladorNuevoCliente {
         vista.getBtnCancelar().addActionListener(e -> cancelar());
     }
 
-    // Carga los datos del cliente en el formulario para edición
+    /**
+     * Carga los datos del cliente seleccionado en los campos del formulario.
+     * Se utiliza exclusivamente cuando el controlador se inicia en modo edición.
+     */
     private void precargarDatos() {
         vista.getTxtNombre().setText(clienteEditar.getNombre());
         vista.getTxtSuperpoder().setText(clienteEditar.getSuperpoder());
@@ -67,7 +86,11 @@ public class ControladorNuevoCliente {
         vista.setCbTipo(clienteEditar.getTipo_heroe());
     }
 
-    // Guarda o actualiza el cliente en la base de datos
+    /**
+     * Procesa el guardado del cliente. 
+     * Valida los campos, determina si es una inserción o una actualización en la base de datos
+     * y gestiona el cierre de ventanas y refresco de listas según el contexto de navegación.
+     */
     private void guardarCliente() {
 
         String nombre = vista.getTxtNombre().getText().trim();
@@ -145,7 +168,10 @@ public class ControladorNuevoCliente {
         }
     }
 
-    // Cancela la operación y cierra la ventana actual
+    /**
+     * Cancela la operación actual.
+     * Cierra la ventana del formulario sin realizar cambios en la persistencia.
+     */
     private void cancelar() {
 
         if (vistaCita == null && (vistaClientes != null || vistaMaestro != null)) {

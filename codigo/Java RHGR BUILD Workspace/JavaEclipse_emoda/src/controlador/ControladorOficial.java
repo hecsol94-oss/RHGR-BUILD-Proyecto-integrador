@@ -9,21 +9,36 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Controlador para la ventana principal del perfil "Oficial".
+ * Gestiona la lógica del dashboard, la carga de datos en memoria y la navegación
+ * hacia los diferentes módulos de la aplicación.
+ */
 public class ControladorOficial {
 
     private final VentanaOficial vista;
     private final AccesoBBDD acceso;
     private final Connection c;
     private final Empleado empleado;
+    
     // Listas en memoria para evitar llamadas constantes a BD
-    private ArrayList<Cita>    todasCitas;
-    private ArrayList<Cita>    citasFiltradas;
+    private ArrayList<Cita> todasCitas;
+    private ArrayList<Cita> citasFiltradas;
     private ArrayList<Cliente> todosClientes;
     private ArrayList<Cliente> clientesFiltrados;
     private ArrayList<Taller> todosTalleres;
     private ArrayList<Empleado> listaEmpleados;
     private ArrayList<Traje> listaTrajes;
 
+    /**
+     * Constructor del controlador. Inicializa la interfaz, vincula los eventos de los menús
+     * y carga la información inicial en el dashboard.
+     * 
+     * @param vista    Ventana principal del oficial.
+     * @param acceso   Objeto de acceso a la base de datos (DAO).
+     * @param c        Conexión activa a la base de datos.
+     * @param empleado Objeto del empleado que ha iniciado sesión.
+     */
     public ControladorOficial(VentanaOficial vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
         this.vista = vista;
         this.acceso = acceso;
@@ -46,14 +61,17 @@ public class ControladorOficial {
         // Evento de cerrar sesión desde label
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vista.getLblSalir().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
                 cerrarSesion();
-            	
             }
         });
     }
 
-    // Carga todos los datos desde la base de datos en memoria
+    /**
+     * Recupera todas las entidades necesarias desde la base de datos y las almacena
+     * en las listas locales de la clase para optimizar el acceso a la información.
+     */
     private void cargarDatosEnMemoria() {
         try {
             todasCitas = acceso.recogeCitas(c);
@@ -68,11 +86,13 @@ public class ControladorOficial {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-           
         }
     }
 
-    // Calcula y actualiza los contadores del dashboard
+    /**
+     * Calcula estadísticas en tiempo real (citas de hoy, de la semana, citas propias)
+     * a partir de los datos en memoria y actualiza las etiquetas de la vista.
+     */
     private void cargarContadores() {
         try {
             vista.getLblTodasLasCitas().setText(String.valueOf(todasCitas.size()));
@@ -118,7 +138,10 @@ public class ControladorOficial {
         }
     }
 
-    // Abre la lista de citas
+    /**
+     * Instancia el controlador de la lista de citas, abre su ventana correspondiente
+     * y cierra la ventana actual del dashboard.
+     */
     private void abrirListaCitas() {
         try {
             ArrayList<Cita> citas = acceso.recogeCitas(c);
@@ -136,7 +159,7 @@ public class ControladorOficial {
     }
 
     /**
-     * Formulario para que el Oficial gestione o consulte una cita.
+     * Abre el formulario de creación/gestión de citas para el Oficial.
      */
     private void abrirNuevaCita() {
         NuevaCita vistaForm = new NuevaCita();
@@ -147,7 +170,8 @@ public class ControladorOficial {
     }
 
     /**
-     * Abre lista de clientes en modo lectura.
+     * Abre la lista de clientes. Se deshabilitan los botones de edición
+     * para asegurar que el Oficial solo tenga acceso de lectura.
      */
     private void abrirListaClientes() {
         try {
@@ -167,7 +191,8 @@ public class ControladorOficial {
     }
 
     /**
-     * Abre lista de talleres en modo lectura.
+     * Abre la lista de talleres registrados. Al igual que con clientes,
+     * se configura en modo de solo lectura para este perfil.
      */
     private void abrirListaTalleres() {
         ArrayList<Taller> talleres = acceso.recogeTalleres(c);
@@ -182,7 +207,10 @@ public class ControladorOficial {
         vista.dispose();
     }
 
-    // Cierra sesión y vuelve al login
+    /**
+     * Cierra la conexión actual con la base de datos, destruye la ventana principal
+     * y redirige al usuario a la pantalla de inicio de sesión.
+     */
     private void cerrarSesion() {
         acceso.cerrarConexion(c);
         vista.dispose();
@@ -198,7 +226,6 @@ public class ControladorOficial {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-        
         }
     }
 }

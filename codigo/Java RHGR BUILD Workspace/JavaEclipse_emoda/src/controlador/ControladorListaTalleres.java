@@ -15,7 +15,11 @@ import vista.VentanaAprendiz;
 import vista.VentanaMaestro;
 import vista.VentanaOficial;
 
-// Controlador de la lista de talleres
+/**
+ * Controlador para la gestión de la lista de talleres.
+ * Maneja las interacciones del usuario con la tabla de talleres, permitiendo
+ * realizar operaciones CRUD y la navegación de retorno según el rol del empleado.
+ */
 public class ControladorListaTalleres {
 
 	private ListaTalleres vista;
@@ -24,6 +28,16 @@ public class ControladorListaTalleres {
 	private ArrayList<Taller> talleres;
 	private Empleado emp;
 
+	/**
+	 * Constructor del controlador de la lista de talleres.
+	 * Inicializa las referencias y asigna los escuchadores de eventos a los botones de la vista.
+	 * 
+	 * @param vista    La ventana que muestra la lista de talleres.
+	 * @param acceso   Objeto para la gestión de operaciones con la base de datos.
+	 * @param c        Conexión activa a la base de datos.
+	 * @param talleres Lista de objetos Taller cargados en memoria.
+	 * @param emp      Empleado que ha iniciado sesión para determinar permisos y navegación.
+	 */
 	public ControladorListaTalleres(ListaTalleres vista, AccesoBBDD acceso, Connection c,
 			ArrayList<Taller> talleres, Empleado emp) {
 
@@ -39,7 +53,10 @@ public class ControladorListaTalleres {
 		vista.getBtnVolver().addActionListener(e -> pulsarBtnVolver());
 	}
 
-	// Abrir formulario de nuevo taller
+	/**
+	 * Abre el formulario para la creación de un nuevo taller.
+	 * Instancia el controlador correspondiente pasando las referencias necesarias.
+	 */
 	private void pulsarBtnNuevoTaller() {
 		try {
 			NuevoTaller nv = new NuevoTaller();
@@ -50,7 +67,11 @@ public class ControladorListaTalleres {
 		}
 	}
 
-	// Editar taller seleccionado
+	/**
+	 * Gestiona la edición de un taller seleccionado en la tabla.
+	 * Verifica que haya una fila seleccionada, recupera el objeto taller y abre el formulario
+	 * de edición con los datos cargados.
+	 */
 	private void pulsarBtnEditar() {
 		int fila = vista.getTable().getSelectedRow();
 
@@ -71,7 +92,11 @@ public class ControladorListaTalleres {
 		nt.setVisible(true);
 	}
 
-	// Eliminar taller seleccionado
+	/**
+	 * Gestiona la eliminación de un taller seleccionado.
+	 * Solicita confirmación al usuario antes de proceder a borrar el registro en la base
+	 * de datos y actualizar la tabla visual.
+	 */
 	private void pulsarBtnEliminar() {
 		int fila = vista.getTable().getSelectedRow();
 
@@ -105,7 +130,11 @@ public class ControladorListaTalleres {
 		}
 	}
 
-	// Volver según rol del empleado
+	/**
+	 * Gestiona el retorno a la ventana principal correspondiente.
+	 * Utiliza la categoría del empleado logado para instanciar la vista de Maestro,
+	 * Oficial o Aprendiz segun corresponda.
+	 */
 	private void pulsarBtnVolver() {
 		try {
 			String rol = emp.getCategoria().toLowerCase();

@@ -8,6 +8,12 @@ import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Controlador para la creación y edición de citas en el sistema.
+ * Gestiona un formulario complejo de dos fases que incluye la validación de fechas,
+ * filtrado dinámico de trajes por cliente, restricción de talleres según el estado 
+ * del traje (diseño vs otros) y la asignación de aprendices con exclusión mutua.
+ */
 public class ControladorNuevaCita {
 
     private final NuevaCita vista;
@@ -37,6 +43,11 @@ public class ControladorNuevaCita {
     // true cuando el traje seleccionado fue RECIÉN creado (estado=diseño), false si ya existía
     private boolean trajeRecienCreado = false;
 
+    /**
+     * Constructor principal del controlador.
+     * Inicializa las dependencias, carga los catálogos iniciales de la base de datos,
+     * configura los eventos de la interfaz y precarga datos si se trata de una edición.
+     */
     public ControladorNuevaCita(NuevaCita vista, AccesoBBDD acceso, ListaCitas ventanaCita, VentanaMaestro ventanaMaestro, VentanaOficial ventanaOficial, Connection c, Empleado empleado, Cita citaAEditar, String clienteEditable, String trajeEditable, String tallerEditable, String empleadoEditable, Cita_Aprendiz aprendizAEditar1, Cita_Aprendiz aprendizAEditar2) {
         this.vista    = vista;
         this.acceso   = acceso;
@@ -61,7 +72,10 @@ public class ControladorNuevaCita {
         }
     }
     
-    // ── Carga inicial ─────────────────────────────────────────────────────────
+    /**
+     * Carga los datos necesarios desde la base de datos para rellenar los selectores (combos) 
+     * de clientes, oficiales, aprendices y trajes.
+     */
     private void cargarDatosIniciales() {
         try {
             // Talleres — se carga PRIMERO porque actualizarComboTrajes lo necesita
@@ -105,7 +119,9 @@ public class ControladorNuevaCita {
         }
     }
 
-    // ── Actualizar combo trajes según cliente seleccionado ────────────────────
+    /**
+     * Actualiza el selector de trajes basándose en el cliente seleccionado actualmente.
+     */
     private void actualizarComboTrajes() {
         vista.getCbTraje().removeAllItems();
         int idx = vista.getCbCliente().getSelectedIndex();
@@ -120,8 +136,8 @@ public class ControladorNuevaCita {
 
     /**
      * Actualiza el combo de talleres.
-     * Si trajeRecienCreado=true → solo talleres de tipo "diseño".
-     * Si el traje ya existía → todos los talleres disponibles.
+     * Si trajeRecienCreado es verdadero, solo muestra talleres de tipo "diseño".
+     * En caso contrario, muestra todos los talleres disponibles.
      */
     private void actualizarComboTalleres() {
         listaTalleresFiltrados = new ArrayList<>();
@@ -141,7 +157,12 @@ public class ControladorNuevaCita {
         }
     }
 
-    // ── Combos aprendices con exclusión mutua ─────────────────────────────────
+    /**
+     * Gestiona la lógica de selección de aprendices asegurando que no se pueda seleccionar
+     * al mismo aprendiz en ambos selectores (exclusión mutua).
+     * 
+     * @param excluirDeApr2 Índice del aprendiz seleccionado en el primer combo para omitirlo en el segundo.
+     */
     private void cargarCombosAprendices(int excluirDeApr2) {
         vista.getCbAprendiz1().removeAllItems();
         vista.getCbAprendiz1().addItem("— Ninguno —");
@@ -157,6 +178,9 @@ public class ControladorNuevaCita {
         }
     }
     
+    /**
+     * Rellena los campos de la vista con los datos de la cita que se desea editar.
+     */
     private void precargarDatos() {
         vista.setCbCliente(clienteEditable);
         vista.setCbTraje(trajeEditable);
@@ -165,11 +189,12 @@ public class ControladorNuevaCita {
         vista.getTxtFecha().setText(citaAEditar.getFecha().toString());
         vista.getTxtHora().setText(citaAEditar.getHora_inicio().toString());
         vista.getTxtDuracion().setText(Integer.toString(citaAEditar.getDuracion()));        
-        
-        
     }
 
-    // ── Listeners ─────────────────────────────────────────────────────────────
+    /**
+     * Asigna los eventos de escucha (listeners) a los componentes de la interfaz,
+     * como cambios de selección en combos y clics en botones.
+     */
     private void asignarListeners() {
 
         // Cambio de cliente → actualizar trajes y talleres
@@ -253,7 +278,10 @@ public class ControladorNuevaCita {
         vista.getBtnGuardar().addActionListener(e -> guardarCita());
     }
 
-    // ── Avanzar a fase 2 ──────────────────────────────────────────────────────
+    /**
+     * Valida los datos de la primera fase y, si son correctos, muestra la segunda fase
+     * del formulario de creación de cita.
+     */
     private void avanzarFase2() {
         String fecha = vista.getTxtFecha().getText().trim();
         String hora = vista.getTxtHora().getText().trim();
@@ -292,7 +320,11 @@ public class ControladorNuevaCita {
         vista.mostrarFase2(fecha, hora, duracion, clienteNombre, trajeNombre, tallerNombre, oficialNombre);
     }
 
-    // ── Guardar cita ──────────────────────────────────────────────────────────
+    /**
+     * Recoge todos los datos del formulario, realiza las validaciones de negocio finales
+     * (como asegurar que la fecha/hora no sean pasadas) y persiste la cita y los 
+     * aprendices en la base de datos.
+     */
     private void guardarCita() {
         String strFecha = vista.getTxtFecha().getText().trim();
         String strHora = vista.getTxtHora().getText().trim();
@@ -447,6 +479,13 @@ public class ControladorNuevaCita {
         }
     }
 
+    /**
+     * Recupera el ID único de un traje en función de su cliente y su posición en la lista.
+     * 
+     * @param idCliente ID del cliente propietario.
+     * @param indexCombo Índice seleccionado en el selector de trajes.
+     * @return El ID del traje o -1 si no se encuentra.
+     */
     private int obtenerIdTraje(int idCliente, int indexCombo) {
         int contador = 0;
         for (Traje t : listaTrajes) {
@@ -458,6 +497,9 @@ public class ControladorNuevaCita {
         return -1;
     }
     
+    /**
+     * Cierra la ventana actual de creación de cita.
+     */
     private void cancelar() {
 			if (ventanaCita != null && ventanaMaestro == null && ventanaOficial == null) {
 		    	vista.dispose();
