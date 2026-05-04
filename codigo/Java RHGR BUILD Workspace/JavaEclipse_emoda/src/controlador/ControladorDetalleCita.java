@@ -58,17 +58,10 @@ public class ControladorDetalleCita {
         }
 
         try {
-<<<<<<< HEAD:codigo/Java RHGR BUILD Workspace/JavaEclipse_emoda/src/controlador/ControladorDetalleCita.java
             // Cargar listas completas desde BD para resolver IDs → nombres
             ArrayList<Cliente>  clientes  = acceso.recogeClientes(c);
             ArrayList<Traje>    trajes    = acceso.recogeTrajes(c);
             ArrayList<Taller>   talleres  = acceso.recogeTalleres(c);
-=======
-            // Resolución de nombres (punto 6)
-            ArrayList<Cliente> clientes = acceso.recogeClientes(c);
-            ArrayList<Traje> trajes = acceso.recogeTrajes(c);
-            ArrayList<Taller> talleres = acceso.recogeTalleres(c);
->>>>>>> d245656e3395d1d7de26ffddcc920efb1fb59a29:codigo/Java_EdnaModa/controlador/ControladorDetalleCita.java
             ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
 
             // Resolución de nombres

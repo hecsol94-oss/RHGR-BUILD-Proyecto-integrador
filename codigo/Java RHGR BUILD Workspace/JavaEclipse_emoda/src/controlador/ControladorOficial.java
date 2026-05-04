@@ -15,15 +15,9 @@ public class ControladorOficial {
     private final AccesoBBDD acceso;
     private final Connection c;
     private final Empleado empleado;
-
-<<<<<<< HEAD:codigo/Java RHGR BUILD Workspace/JavaEclipse_emoda/src/controlador/ControladorOficial.java
     // Listas en memoria para evitar llamadas constantes a BD
     private ArrayList<Cita>    todasCitas;
     private ArrayList<Cita>    citasFiltradas;
-=======
-    private ArrayList<Cita> todasCitas;
-    private ArrayList<Cita> citasFiltradas;
->>>>>>> d245656e3395d1d7de26ffddcc920efb1fb59a29:codigo/Java_EdnaModa/controlador/ControladorOficial.java
     private ArrayList<Cliente> todosClientes;
     private ArrayList<Cliente> clientesFiltrados;
     private ArrayList<Taller> todosTalleres;
@@ -53,11 +47,8 @@ public class ControladorOficial {
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vista.getLblSalir().addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
-<<<<<<< HEAD:codigo/Java RHGR BUILD Workspace/JavaEclipse_emoda/src/controlador/ControladorOficial.java
                 cerrarSesion();
-=======
-            	cerrarSesion();
->>>>>>> d245656e3395d1d7de26ffddcc920efb1fb59a29:codigo/Java_EdnaModa/controlador/ControladorOficial.java
+            	
             }
         });
     }
@@ -69,7 +60,6 @@ public class ControladorOficial {
             todosTalleres = acceso.recogeTalleres(c);
             todosClientes = acceso.recogeClientes(c);
             listaEmpleados = acceso.recogeEmpleados(c);
-<<<<<<< HEAD:codigo/Java RHGR BUILD Workspace/JavaEclipse_emoda/src/controlador/ControladorOficial.java
             listaTrajes    = acceso.recogeTrajes(c);
 
             // Copias para filtrado en interfaz
@@ -78,13 +68,7 @@ public class ControladorOficial {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-=======
-            listaTrajes = acceso.recogeTrajes(c);
-            citasFiltradas = new ArrayList<>(todasCitas);
-            clientesFiltrados = new ArrayList<>(todosClientes);
-        } catch (SQLException ex) {
-        	ex.printStackTrace();
->>>>>>> d245656e3395d1d7de26ffddcc920efb1fb59a29:codigo/Java_EdnaModa/controlador/ControladorOficial.java
+           
         }
     }
 
@@ -128,14 +112,9 @@ public class ControladorOficial {
                     .orElse("—");
 
             vista.getLblProximaCita().setText(proxima);
-<<<<<<< HEAD:codigo/Java RHGR BUILD Workspace/JavaEclipse_emoda/src/controlador/ControladorOficial.java
 
         } catch (Exception ex) {
             ex.printStackTrace();
-=======
-        } catch (Exception ex) {
-        	ex.printStackTrace();
->>>>>>> d245656e3395d1d7de26ffddcc920efb1fb59a29:codigo/Java_EdnaModa/controlador/ControladorOficial.java
         }
     }
 
@@ -216,14 +195,10 @@ public class ControladorOficial {
             InicioSesion is = new InicioSesion();
             new ControladorInicioSesion(is, acceso, emps);
             is.setVisible(true);
-<<<<<<< HEAD:codigo/Java RHGR BUILD Workspace/JavaEclipse_emoda/src/controlador/ControladorOficial.java
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-=======
-        } catch (SQLException ex) {
-        	ex.printStackTrace();
->>>>>>> d245656e3395d1d7de26ffddcc920efb1fb59a29:codigo/Java_EdnaModa/controlador/ControladorOficial.java
+        
         }
     }
 }

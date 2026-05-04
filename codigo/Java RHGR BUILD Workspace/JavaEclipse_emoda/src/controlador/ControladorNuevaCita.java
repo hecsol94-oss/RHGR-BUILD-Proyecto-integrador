@@ -37,7 +37,6 @@ public class ControladorNuevaCita {
     // true cuando el traje seleccionado fue RECIÉN creado (estado=diseño), false si ya existía
     private boolean trajeRecienCreado = false;
 
-<<<<<<< HEAD:codigo/Java RHGR BUILD Workspace/JavaEclipse_emoda/src/controlador/ControladorNuevaCita.java
     public ControladorNuevaCita(NuevaCita vista, AccesoBBDD acceso, ListaCitas ventanaCita, VentanaMaestro ventanaMaestro, VentanaOficial ventanaOficial, Connection c, Empleado empleado, Cita citaAEditar, String clienteEditable, String trajeEditable, String tallerEditable, String empleadoEditable, Cita_Aprendiz aprendizAEditar1, Cita_Aprendiz aprendizAEditar2) {
         this.vista    = vista;
         this.acceso   = acceso;
@@ -45,12 +44,6 @@ public class ControladorNuevaCita {
         this.ventanaMaestro = ventanaMaestro;
         this.ventanaOficial = ventanaOficial;
         this.c        = c;
-=======
-    public ControladorNuevaCita(NuevaCita vista, AccesoBBDD acceso, Connection c, Empleado empleado, Cita citaAEditar, String clienteEditable, String trajeEditable, String tallerEditable, String empleadoEditable, Cita_Aprendiz aprendizAEditar1, Cita_Aprendiz aprendizAEditar2) {
-        this.vista = vista;
-        this.acceso = acceso;
-        this.c = c;
->>>>>>> d245656e3395d1d7de26ffddcc920efb1fb59a29:codigo/Java_EdnaModa/controlador/ControladorNuevaCita.java
         this.empleado = empleado;
         this.citaAEditar = citaAEditar;
         this.clienteEditable = clienteEditable;

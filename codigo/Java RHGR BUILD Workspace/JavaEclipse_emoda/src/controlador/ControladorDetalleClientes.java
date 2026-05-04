@@ -102,11 +102,6 @@ public class ControladorDetalleClientes {
         int index = vista.getListTrajes().getSelectedIndex();
 
         if (index != -1) {
-<<<<<<< HEAD:codigo/Java RHGR BUILD Workspace/JavaEclipse_emoda/src/controlador/ControladorDetalleClientes.java
-=======
-        	
-        	int confirmacion = JOptionPane.showConfirmDialog(vista, "¿Estas seguro de que quieres eliminar este traje?, \nSi lo llegas a eliminar, las citas asociadas a el se eliminan tambien", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
->>>>>>> d245656e3395d1d7de26ffddcc920efb1fb59a29:codigo/Java_EdnaModa/controlador/ControladorDetalleClientes.java
 
             // Confirmación antes de borrar
             int confirmacion = JOptionPane.showConfirmDialog(

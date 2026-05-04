@@ -22,10 +22,7 @@ public class ControladorAprendiz {
     private ArrayList<Cliente> todosClientes;
 
     public ControladorAprendiz(VentanaAprendiz vista, AccesoBBDD acceso, Connection c, Empleado empleado) {
-<<<<<<< HEAD:codigo/Java RHGR BUILD Workspace/JavaEclipse_emoda/src/controlador/ControladorAprendiz.java
 
-=======
->>>>>>> d245656e3395d1d7de26ffddcc920efb1fb59a29:codigo/Java_EdnaModa/controlador/ControladorAprendiz.java
         this.vista = vista;
         this.acceso = acceso;
         this.c = c;
@@ -47,11 +44,7 @@ public class ControladorAprendiz {
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vista.getLblSalir().addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
-<<<<<<< HEAD:codigo/Java RHGR BUILD Workspace/JavaEclipse_emoda/src/controlador/ControladorAprendiz.java
-                cerrarSesion();
-=======
             	cerrarSesion();
->>>>>>> d245656e3395d1d7de26ffddcc920efb1fb59a29:codigo/Java_EdnaModa/controlador/ControladorAprendiz.java
             }
         });
     }
@@ -64,48 +57,10 @@ public class ControladorAprendiz {
             todosClientes = acceso.recogeClientes(c);
             listaEmpleados = acceso.recogeEmpleados(c);
             listaTrajes = acceso.recogeTrajes(c);
-<<<<<<< HEAD:codigo/Java RHGR BUILD Workspace/JavaEclipse_emoda/src/controlador/ControladorAprendiz.java
-
             citasFiltradas = new ArrayList<>(todasCitas);
-
-=======
             citasFiltradas = new ArrayList<>(todasCitas);
         } catch (SQLException ex) {
         	ex.printStackTrace();
-        }
-    }
-
-    private void cargarContadores() {
-        try {
-            vista.getLblTodasLasCitas().setText(String.valueOf(todasCitas.size()));
-            vista.getLblNumeroDeTalleres().setText(String.valueOf(todosTalleres.size()));
-            ArrayList<Cita_Aprendiz> rel = acceso.recogeCitasAprendiz(c);
-            long misCitas = rel.stream().filter(ca -> ca.getId_empleado() == empleado.getId_empleado()).count();
-            vista.getLblNumeroDeMisCitas().setText(String.valueOf(misCitas));
-            java.sql.Date hoy = new java.sql.Date(System.currentTimeMillis());
-            long citasHoy = todasCitas.stream().filter(ci -> ci.getFecha().toString().equals(hoy.toString())).count();
-            vista.getLblCitasHoy().setText(String.valueOf(citasHoy));
-            String proxima = todasCitas.stream().filter(ci -> !ci.getFecha().before(hoy))
-                .map(ci -> ci.getFecha() + " " + ci.getHora_inicio()).min(String::compareTo).orElse("—");
-            vista.getLblProximaCita().setText(proxima);
-        } catch (Exception ex) {
-        	ex.printStackTrace();
-        }
-    }
-
-    private void abrirListaCitas() {
-        try {
-        	ArrayList<Cita> citas = acceso.recogeCitas(c);
-            ArrayList<Cita_Aprendiz> aprendices = acceso.recogeCitasAprendiz(c);
-            ListaCitas vistaLista = new ListaCitas();
-            vistaLista.deshabilitarBotones();
-            new ControladorListaCitas(vistaLista, acceso, c, citas, aprendices, empleado);
-            vistaLista.deshabilitarBotones(); // solo lectura para Aprendiz
-            vistaLista.setVisible(true);
-            vista.dispose();
->>>>>>> d245656e3395d1d7de26ffddcc920efb1fb59a29:codigo/Java_EdnaModa/controlador/ControladorAprendiz.java
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
     }
 
@@ -205,14 +160,8 @@ public class ControladorAprendiz {
             new ControladorInicioSesion(is, acceso, emps);
 
             is.setVisible(true);
-<<<<<<< HEAD:codigo/Java RHGR BUILD Workspace/JavaEclipse_emoda/src/controlador/ControladorAprendiz.java
-
         } catch (SQLException ex) {
             ex.printStackTrace();
-=======
-        } catch (SQLException ex) {
-        	ex.printStackTrace();
->>>>>>> d245656e3395d1d7de26ffddcc920efb1fb59a29:codigo/Java_EdnaModa/controlador/ControladorAprendiz.java
         }
     }
 }
