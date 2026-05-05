@@ -105,7 +105,7 @@ public class ControladorMaestro {
             for (Cita proximaCita : todasCitas) {
                 if (proximaCita.getId_empleado() == empleado.getId_empleado()) {
                     citasMias.add(proximaCita);
-                    java.sql.Date hoy = new java.sql.Date(System.currentTimeMillis());
+                    java.sql.Date hoy = java.sql.Date.valueOf(java.time.LocalDate.now());
                     long citasHoy = citasMias.stream().filter(ci -> ci.getFecha().toString().equals(hoy.toString())).count();
                     vista.getLblCitasHoy().setText(String.valueOf(citasHoy));
 

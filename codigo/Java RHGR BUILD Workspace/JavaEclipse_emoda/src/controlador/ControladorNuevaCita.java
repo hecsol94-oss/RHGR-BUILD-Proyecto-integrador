@@ -6,6 +6,8 @@ import vista.*;
 import javax.swing.*;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -298,6 +300,73 @@ public class ControladorNuevaCita {
         int idxTraje = vista.getCbTraje().getSelectedIndex();
         int idxTaller = vista.getCbTaller().getSelectedIndex();
         int idxOficial = vista.getCbOficial().getSelectedIndex();
+        
+        Date fechaDate;
+        Time horaTime;
+        int duracionInt;
+            
+            // VALIDACIÓN DE FECHA ANTERIOR
+            // Obtenemos la fecha de hoy a las 00:00 para comparar solo días
+            
+     // VALIDACIÓN DE FECHA (permitir hoy, prohibir pasado)
+        if (fecha.isEmpty() || hora.isEmpty() || duracion.isEmpty()) {
+            JOptionPane.showMessageDialog(vista, "Rellena Fecha, Hora y Duración.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try { 
+        	horaTime = Time.valueOf(hora + ":00");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(vista, "Formato de hora incorrecto (HH:mm).", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try {
+            // Convertimos la fecha introducida
+            LocalDate fechaIntroducida = LocalDate.parse(fecha);
+
+            // Fecha actual (solo día, sin hora)
+            LocalDate hoy = LocalDate.now();
+
+            // Comprobación
+            if (fechaIntroducida.isBefore(hoy)) {
+                JOptionPane.showMessageDialog(vista,
+                    "No se puede programar una cita en una fecha anterior a la actual.",
+                    "Fecha Inválida",
+                    JOptionPane.WARNING_MESSAGE);
+                return;
+                
+            } else {
+            			LocalTime horaIntroducida = LocalTime.parse(hora);
+                	
+            			LocalTime horaActual = LocalTime.now();
+            		
+            			if (fechaIntroducida.equals(hoy) && horaIntroducida.isBefore(horaActual)) {
+            				JOptionPane.showMessageDialog(vista,
+                               "No se puede programar una cita en una hora anterior a la actual.",
+                               "Fecha Inválida",
+                               JOptionPane.WARNING_MESSAGE);
+            				return;
+            			} 
+            }
+
+            // Convertimos a java.sql.Date para la BD
+            fechaDate = Date.valueOf(fechaIntroducida);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(vista,
+                "Formato de fecha incorrecto (yyyy-MM-dd).",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        try { 
+        	duracionInt = Integer.parseInt(duracion);
+        	if (duracionInt <= 0) throw new NumberFormatException();
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(vista, "Duración debe ser un entero positivo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         if (fecha.isEmpty() || hora.isEmpty() || duracion.isEmpty()) {
             JOptionPane.showMessageDialog(vista, "Rellena Fecha, Hora y Duración.", "Campos incompletos", JOptionPane.WARNING_MESSAGE);
@@ -348,43 +417,12 @@ public class ControladorNuevaCita {
         int idxTaller = vista.getCbTaller().getSelectedIndex();
         int idxOficial = vista.getCbOficial().getSelectedIndex();
 
-        Date fecha;
-        Time hora;
-        int duracion;
-            
-            // VALIDACIÓN DE FECHA ANTERIOR
-            // Obtenemos la fecha de hoy a las 00:00 para comparar solo días
-            
-            // Si la fecha introducida es estrictamente anterior a hoy
-            try {
-                fecha = Date.valueOf(strFecha); 
-                long milisHoy = System.currentTimeMillis();
-                Date hoy = new Date(milisHoy);
-            if (fecha.before(hoy)) {
-                JOptionPane.showMessageDialog(vista, 
-                    "No se puede programar una cita en una fecha anterior a la actual.", 
-                    "Fecha Inválida", 
-                    JOptionPane.WARNING_MESSAGE);
-                return; // Cortamos la ejecución para que no guarde nada
-            }
-
-            } catch (Exception ex) {
-            JOptionPane.showMessageDialog(vista, "Formato de fecha incorrecto (yyyy-MM-dd).", "Error", JOptionPane.ERROR_MESSAGE); 
-            return;
-        }
-        try { 
-            hora = Time.valueOf(strHora + ":00");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(vista, "Formato de hora incorrecto (HH:mm).", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        try { 
-        	duracion = Integer.parseInt(strDuracion);
-        	if (duracion <= 0) throw new NumberFormatException();
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(vista, "Duración debe ser un entero positivo.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        Date fechaDate;
+        Time horaTime;
+        int duracionInt;
+        fechaDate = Date.valueOf(strFecha);
+        horaTime = Time.valueOf(strHora + ":00");
+        duracionInt = Integer.parseInt(strDuracion);
 
         int idCliente = listaClientes.get(idxCliente).getId_cliente();
         int idSala = listaTalleresFiltrados.get(idxTaller).getId_sala();
@@ -406,12 +444,12 @@ public class ControladorNuevaCita {
         
         if (citaAEditar == null) {
                     	
-            	Cita nuevaCita = new Cita(0, fecha, hora, duracion, idOficial, idCliente, idSala, idTraje);
+            	Cita nuevaCita = new Cita(0, fechaDate, horaTime, duracionInt, idOficial, idCliente, idSala, idTraje);
                 acceso.insertarNuevaCita(c, nuevaCita);
 				
         } else {
 	
-				Cita nuevaCita = new Cita(0, fecha, hora, duracion, idOficial, idCliente, idSala, idTraje);
+				Cita nuevaCita = new Cita(0, fechaDate, horaTime, duracionInt, idOficial, idCliente, idSala, idTraje);
 	        	acceso.actualizarCita(c, citaAEditar.getId_cita(), nuevaCita);
 
 

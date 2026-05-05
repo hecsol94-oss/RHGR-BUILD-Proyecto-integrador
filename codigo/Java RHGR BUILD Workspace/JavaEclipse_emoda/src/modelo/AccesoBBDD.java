@@ -407,7 +407,7 @@ public class AccesoBBDD {
 	public ArrayList<Cita> recogeCitas(Connection c) throws SQLException {
 		ArrayList<Cita> citas = new ArrayList<>();
 		Statement st = c.createStatement();
-		ResultSet resultados = st.executeQuery("SELECT * FROM Citas");
+		ResultSet resultados = st.executeQuery("SELECT * FROM Citas ORDER BY fecha, hora_inicio");
 
 		while (resultados.next()) {
 			// Extraemos el ID que MySQL creó automáticamente
