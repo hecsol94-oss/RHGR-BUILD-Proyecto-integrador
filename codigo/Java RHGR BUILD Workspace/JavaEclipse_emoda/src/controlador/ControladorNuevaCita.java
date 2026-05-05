@@ -4,6 +4,7 @@ import modelo.*;
 import vista.*;
 
 import javax.swing.*;
+
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -91,22 +92,27 @@ public class ControladorNuevaCita {
             actualizarComboTrajes();
 
             // Oficiales: todos los empleados que sean maestro u oficial
-            listaOficiales = new ArrayList<>();
-            for (Empleado e : acceso.recogeEmpleados(c)) {
-                String cat = e.getCategoria().toLowerCase();
-                if (cat.equals("maestro") || cat.equals("oficial")) listaOficiales.add(e);
-            }
-            vista.getCbOficial().removeAllItems();
-            for (Empleado e : listaOficiales)
-                vista.getCbOficial().addItem(e.getNombre() + " " + e.getApellido() + " (" + e.getCategoria() + ")");
-            // Pre-seleccionar el empleado logado si está en la lista
-            for (int i = 0; i < listaOficiales.size(); i++) {
-                if (listaOficiales.get(i).getId_empleado() == empleado.getId_empleado()) {
-                    vista.getCbOficial().setSelectedIndex(i);
-                    break;
+            if (empleado.getCategoria().equals("maestro")) {
+            	listaOficiales = new ArrayList<>();
+                for (Empleado e : acceso.recogeEmpleados(c)) {
+                    String cat = e.getCategoria().toLowerCase();
+                    if (cat.equals("maestro") || cat.equals("oficial")) listaOficiales.add(e);
                 }
-            }
+                vista.getCbOficial().removeAllItems();
+                for (Empleado e : listaOficiales)
+                    vista.getCbOficial().addItem(e.getNombre() + " " + e.getApellido() + " (" + e.getCategoria() + ")");
+                // Pre-seleccionar el empleado logado si está en la lista
+                for (int i = 0; i < listaOficiales.size(); i++) {
+                    if (listaOficiales.get(i).getId_empleado() == empleado.getId_empleado()) {
+                        vista.getCbOficial().setSelectedIndex(i);
+                        break;
 
+                    }
+                }
+            } else {
+                vista.getCbOficial().addItem(empleado.getNombre() + " " + empleado.getApellido() + " (" + empleado.getCategoria() + ")");
+            }
+            
             listaEmpleados = acceso.recogeEmpleados(c);
             
             // Aprendices
@@ -185,9 +191,11 @@ public class ControladorNuevaCita {
         vista.setCbCliente(clienteEditable);
         vista.setCbTraje(trajeEditable);
         vista.setCbTaller(tallerEditable);
-        vista.setCbOficial(empleadoEditable);
+        vista.setCbOficial(empleado.getNombre() + " " + empleado.getApellido() + " (" + empleado.getCategoria() + ")");
         vista.getTxtFecha().setText(citaAEditar.getFecha().toString());
-        vista.getTxtHora().setText(citaAEditar.getHora_inicio().toString());
+        String hora = citaAEditar.getHora_inicio().toString();
+        String horaReal = hora.substring(0, hora.length() - 3);
+        vista.getTxtHora().setText(horaReal);
         vista.getTxtDuracion().setText(Integer.toString(citaAEditar.getDuracion()));        
     }
 
@@ -314,7 +322,13 @@ public class ControladorNuevaCita {
         String clienteNombre = listaClientes.get(idxCliente).getNombre();
         String trajeNombre = (String) vista.getCbTraje().getSelectedItem();
         String tallerNombre = listaTalleresFiltrados.get(idxTaller).getNombre();
-        String oficialNombre = listaOficiales.get(idxOficial).getNombre() + " " + listaOficiales.get(idxOficial).getApellido();
+        String oficialNombre = "";
+        if(empleado.getCategoria().equals("maestro")) {
+            oficialNombre = listaOficiales.get(idxOficial).getNombre() + " " + listaOficiales.get(idxOficial).getApellido();
+        } else {
+        	oficialNombre = empleado.getNombre() + " " + empleado.getApellido();
+        }
+        
 
         cargarCombosAprendices(-1);
         vista.mostrarFase2(fecha, hora, duracion, clienteNombre, trajeNombre, tallerNombre, oficialNombre);
@@ -337,17 +351,15 @@ public class ControladorNuevaCita {
         Date fecha;
         Time hora;
         int duracion;
-        try { 
-            fecha = Date.valueOf(strFecha); 
-            hora = Time.valueOf(strHora + ":00");
             
             // VALIDACIÓN DE FECHA ANTERIOR
             // Obtenemos la fecha de hoy a las 00:00 para comparar solo días
-            long milisHoy = System.currentTimeMillis();
-            Date hoy = new Date(milisHoy);
-            Time horaActual = new Time(milisHoy);
             
             // Si la fecha introducida es estrictamente anterior a hoy
+            try {
+                fecha = Date.valueOf(strFecha); 
+                long milisHoy = System.currentTimeMillis();
+                Date hoy = new Date(milisHoy);
             if (fecha.before(hoy)) {
                 JOptionPane.showMessageDialog(vista, 
                     "No se puede programar una cita en una fecha anterior a la actual.", 
@@ -355,19 +367,13 @@ public class ControladorNuevaCita {
                     JOptionPane.WARNING_MESSAGE);
                 return; // Cortamos la ejecución para que no guarde nada
             }
-            
-            if (fecha.toString().equals(hoy.toString())) { // Comparamos si es el mismo día
-                if (hora.before(horaActual)) {
-                    JOptionPane.showMessageDialog(vista, "La hora de inicio no puede ser anterior a la hora actual para citas de hoy.", "Hora Inválida", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
-            }
 
-        } catch (Exception ex) {
+            } catch (Exception ex) {
             JOptionPane.showMessageDialog(vista, "Formato de fecha incorrecto (yyyy-MM-dd).", "Error", JOptionPane.ERROR_MESSAGE); 
             return;
         }
-        try { hora = Time.valueOf(strHora + ":00");
+        try { 
+            hora = Time.valueOf(strHora + ":00");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(vista, "Formato de hora incorrecto (HH:mm).", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -389,7 +395,14 @@ public class ControladorNuevaCita {
         }
 
         // Usar el id_empleado del oficial seleccionado (NO el del empleado logado)
-        int idOficial = listaOficiales.get(idxOficial).getId_empleado();
+        int idOficial = 0;
+        if (empleado.getCategoria().equals("maestro")) {
+            idOficial = listaOficiales.get(idxOficial).getId_empleado();
+
+        } else {
+            idOficial = empleado.getId_empleado();
+
+        }
         
         if (citaAEditar == null) {
                     	
@@ -456,7 +469,34 @@ public class ControladorNuevaCita {
 
             // --- VALIDACIÓN Y CIERRE ---
             if (idxApr1 <= 0 && idxApr2 <= 0) {
-                JOptionPane.showMessageDialog(vista, "Por favor, asigna al menos un aprendiz.");
+                JOptionPane.showMessageDialog(vista, "Cita y aprendices guardados correctamente.");
+                if (ventanaCita != null) {
+                	ArrayList<Cita_Aprendiz> aprendicesConCita = acceso.recogeCitasAprendiz(c);
+                    citasActuales = acceso.recogeCitas(c);
+                    ListaCitas lc = new ListaCitas();
+                    new ControladorListaCitas(lc, acceso, c, citasActuales, aprendicesConCita, empleado);
+                    lc.setVisible(true);
+                    vista.dispose();
+                    ventanaCita.dispose();
+                    
+                } else if (ventanaMaestro != null) {
+                	ArrayList<Cita_Aprendiz> aprendicesConCita = acceso.recogeCitasAprendiz(c);
+                    citasActuales = acceso.recogeCitas(c);
+                    VentanaMaestro lc = new VentanaMaestro();
+                    new ControladorMaestro(lc, acceso, c, empleado);
+                    lc.setVisible(true);
+                    vista.dispose();
+                    ventanaMaestro.dispose();
+                    
+                } else if (ventanaOficial != null) {
+                	ArrayList<Cita_Aprendiz> aprendicesConCita = acceso.recogeCitasAprendiz(c);
+                    citasActuales = acceso.recogeCitas(c);
+                    VentanaOficial lc = new VentanaOficial();
+                    new ControladorOficial(lc, acceso, c, empleado);
+                    lc.setVisible(true);
+                    vista.dispose();
+                    ventanaMaestro.dispose();
+                }
             } else {
                 JOptionPane.showMessageDialog(vista, "Cita y aprendices guardados correctamente.");
                 
@@ -469,8 +509,23 @@ public class ControladorNuevaCita {
                     vista.dispose();
                     ventanaCita.dispose();
                     
-                } else {
+                } else if (ventanaMaestro != null) {
+                	ArrayList<Cita_Aprendiz> aprendicesConCita = acceso.recogeCitasAprendiz(c);
+                    citasActuales = acceso.recogeCitas(c);
+                    VentanaMaestro lc = new VentanaMaestro();
+                    new ControladorMaestro(lc, acceso, c, empleado);
+                    lc.setVisible(true);
                     vista.dispose();
+                    ventanaMaestro.dispose();
+                    
+                } else if (ventanaOficial != null) {
+                	ArrayList<Cita_Aprendiz> aprendicesConCita = acceso.recogeCitasAprendiz(c);
+                    citasActuales = acceso.recogeCitas(c);
+                    VentanaOficial lc = new VentanaOficial();
+                    new ControladorOficial(lc, acceso, c, empleado);
+                    lc.setVisible(true);
+                    vista.dispose();
+                    ventanaMaestro.dispose();
                 }
             }
 
@@ -501,10 +556,10 @@ public class ControladorNuevaCita {
      * Cierra la ventana actual de creación de cita.
      */
     private void cancelar() {
-			if (ventanaCita != null && ventanaMaestro == null && ventanaOficial == null) {
-		    	vista.dispose();
-			} else if (ventanaCita == null && (ventanaMaestro != null || ventanaOficial != null)) {
-                vista.dispose();
+		if (ventanaCita != null && ventanaMaestro == null && ventanaOficial == null) {
+	    	vista.dispose();
+		} else if (ventanaCita == null && (ventanaMaestro != null || ventanaOficial != null)) {
+            vista.dispose();
             }	
     }
 }

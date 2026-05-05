@@ -29,6 +29,7 @@ public class ControladorDetalleCita {
 
     /** Array que contiene los nombres de los aprendices asignados a la cita */
     private final String[] aprendices;
+    
 
     /**
      * Constructor principal del controlador.
@@ -85,14 +86,16 @@ public class ControladorDetalleCita {
             vista.setTraje("ID " + cita.getId_traje());
             vista.setTaller("ID " + cita.getId_sala());
             vista.setOficial("ID " + cita.getId_empleado());
-
             vista.setAprendices(
                     (aprendices[0] != null ? aprendices[0] : "—") + "\n" +
                     (aprendices[1] != null ? aprendices[1] : "")
             );
-
+            
             return;
         }
+            
+
+        
 
         // Modo online: Resolución de nombres mediante listas de la BD
         try {

@@ -101,14 +101,36 @@ public class ControladorListaCitas {
         modelo.setRowCount(0);
 
         for (Cita cita : lista) {
-            modelo.addRow(new Object[]{
+
+            if (empleado.getCategoria().equals("aprendiz")) {
+
+                for (Cita_Aprendiz aprendiz : aprendices) {
+                    if (aprendiz.getId_empleado() == empleado.getId_empleado() &&
+                        aprendiz.getId_cita() == cita.getId_cita()) {
+
+                        modelo.addRow(new Object[]{
+                            cita.getFecha() + " " + cita.getHora_inicio(),
+                            nombreCliente(cita.getId_cliente()),
+                            nombreTraje(cita.getId_traje()),
+                            nombreTaller(cita.getId_sala()),
+                            nombreEmpleado(cita.getId_empleado()),
+                            cita.getDuracion() + " h"
+                        });
+                    }
+                }
+
+            } else if (empleado.getCategoria().equals("oficial") || empleado.getCategoria().equals("maestro")) {
+
+                modelo.addRow(new Object[]{
                     cita.getFecha() + " " + cita.getHora_inicio(),
                     nombreCliente(cita.getId_cliente()),
                     nombreTraje(cita.getId_traje()),
                     nombreTaller(cita.getId_sala()),
                     nombreEmpleado(cita.getId_empleado()),
                     cita.getDuracion() + " h"
-            });
+                });
+
+            }
         }
     }
 
@@ -172,6 +194,10 @@ public class ControladorListaCitas {
         Cita cita = citasFiltradas.get(fila);
         int contador = 0;
         String[] aprs = new String[]{"", ""};
+        if(empleado.getCategoria().equals("aprendiz")) {
+        	aprs[0] = empleado.getNombre() + " " + empleado.getApellido();
+        	contador++;
+        }
 
         for (Cita_Aprendiz a : aprendices) {
             if (a.getId_cita() == cita.getId_cita()) {
@@ -212,12 +238,7 @@ public class ControladorListaCitas {
             }
         }
 
-        String empleadoEditable = "";
-        for (Empleado e : listaEmpleados) {
-            if (e.getId_empleado() == citaEditable.getId_empleado()) {
-                empleadoEditable = e.getNombre() + " " + e.getApellido() + " (" + e.getCategoria() + ")";
-            }
-        }
+        
 
         Cita_Aprendiz a1 = new Cita_Aprendiz(0, 0, 0);
         Cita_Aprendiz a2 = new Cita_Aprendiz(0, 0, 0);
@@ -228,13 +249,31 @@ public class ControladorListaCitas {
                 else a2 = a;
             }
         }
+        
+        String empleadoEditable = "";
+        for (Empleado e : listaEmpleados) {
+            if (e.getId_empleado() == citaEditable.getId_empleado()) {
+                empleadoEditable = e.getNombre() + " " + e.getApellido() + " (" + e.getCategoria() + ")";
+                if(empleado.getCategoria().equals("oficial") && empleado.getId_empleado() == citaEditable.getId_empleado()) {
+                	NuevaCita vistaForm = new NuevaCita();
+                    new ControladorNuevaCita(vistaForm, acceso, vista, null, null, c,
+                            empleado, citaEditable, clienteEditable, trajeEditable,
+                            tallerEditable, empleadoEditable, a1, a2);
 
-        NuevaCita vistaForm = new NuevaCita();
-        new ControladorNuevaCita(vistaForm, acceso, vista, null, null, c,
-                empleado, citaEditable, clienteEditable, trajeEditable,
-                tallerEditable, empleadoEditable, a1, a2);
+                    vistaForm.setVisible(true);
+                } else if (empleado.getCategoria().equals("maestro")){
+                	NuevaCita vistaForm = new NuevaCita();
+                    new ControladorNuevaCita(vistaForm, acceso, vista, null, null, c,
+                            empleado, citaEditable, clienteEditable, trajeEditable,
+                            tallerEditable, empleadoEditable, a1, a2);
 
-        vistaForm.setVisible(true);
+                    vistaForm.setVisible(true);
+                } else {
+                	JOptionPane.showMessageDialog(vista, "No puedes editar citas de otros oficiales o maestros",
+                			"Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
     }
 
     /**
@@ -249,16 +288,47 @@ public class ControladorListaCitas {
         }
 
         Cita cita = citasFiltradas.get(fila);
-        int confirmacion = JOptionPane.showConfirmDialog(vista, "¿Eliminar esta cita?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        
+        for (Empleado e : listaEmpleados) {
+            if (e.getId_empleado() == cita.getId_empleado()) {
+                if(empleado.getCategoria().equals("oficial") && empleado.getId_empleado() == cita.getId_empleado()) {
+                	int confirmacion = JOptionPane.showConfirmDialog(vista, "¿Eliminar esta cita?", "Confirmar", JOptionPane.YES_NO_OPTION);
 
-        if (confirmacion == JOptionPane.YES_OPTION) {
-            try {
-                acceso.eliminarCita(c, cita.getId_cita());
-                citas = acceso.recogeCitas(c);
-                citasFiltradas = new ArrayList<>(citas);
-                cargarTabla(citasFiltradas);
-            } catch (SQLException e) {
-                e.printStackTrace();
+                    if (confirmacion == JOptionPane.YES_OPTION) {
+                        try {
+                            acceso.eliminarCita(c, cita.getId_cita());
+                            citas = acceso.recogeCitas(c);
+                            citasFiltradas = new ArrayList<>(citas);
+                            cargarTabla(citasFiltradas);
+                            ListaCitas lc = new ListaCitas();
+                            new ControladorListaCitas(lc, acceso, c, citas, aprendices, empleado);
+                            lc.setVisible(true);
+                            vista.dispose();
+                        } catch (SQLException sqle) {
+                        	sqle.printStackTrace();
+                        }
+                    }
+                } else if (empleado.getCategoria().equals("maestro")){
+                	int confirmacion = JOptionPane.showConfirmDialog(vista, "¿Eliminar esta cita?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+                    if (confirmacion == JOptionPane.YES_OPTION) {
+                        try {
+                            acceso.eliminarCita(c, cita.getId_cita());
+                            citas = acceso.recogeCitas(c);
+                            citasFiltradas = new ArrayList<>(citas);
+                            cargarTabla(citasFiltradas);
+                            ListaCitas lc = new ListaCitas();
+                            new ControladorListaCitas(lc, acceso, c, citas, aprendices, empleado);
+                            lc.setVisible(true);
+                            vista.dispose();
+                        } catch (SQLException sqle) {
+                        	sqle.printStackTrace();
+                        }
+                    }
+                } else {
+                	JOptionPane.showMessageDialog(vista, "No puedes eliminar citas de otros oficiales o maestros",
+                			"Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }
