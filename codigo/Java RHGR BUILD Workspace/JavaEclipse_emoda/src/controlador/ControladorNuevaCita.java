@@ -200,6 +200,8 @@ public class ControladorNuevaCita {
         vista.getTxtHora().setText(horaReal);
         vista.getTxtDuracion().setText(Integer.toString(citaAEditar.getDuracion()));        
     }
+    
+    
 
     /**
      * Asigna los eventos de escucha (listeners) a los componentes de la interfaz,
