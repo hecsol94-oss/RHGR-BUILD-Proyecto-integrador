@@ -200,6 +200,8 @@ public class ControladorNuevaCita {
         vista.getTxtHora().setText(horaReal);
         vista.getTxtDuracion().setText(Integer.toString(citaAEditar.getDuracion()));        
     }
+    
+    
 
     /**
      * Asigna los eventos de escucha (listeners) a los componentes de la interfaz,
@@ -463,7 +465,7 @@ public class ControladorNuevaCita {
             ArrayList<Cita> citasActuales = acceso.recogeCitas(c);
             int idCitaReal = citasActuales.size();
 
-            int idxApr1 = vista.getCbAprendiz1().getSelectedIndex(); 
+            int idxApr1 = vista.getCbAprendiz1().getSelectedIndex();
             int idxApr2 = vista.getCbAprendiz2().getSelectedIndex();
             String nombreApr1 = (String) vista.getCbAprendiz1().getSelectedItem();
             String nombreApr2 = (String) vista.getCbAprendiz2().getSelectedItem();
@@ -472,16 +474,16 @@ public class ControladorNuevaCita {
             if (idxApr1 > 0) {
                 for (Empleado emp : listaEmpleados) {
                     if ((emp.getNombre() + " " + emp.getApellido()).equals(nombreApr1)) {
-                    	if (aprendizAEditar1 == null && citaAEditar == null) {
-                    		acceso.insertarNuevaCita_Aprendiz(c, new Cita_Aprendiz(0, idCitaReal, emp.getId_empleado()));
+                    if (aprendizAEditar1 == null && citaAEditar == null) {
+                    acceso.insertarNuevaCita_Aprendiz(c, new Cita_Aprendiz(0, idCitaReal, emp.getId_empleado()));
                             break;
-                    	} else if (aprendizAEditar1 == null && citaAEditar != null) {
-                    		acceso.insertarNuevaCita_Aprendiz(c, new Cita_Aprendiz(0, citaAEditar.getId_cita(), emp.getId_empleado()));
-                    		break;
-                    	} else {
-                    		acceso.actualizarCitaAprendiz(c, aprendizAEditar1.getId_aprendiz(), new Cita_Aprendiz(0, citaAEditar.getId_cita(), emp.getId_empleado()));
-                    		break;
-                    	}
+                    } else if (aprendizAEditar1 == null && citaAEditar != null) {
+                    acceso.insertarNuevaCita_Aprendiz(c, new Cita_Aprendiz(0, citaAEditar.getId_cita(), emp.getId_empleado()));
+                    break;
+                    } else {
+                    acceso.actualizarCitaAprendiz(c, aprendizAEditar1.getId_aprendiz(), new Cita_Aprendiz(0, citaAEditar.getId_cita(), emp.getId_empleado()));
+                    break;
+                    }
                     }
                 }
             }

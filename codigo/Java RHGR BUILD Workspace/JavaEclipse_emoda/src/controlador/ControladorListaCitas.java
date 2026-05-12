@@ -240,12 +240,12 @@ public class ControladorListaCitas {
 
         
 
-        Cita_Aprendiz a1 = new Cita_Aprendiz(0, 0, 0);
-        Cita_Aprendiz a2 = new Cita_Aprendiz(0, 0, 0);
+        Cita_Aprendiz a1 = null;
+        Cita_Aprendiz a2 = null;
 
         for (Cita_Aprendiz a : aprendices) {
             if (a.getId_cita() == citaEditable.getId_cita()) {
-                if (a1.getId_empleado() == 0) a1 = a;
+                if (a1 == null) a1 = a;
                 else a2 = a;
             }
         }
