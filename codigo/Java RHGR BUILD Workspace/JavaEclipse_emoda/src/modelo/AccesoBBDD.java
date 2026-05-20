@@ -9,7 +9,7 @@ public class AccesoBBDD {
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	private String url = "jdbc:mysql://localhost/tallerednamoda";
 	private String usuario = "root";
-	private String pword = "12345678";
+	private String pword = "1234";
 
 	/**
 	 * 
