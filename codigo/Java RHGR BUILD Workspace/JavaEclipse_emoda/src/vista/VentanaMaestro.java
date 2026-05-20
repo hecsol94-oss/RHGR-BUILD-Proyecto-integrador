@@ -48,7 +48,7 @@ public class VentanaMaestro extends JFrame {
         lblCitasSemana = new JLabel("0");
         lblProximaCita = new JLabel("-");
         
-        setTitle("SISTEMA DE OPERACIONES ELITE - RHGR");
+        setTitle("SISTEMA DE OPERACIONES ELITE - EDNA MODA");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH); 
         setMinimumSize(new Dimension(1200, 800));

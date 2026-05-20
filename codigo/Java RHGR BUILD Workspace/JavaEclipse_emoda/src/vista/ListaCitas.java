@@ -19,7 +19,7 @@ public class ListaCitas extends JFrame {
     private JButton btnTodas, btnDiseno, btnCostura, btnPruebas, btnVolver;
 
     public ListaCitas() {
-        setTitle("SISTEMA DE LOGÍSTICA DE CITAS - RHGR");
+        setTitle("SISTEMA DE LOGÍSTICA DE CITAS - EDNA MODA");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH); 
         setMinimumSize(new Dimension(1000, 700));
