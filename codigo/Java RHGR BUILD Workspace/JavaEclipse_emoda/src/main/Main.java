@@ -62,4 +62,3 @@ public class Main {
         sesion.setVisible(true);
     }
 }
-}
