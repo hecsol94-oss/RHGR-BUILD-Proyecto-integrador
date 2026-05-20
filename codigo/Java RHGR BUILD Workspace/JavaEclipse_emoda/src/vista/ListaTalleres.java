@@ -31,7 +31,7 @@ public class ListaTalleres extends JFrame {
         contentPane.setBorder(new EmptyBorder(40, 50, 40, 50)); // Margen externo elegante
         setContentPane(contentPane);
 
-        JPanel panelNorte = new JPanel(new BorderLayout());
+        JPanel panelNorte = new JPanel(new BorderLayout(0, 20));
         panelNorte.setOpaque(false);
 
         JLabel lblTitulo = new JLabel("GESTIÓN DE SEDES ESTRATÉGICAS");
