@@ -176,5 +176,77 @@ public class NuevoEmpleado extends JFrame {
         pword.setFont(new Font("Monospaced", Font.BOLD, 14));
         contentPane.add(pword);
     }
+
+	/**
+	 * @return the txtNombre
+	 */
+	public JTextField getTxtNombre() {
+		return txtNombre;
+	}
+
+	/**
+	 * @return the txtApellido
+	 */
+	public JTextField getTxtApellido() {
+		return txtApellido;
+	}
+
+	/**
+	 * @return the txtApodo
+	 */
+	public JTextField getTxtApodo() {
+		return txtApodo;
+	}
+
+	/**
+	 * @return the txtUsuario
+	 */
+	public JTextField getTxtUsuario() {
+		return txtUsuario;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getCbTipo() {
+		return (String) cbTipo.getSelectedItem();
+	}
+	
+	/**
+	 * 
+	 * @param tipo
+	 */
+	public void setCbTipo(String tipo) {
+		cbTipo.setSelectedItem(tipo);
+    }
+
+	/**
+	 * @return the contraseñaCampo
+	 */
+	public JPasswordField getContraseñaCampo() {
+		return ContraseñaCampo;
+	}
+
+	/**
+	 * @return the confirmarContraseña
+	 */
+	public JPasswordField getConfirmarContraseña() {
+		return ConfirmarContraseña;
+	}
+
+	/**
+	 * @return the btnGuardar
+	 */
+	public JButton getBtnGuardar() {
+		return btnGuardar;
+	}
+
+	/**
+	 * @return the btnCancelar
+	 */
+	public JButton getBtnCancelar() {
+		return btnCancelar;
+	}
     
 }
