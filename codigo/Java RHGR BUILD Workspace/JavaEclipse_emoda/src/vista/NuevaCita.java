@@ -26,7 +26,7 @@ public class NuevaCita extends JFrame {
     private JPanel panelContenedor;
 
     public NuevaCita() {
-        setTitle("PROTOCOLOS DE AGENDAMIENTO - RHGR");
+        setTitle("PROTOCOLOS DE AGENDAMIENTO - EDNA MODA");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         setSize(520, 550);

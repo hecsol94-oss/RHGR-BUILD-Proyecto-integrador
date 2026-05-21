@@ -17,7 +17,7 @@ public class NuevoCliente extends JFrame {
     private JButton btnGuardar, btnCancelar;
 
     public NuevoCliente() {
-        setTitle("REGISTRO DE SUJETO - RHGR");
+        setTitle("REGISTRO DE SUJETO - EDNA MODA");
         setResizable(false); 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(420, 450);
@@ -78,7 +78,7 @@ public class NuevoCliente extends JFrame {
         estilizarBoton(btnCancelar, NEGRO_ELITE, AMARILLO_POWER);
         contentPane.add(btnCancelar);
         
-        JLabel lblFooter = new JLabel("RHGR STRATEGIC SYSTEMS v2.6");
+        JLabel lblFooter = new JLabel("EDNA MODA STRATEGIC SYSTEMS v2.6");
         lblFooter.setFont(new Font("Monospaced", Font.PLAIN, 10));
         lblFooter.setForeground(Color.GRAY);
         lblFooter.setBounds(110, 380, 200, 20);

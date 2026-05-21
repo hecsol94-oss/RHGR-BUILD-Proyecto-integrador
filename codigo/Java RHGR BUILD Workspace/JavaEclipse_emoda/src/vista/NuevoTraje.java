@@ -73,7 +73,7 @@ public class NuevoTraje extends JFrame {
         estilizarBoton(btnCancelar, NEGRO_ELITE, AMARILLO_POWER);
         contentPane.add(btnCancelar);
         
-        JLabel lblFooter = new JLabel("RHGR-MFT UNIT v1.0");
+        JLabel lblFooter = new JLabel("EDNA MODA-MFT UNIT v1.0");
         lblFooter.setFont(new Font("Monospaced", Font.PLAIN, 10));
         lblFooter.setForeground(Color.GRAY);
         lblFooter.setBounds(130, 280, 200, 20);
