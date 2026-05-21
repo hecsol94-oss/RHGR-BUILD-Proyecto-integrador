@@ -1,6 +1,3 @@
-/**
- * 
- */
 package vista;
 
 import java.awt.Color;
@@ -10,9 +7,6 @@ import java.awt.Font;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
-/**
- * 
- */
 public class NuevoEmpleado extends JFrame {
 
 	private final Color ROJO_HEROE = new Color(204, 0, 0);
