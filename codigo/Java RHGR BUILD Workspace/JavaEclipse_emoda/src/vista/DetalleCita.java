@@ -18,7 +18,7 @@ public class DetalleCita extends JFrame {
     private JButton btnVolver;
 
     public DetalleCita() {
-        setTitle("DOSSIER TÉCNICO DE CITA - RHGR");
+        setTitle("DOSSIER TÉCNICO DE CITA - EDNA MODA");
         setResizable(false);
         setBounds(150, 150, 460, 520);
         
