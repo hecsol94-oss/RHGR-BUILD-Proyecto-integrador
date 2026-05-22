@@ -17,7 +17,7 @@ public class ListaEmpleados extends JFrame {
     private JPanel contentPane;
     private JTextField txtBuscar;
     private JTable table;
-    private JButton btnBuscar, btnNuevo, btnDetalle, btnEditar, btnVolver, btnTodos, btnAprendiz, btnOficial, btnMaestro, btnEliminar;
+    private JButton btnBuscar, btnNuevo, btnEditar, btnVolver, btnTodos, btnAprendiz, btnOficial, btnMaestro, btnEliminar;
     
     public ListaEmpleados() {
     	setTitle("DATABASE: EMPLEADOS - EDNA MODA");
@@ -95,7 +95,6 @@ public class ListaEmpleados extends JFrame {
         JPanel panelAccionesIzquierda = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 0));
         panelAccionesIzquierda.setOpaque(false);
         
-        btnDetalle = new JButton("VER EXPEDIENTE"); estilizarBoton(btnDetalle, 180, 50);
         btnEditar = new JButton("MODIFICAR"); estilizarBoton(btnEditar, 150, 50);
         btnEliminar = new JButton("ELIMINAR"); estilizarBoton(btnEliminar, 150, 50);
         
@@ -167,13 +166,6 @@ public class ListaEmpleados extends JFrame {
 	 */
 	public JButton getBtnNuevo() {
 		return btnNuevo;
-	}
-
-	/**
-	 * @return the btnDetalle
-	 */
-	public JButton getBtnDetalle() {
-		return btnDetalle;
 	}
 
 	/**
