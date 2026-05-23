@@ -36,8 +36,31 @@ public class ControladorListaEmpleados {
 		this.empleado = empleado;
 		
 		cargarTabla(empleadosFiltrados);
+		
+		// Evento para resetear filtros y mostrar todos los empleados
+        vista.getBtnTodos().addActionListener(e -> {
+            empleadosFiltrados = new ArrayList<>(empleados);
+            cargarTabla(empleadosFiltrados);
+        });
+        
+        // Configuración de botones de filtrado y búsqueda
+        vista.getBtnAprendiz().addActionListener(e -> filtrarPorCategoria("aprendiz"));
+        vista.getBtnOficial().addActionListener(e -> filtrarPorCategoria("oficial"));
+        vista.getBtnMaestro().addActionListener(e -> filtrarPorCategoria("maestro"));
+        vista.getBtnBuscar().addActionListener(e -> buscar());
+        
+        // Configuración de acciones CRUD y navegación
+        vista.getBtnEditar().addActionListener(e -> editarEmpleado());
+        vista.getBtnNuevo().addActionListener(e -> nuevoEmpleado());
+        vista.getBtnEliminar().addActionListener(e -> eliminarEmpleado());
+        vista.getBtnVolver().addActionListener(e -> volver());
 	}
 	
+	/**
+     * Actualiza el modelo de la tabla en la vista con los datos proporcionados.
+     * 
+     * @param empleados Lista de empleados a mostrar.
+     */
 	public void cargarTabla(ArrayList<Empleado> empleados) {
 		
 		DefaultTableModel modelo = (DefaultTableModel) vista.getTable().getModel();
@@ -46,7 +69,29 @@ public class ControladorListaEmpleados {
         for (Empleado empleado : empleados) {
         	
         }
+        
+        modelo.addRow(new Object[]{
+        		empleado.getCategoria(),
+        		empleado.getNombre(),
+        		empleado.getApellido(),
+        		empleado.getApodo(),
+        		empleado.getUsuario(),
+        		empleado.getContrasena()
+        });
 	}
+	
+	private void filtrarPorCategoria(String categoriaAprendiz, String categoriaOficial, String categoriaMaestro) {
+        empleadosFiltrados = new ArrayList<>();
+
+        for (Empleado empleado : empleados) {
+            if (empleado.getCategoria().equalsIgnoreCase(categoriaAprendiz)
+                    || empleado.getCategoria().equalsIgnoreCase(categoriaOficial)
+            		|| empleado.getCategoria().equalsIgnoreCase(categoriaMaestro)) {
+                empleadosFiltrados.add(empleado);
+            }
+        }
+        cargarTabla(empleadosFiltrados);
+    }
 	
 	/**
      * Abre el formulario de edición para el empleado seleccionado en la tabla.
