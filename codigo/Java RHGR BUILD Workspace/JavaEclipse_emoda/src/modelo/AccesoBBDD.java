@@ -843,4 +843,86 @@ public class AccesoBBDD {
 	    }
 	    
 	}
+	
+	//Al crear un nuevo empleado en la ventana NuevoEmpleado, añadimos la insercion de la nueva fila a la BBDD
+	/**
+	 * 
+	 * @param c
+	 * @param categoria
+	 * @param nombre
+	 * @param apellido
+	 * @param apodo
+	 * @param usuario
+	 * @param contraseña
+	 */
+	public void insertarNuevoEmpleado(Connection c, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña) {
+
+		Statement st;
+		try {
+			st = c.createStatement();
+			String queryC = ("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('" +categoria + "', '" +nombre + "', '" +apellido + "', '" +apodo + "', '" +usuario +"', '" +contraseña + "');");
+
+			st.executeUpdate(queryC);
+			st.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	/**
+	 * 
+	 * @param c
+	 * @param id_empleado
+	 */
+	public void eliminarEmpleado(Connection c, int id_empleado) {
+		
+	    String query = "DELETE FROM Empleados WHERE id_empleado = ?";
+	    
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        
+	        pstmt.setInt(1, id_empleado); 
+	        pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        System.out.println("Error al eliminar el empleado: " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	    
+	}
+	
+	/**
+	 * 
+	 * @param c
+	 * @param id_empleado
+	 * @param categoria
+	 * @param nombre
+	 * @param apellido
+	 * @param apodo
+	 * @param usuario
+	 * @param contraseña
+	 */
+	public void actualizarEmpleado(Connection c, int id_empleado, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña) {
+	    String query = "UPDATE Empleados SET categoria = ?, nombre = ?, apellido = ?, apodo = ?, usario = ?, contraseña = ? WHERE id_empleado = ?";
+	    
+	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
+	        
+	        pstmt.setString(1, categoria);
+	        pstmt.setString(2, nombre);
+	        pstmt.setString(3, apellido);
+	        pstmt.setString(4, apodo);
+	        pstmt.setString(5, usuario);
+	        pstmt.setString(6, contraseña);
+	        pstmt.setInt(7, id_empleado);
+	        
+	        pstmt.executeUpdate();
+	        
+	    } catch (SQLException e) {
+	        System.out.println("Error al actualizar el empleado " + e.getMessage());
+	        e.printStackTrace();
+	    }
+	}
+	
 }
