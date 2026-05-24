@@ -153,6 +153,14 @@ public class ListaEmpleados extends JFrame {
 	public JTextField getTxtBuscar() {
 		return txtBuscar;
 	}
+	
+	/**
+	 * 
+	 * @return the table
+	 */
+	public JTable getTable() {
+		return table; 
+	}
 
 	/**
 	 * @return the btnBuscar
