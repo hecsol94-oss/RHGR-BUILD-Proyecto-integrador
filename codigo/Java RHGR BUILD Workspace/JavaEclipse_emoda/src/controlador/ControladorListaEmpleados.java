@@ -67,17 +67,15 @@ public class ControladorListaEmpleados {
         modelo.setRowCount(0);
         
         for (Empleado empleado : empleados) {
-        	
+        	modelo.addRow(new Object[]{
+            		empleado.getCategoria(),
+            		empleado.getNombre(),
+            		empleado.getApellido(),
+            		empleado.getApodo(),
+            		empleado.getUsuario(),
+            		empleado.getContrasena()
+            });
         }
-        
-        modelo.addRow(new Object[]{
-        		empleado.getCategoria(),
-        		empleado.getNombre(),
-        		empleado.getApellido(),
-        		empleado.getApodo(),
-        		empleado.getUsuario(),
-        		empleado.getContrasena()
-        });
 	}
 	
 	private void filtrarPorCategoria(String categoriaAprendiz, String categoriaOficial, String categoriaMaestro) {
@@ -90,6 +88,24 @@ public class ControladorListaEmpleados {
                 empleadosFiltrados.add(empleado);
             }
         }
+        cargarTabla(empleadosFiltrados);
+    }
+	
+	/**
+     * Realiza una búsqueda parcial en la lista de empleados basándose en el 
+     * texto introducido en el campo de búsqueda de la vista.
+     */
+    private void buscar() {
+        String texto = vista.getTxtBuscar().getText().trim().toLowerCase();
+        ArrayList<Empleado> resultado = new ArrayList<>();
+
+        for (Empleado empleado : empleados) {
+            if (empleado.getNombre().toLowerCase().contains(texto)) {
+                resultado.add(empleado);
+            }
+        }
+
+        empleadosFiltrados = resultado;
         cargarTabla(empleadosFiltrados);
     }
 	
