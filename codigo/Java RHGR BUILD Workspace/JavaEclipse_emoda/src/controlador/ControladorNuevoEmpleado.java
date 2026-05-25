@@ -40,6 +40,16 @@ public class ControladorNuevoEmpleado {
 	 /**
      * Constructor principal del controlador.
      * Inicializa las referencias, carga los datos si es edición y configura los listeners de la vista.
+     * 
+     * @param vista Ventana del formulario NuevoEmpleado.
+     * @param vistaEmpleados Referencia a la lista de empleados (ventana origen).
+     * @param vistaMaestro Referencia a la ventana del maestro (ventana origen).
+     * @param vistaCita Referencia a la ventana de nueva cita (ventana origen).
+     * @param acceso Capa de acceso a la base de datos.
+     * @param c Conenxión activa a la base de datos.
+     * @param empleadoEditar Instancia del empleado a editar, o null si se crea uno nuevo.
+     * @param empleados Lista actual de empleados en memoria.
+     * @param empleado Empleado que está realizando la operación.
      */
 	public ControladorNuevoEmpleado(NuevoEmpleado vista, ListaEmpleados vistaEmpleados, VentanaMaestro vistaMaestro,
 			NuevaCita vistaCita, AccesoBBDD acceso, Connection c, Empleado empleadoEditar, ArrayList<Empleado> empleados,
