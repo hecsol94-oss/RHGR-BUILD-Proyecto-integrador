@@ -25,6 +25,16 @@ public class ControladorListaEmpleados {
 	private ArrayList<Empleado> empleadosFiltrados;
 	private Empleado empleado;
 	
+	/**
+     * Constructor del controlador de la lista de clientes.
+     * Inicializa los datos y configura todos los escuchadores de eventos para la interfaz.
+     * 
+     * @param vista La ventana que muestra la tabla de empleados.
+     * @param acceso Objeto de acceso a datos para operaciones en BD.
+     * @param c Conexión activa a la base de datos.
+     * @param empleados Lista completa de empleados registrados.
+     * @param empleado Empleado que está utilizando la aplicación (para control de roles).
+     */
 	public ControladorListaEmpleados(ListaEmpleados vista, AccesoBBDD acceso, Connection c,
 			ArrayList<Empleado> empleados, Empleado empleado) {
 		
@@ -78,6 +88,11 @@ public class ControladorListaEmpleados {
         }
 	}
 	
+	/**
+	 * Filtra la lista actual basándose en la categoría.
+	 * 
+	 * @param categoria Etiqueta para la categoría.
+	 */
 	private void filtrarPorCategoria(String categoria) {
         empleadosFiltrados = new ArrayList<>();
 
