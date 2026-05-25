@@ -854,8 +854,9 @@ public class AccesoBBDD {
 	 * @param apodo
 	 * @param usuario
 	 * @param contraseña
+	 * @param confirmarContraseña 
 	 */
-	public void insertarNuevoEmpleado(Connection c, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña) {
+	public void insertarNuevoEmpleado(Connection c, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña, String confirmarContraseña) {
 
 		Statement st;
 		try {
@@ -903,8 +904,9 @@ public class AccesoBBDD {
 	 * @param apodo
 	 * @param usuario
 	 * @param contraseña
+	 * @param confirmarContraseña 
 	 */
-	public void actualizarEmpleado(Connection c, int id_empleado, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña) {
+	public void actualizarEmpleado(Connection c, int id_empleado, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña, String confirmarContraseña) {
 	    String query = "UPDATE Empleados SET categoria = ?, nombre = ?, apellido = ?, apodo = ?, usario = ?, contraseña = ? WHERE id_empleado = ?";
 	    
 	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
@@ -915,7 +917,8 @@ public class AccesoBBDD {
 	        pstmt.setString(4, apodo);
 	        pstmt.setString(5, usuario);
 	        pstmt.setString(6, contraseña);
-	        pstmt.setInt(7, id_empleado);
+	        pstmt.setString(7, confirmarContraseña);
+	        pstmt.setInt(8, id_empleado);
 	        
 	        pstmt.executeUpdate();
 	        

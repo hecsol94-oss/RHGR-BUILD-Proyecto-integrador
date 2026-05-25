@@ -78,13 +78,13 @@ public class ControladorListaEmpleados {
         }
 	}
 	
-	private void filtrarPorCategoria(String categoriaAprendiz, String categoriaOficial, String categoriaMaestro) {
+	private void filtrarPorCategoria(String categoria) {
         empleadosFiltrados = new ArrayList<>();
 
         for (Empleado empleado : empleados) {
-            if (empleado.getCategoria().equalsIgnoreCase(categoriaAprendiz)
-                    || empleado.getCategoria().equalsIgnoreCase(categoriaOficial)
-            		|| empleado.getCategoria().equalsIgnoreCase(categoriaMaestro)) {
+            if (empleado.getCategoria().equalsIgnoreCase(categoria)
+                    || empleado.getCategoria().equalsIgnoreCase(categoria)
+            		|| empleado.getCategoria().equalsIgnoreCase(categoria)) {
                 empleadosFiltrados.add(empleado);
             }
         }
@@ -123,9 +123,9 @@ public class ControladorListaEmpleados {
             return;
         }
 
-        Empleado usuario = empleadosFiltrados.get(fila);
+        Empleado empleado = empleadosFiltrados.get(fila);
         NuevoEmpleado vistaForm = new NuevoEmpleado();
-        new ControladorNuevoEmpleado(vistaForm, vista, null, null, acceso, c, usuario, empleados, empleado);
+        new ControladorNuevoEmpleado(vistaForm, vista, null, null, acceso, c, empleado, empleados, empleado);
         vistaForm.setVisible(true);
     }
     
