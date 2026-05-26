@@ -16,7 +16,7 @@ public class VentanaOficial extends JFrame {
     private CardLayout cardLayout;
     private JPanel cardPane;
 
-    private JMenuItem menuItemListaCitas, menuItemNuevaCita, menuItemListaClientes, menuItemNuevoCliente, menuItemListaTalleres, menuItemNuevoTaller;
+    private JMenuItem menuItemListaCitas, menuItemNuevaCita, menuItemListaClientes, menuItemNuevoCliente, menuItemListaTalleres, menuItemNuevoTaller, menuItemListaEmpleados, menuItemNuevoEmpleado;
     private JLabel lblUsuario, lblSalir;
     private JLabel lblTodasLasCitas, lblNumeroDeMisCitas, lblNumeroDeTalleres, lblTotalClientes, lblCitasHoy, lblCitasSemana, lblProximaCita;
     private JTable tableCitas, tableClientes, tableTalleres;
@@ -26,6 +26,7 @@ public class VentanaOficial extends JFrame {
     private JList<String> listaTalleres;
     private DefaultListModel<String> modeloListaTalleres;
     private JButton btnNuevoTallerEmb, btnEditarTalleres, btnEliminarTalleres, btnConfirmarTalleres, btnVolverTalleres;
+    private JButton btnNuevoEmpleadoEmb, btnEditarEmpleados, btnEliminarEmpleados, btnBuscarEmpleados, btnTodosEmpleados, btnAprendizEmpleados, btnOficialEmpleados, btnMaestroEmpleados, btnVolverEmpleados;
 
     public static final String CARD_DASHBOARD = "DASHBOARD";
     public static final String CARD_LISTA_CITAS = "LISTA_CITAS";
@@ -300,6 +301,11 @@ public class VentanaOficial extends JFrame {
         menuBar.add(menuTalleres);
         menuItemNuevoCliente.setEnabled(false);
         menuItemNuevoTaller.setEnabled(false);
+        JMenu menuEmpleados = crearMenu("Empleados");
+        menuItemListaEmpleados = crearItem("Lista de empleados");
+        menuItemNuevoEmpleado = crearItem("Nuevo empleado");
+        menuEmpleados.add(menuItemListaEmpleados); menuEmpleados.add(menuItemNuevoEmpleado);
+        menuBar.add(menuEmpleados);
     }
 
     /**
