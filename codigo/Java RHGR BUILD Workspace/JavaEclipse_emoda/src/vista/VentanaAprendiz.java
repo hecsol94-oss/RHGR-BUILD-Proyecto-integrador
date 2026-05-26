@@ -23,16 +23,16 @@ public class VentanaAprendiz extends JFrame {
     private JPanel cardPane;
 
     // --- Componentes originales (Todos mantenidos para el Controlador) ---
-    private JMenuItem menuItemListaCitas, menuItemNuevaCita, menuItemListaClientes, menuItemNuevoCliente, menuItemListaTalleres, menuItemNuevoTaller;
+    private JMenuItem menuItemListaCitas, menuItemNuevaCita, menuItemListaClientes, menuItemNuevoCliente, menuItemListaTalleres, menuItemNuevoTaller, menuItemListaEmpleados, menuItemNuevoEmpleado;
     private JLabel lblUsuario, lblSalir;
     private JLabel lblTodasLasCitas, lblNumeroDeMisCitas, lblNumeroDeTalleres, lblTotalClientes, lblCitasHoy, lblCitasSemana, lblProximaCita;
     private JTable tableCitas, tableClientes, tableTalleres;
     private JTextField txtBuscarCitas, txtBuscarClientes;
     private JButton btnNuevaCitaEmb, btnVerDetallesCitas, btnEditarCitas, btnBuscarCitas, btnTodasCitas, btnDisenoCitas, btnCosturaCitas, btnPruebasCitas, btnVolverCitas;
-    private JButton btnNuevoClienteEmb, btnDetalleClientes, btnEditarClientes, btnBuscarClientes, btnTodosClientes, btnHeroeClientes, btnVillanoClientes, btnEliminarClientes, btnVolverClientes;
     private JList<String> listaTalleres;
     private DefaultListModel<String> modeloListaTalleres;
     private JButton btnNuevoTallerEmb, btnEditarTalleres, btnEliminarTalleres, btnConfirmarTalleres, btnVolverTalleres;
+    private JButton btnNuevoEmpleadoEmb, btnEditarEmpleados, btnEliminarEmpleados, btnBuscarEmpleados, btnTodosEmpleados, btnAprendizEmpleados, btnOficialEmpleados, btnMaestroEmpleados, btnVolverEmpleados;
 
     public static final String CARD_DASHBOARD = "DASHBOARD";
     public static final String CARD_LISTA_CITAS = "LISTA_CITAS";
@@ -308,6 +308,12 @@ public class VentanaAprendiz extends JFrame {
         menuClientes.setEnabled(false);
         menuItemNuevoTaller.setEnabled(false);
         menuItemNuevaCita.setEnabled(false);
+        JMenu menuEmpleados = crearMenu("Empleados");
+        menuItemListaEmpleados = crearItem("Lista de empleados");
+        menuItemNuevoEmpleado = crearItem("Nuevo empleado");
+        menuEmpleados.add(menuItemListaEmpleados); menuEmpleados.add(menuItemNuevoEmpleado);
+        menuBar.add(menuEmpleados);
+        menuItemNuevoEmpleado.setEnabled(false);
     }
 
     /**
@@ -526,6 +532,55 @@ public class VentanaAprendiz extends JFrame {
     public JButton getBtnVolverTalleres() {
     	return btnVolverTalleres; 
     }
+    /**
+	 * 
+	 * @return
+	 */
+    public JButton getBtnEditarEmpleados() {
+    	return btnEditarEmpleados;
+    }
+    /**
+	 * 
+	 * @return
+	 */
+    public JButton getBtnBuscarEmpleados() {
+    	return btnBuscarEmpleados;
+    }
+    /**
+	 * 
+	 * @return
+	 */
+    public JButton getBtnTodosEmpleados() {
+    	return btnTodosEmpleados;
+    }
+    /**
+	 * 
+	 * @return
+	 */
+    public JButton getBtnAprendizEmpleados() {
+    	return btnAprendizEmpleados;
+    }
+    /**
+	 * 
+	 * @return
+	 */
+    public JButton getBtnOficialEmpleados() {
+    	return btnOficialEmpleados;
+    }
+    /**
+	 * 
+	 * @return
+	 */
+    public JButton getBtnMaestroEmpleados() {
+    	return btnMaestroEmpleados;
+    }
+    /**
+	 * 
+	 * @return
+	 */
+    public JButton getBtnVolverEmpleados() {
+    	return btnVolverEmpleados;
+    }
     public void deshabilitarBotonesCitas() {
     	btnEditarCitas.setEnabled(false); 
     	btnNuevaCitaEmb.setEnabled(false); 
@@ -535,8 +590,12 @@ public class VentanaAprendiz extends JFrame {
     	btnEliminarTalleres.setEnabled(false);
     	btnNuevoTallerEmb.setEnabled(false); 
     }
+    public void deshabilitarBotonesEmpleados() {
+    	btnEliminarEmpleados.setEnabled(false);
+    	btnNuevoEmpleadoEmb.setEnabled(false);
+    }
 
-//Getters para los items de menú
+    //Getters para los items de menú
     /**
      * 
      * @return
@@ -550,5 +609,12 @@ public class VentanaAprendiz extends JFrame {
 	 */
 	public JMenuItem getMenuItemListaTalleres() { 
 		return menuItemListaTalleres; 
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public JMenuItem getMenuItemListaEmpleados() {
+		return menuItemListaTalleres;
 	}
 }

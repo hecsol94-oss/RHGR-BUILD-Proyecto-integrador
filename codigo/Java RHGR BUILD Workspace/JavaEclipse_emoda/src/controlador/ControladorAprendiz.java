@@ -55,6 +55,7 @@ public class ControladorAprendiz {
         // Configuración de la navegación por menús
         vista.getMenuItemListaCitas().addActionListener(e -> abrirListaCitas());
         vista.getMenuItemListaTalleres().addActionListener(e -> abrirListaTalleres());
+        vista.getMenuItemListaEmpleados().addActionListener(e -> abrirListaEmpleados());
 
         // Configuración del botón de salida (Logout)
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -164,6 +165,21 @@ public class ControladorAprendiz {
 
         vistaLista.setVisible(true);
         vista.dispose();
+    }
+    
+    /**
+     * Abre la ventana de gestión de empleados y cierra la ventana actual.
+     */
+    private void abrirListaEmpleados() {
+    	try {
+    		ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
+        	ListaEmpleados vistaLista = new ListaEmpleados();
+        	new ControladorListaEmpleados(vistaLista, acceso, c, empleados, empleado);
+        	vistaLista.setVisible(true);
+        	vista.dispose();
+    	} catch (SQLException ex) {
+    		ex.printStackTrace();
+    	}
     }
 
     /**
