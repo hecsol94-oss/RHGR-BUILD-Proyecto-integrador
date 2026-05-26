@@ -26,7 +26,7 @@ public class ControladorListaEmpleados {
 	private Empleado empleado;
 	
 	/**
-     * Constructor del controlador de la lista de clientes.
+     * Constructor del controlador de la lista de empleados.
      * Inicializa los datos y configura todos los escuchadores de eventos para la interfaz.
      * 
      * @param vista La ventana que muestra la tabla de empleados.

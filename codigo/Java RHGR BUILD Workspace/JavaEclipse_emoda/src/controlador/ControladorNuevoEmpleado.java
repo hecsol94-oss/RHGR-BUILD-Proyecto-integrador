@@ -120,7 +120,7 @@ public class ControladorNuevoEmpleado {
 				
 				JOptionPane.showMessageDialog(vista, "Empleado creado correctamente");
 				
-			// ===== CASO: EDITAR CLIENTE =====
+			// ===== CASO: EDITAR EMPLEADO =====
 			} else {
 				
 				acceso.actualizarEmpleado(c, empleadoEditar.getId_empleado(), categoria, nombre, apellido, apodo, usuario, contraseña, confirmarContraseña);
