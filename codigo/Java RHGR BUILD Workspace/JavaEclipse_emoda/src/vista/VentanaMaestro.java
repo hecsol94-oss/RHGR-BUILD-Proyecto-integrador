@@ -19,7 +19,7 @@ public class VentanaMaestro extends JFrame {
     private JPanel cardPane;
 
     // --- Componentes originales (Todos mantenidos para el Controlador) ---
-    private JMenuItem menuItemListaCitas, menuItemNuevaCita, menuItemListaClientes, menuItemNuevoCliente, menuItemListaTalleres, menuItemNuevoTaller;
+    private JMenuItem menuItemListaCitas, menuItemNuevaCita, menuItemListaClientes, menuItemNuevoCliente, menuItemListaTalleres, menuItemNuevoTaller, menuItemListaEmpleados, menuItemNuevoEmpleado;
     private JLabel lblUsuario, lblSalir;
     private JLabel lblTodasLasCitas, lblNumeroDeMisCitas, lblNumeroDeTalleres, lblTotalClientes, lblCitasHoy, lblCitasSemana, lblProximaCita;
     private JTable tableCitas, tableClientes, tableTalleres;
@@ -29,6 +29,7 @@ public class VentanaMaestro extends JFrame {
     private JList<String> listaTalleres;
     private DefaultListModel<String> modeloListaTalleres;
     private JButton btnNuevoTallerEmb, btnEditarTalleres, btnEliminarTalleres, btnConfirmarTalleres, btnVolverTalleres;
+    private JButton btnNuevoEmpleadoEmb, btnEditarEmpleados, btnEliminarEmpleados, btnBuscarEmpleados, btnTodosEmpleados, btnAprendizEmpleados, btnOficialEmpleados, btnMaestroEmpleados, btnVolverEmpleados;
 
     public static final String CARD_DASHBOARD = "DASHBOARD";
     public static final String CARD_LISTA_CITAS = "LISTA_CITAS";
@@ -293,6 +294,11 @@ public class VentanaMaestro extends JFrame {
         menuItemNuevoTaller = crearItem("Nuevo taller");
         menuTalleres.add(menuItemListaTalleres); menuTalleres.add(menuItemNuevoTaller);
         menuBar.add(menuTalleres);
+        JMenu menuEmpleados = crearMenu("Empleados");
+        menuItemListaEmpleados = crearItem("Lista de empleados");
+        menuItemNuevoEmpleado = crearItem("Nuevo empleado");
+        menuEmpleados.add(menuItemListaEmpleados); menuEmpleados.add(menuItemNuevoEmpleado);
+        menuBar.add(menuEmpleados);
      
     }
 
@@ -607,9 +613,73 @@ public class VentanaMaestro extends JFrame {
     public JButton getBtnVolverTalleres() { 
     	return btnVolverTalleres; 
     }
-
     
- // Getters menú
+    // Getters lista empleados
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnNuevoEmpleadoEmb() {
+    	return btnNuevoEmpleadoEmb;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnEditarEmpleados() {
+    	return btnEditarEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnEliminarEmpleados() {
+    	return btnEliminarEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnBuscarEmpleados() {
+    	return btnBuscarEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnTodosEmpleados() {
+    	return btnTodosEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnAprendizEmpleados() {
+    	return btnAprendizEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnOficialEmpleados() {
+    	return btnOficialEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnMaestroEmpleados() {
+    	return btnMaestroEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnVolverEmpleados() {
+    	return btnVolverEmpleados;
+    }
+    
+    // Getters menú
     /**
      * 
      * @return
@@ -651,5 +721,19 @@ public class VentanaMaestro extends JFrame {
      */
     public JMenuItem getMenuItemNuevoTaller() { 
     	return menuItemNuevoTaller; 
+    }
+    /**
+     * 
+     * @return
+     */
+    public JMenuItem getMenuItemListaEmpleados() {
+    	return menuItemListaEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JMenuItem getMenuItemNuevoEmpleado() {
+    	return menuItemNuevoEmpleado;
     }
 }

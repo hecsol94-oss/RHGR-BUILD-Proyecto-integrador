@@ -29,6 +29,7 @@ public class ControladorMaestro {
     private ArrayList<Cliente> clientesFiltrados;
     private ArrayList<Taller> todosTalleres;
     private ArrayList<Empleado> listaEmpleados;
+    private ArrayList<Empleado> empleadosFiltrados;
     private ArrayList<Traje> listaTrajes;
     private ArrayList<Traje> trajesFiltrados;
     private boolean editable = true;
@@ -59,6 +60,8 @@ public class ControladorMaestro {
         vista.getMenuItemNuevoCliente().addActionListener(e -> abrirNuevoCliente());
         vista.getMenuItemListaTalleres().addActionListener(e -> abrirListaTalleres());
         vista.getMenuItemNuevoTaller().addActionListener(e -> abrirNuevoTaller());
+        vista.getMenuItemListaEmpleados().addActionListener(e -> abrirListaEmpleados());
+        vista.getMenuItemNuevoEmpleado().addActionListener(e -> abrirNuevoEmpleado());
 
         // Salir
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -201,6 +204,35 @@ public class ControladorMaestro {
         NuevoTaller vistaForm = new NuevoTaller();
         new ControladorNuevoTaller(vistaForm, null, vista, acceso, c, null, talleres, empleado);
         vistaForm.setVisible(true);
+    }
+    
+    /**
+     * Abre la ventana de gestión de empleados y cierra la ventana actual.
+     */
+    private void abrirListaEmpleados() {
+    	try {
+    		ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
+        	ListaEmpleados vistaLista = new ListaEmpleados();
+        	new ControladorListaEmpleados(vistaLista, acceso, c, empleados, empleado);
+        	vistaLista.setVisible(true);
+        	vista.dispose();
+    	} catch (SQLException ex) {
+    		ex.printStackTrace();
+    	}
+    }
+    
+    /**
+     * Abre el formulario para registrar un nuevo empleado.
+     */
+    private void abrirNuevoEmpleado() {
+    	try {
+    		NuevoEmpleado vistaForm = new NuevoEmpleado();
+    		ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
+    		new ControladorNuevoEmpleado(vistaForm, null, vista, null, acceso, c, empleado, empleados, empleado);
+    		vistaForm.setVisible(true);
+    	} catch (SQLException ex) {
+    		ex.printStackTrace();
+    	}
     }
 
     /**
