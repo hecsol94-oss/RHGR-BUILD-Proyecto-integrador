@@ -22,7 +22,7 @@ public class NuevoEmpleado extends JFrame {
     	setTitle("REGISTRO DE EMPLEADO - EDNA MODA");
         setResizable(false); 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(420, 450);
+        setSize(520, 550);
         setLocationRelativeTo(null);
         
         contentPane = new JPanel();
