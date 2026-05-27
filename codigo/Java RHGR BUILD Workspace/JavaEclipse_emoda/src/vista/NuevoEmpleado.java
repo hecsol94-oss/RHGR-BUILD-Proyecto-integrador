@@ -47,13 +47,13 @@ public class NuevoEmpleado extends JFrame {
         estilizarLabel(lblNombre, 20, 60);
         
         txtNombre = new JTextField();
-        estilizarCampo(txtNombre, 20, 80, 360, 30);
+        estilizarCampo(txtNombre, 20, 80, 170, 30);
         
         JLabel lblApellido = new JLabel("APELLIDO:");
         estilizarLabel(lblApellido, 20, 120);
         
         txtApellido = new JTextField();
-        estilizarCampo(txtApellido, 20, 140, 360, 30);
+        estilizarCampo(txtApellido, 20, 140, 170, 30);
         
         JLabel lblApodo = new JLabel("APODO:");
         estilizarLabel(lblApodo, 20, 185);
@@ -61,17 +61,23 @@ public class NuevoEmpleado extends JFrame {
         txtApodo = new JTextField();
         estilizarCampo(txtApodo, 20, 205, 170, 30);
         
+        JLabel lblUsuario = new JLabel("USUARIO:");
+        estilizarLabel(lblUsuario, 20, 245);
+        
+        txtUsuario = new JTextField();
+        estilizarCampo(txtUsuario, 20, 265, 170, 30);
+        
         JLabel lblContraseñaCampo = new JLabel("CONTRASEÑA:");
-        estilizarLabel(lblContraseñaCampo, 20, 245);
+        estilizarLabel(lblContraseñaCampo, 20, 305);
         
         ContraseñaCampo = new JPasswordField();
-        estilizarContraseña(ContraseñaCampo, 20, 265, 170, 30);
+        estilizarContraseña(ContraseñaCampo, 20, 325, 170, 30);
         
         JLabel lblConfirmarContraseña = new JLabel("CONFIRMAR CONTRASEÑA:");
-        estilizarLabel(lblConfirmarContraseña, 20, 305);
+        estilizarLabel(lblConfirmarContraseña, 20, 365);
         
         ConfirmarContraseña = new JPasswordField();
-        estilizarContraseña(ConfirmarContraseña, 20, 325, 170, 30);
+        estilizarContraseña(ConfirmarContraseña, 20, 385, 170, 30);
         
         JLabel lblTipo = new JLabel("CATEGORÍA:");
         estilizarLabel(lblTipo, 210, 185);
