@@ -78,10 +78,10 @@ public class ControladorListaEmpleados {
         
         for (Empleado empleado : empleados) {
         	modelo.addRow(new Object[]{
-            		empleado.getCategoria(),
             		empleado.getApodo(),
             		empleado.getNombre(),
-            		empleado.getApellido()
+            		empleado.getApellido(),
+            		empleado.getCategoria()
             });
         }
 	}
@@ -136,9 +136,9 @@ public class ControladorListaEmpleados {
             return;
         }
 
-        Empleado empleado = empleadosFiltrados.get(fila);
+        Empleado empleadoEdit = empleadosFiltrados.get(fila);
         NuevoEmpleado vistaForm = new NuevoEmpleado();
-        new ControladorNuevoEmpleado(vistaForm, vista, null, null, acceso, c, empleado, empleados, empleado);
+        new ControladorNuevoEmpleado(vistaForm, vista, null, null, acceso, c, empleadoEdit, empleados, empleado);
         vistaForm.setVisible(true);
     }
     

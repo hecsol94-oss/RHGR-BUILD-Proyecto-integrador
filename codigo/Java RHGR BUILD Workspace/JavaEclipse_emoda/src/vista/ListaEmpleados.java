@@ -56,7 +56,7 @@ public class ListaEmpleados extends JFrame {
         panelBusquedaAccion.setOpaque(false);
         
         txtBuscar = new JTextField();
-        txtBuscar.setPreferredSize(new Dimension(350, 35));
+        txtBuscar.setPreferredSize(new Dimension(250, 35));
         txtBuscar.setFont(new Font("Monospaced", Font.PLAIN, 16));
         txtBuscar.setBorder(new LineBorder(NEGRO_ELITE, 1));
         
@@ -81,7 +81,7 @@ public class ListaEmpleados extends JFrame {
         estilizarTabla(table);
         table.setModel(new DefaultTableModel(
             new Object[][] {},
-            new String[] { "CATEGORÍA", "APODO", "NOMBRE", "APELLIDO" }
+            new String[] { "APODO", "NOMBRE", "APELLIDO", "CATEGORÍA" }
         ));
         table.setDefaultEditor(Object.class, null);
         
