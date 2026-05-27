@@ -89,19 +89,19 @@ public class NuevoEmpleado extends JFrame {
         contentPane.add(cbTipo);
         
         btnGuardar = new JButton("CONFIRMAR");
-        btnGuardar.setBounds(50, 300, 240, 45);
+        btnGuardar.setBounds(50, 400, 140, 45);
         estilizarBoton(btnGuardar, ROJO_HEROE, Color.WHITE);
         contentPane.add(btnGuardar);
         
         btnCancelar = new JButton("CANCELAR");
-        btnCancelar.setBounds(210, 300, 240, 45);
+        btnCancelar.setBounds(210, 400, 140, 45);
         estilizarBoton(btnCancelar, NEGRO_ELITE, AMARILLO_POWER);
         contentPane.add(btnCancelar);
         
         JLabel lblFooter = new JLabel("EDNA MODA STRATEGIC SYSTEMS v2.6");
         lblFooter.setFont(new Font("Monospaced", Font.PLAIN, 10));
         lblFooter.setForeground(Color.GRAY);
-        lblFooter.setBounds(110, 380, 300, 20);
+        lblFooter.setBounds(110, 480, 200, 20);
         contentPane.add(lblFooter);
     }
     
