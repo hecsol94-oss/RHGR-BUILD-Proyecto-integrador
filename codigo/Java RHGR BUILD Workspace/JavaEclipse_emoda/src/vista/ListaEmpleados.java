@@ -81,7 +81,7 @@ public class ListaEmpleados extends JFrame {
         estilizarTabla(table);
         table.setModel(new DefaultTableModel(
             new Object[][] {},
-            new String[] { "NOMBRE", "APELLIDO", "APODO", "CATEGORÍA", "USUARIO", "CONTRASEÑA" }
+            new String[] { "CATEGORÍA", "APODO", "NOMBRE", "APELLIDO" }
         ));
         table.setDefaultEditor(Object.class, null);
         
@@ -97,6 +97,9 @@ public class ListaEmpleados extends JFrame {
         
         btnEditar = new JButton("MODIFICAR"); estilizarBoton(btnEditar, 150, 50);
         btnEliminar = new JButton("ELIMINAR"); estilizarBoton(btnEliminar, 150, 50);
+        
+        panelAccionesIzquierda.add(btnEditar);
+        panelAccionesIzquierda.add(btnEliminar);
         
         btnVolver = new JButton("← VOLVER");
         estilizarBoton(btnVolver, 150, 50);

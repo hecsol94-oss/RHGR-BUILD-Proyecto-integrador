@@ -61,6 +61,7 @@ public class ControladorNuevoEmpleado {
 		this.vistaCita = vistaCita;
 		this.acceso = acceso;
 		this.c = c;
+		this.empleadoEditar = empleadoEditar;
 		this.empleados = empleados;
 		this.empleado = empleado;
 		

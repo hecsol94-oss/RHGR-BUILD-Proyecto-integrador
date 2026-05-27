@@ -79,11 +79,9 @@ public class ControladorListaEmpleados {
         for (Empleado empleado : empleados) {
         	modelo.addRow(new Object[]{
             		empleado.getCategoria(),
-            		empleado.getNombre(),
-            		empleado.getApellido(),
             		empleado.getApodo(),
-            		empleado.getUsuario(),
-            		empleado.getContrasena()
+            		empleado.getNombre(),
+            		empleado.getApellido()
             });
         }
 	}
