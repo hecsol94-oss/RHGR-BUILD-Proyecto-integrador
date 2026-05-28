@@ -22,7 +22,7 @@ public class NuevoEmpleado extends JFrame {
     	setTitle("REGISTRO DE EMPLEADO - EDNA MODA");
         setResizable(false); 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(520, 550);
+        setSize(420, 550);
         setLocationRelativeTo(null);
         
         contentPane = new JPanel();
@@ -33,7 +33,7 @@ public class NuevoEmpleado extends JFrame {
         
         JPanel header = new JPanel();
         header.setBackground(NEGRO_ELITE);
-        header.setBounds(0, 0, 520, 40);
+        header.setBounds(0, 0, 450, 40);
         header.setLayout(null);
         contentPane.add(header);
         
@@ -89,19 +89,19 @@ public class NuevoEmpleado extends JFrame {
         contentPane.add(cbTipo);
         
         btnGuardar = new JButton("CONFIRMAR");
-        btnGuardar.setBounds(50, 400, 140, 45);
+        btnGuardar.setBounds(50, 430, 140, 45);
         estilizarBoton(btnGuardar, ROJO_HEROE, Color.WHITE);
         contentPane.add(btnGuardar);
         
         btnCancelar = new JButton("CANCELAR");
-        btnCancelar.setBounds(210, 400, 140, 45);
+        btnCancelar.setBounds(210, 430, 140, 45);
         estilizarBoton(btnCancelar, NEGRO_ELITE, AMARILLO_POWER);
         contentPane.add(btnCancelar);
         
         JLabel lblFooter = new JLabel("EDNA MODA STRATEGIC SYSTEMS v2.6");
         lblFooter.setFont(new Font("Monospaced", Font.PLAIN, 10));
         lblFooter.setForeground(Color.GRAY);
-        lblFooter.setBounds(110, 480, 200, 20);
+        lblFooter.setBounds(100, 480, 200, 20);
         contentPane.add(lblFooter);
     }
     
