@@ -533,51 +533,65 @@ public class VentanaAprendiz extends JFrame {
     	return btnVolverTalleres; 
     }
     /**
-	 * 
-	 * @return
-	 */
+     * 
+     * @return
+     */
+    public JButton getBtnNuevoEmpleadoEmb() {
+    	return btnNuevoEmpleadoEmb;
+    }
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnEditarEmpleados() {
     	return btnEditarEmpleados;
     }
     /**
-	 * 
-	 * @return
-	 */
+     * 
+     * @return
+     */
+    public JButton getBtnEliminarEmpleados() {
+    	return btnEliminarEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
     public JButton getBtnBuscarEmpleados() {
     	return btnBuscarEmpleados;
     }
     /**
-	 * 
-	 * @return
-	 */
+     * 
+     * @return
+     */
     public JButton getBtnTodosEmpleados() {
     	return btnTodosEmpleados;
     }
     /**
-	 * 
-	 * @return
-	 */
+     * 
+     * @return
+     */
     public JButton getBtnAprendizEmpleados() {
     	return btnAprendizEmpleados;
     }
     /**
-	 * 
-	 * @return
-	 */
+     * 
+     * @return
+     */
     public JButton getBtnOficialEmpleados() {
     	return btnOficialEmpleados;
     }
     /**
-	 * 
-	 * @return
-	 */
+     * 
+     * @return
+     */
     public JButton getBtnMaestroEmpleados() {
     	return btnMaestroEmpleados;
     }
     /**
-	 * 
-	 * @return
-	 */
+     * 
+     * @return
+     */
     public JButton getBtnVolverEmpleados() {
     	return btnVolverEmpleados;
     }

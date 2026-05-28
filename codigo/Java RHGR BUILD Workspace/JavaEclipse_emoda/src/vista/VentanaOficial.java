@@ -306,6 +306,7 @@ public class VentanaOficial extends JFrame {
         menuItemNuevoEmpleado = crearItem("Nuevo empleado");
         menuEmpleados.add(menuItemListaEmpleados); menuEmpleados.add(menuItemNuevoEmpleado);
         menuBar.add(menuEmpleados);
+        menuItemNuevoEmpleado.setEnabled(false);
     }
 
     /**
@@ -608,6 +609,69 @@ public class VentanaOficial extends JFrame {
     }
     /**
      * 
+     * @return
+     */
+    public JButton getBtnNuevoEmpleadoEmb() {
+    	return btnNuevoEmpleadoEmb;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnEditarEmpleados() {
+    	return btnEditarEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnEliminarEmpleados() {
+    	return btnEliminarEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnBuscarEmpleados() {
+    	return btnBuscarEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnTodosEmpleados() {
+    	return btnTodosEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnAprendizEmpleados() {
+    	return btnAprendizEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnOficialEmpleados() {
+    	return btnOficialEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnMaestroEmpleados() {
+    	return btnMaestroEmpleados;
+    }
+    /**
+     * 
+     * @return
+     */
+    public JButton getBtnVolverEmpleados() {
+    	return btnVolverEmpleados;
+    }
+    /**
+     * 
      */
     public void deshabilitarBotonesCitas() {
     	btnEditarCitas.setEnabled(false);
@@ -628,6 +692,13 @@ public class VentanaOficial extends JFrame {
     	btnEditarTalleres.setEnabled(false);
     	btnEliminarTalleres.setEnabled(false);
     	btnNuevoTallerEmb.setEnabled(false);
+    }
+    /**
+     * 
+     */
+    public void deshabilitarBotonesEmpleados() {
+    	btnEliminarEmpleados.setEnabled(false);
+    	btnNuevoEmpleadoEmb.setEnabled(false);
     }
     
  // Getters para los items de menú
@@ -659,4 +730,11 @@ public class VentanaOficial extends JFrame {
  	public JMenuItem getMenuItemListaTalleres() { 
  		return menuItemListaTalleres; 
  	}
+ 	/**
+     * 
+     * @return
+     */
+    public JMenuItem getMenuItemListaEmpleados() {
+    	return menuItemListaEmpleados;
+    }
 }

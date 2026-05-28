@@ -57,6 +57,7 @@ public class ControladorOficial {
         vista.getMenuItemNuevaCita().addActionListener(e -> abrirNuevaCita());
         vista.getMenuItemListaClientes().addActionListener(e -> abrirListaClientes());
         vista.getMenuItemListaTalleres().addActionListener(e -> abrirListaTalleres());
+        vista.getMenuItemListaEmpleados().addActionListener(e -> abrirListaEmpleados());
 
         // Evento de cerrar sesión desde label
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -205,6 +206,22 @@ public class ControladorOficial {
         vistaLista.deshabilitarBotones(); // modo solo lectura
         vistaLista.setVisible(true);
         vista.dispose();
+    }
+    
+    /**
+     * Abre la ventana de gestión de empleados y cierra la ventana actual.
+     */
+    private void abrirListaEmpleados() {
+    	try {
+    		ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
+        	ListaEmpleados vistaLista = new ListaEmpleados();
+        	new ControladorListaEmpleados(vistaLista, acceso, c, empleados, empleado);
+        	vistaLista.deshabilitarBotones(); // modo solo lectura
+        	vistaLista.setVisible(true);
+        	vista.dispose();
+    	} catch (SQLException ex) {
+    		ex.printStackTrace();
+    	}
     }
 
     /**

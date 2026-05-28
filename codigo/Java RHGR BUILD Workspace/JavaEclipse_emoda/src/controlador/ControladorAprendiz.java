@@ -175,6 +175,7 @@ public class ControladorAprendiz {
     		ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
         	ListaEmpleados vistaLista = new ListaEmpleados();
         	new ControladorListaEmpleados(vistaLista, acceso, c, empleados, empleado);
+        	vistaLista.deshabilitarBotones(); // modo solo lectura
         	vistaLista.setVisible(true);
         	vista.dispose();
     	} catch (SQLException ex) {
