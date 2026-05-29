@@ -232,7 +232,6 @@ public class ListaEmpleados extends JFrame {
 	 * 
 	 */
 	public void deshabilitarBotones() {
-    	btnEditar.setEnabled(false);
     	btnEliminar.setEnabled(false);
     	btnNuevo.setEnabled(false);
 
