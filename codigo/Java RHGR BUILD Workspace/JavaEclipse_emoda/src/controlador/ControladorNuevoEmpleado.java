@@ -95,16 +95,16 @@ public class ControladorNuevoEmpleado {
      * y gestiona el cierre de ventanas y refresco de listas según el contexto de navegación.
      */
 	private void guardarEmpleado() {
+		String apodo = vista.getTxtApodo().getText().trim();
 		String nombre = vista.getTxtNombre().getText().trim();
 		String apellido = vista.getTxtApellido().getText().trim();
-		String apodo = vista.getTxtApodo().getText().trim();
 		String usuario = vista.getTxtUsuario().getText().trim();
 		String contraseña = vista.getContraseñaCampo().getText().trim();
 		String confirmarContraseña = vista.getConfirmarContraseña().getText().trim();
 		String categoria = vista.getCbTipo().toString();
 		
 		// Validación de campos obligatorios
-		if (nombre.isEmpty() || apellido.isEmpty() || apodo.isEmpty() || usuario.isEmpty() || contraseña.isEmpty() || confirmarContraseña.isEmpty() || categoria.isEmpty()) {
+		if (apodo.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || contraseña.isEmpty() || confirmarContraseña.isEmpty() || categoria.isEmpty()) {
 			JOptionPane.showMessageDialog(vista,
 					"Por favor, rellena todos los campos del empleado.",
 					"Campos incompletos",

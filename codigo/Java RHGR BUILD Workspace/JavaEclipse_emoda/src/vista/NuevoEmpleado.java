@@ -43,23 +43,23 @@ public class NuevoEmpleado extends JFrame {
         lblTitle.setBounds(20, 5, 200, 30);
         header.add(lblTitle);
         
-        JLabel lblNombre = new JLabel("NOMBRE:");
-        estilizarLabel(lblNombre, 20, 60);
-        
-        txtNombre = new JTextField();
-        estilizarCampo(txtNombre, 20, 80, 170, 30);
-        
-        JLabel lblApellido = new JLabel("APELLIDO:");
-        estilizarLabel(lblApellido, 20, 120);
-        
-        txtApellido = new JTextField();
-        estilizarCampo(txtApellido, 20, 140, 170, 30);
-        
         JLabel lblApodo = new JLabel("APODO:");
-        estilizarLabel(lblApodo, 20, 185);
+        estilizarLabel(lblApodo, 20, 60);
         
         txtApodo = new JTextField();
-        estilizarCampo(txtApodo, 20, 205, 170, 30);
+        estilizarCampo(txtApodo, 20, 80, 170, 30);
+        
+        JLabel lblNombre = new JLabel("NOMBRE:");
+        estilizarLabel(lblNombre, 20, 120);
+        
+        txtNombre = new JTextField();
+        estilizarCampo(txtNombre, 20, 140, 170, 30);
+        
+        JLabel lblApellido = new JLabel("APELLIDO:");
+        estilizarLabel(lblApellido, 20, 185);
+        
+        txtApellido = new JTextField();
+        estilizarCampo(txtApellido, 20, 205, 170, 30);
         
         JLabel lblUsuario = new JLabel("USUARIO:");
         estilizarLabel(lblUsuario, 20, 245);
