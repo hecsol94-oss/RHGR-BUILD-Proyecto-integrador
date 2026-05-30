@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import modelo.AccesoBBDD;
+import modelo.Cita;
 import modelo.Cliente;
 import modelo.Empleado;
 import vista.*;
@@ -23,6 +24,8 @@ public class ControladorListaEmpleados {
 	private Connection c;
 	private ArrayList<Empleado> empleados;
 	private ArrayList<Empleado> empleadosFiltrados;
+	private ArrayList<Cita> citas;
+	private ArrayList<Cita> citasFiltradas;
 	private Empleado empleado;
 	
 	/**
@@ -36,21 +39,23 @@ public class ControladorListaEmpleados {
      * @param empleado Empleado que está utilizando la aplicación (para control de roles).
      */
 	public ControladorListaEmpleados(ListaEmpleados vista, AccesoBBDD acceso, Connection c,
-			ArrayList<Empleado> empleados, Empleado empleado) {
+			ArrayList<Empleado> empleados, ArrayList<Cita> citas, Empleado empleado) {
 		
 		this.vista = vista;
 		this.acceso = acceso;
 		this.c = c;
 		this.empleados = empleados;
+		this.citas = citas;
 		this.empleadosFiltrados = new ArrayList<>(empleados);
+		this.citasFiltradas = new ArrayList<>(citas);
 		this.empleado = empleado;
 		
-		cargarTabla(empleadosFiltrados);
+		cargarTabla(empleadosFiltrados, citasFiltradas);
 		
 		// Evento para resetear filtros y mostrar todos los empleados
         vista.getBtnTodos().addActionListener(e -> {
             empleadosFiltrados = new ArrayList<>(empleados);
-            cargarTabla(empleadosFiltrados);
+            cargarTabla(empleadosFiltrados, citasFiltradas);
         });
         
         // Configuración de botones de filtrado y búsqueda
