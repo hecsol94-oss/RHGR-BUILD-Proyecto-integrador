@@ -80,9 +80,9 @@ public class ControladorNuevoEmpleado {
      * Se utiliza exclusivamente cuando el controlador se inicia en modo edición.
      */
 	private void precargarDatos() {
+		vista.getTxtApodo().setText(empleadoEditar.getApodo());
 		vista.getTxtNombre().setText(empleadoEditar.getNombre());
 		vista.getTxtApellido().setText(empleadoEditar.getApellido());
-		vista.getTxtApodo().setText(empleadoEditar.getApodo());
 		vista.getTxtUsuario().setText(empleadoEditar.getUsuario());
 		vista.getContraseñaCampo().setText(empleadoEditar.getContrasena());
 		vista.getConfirmarContraseña().setText(empleadoEditar.getContrasena());
@@ -116,7 +116,7 @@ public class ControladorNuevoEmpleado {
 			// ===== CASO: NUEVO EMPLEADO =====
 			if (empleadoEditar == null) {
 				
-				acceso.insertarNuevoEmpleado(c, categoria, nombre, apellido, apodo, usuario, contraseña, confirmarContraseña);
+				acceso.insertarNuevoEmpleado(c, apodo, nombre, apellido, usuario, contraseña, confirmarContraseña, categoria);
 				empleados = acceso.recogeEmpleados(c);
 				
 				JOptionPane.showMessageDialog(vista, "Empleado creado correctamente");
@@ -124,7 +124,7 @@ public class ControladorNuevoEmpleado {
 			// ===== CASO: EDITAR EMPLEADO =====
 			} else {
 				
-				acceso.actualizarEmpleado(c, empleadoEditar.getId_empleado(), categoria, nombre, apellido, apodo, usuario, contraseña, confirmarContraseña);
+				acceso.actualizarEmpleado(c, empleadoEditar.getId_empleado(), apodo, nombre, apellido, usuario, contraseña, confirmarContraseña, categoria);
 				empleados = acceso.recogeEmpleados(c);
 				
 				JOptionPane.showMessageDialog(vista, "Empleado actualizado correctamente.");
