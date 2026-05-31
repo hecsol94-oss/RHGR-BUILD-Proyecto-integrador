@@ -173,9 +173,8 @@ public class ControladorAprendiz {
     private void abrirListaEmpleados() {
     	try {
     		ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
-    		ArrayList<Cita> citas = acceso.recogeCitas(c);
         	ListaEmpleados vistaLista = new ListaEmpleados();
-        	new ControladorListaEmpleados(vistaLista, acceso, c, empleados, citas, empleado);
+        	new ControladorListaEmpleados(vistaLista, acceso, c, empleados, empleado);
         	vistaLista.deshabilitarBotones(); // modo solo lectura
         	vistaLista.setVisible(true);
         	vista.dispose();

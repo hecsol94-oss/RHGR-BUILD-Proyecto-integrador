@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import modelo.AccesoBBDD;
-import modelo.Cita;
 import modelo.Empleado;
 import vista.ListaEmpleados;
 import vista.NuevaCita;
@@ -137,9 +136,8 @@ public class ControladorNuevoEmpleado {
 			if (vistaCita == null && (vistaEmpleados != null && vistaMaestro != null)) {
 				
 				ListaEmpleados le = new ListaEmpleados();
-				ArrayList<Cita> citas = acceso.recogeCitas(c);
 				
-				new ControladorListaEmpleados(le, acceso, c, empleados, citas, empleado);
+				new ControladorListaEmpleados(le, acceso, c, empleados, empleado);
 				
 				le.setVisible(true);
 				
@@ -150,9 +148,8 @@ public class ControladorNuevoEmpleado {
 			} else if (vistaCita == null && vistaEmpleados == null && vistaMaestro != null) {
 				
 				ListaEmpleados le = new ListaEmpleados();
-				ArrayList<Cita> citas = acceso.recogeCitas(c);
 				
-				new ControladorListaEmpleados(le, acceso, c, empleados, citas, empleado);
+				new ControladorListaEmpleados(le, acceso, c, empleados, empleado);
 				
 				vista.dispose();
 				

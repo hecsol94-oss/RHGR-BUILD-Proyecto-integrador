@@ -24,8 +24,6 @@ public class ControladorListaEmpleados {
 	private Connection c;
 	private ArrayList<Empleado> empleados;
 	private ArrayList<Empleado> empleadosFiltrados;
-	private ArrayList<Cita> citas;
-	private ArrayList<Cita> citasFiltradas;
 	private Empleado empleado;
 	
 	/**
@@ -39,23 +37,21 @@ public class ControladorListaEmpleados {
      * @param empleado Empleado que está utilizando la aplicación (para control de roles).
      */
 	public ControladorListaEmpleados(ListaEmpleados vista, AccesoBBDD acceso, Connection c,
-			ArrayList<Empleado> empleados, ArrayList<Cita> citas, Empleado empleado) {
+			ArrayList<Empleado> empleados, Empleado empleado) {
 		
 		this.vista = vista;
 		this.acceso = acceso;
 		this.c = c;
 		this.empleados = empleados;
-		this.citas = citas;
 		this.empleadosFiltrados = new ArrayList<>(empleados);
-		this.citasFiltradas = new ArrayList<>(citas);
 		this.empleado = empleado;
 		
-		cargarTabla(empleadosFiltrados, citasFiltradas);
+		cargarTabla(empleadosFiltrados);
 		
 		// Evento para resetear filtros y mostrar todos los empleados
         vista.getBtnTodos().addActionListener(e -> {
             empleadosFiltrados = new ArrayList<>(empleados);
-            cargarTabla(empleadosFiltrados, citasFiltradas);
+            cargarTabla(empleadosFiltrados);
         });
         
         // Configuración de botones de filtrado y búsqueda
@@ -75,27 +71,19 @@ public class ControladorListaEmpleados {
      * Actualiza el modelo de la tabla en la vista con los datos proporcionados.
      * 
      * @param empleados Lista de empleados a mostrar.
+     * @param citas Lista
      */
-	public void cargarTabla(ArrayList<Empleado> empleados, ArrayList<Cita> citas) {
+	public void cargarTabla(ArrayList<Empleado> empleados) {
 		
 		DefaultTableModel modelo = (DefaultTableModel) vista.getTable().getModel();
         modelo.setRowCount(0);
         
         for (Empleado empleado : empleados) {
-        	StringBuilder fechaCita = new StringBuilder();
-        	
-        	for (Cita cita : citas) {
-        		if (empleado.getId_empleado() == cita.getId_cita()) {
-        			if (fechaCita.length() > 0) fechaCita.append(", ");
-        			fechaCita.append(cita.getFecha());
-        		}
-        	}
         	modelo.addRow(new Object[]{
             		empleado.getApodo(),
             		empleado.getNombre(),
             		empleado.getApellido(),
-            		empleado.getCategoria(),
-            		fechaCita.toString()
+            		empleado.getCategoria()
             });
         }
 	}
@@ -115,7 +103,7 @@ public class ControladorListaEmpleados {
                 empleadosFiltrados.add(empleado);
             }
         }
-        cargarTabla(empleadosFiltrados, citasFiltradas);
+        cargarTabla(empleadosFiltrados);
     }
 	
 	/**
@@ -133,7 +121,7 @@ public class ControladorListaEmpleados {
         }
 
         empleadosFiltrados = resultado;
-        cargarTabla(empleadosFiltrados, citasFiltradas);
+        cargarTabla(empleadosFiltrados);
     }
 	
 	/**
@@ -192,7 +180,7 @@ public class ControladorListaEmpleados {
             acceso.eliminarEmpleado(c, empleado.getId_empleado());
             empleados.remove(empleado);
             empleadosFiltrados.remove(empleado);
-            cargarTabla(empleadosFiltrados, citasFiltradas);
+            cargarTabla(empleadosFiltrados);
             JOptionPane.showMessageDialog(vista, "Empleado eliminado correctamente.");
         }
     }
