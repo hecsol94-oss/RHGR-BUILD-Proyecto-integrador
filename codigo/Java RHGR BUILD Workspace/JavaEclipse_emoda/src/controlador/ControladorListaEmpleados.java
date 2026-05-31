@@ -76,17 +76,26 @@ public class ControladorListaEmpleados {
      * 
      * @param empleados Lista de empleados a mostrar.
      */
-	public void cargarTabla(ArrayList<Empleado> empleados) {
+	public void cargarTabla(ArrayList<Empleado> empleados, ArrayList<Cita> citas) {
 		
 		DefaultTableModel modelo = (DefaultTableModel) vista.getTable().getModel();
         modelo.setRowCount(0);
         
         for (Empleado empleado : empleados) {
+        	StringBuilder fechaCita = new StringBuilder();
+        	
+        	for (Cita cita : citas) {
+        		if (empleado.getId_empleado() == cita.getId_cita()) {
+        			if (fechaCita.length() > 0) fechaCita.append(", ");
+        			fechaCita.append(cita.getFecha());
+        		}
+        	}
         	modelo.addRow(new Object[]{
             		empleado.getApodo(),
             		empleado.getNombre(),
             		empleado.getApellido(),
-            		empleado.getCategoria()
+            		empleado.getCategoria(),
+            		fechaCita.toString()
             });
         }
 	}
@@ -106,7 +115,7 @@ public class ControladorListaEmpleados {
                 empleadosFiltrados.add(empleado);
             }
         }
-        cargarTabla(empleadosFiltrados);
+        cargarTabla(empleadosFiltrados, citasFiltradas);
     }
 	
 	/**
@@ -124,7 +133,7 @@ public class ControladorListaEmpleados {
         }
 
         empleadosFiltrados = resultado;
-        cargarTabla(empleadosFiltrados);
+        cargarTabla(empleadosFiltrados, citasFiltradas);
     }
 	
 	/**
@@ -183,7 +192,7 @@ public class ControladorListaEmpleados {
             acceso.eliminarEmpleado(c, empleado.getId_empleado());
             empleados.remove(empleado);
             empleadosFiltrados.remove(empleado);
-            cargarTabla(empleadosFiltrados);
+            cargarTabla(empleadosFiltrados, citasFiltradas);
             JOptionPane.showMessageDialog(vista, "Empleado eliminado correctamente.");
         }
     }
