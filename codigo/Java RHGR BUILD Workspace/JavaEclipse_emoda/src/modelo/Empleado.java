@@ -10,6 +10,7 @@ public class Empleado {
 	private String apodo;
 	private String usuario;
 	private String contrasena;
+	private String confirmar_contrasena;
 	
 	// Constructor principal para crear el objeto Empleado con la información de la BBDD
 	/**
@@ -22,7 +23,7 @@ public class Empleado {
 	 * @param usuario
 	 * @param contrasena
 	 */
-	public Empleado (int id_empleado, String categoria, String nombre, String apellido, String apodo, String usuario, String contrasena) {
+	public Empleado (int id_empleado, String categoria, String nombre, String apellido, String apodo, String usuario, String contrasena, String confirmar_contrasena) {
 		this.id_empleado = id_empleado;
 		this.categoria = categoria;
 		this.nombre = nombre;
@@ -30,6 +31,7 @@ public class Empleado {
 		this.apodo = apodo;
 		this.usuario = usuario;
 		this.contrasena = contrasena;
+		this.confirmar_contrasena = confirmar_contrasena;
 		
 	}
 	
@@ -133,6 +135,22 @@ public class Empleado {
 	 */
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getConfirmar_contrasena() {
+		return confirmar_contrasena;
+	}
+	
+	/**
+	 * 
+	 * @param confirmar_contrasena
+	 */
+	public void setConfirmar_contrasena(String confirmar_contrasena) {
+		this.confirmar_contrasena = confirmar_contrasena;
 	}
 
 	/**

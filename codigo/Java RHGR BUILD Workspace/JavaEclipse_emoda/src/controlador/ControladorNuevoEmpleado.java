@@ -85,7 +85,7 @@ public class ControladorNuevoEmpleado {
 		vista.getTxtApellido().setText(empleadoEditar.getApellido());
 		vista.getTxtUsuario().setText(empleadoEditar.getUsuario());
 		vista.getContraseñaCampo().setText(empleadoEditar.getContrasena());
-		vista.getConfirmarContraseña().setText(empleadoEditar.getContrasena());
+		vista.getConfirmarContraseña().setText(empleadoEditar.getConfirmar_contrasena());
 		vista.setCbTipo(empleadoEditar.getCategoria());
 	}
 	
@@ -100,11 +100,11 @@ public class ControladorNuevoEmpleado {
 		String apellido = vista.getTxtApellido().getText().trim();
 		String usuario = vista.getTxtUsuario().getText().trim();
 		String contraseña = vista.getContraseñaCampo().getText().trim();
-		String confirmarContraseña = vista.getConfirmarContraseña().getText().trim();
+		String confirmar_contraseña = vista.getConfirmarContraseña().getText().trim();
 		String categoria = vista.getCbTipo().toString();
 		
 		// Validación de campos obligatorios
-		if (apodo.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || contraseña.isEmpty() || confirmarContraseña.isEmpty() || categoria.isEmpty()) {
+		if (apodo.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || contraseña.isEmpty() || confirmar_contraseña.isEmpty() || categoria.isEmpty()) {
 			JOptionPane.showMessageDialog(vista,
 					"Por favor, rellena todos los campos del empleado.",
 					"Campos incompletos",
@@ -116,7 +116,7 @@ public class ControladorNuevoEmpleado {
 			// ===== CASO: NUEVO EMPLEADO =====
 			if (empleadoEditar == null) {
 				
-				acceso.insertarNuevoEmpleado(c, apodo, nombre, apellido, usuario, contraseña, confirmarContraseña, categoria);
+				acceso.insertarNuevoEmpleado(c, apodo, nombre, apellido, usuario, contraseña, confirmar_contraseña, categoria);
 				empleados = acceso.recogeEmpleados(c);
 				
 				JOptionPane.showMessageDialog(vista, "Empleado creado correctamente");
@@ -124,7 +124,7 @@ public class ControladorNuevoEmpleado {
 			// ===== CASO: EDITAR EMPLEADO =====
 			} else {
 				
-				acceso.actualizarEmpleado(c, empleadoEditar.getId_empleado(), apodo, nombre, apellido, usuario, contraseña, confirmarContraseña, categoria);
+				acceso.actualizarEmpleado(c, empleadoEditar.getId_empleado(), apodo, nombre, apellido, usuario, contraseña, confirmar_contraseña, categoria);
 				empleados = acceso.recogeEmpleados(c);
 				
 				JOptionPane.showMessageDialog(vista, "Empleado actualizado correctamente.");
