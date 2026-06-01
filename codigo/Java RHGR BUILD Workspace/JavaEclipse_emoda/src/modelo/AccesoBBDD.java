@@ -909,7 +909,7 @@ public class AccesoBBDD {
 	 * @param confirmar_contraseña 
 	 */
 	public void actualizarEmpleado(Connection c, int id_empleado, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña, String confirmar_contraseña) {
-	    String query = "UPDATE Empleados SET categoria = ?, nombre = ?, apellido = ?, apodo = ?, usario = ?, contraseña = ?, confirmar_contraseña = ? WHERE id_empleado = ?";
+	    String query = "UPDATE Empleados SET categoria = ?, nombre = ?, apellido = ?, apodo = ?, usuario = ?, contraseña = ?, confirmar_contraseña = ? WHERE id_empleado = ?";
 	    
 	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
 	        
