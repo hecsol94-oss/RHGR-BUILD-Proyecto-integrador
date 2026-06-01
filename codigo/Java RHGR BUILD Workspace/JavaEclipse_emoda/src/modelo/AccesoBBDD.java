@@ -858,12 +858,12 @@ public class AccesoBBDD {
 	 * @param contraseña
 	 * @param confirmar_contraseña 
 	 */
-	public void insertarNuevoEmpleado(Connection c, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña, String confirmar_contraseña) {
+	public void insertarNuevoEmpleado(Connection c, String apodo, String nombre, String apellido, String categoria, String usuario, String contraseña, String confirmar_contraseña) {
 
 		Statement st;
 		try {
 			st = c.createStatement();
-			String queryC = ("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('" +categoria + "', '" +nombre + "', '" +apellido + "', '" +apodo + "', '" +usuario +"', '" +contraseña + "', '" +confirmar_contraseña + "');");
+			String queryC = ("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('" +apodo + "', '" +nombre + "', '" +apellido + "', '" +categoria + "', '" +usuario +"', '" +contraseña + "', '" +confirmar_contraseña + "');");
 
 			st.executeUpdate(queryC);
 			st.close();
