@@ -71,7 +71,6 @@ public class ControladorListaEmpleados {
      * Actualiza el modelo de la tabla en la vista con los datos proporcionados.
      * 
      * @param empleados Lista de empleados a mostrar.
-     * @param citas Lista
      */
 	public void cargarTabla(ArrayList<Empleado> empleados) {
 		
