@@ -208,15 +208,15 @@ public class NuevoEmpleado extends JFrame {
 	 * @return
 	 */
 	public JComboBox<String> getCbTipo() {
-		return cbTipo;
+	    return cbTipo;
 	}
 	
 	/**
 	 * 
 	 * @param tipo
 	 */
-	public void setCbTipo(String tipo) {
-		cbTipo.setSelectedItem(tipo);
+	public void setCbTipo(String categoria) {
+		cbTipo.setSelectedItem(categoria);
     }
 
 	/**
