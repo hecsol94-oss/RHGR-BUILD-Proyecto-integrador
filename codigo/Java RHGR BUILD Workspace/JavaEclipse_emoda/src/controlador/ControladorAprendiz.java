@@ -213,7 +213,7 @@ public class ControladorAprendiz {
 
         try {
             /**
-             *  Se abre una conexión temporal para recargar la lista de empleados en el login
+             * Se abre una conexión temporal para recargar la lista de empleados en el login
              */
             Connection nc = acceso.abrirConexion();
             ArrayList<Empleado> emps = acceso.recogeEmpleados(nc);
