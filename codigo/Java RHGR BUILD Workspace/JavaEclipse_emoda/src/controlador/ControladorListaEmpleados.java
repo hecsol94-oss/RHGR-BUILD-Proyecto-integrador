@@ -192,7 +192,7 @@ public class ControladorListaEmpleados {
     
     /**
      * Cierra la vista actual y regresa a la ventana principal del empleado,
-     * determinando cuál abrir mediante su categoría (Maestro u Oficial).
+     * determinando cuál abrir mediante su categoría (Maestro, Oficial o Aprendiz).
      */
     private void volver() {
         try {
