@@ -521,7 +521,7 @@ public class AccesoBBDD {
 			String confirmarContrasena = resultados.getString("confirmar_contraseña");
 
 			/** Creación del objeto e inserción en la lista */
-			Empleado aprendices = new Empleado(idEmpleado, apodo, nombre, apellido, categoria, usuario, contrasena, confirmarContrasena);
+			Empleado aprendices = new Empleado(idEmpleado, categoria, nombre, apellido, apodo, usuario, contrasena, confirmarContrasena);
 			empleados.add(aprendices);
 		}
 
