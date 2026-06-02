@@ -880,9 +880,9 @@ public class AccesoBBDD {
 		Statement st;
 		try {
 			st = c.createStatement();
-			String queryC = ("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('" +apodo + "', '" +nombre + "', '" +apellido + "', '" +categoria + "', '" +usuario +"', '" +contraseña + "', '" +confirmar_contraseña + "');");
+			String queryE = ("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('" +apodo + "', '" +nombre + "', '" +apellido + "', '" +categoria + "', '" +usuario +"', '" +contraseña + "', '" +confirmar_contraseña + "');");
 
-			st.executeUpdate(queryC);
+			st.executeUpdate(queryE);
 			st.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
