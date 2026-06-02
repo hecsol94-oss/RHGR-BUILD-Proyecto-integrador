@@ -194,7 +194,7 @@ public class AccesoBBDD {
 
 		while (resultados.next()) {
 			/** Declaración de variables según las columnas de la tabla */
-			int idEmpleado = resultados.getInt("id_empleado");
+			int idEmpleados = resultados.getInt("id_empleado");
 			String categoria = resultados.getString("categoria");
 			String nombre = resultados.getString("nombre");
 			String apellido = resultados.getString("apellido");
@@ -204,7 +204,7 @@ public class AccesoBBDD {
 			String confirmarContrasena = resultados.getString("confirmar_contraseña");
 
 			/** Creación del objeto e inserción en la lista */
-			Empleado empleado = new Empleado(idEmpleado, categoria, nombre, apellido, apodo, usuario, contrasena, confirmarContrasena);
+			Empleado empleado = new Empleado(idEmpleados, categoria, nombre, apellido, apodo, usuario, contrasena, confirmarContrasena);
 			empleados.add(empleado);
 		}
 
