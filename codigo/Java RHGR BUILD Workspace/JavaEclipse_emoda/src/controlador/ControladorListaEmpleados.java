@@ -137,9 +137,9 @@ public class ControladorListaEmpleados {
             return;
         }
 
-        Empleado empleadoEdit = empleadosFiltrados.get(fila);
+        Empleado empleadoEditar = empleadosFiltrados.get(fila);
         NuevoEmpleado vistaForm = new NuevoEmpleado();
-        new ControladorNuevoEmpleado(vistaForm, vista, null, null, acceso, c, empleadoEdit, empleados, empleado);
+        new ControladorNuevoEmpleado(vistaForm, vista, null, null, acceso, c, empleadoEditar, empleados, empleado);
         vistaForm.setVisible(true);
     }
     
