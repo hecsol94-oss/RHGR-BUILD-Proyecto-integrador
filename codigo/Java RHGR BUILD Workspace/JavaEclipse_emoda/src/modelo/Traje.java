@@ -5,14 +5,17 @@ import java.util.List;
 
 public class Traje {
 	
-	// Atributos del traje y su vinculación con el cliente (FK id_cliente)
+	/**
+	 * Atributos del traje y su vinculación con el cliente (FK id_cliente)
+	 */
 	private int id_traje;
 	private String nombre_traje;
 	private String estado;
 	private int id_cliente;
 	private List<Cliente> clientes;
 	
-	// Constructor que permite asociar un traje específico a un superhéroe
+	/** Constructor que permite asociar un traje específico a un superhéroe */
+	
 	/**
 	 * 
 	 * @param id_traje
@@ -28,7 +31,8 @@ public class Traje {
 		this.clientes = new ArrayList<>();
 	}
 
-	// Getters y Setters para monitorizar el estado y dueño de la prenda
+	/** Getters y Setters para monitorizar el estado y dueño de la prenda */
+	
 	/**
 	 * 
 	 * @return

@@ -37,7 +37,8 @@ public class Empleado {
 		
 	}
 	
-	// Getters y Setters para la gestión de la información del empleado
+	/** Getters y Setters para la gestión de la información del empleado */
+	
 	/**
 	 * 
 	 * @return

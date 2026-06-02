@@ -2,12 +2,15 @@ package modelo;
 
 public class Taller {
 	
-	// Atributos que definen las salas disponibles en la mansión de Edna
+	/**
+	 * Atributos que definen las salas disponibles en la mansión de Edna
+	 */
 	private int id_sala;
 	private String nombre;
 	private String tipo;
 
-	// Constructor para mapear los datos de las salas de la BBDD
+	/** Constructor para mapear los datos de las salas de la BBDD */
+	
 	/**
 	 * 
 	 * @param id_sala
@@ -20,11 +23,12 @@ public class Taller {
 		this.tipo = tipo;	
 	}
 
+	/** Métodos de acceso para el nombre y tipo de sala de trabajo */
+	
 	/**
 	 * 
 	 * @return
 	 */
-	// Métodos de acceso para el nombre y tipo de sala de trabajo
 	public String getNombre() {
 		return nombre;
 	}

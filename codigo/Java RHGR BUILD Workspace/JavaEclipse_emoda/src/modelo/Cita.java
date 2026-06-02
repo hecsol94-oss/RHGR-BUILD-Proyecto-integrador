@@ -7,7 +7,9 @@ import java.util.List;
 
 public class Cita {
 	
-	// Atributos que representan el registro de una sesión de pruebas o diseño
+	/**
+	 * Atributos que representan el registro de una sesión de pruebas o diseño
+	 */
 	private int id_cita;
 	private Date fecha;
 	private Time hora_inicio;
@@ -22,8 +24,8 @@ public class Cita {
 	private List<Traje> trajes;
 	private List<Cita_Aprendiz> aprendices;
 	
-	// Constructor completo para gestionar la agenda del taller
 	/**
+	 * Constructor completo para gestionar la agenda del taller
 	 * 
 	 * @param id_cita
 	 * @param fecha
@@ -50,7 +52,8 @@ public class Cita {
 		this.aprendices = new ArrayList<>();
 	}
 
-	// Métodos de acceso para la gestión temporal y espacial de la cita
+	/** Métodos de acceso para la gestión temporal y espacial de la cita */
+	
 	/**
 	 * 
 	 * @return

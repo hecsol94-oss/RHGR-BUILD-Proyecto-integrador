@@ -2,14 +2,17 @@ package modelo;
 
 public class Cliente {
 	
-	// Atributos privados que representan las columnas de la tabla Cliente en la BBDD
+	/**
+	 * Atributos privados que representan las columnas de la tabla Cliente en la BBDD
+	 */
 	private int id_cliente;
 	private String nombre;
 	private String tipo_heroe;
 	private String superpoder;
 	private String color;
 	
-	// Constructor para instanciar el objeto con todos los datos (incluyendo el ID autogenerado)
+	/** Constructor para instanciar el objeto con todos los datos (incluyendo el ID autogenerado) */
+	
 	/**
 	 * 
 	 * @param id_cliente
@@ -27,7 +30,8 @@ public class Cliente {
 		
 	}
 
-	// Métodos Getter y Setter para el acceso controlado a los atributos del cliente
+	/** Métodos Getter y Setter para el acceso controlado a los atributos del cliente */
+	
 	/**
 	 * 
 	 * @return

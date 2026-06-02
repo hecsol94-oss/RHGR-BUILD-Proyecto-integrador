@@ -5,7 +5,9 @@ import java.sql.*;
 
 public class AccesoBBDD {
 
-	// Configuración de los parámetros de conexión a MySQL
+	/**
+	 * Configuración de los parámetros de conexión a MySQL
+	 */
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	private String url = "jdbc:mysql://localhost/tallerednamoda";
 	private String usuario = "root";
@@ -20,7 +22,7 @@ public class AccesoBBDD {
 		Connection conexion = null;
 
 		try {
-			// Carga del driver y establecimiento de la conexión
+			/** Carga del driver y establecimiento de la conexión */
 			Class.forName(driver);
 			conexion = DriverManager.getConnection(url, usuario, pword);
 
@@ -52,10 +54,14 @@ public class AccesoBBDD {
 	public void limpiarTablas(Connection c) throws SQLException {
 		Statement st = c.createStatement();
 
-		// Desactivación de restricciones para limpiar tablas con claves ajenas
+		/**
+		 * Desactivación de restricciones para limpiar tablas con claves ajenas
+		 */
 		st.executeUpdate("SET FOREIGN_KEY_CHECKS = 0");
 
-		// Vaciado de tablas y reinicio de contadores AUTO_INCREMENT
+		/**
+		 * Vaciado de tablas y reinicio de contadores AUTO_INCREMENT
+		 */
 		st.executeUpdate("TRUNCATE TABLE Cita_Aprendiz");
 		st.executeUpdate("TRUNCATE TABLE Citas");
 		st.executeUpdate("TRUNCATE TABLE Traje");
@@ -77,7 +83,9 @@ public class AccesoBBDD {
 		Statement st = c.createStatement();
 		ArrayList<String> queryC = new ArrayList<>();
 
-		// Lista de sentencias SQL para dar de alta a los personajes
+		/**
+		 * Lista de sentencias SQL para dar de alta a los personajes
+		 */
 		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Mr. Increíble', 'superhéroe', 'superfuerza', 'rojo y azúl');");
 		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Elastigirl', 'superheroína', 'elasticidad', 'rojo y blanco');");
 		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Dash', 'superhéroe', 'supervelocidad', 'rojo y negro');");
@@ -95,7 +103,9 @@ public class AccesoBBDD {
 		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Bloque', 'superheroína', 'superfuerza', 'marrón y negro');");
 		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Silbido', 'superhéroe', 'chillido agudo', 'negro');");
 
-		// Ejecución masiva de los inserts
+		/**
+		 * Ejecución masiva de los inserts
+		 */
 		for (String query : queryC) {
 			st.executeUpdate(query);
 		}
@@ -113,7 +123,7 @@ public class AccesoBBDD {
 		Statement st = c.createStatement();
 		ResultSet resultados = st.executeQuery("SELECT * FROM Cliente");
 
-		// Bucle para convertir cada fila de la BBDD en un objeto de la clase Cliente
+		/** Bucle para convertir cada fila de la BBDD en un objeto de la clase Cliente */
 		while (resultados.next()) {
 			int idClientes = resultados.getInt("id_cliente");
 			String nombre = resultados.getString("nombre_personaje");
@@ -131,8 +141,9 @@ public class AccesoBBDD {
 	
 	
 
-	// (El resto de métodos insertar y recoge siguen la misma lógica comentada
-	// arriba)
+	/**
+	 * (El resto de métodos insertar y recoge siguen la misma lógica comentada arriba)
+	 */
 
 	/**
 	 * 
@@ -144,7 +155,9 @@ public class AccesoBBDD {
 		Statement st = c.createStatement();
 
 		ArrayList<String> queryE = new ArrayList<>();
-		// Lista de sentencias SQL para dar de alta a los empleados
+		/**
+		 * Lista de sentencias SQL para dar de alta a los empleados
+		 */
 		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('aprendiz', 'Lucía', 'Martínez', 'Aguja', 'lucia', 'Lucia2026', 'Lucia2026')");
 		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('aprendiz', 'Carlos', 'Ruiz', 'Tijeras', 'carlos', 'Tijeras123', 'Tijeras123')");
 		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('oficial', 'Ana', 'Torres', 'SastreX', 'ana', 'SastreX2026', 'SastreX2026')");
@@ -180,7 +193,7 @@ public class AccesoBBDD {
 		ResultSet resultados = st.executeQuery("SELECT * FROM Empleados");
 
 		while (resultados.next()) {
-			// Declaración de variables según las columnas de la tabla
+			/** Declaración de variables según las columnas de la tabla */
 			int idEmpleado = resultados.getInt("id_empleado");
 			String categoria = resultados.getString("categoria");
 			String nombre = resultados.getString("nombre");
@@ -190,7 +203,7 @@ public class AccesoBBDD {
 			String contrasena = resultados.getString("contraseña");
 			String confirmarContrasena = resultados.getString("confirmar_contraseña");
 
-			// Creación del objeto e inserción en la lista
+			/** Creación del objeto e inserción en la lista */
 			Empleado empleado = new Empleado(idEmpleado, categoria, nombre, apellido, apodo, usuario, contrasena, confirmarContrasena);
 			empleados.add(empleado);
 		}
@@ -210,7 +223,9 @@ public class AccesoBBDD {
 		Statement st = c.createStatement();
 
 		ArrayList<String> queryT = new ArrayList<>();
-		// Lista de sentencias SQL para dar de alta a los talleres
+		/**
+		 * Lista de sentencias SQL para dar de alta a los talleres
+		 */
 		queryT.add("INSERT INTO Taller (nombre_sala, tipo_sala) VALUES ('Milán', 'diseño');");
 		queryT.add("INSERT INTO Taller (nombre_sala, tipo_sala) VALUES ('París', 'diseño');");
 		queryT.add("INSERT INTO Taller (nombre_sala, tipo_sala) VALUES ('Madrid', 'costura');");
@@ -264,7 +279,7 @@ public class AccesoBBDD {
 		Statement st = c.createStatement();
 
 		ArrayList<String> queryT = new ArrayList<>();
-		// Lista de sentencias SQL para dar de alta a los trajes
+		/** Lista de sentencias SQL para dar de alta a los trajes */
 		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje principal de Mr. Increíble', 'pruebas', 1)");
 		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje reforzado para misiones pesadas', 'costura', 1)");
 		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje elástico de alta resistencia', 'pruebas', 2)");
@@ -410,7 +425,7 @@ public class AccesoBBDD {
 		ResultSet resultados = st.executeQuery("SELECT * FROM Citas ORDER BY fecha, hora_inicio");
 
 		while (resultados.next()) {
-			// Extraemos el ID que MySQL creó automáticamente
+			/** Extraemos el ID que MySQL creó automáticamente */
 			int id = resultados.getInt("id_cita");
 			Date fecha = resultados.getDate("fecha");
 			Time hora = resultados.getTime("hora_inicio");
@@ -420,7 +435,7 @@ public class AccesoBBDD {
 			int idSala = resultados.getInt("id_sala");
 			int idTraje = resultados.getInt("id_traje");
 
-			// Se lo pasamos al constructor de tu clase Cita
+			/** Se lo pasamos al constructor de tu clase Cita */
 			Cita cita = new Cita(id, fecha, hora, duracion, idEmpleado, idCliente, idSala, idTraje);
 			citas.add(cita);
 		}
@@ -440,7 +455,9 @@ public class AccesoBBDD {
 		Statement st = c.createStatement();
 
 		ArrayList<String> QueryCA = new ArrayList<>();
-		// Lista de sentencias SQL para dar de alta a las citas de los aprendices
+		/**
+		 * Lista de sentencias SQL para dar de alta a las citas de los aprendices
+		 */
 		QueryCA.add("INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (1, 1);");
 		QueryCA.add("INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (2, 1);");
 		QueryCA.add("INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (3, 2);");
@@ -466,12 +483,12 @@ public class AccesoBBDD {
 		ResultSet resultados = st.executeQuery("SELECT * FROM Cita_Aprendiz");
 
 		while (resultados.next()) {
-			// Extraemos el ID que MySQL creó automáticamente
+			/** Extraemos el ID que MySQL creó automáticamente */
 			int idAprendiz = resultados.getInt("id_aprendiz");
 			int idCita = resultados.getInt("id_cita");
 			int idEmpleado = resultados.getInt("id_empleado");
 
-			// Se lo pasamos al constructor de tu clase Cita
+			/** Se lo pasamos al constructor de tu clase Cita */
 			Cita_Aprendiz citaAprendiz = new Cita_Aprendiz(idAprendiz, idCita, idEmpleado);
 			citasAprendiz.add(citaAprendiz);
 		}
@@ -493,7 +510,7 @@ public class AccesoBBDD {
 		ResultSet resultados = st.executeQuery("SELECT * FROM Empleados WHERE categoria = 'aprendiz'");
 
 		while (resultados.next()) {
-			// Declaración de variables según las columnas de la tabla
+			/** Declaración de variables según las columnas de la tabla */
 			int idEmpleado = resultados.getInt("id_empleado");
 			String categoria = resultados.getString("categoria");
 			String nombre = resultados.getString("nombre");
@@ -503,7 +520,7 @@ public class AccesoBBDD {
 			String contrasena = resultados.getString("contraseña");
 			String confirmarContrasena = resultados.getString("confirmar_contraseña");
 
-			// Creación del objeto e inserción en la lista
+			/** Creación del objeto e inserción en la lista */
 			Empleado aprendices = new Empleado(idEmpleado, categoria, nombre, apellido, apodo, usuario, contrasena, confirmarContrasena);
 			empleados.add(aprendices);
 		}
@@ -513,8 +530,8 @@ public class AccesoBBDD {
 		return empleados;
 	}
 	
-	//Al crear un nuevo cliente en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD
 	/**
+	 * Al crear un nuevo cliente en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD
 	 * 
 	 * @param c
 	 * @param nombre
@@ -588,8 +605,8 @@ public class AccesoBBDD {
 	    }
 	}
 	
-	//Al crear un nuevo taller y traje en la ventana NuevoTaller, añadimos la insercion de la nueva fila a la BBDD
 	/**
+	 * Al crear un nuevo taller y traje en la ventana NuevoTaller, añadimos la insercion de la nueva fila a la BBDD
 	 * 
 	 * @param c
 	 * @param t
@@ -636,7 +653,7 @@ public class AccesoBBDD {
 	 * @param tn
 	 */
 	public void ActualizarTaller(Connection c, int id_sala, Taller tn) {
-		// Usamos PreparedStatement para que sea más limpio y seguro
+		/** Usamos PreparedStatement para que sea más limpio y seguro */
 	    String query = "UPDATE Taller SET nombre_sala = ?, tipo_sala = ? WHERE id_sala = ?";
 	    
 	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
@@ -651,8 +668,8 @@ public class AccesoBBDD {
 	    }
 	}
 	
-	//Al crear un nuevo traje en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD
 	/**
+	 * Al crear un nuevo traje en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD
 	 * 
 	 * @param c
 	 * @param nombre
@@ -721,8 +738,8 @@ public class AccesoBBDD {
 	    }
 	}
 	
-	//Al crear una nueva cita ventana NuevaCitaMaestro, añadimos la insercion de la nueva fila a la BBDD
     /**
+     * Al crear una nueva cita ventana NuevaCitaMaestro, añadimos la insercion de la nueva fila a la BBDD
      * 
      * @param c
      * @param ci
@@ -750,7 +767,7 @@ public class AccesoBBDD {
 	 * @param id_cita
 	 */
 	public void eliminarCita(Connection c, int id_cita) {
-	    // Primero eliminar los registros relacionados en cita_aprendiz (FK)
+	    /** Primero eliminar los registros relacionados en cita_aprendiz (FK) */
 	    String queryAprendiz = "DELETE FROM Cita_Aprendiz WHERE id_cita = ?";
 	    try (PreparedStatement pstmt = c.prepareStatement(queryAprendiz)) {
 	        pstmt.setInt(1, id_cita);
@@ -759,7 +776,7 @@ public class AccesoBBDD {
 	        System.out.println("Error al eliminar aprendices de la cita: " + e.getMessage());
 	        e.printStackTrace();
 	    }
-	    // Luego eliminar la cita
+	    /** Luego eliminar la cita */
 	    String queryCita = "DELETE FROM Citas WHERE id_cita = ?";
 	    try (PreparedStatement pstmt = c.prepareStatement(queryCita)) {
 	        pstmt.setInt(1, id_cita);
@@ -799,8 +816,8 @@ public class AccesoBBDD {
 	    }
 	}
 	
-	//Al asignar la cita a el/los aprendiz/es en la ventana NuevaCitaOficial, añadimos la insercion de la nueva fila a la BBDD
 	/**
+	 * Al asignar la cita a el/los aprendiz/es en la ventana NuevaCitaOficial, añadimos la insercion de la nueva fila a la BBDD
 	 * 
 	 * @param c
 	 * @param ca
@@ -846,8 +863,8 @@ public class AccesoBBDD {
 	    
 	}
 	
-	//Al crear un nuevo empleado en la ventana NuevoEmpleado, añadimos la insercion de la nueva fila a la BBDD
 	/**
+	 * Al crear un nuevo empleado en la ventana NuevoEmpleado, añadimos la insercion de la nueva fila a la BBDD
 	 * 
 	 * @param c
 	 * @param categoria
