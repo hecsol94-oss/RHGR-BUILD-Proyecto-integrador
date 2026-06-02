@@ -250,6 +250,11 @@ public class ControladorListaClientes {
                     new ControladorOficial(vo, acceso, c, empleado);
                     vo.setVisible(true);
                     break;
+                case "aprendiz":
+                	VentanaAprendiz va = new VentanaAprendiz();
+                	new ControladorAprendiz(va, acceso, c, empleado);
+                	va.setVisible(true);
+                	break;
             }
             vista.dispose();
         } catch (Exception ex) {
