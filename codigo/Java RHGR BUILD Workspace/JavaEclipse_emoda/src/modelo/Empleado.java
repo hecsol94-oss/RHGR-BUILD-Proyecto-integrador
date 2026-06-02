@@ -3,7 +3,7 @@ package modelo;
 public class Empleado {
 	
 	/**
-	 *  Datos de identificación y credenciales del personal del empleado
+	 * Datos de identificación y credenciales del personal del empleado
 	 */
 	private int id_empleado;
 	private String categoria;
