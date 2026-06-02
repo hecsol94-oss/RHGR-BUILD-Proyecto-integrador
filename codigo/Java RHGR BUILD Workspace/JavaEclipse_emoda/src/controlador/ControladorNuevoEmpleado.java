@@ -128,7 +128,7 @@ public class ControladorNuevoEmpleado {
 			/** ===== CASO: NUEVO EMPLEADO ===== */
 			if (empleadoEditar == null) {
 				
-				acceso.insertarNuevoEmpleado(c, apodo, nombre, apellido, usuario, contraseña, confirmar_contraseña, categoria);
+				acceso.insertarNuevoEmpleado(c, categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña);
 				empleados = acceso.recogeEmpleados(c);
 				
 				JOptionPane.showMessageDialog(vista, "Empleado creado correctamente");
@@ -136,7 +136,7 @@ public class ControladorNuevoEmpleado {
 			/** ===== CASO: EDITAR EMPLEADO ===== */
 			} else {
 				
-				acceso.actualizarEmpleado(c, empleadoEditar.getId_empleado(), apodo, nombre, apellido, usuario, contraseña, confirmar_contraseña, categoria);
+				acceso.actualizarEmpleado(c, empleadoEditar.getId_empleado(), categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña);
 				empleados = acceso.recogeEmpleados(c);
 				
 				JOptionPane.showMessageDialog(vista, "Empleado actualizado correctamente.");
@@ -145,7 +145,7 @@ public class ControladorNuevoEmpleado {
 			/** ===== REDIRECCIÓN SEGÚN CONTEXTO ===== */
 			
 			/** Desde ListaEmpleados */
-			if (vistaCita == null && (vistaEmpleados != null && vistaMaestro != null)) {
+			if (vistaCita == null && (vistaEmpleados != null && vistaMaestro == null)) {
 				
 				ListaEmpleados le = new ListaEmpleados();
 				
