@@ -26,7 +26,7 @@ public class ControladorListaCitas {
     private final Empleado empleado;
 
     /**
-     *  Listas auxiliares para la resolución de nombres (IDs -> Strings legibles)
+     * Listas auxiliares para la resolución de nombres (IDs -> Strings legibles)
      */
     private ArrayList<Cliente> listaClientes;
     private ArrayList<Taller> listaTalleres;
@@ -37,12 +37,12 @@ public class ControladorListaCitas {
      * Constructor del controlador de la lista de citas.
      * Inicializa los datos, carga las listas auxiliares de la BD y configura los eventos de la vista.
      * 
-     * @param vista     Ventana que contiene la tabla de citas.
-     * @param acceso    Objeto de acceso a la base de datos.
-     * @param c         Conexión activa.
-     * @param citas     Lista inicial de citas.
+     * @param vista Ventana que contiene la tabla de citas.
+     * @param acceso Objeto de acceso a la base de datos.
+     * @param c Conexión activa.
+     * @param citas Lista inicial de citas.
      * @param aprendices Relación de aprendices asignados a las citas.
-     * @param empleado  Usuario actualmente logado en el sistema.
+     * @param empleado Usuario actualmente logado en el sistema.
      */
     public ControladorListaCitas(ListaCitas vista, AccesoBBDD acceso, Connection c,
                                   ArrayList<Cita> citas, ArrayList<Cita_Aprendiz> aprendices, Empleado empleado) {
@@ -58,7 +58,7 @@ public class ControladorListaCitas {
         cargarTabla(citasFiltradas);
 
         /**
-         *  Configuración de botones de filtrado rápido
+         * Configuración de botones de filtrado rápido
          */
         vista.getBtnTodas().addActionListener(e -> {
             citasFiltradas = new ArrayList<>(citas);
@@ -70,7 +70,7 @@ public class ControladorListaCitas {
         vista.getBtnPruebas().addActionListener(e -> filtrarPorTipo("pruebas"));
 
         /**
-         *  Configuración de acciones y navegación
+         * Configuración de acciones y navegación
          */
         vista.getBtnBuscar().addActionListener(e -> buscar());
         vista.getBtnVerDetalles().addActionListener(e -> verDetalle());

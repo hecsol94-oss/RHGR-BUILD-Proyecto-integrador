@@ -22,7 +22,7 @@ public class ControladorMaestro {
     private final Empleado empleado;
 
     /**
-     *  Datos en memoria para las listas embebidas
+     * Datos en memoria para las listas embebidas
      */
     private ArrayList<Cita> todasCitas;
     private ArrayList<Cita> citasFiltradas;
@@ -56,7 +56,7 @@ public class ControladorMaestro {
         cargarContadores();
 
         /**
-         *  Acceso completo al menú
+         * Acceso completo al menú
          */
         vista.getMenuItemListaCitas().addActionListener(e -> abrirListaCitas());
         vista.getMenuItemNuevaCita().addActionListener(e -> abrirNuevaCita());

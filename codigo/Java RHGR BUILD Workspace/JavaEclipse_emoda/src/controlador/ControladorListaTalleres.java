@@ -32,11 +32,11 @@ public class ControladorListaTalleres {
 	 * Constructor del controlador de la lista de talleres.
 	 * Inicializa las referencias y asigna los escuchadores de eventos a los botones de la vista.
 	 * 
-	 * @param vista    La ventana que muestra la lista de talleres.
-	 * @param acceso   Objeto para la gestión de operaciones con la base de datos.
-	 * @param c        Conexión activa a la base de datos.
+	 * @param vista La ventana que muestra la lista de talleres.
+	 * @param acceso Objeto para la gestión de operaciones con la base de datos.
+	 * @param c Conexión activa a la base de datos.
 	 * @param talleres Lista de objetos Taller cargados en memoria.
-	 * @param emp      Empleado que ha iniciado sesión para determinar permisos y navegación.
+	 * @param emp Empleado que ha iniciado sesión para determinar permisos y navegación.
 	 */
 	public ControladorListaTalleres(ListaTalleres vista, AccesoBBDD acceso, Connection c,
 			ArrayList<Taller> talleres, Empleado emp) {

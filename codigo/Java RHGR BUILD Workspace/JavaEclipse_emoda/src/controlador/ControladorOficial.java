@@ -36,9 +36,9 @@ public class ControladorOficial {
      * Constructor del controlador. Inicializa la interfaz, vincula los eventos de los menús
      * y carga la información inicial en el dashboard.
      * 
-     * @param vista    Ventana principal del oficial.
-     * @param acceso   Objeto de acceso a la base de datos (DAO).
-     * @param c        Conexión activa a la base de datos.
+     * @param vista Ventana principal del oficial.
+     * @param acceso Objeto de acceso a la base de datos (DAO).
+     * @param c Conexión activa a la base de datos.
      * @param empleado Objeto del empleado que ha iniciado sesión.
      */
     public ControladorOficial(VentanaOficial vista, AccesoBBDD acceso, Connection c, Empleado empleado) {

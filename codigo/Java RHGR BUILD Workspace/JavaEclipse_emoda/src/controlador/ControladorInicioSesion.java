@@ -28,8 +28,8 @@ public class ControladorInicioSesion {
      * Configura la vista y el acceso a datos, además de inicializar el escuchador de eventos 
      * para el botón de acceso.
      * 
-     * @param vista     La ventana de login (InicioSesion).
-     * @param acceso    Objeto para la gestión de conexiones a la base de datos.
+     * @param vista La ventana de login (InicioSesion).
+     * @param acceso Objeto para la gestión de conexiones a la base de datos.
      * @param empleados Lista de empleados registrados para validar las credenciales.
      */
     public ControladorInicioSesion(InicioSesion vista, AccesoBBDD acceso, ArrayList<Empleado> empleados) {
@@ -38,7 +38,7 @@ public class ControladorInicioSesion {
         this.empleados = empleados;
 
         /**
-         *  Configura el listener del botón de entrada
+         * Configura el listener del botón de entrada
          */
         this.vista.getBtnEntrar().addActionListener(new ActionListener() {
             @Override
@@ -62,7 +62,7 @@ public class ControladorInicioSesion {
         Empleado empleadoAutenticado = null;
 
         /**
-         *  Lógica de búsqueda del empleado en la lista cargada
+         * Lógica de búsqueda del empleado en la lista cargada
          */
         for (Empleado emp : empleados) {
             if (emp.getUsuario().equals(usuario) &&
@@ -73,7 +73,7 @@ public class ControladorInicioSesion {
         }
 
         /**
-         *  Manejo de error en caso de credenciales inválidas
+         * Manejo de error en caso de credenciales inválidas
          */
         if (empleadoAutenticado == null) {
             vista.setRespuesta("Usuario o contraseña incorrectos");
@@ -81,7 +81,7 @@ public class ControladorInicioSesion {
         }
 
         /**
-         *  Proceso de transición: cerrar login e iniciar sesión de trabajo
+         * Proceso de transición: cerrar login e iniciar sesión de trabajo
          */
         String categoria = empleadoAutenticado.getCategoria();
 
@@ -89,7 +89,7 @@ public class ControladorInicioSesion {
         vista.dispose();
 
         /**
-         *  Se abre una conexión única que se pasará a los siguientes controladores
+         * Se abre una conexión única que se pasará a los siguientes controladores
          */
         Connection c = acceso.abrirConexion();
 

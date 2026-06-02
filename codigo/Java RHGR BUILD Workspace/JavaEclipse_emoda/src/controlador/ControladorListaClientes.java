@@ -31,11 +31,11 @@ public class ControladorListaClientes {
      * Constructor del controlador de la lista de clientes.
      * Inicializa los datos y configura todos los escuchadores de eventos para la interfaz.
      * 
-     * @param vista    La ventana que muestra la tabla de clientes.
-     * @param acceso   Objeto de acceso a datos para operaciones en BD.
-     * @param c        Conexión activa a la base de datos.
+     * @param vista La ventana que muestra la tabla de clientes.
+     * @param acceso Objeto de acceso a datos para operaciones en BD.
+     * @param c Conexión activa a la base de datos.
      * @param clientes Lista completa de clientes registrados.
-     * @param trajes   Lista completa de trajes asociados a clientes.
+     * @param trajes Lista completa de trajes asociados a clientes.
      * @param empleado Empleado que está utilizando la aplicación (para control de roles).
      */
     public ControladorListaClientes(ListaClientes vista, AccesoBBDD acceso, Connection c,
@@ -54,7 +54,7 @@ public class ControladorListaClientes {
         cargarTabla(clientesFiltrados, trajesFiltrados);
 
         /**
-         *  Evento para resetear filtros y mostrar todos los clientes
+         * Evento para resetear filtros y mostrar todos los clientes
          */
         vista.getBtnTodos().addActionListener(e -> {
             clientesFiltrados = new ArrayList<>(clientes);
@@ -62,14 +62,14 @@ public class ControladorListaClientes {
         });
 
         /**
-         *  Configuración de botones de filtrado y búsqueda
+         * Configuración de botones de filtrado y búsqueda
          */
         vista.getBtnHeroe().addActionListener(e -> filtrarPorTipo("superhéroe", "superheroína"));
         vista.getBtnVillano().addActionListener(e -> filtrarPorTipo("supervillano", "supervillana"));
         vista.getBtnBuscar().addActionListener(e -> buscar());
 
         /**
-         *  Configuración de acciones CRUD y navegación
+         * Configuración de acciones CRUD y navegación
          */
         vista.getBtnDetalle().addActionListener(e -> verDetalle());
         vista.getBtnEditar().addActionListener(e -> editarCliente());

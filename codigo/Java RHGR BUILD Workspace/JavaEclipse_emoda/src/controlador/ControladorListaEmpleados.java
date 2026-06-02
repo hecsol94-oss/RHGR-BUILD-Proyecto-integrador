@@ -49,7 +49,7 @@ public class ControladorListaEmpleados {
 		cargarTabla(empleadosFiltrados);
 		
 		/**
-		 *  Evento para resetear filtros y mostrar todos los empleados
+		 * Evento para resetear filtros y mostrar todos los empleados
 		 */
         vista.getBtnTodos().addActionListener(e -> {
             empleadosFiltrados = new ArrayList<>(empleados);
@@ -57,7 +57,7 @@ public class ControladorListaEmpleados {
         });
         
         /**
-         *  Configuración de botones de filtrado y búsqueda
+         * Configuración de botones de filtrado y búsqueda
          */
         vista.getBtnAprendiz().addActionListener(e -> filtrarPorCategoria("aprendiz"));
         vista.getBtnOficial().addActionListener(e -> filtrarPorCategoria("oficial"));
@@ -65,7 +65,7 @@ public class ControladorListaEmpleados {
         vista.getBtnBuscar().addActionListener(e -> buscar());
         
         /**
-         *  Configuración de acciones CRUD y navegación
+         * Configuración de acciones CRUD y navegación
          */
         vista.getBtnEditar().addActionListener(e -> editarEmpleado());
         vista.getBtnNuevo().addActionListener(e -> nuevoEmpleado());

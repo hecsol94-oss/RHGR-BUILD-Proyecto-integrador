@@ -36,10 +36,10 @@ public class ControladorDetalleCita {
      * Inicializa las dependencias, vincula el evento del botón volver y rellena 
      * automáticamente los campos de la vista al instanciarse.
      * 
-     * @param vista     Ventana de detalle de la cita.
-     * @param cita      Modelo de la cita seleccionada.
-     * @param acceso    Clase DAO para acceso a datos.
-     * @param c         Conexión JDBC.
+     * @param vista Ventana de detalle de la cita.
+     * @param cita Modelo de la cita seleccionada.
+     * @param acceso Clase DAO para acceso a datos.
+     * @param c Conexión JDBC.
      * @param aprendices Nombres de los aprendices asociados.
      */
     public ControladorDetalleCita(DetalleCita vista, Cita cita, AccesoBBDD acceso, Connection c, String[] aprendices) {
@@ -50,12 +50,12 @@ public class ControladorDetalleCita {
         this.aprendices = aprendices;
 
         /**
-         *  Población de la interfaz
+         * Población de la interfaz
          */
         rellenarCampos();
 
         /**
-         *  Configuración de eventos
+         * Configuración de eventos
          */
         vista.getBtnVolver().addActionListener(e -> vista.dispose());
     }
@@ -65,8 +65,8 @@ public class ControladorDetalleCita {
      * Útil cuando no se dispone de conexión a base de datos; en este caso, 
      * la vista mostrará los IDs numéricos en lugar de los nombres.
      * 
-     * @param vista     Ventana de detalle de la cita.
-     * @param cita      Modelo de la cita seleccionada.
+     * @param vista Ventana de detalle de la cita.
+     * @param cita Modelo de la cita seleccionada.
      * @param aprendices Nombres de los aprendices asociados.
      */
     public ControladorDetalleCita(DetalleCita vista, Cita cita, String[] aprendices) {
@@ -80,14 +80,14 @@ public class ControladorDetalleCita {
     private void rellenarCampos() {
 
         /**
-         *  Asignación de datos temporales básicos
+         * Asignación de datos temporales básicos
          */
         vista.setFecha(String.valueOf(cita.getFecha()));
         vista.setHora(String.valueOf(cita.getHora_inicio()));
         vista.setDuracion(cita.getDuracion() + " h");
 
         /**
-         *  Modo offline o sin acceso: Mostrar solo identificadores numéricos
+         * Modo offline o sin acceso: Mostrar solo identificadores numéricos
          */
         if (acceso == null || c == null) {
             vista.setCliente("ID " + cita.getId_cliente());
@@ -106,7 +106,7 @@ public class ControladorDetalleCita {
         
 
         /**
-         *  Modo online: Resolución de nombres mediante listas de la BD
+         * Modo online: Resolución de nombres mediante listas de la BD
          */
         try {
             ArrayList<Cliente>  clientes  = acceso.recogeClientes(c);
@@ -115,7 +115,7 @@ public class ControladorDetalleCita {
             ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
 
             /**
-             *  Poblar vista con nombres reales
+             * Poblar vista con nombres reales
              */
             vista.setCliente(nombreCliente(clientes, cita.getId_cliente()));
             vista.setTraje(nombreTraje(trajes, cita.getId_traje()));
@@ -123,7 +123,7 @@ public class ControladorDetalleCita {
             vista.setOficial(nombreEmpleado(empleados, cita.getId_empleado()));
 
             /**
-             *  Formateo del bloque de texto para aprendices
+             * Formateo del bloque de texto para aprendices
              */
             StringBuilder texto = new StringBuilder();
             if (aprendices[0] != null && !aprendices[0].isEmpty()) {
