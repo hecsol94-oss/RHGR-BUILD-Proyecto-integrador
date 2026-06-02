@@ -98,9 +98,11 @@ public class NuevoTraje extends JFrame {
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 	
-    // --- MÉTODOS GETTER PARA EL CONTROLADOR (MANTENIDOS) ---
+    /**
+     * --- MÉTODOS GETTER PARA EL CONTROLADOR (MANTENIDOS) ---
+     */
 
- // --- MÉTODOS GETTER PARA EL CONTROLADOR ---
+ /** --- MÉTODOS GETTER PARA EL CONTROLADOR --- */
 
  	/**
  	 * 

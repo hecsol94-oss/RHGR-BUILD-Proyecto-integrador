@@ -166,9 +166,9 @@ public class DetalleClientes extends JFrame {
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
-    // --- MÉTODOS PARA EL CONTROLADOR (IDÉNTICOS) ---
+    /** --- MÉTODOS PARA EL CONTROLADOR (IDÉNTICOS) --- */
 
- // --- MÉTODOS GETTER PARA EL CONTROLADOR ---
+ /** --- MÉTODOS GETTER PARA EL CONTROLADOR --- */
 
     /**
      * 

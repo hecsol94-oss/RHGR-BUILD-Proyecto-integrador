@@ -109,7 +109,8 @@ public class DetalleCita extends JFrame {
         return val;
     }
 
-    // Setters (Mantenidos)
+    /** Setters (Mantenidos) */
+    
     /**
      * 
      * @param v

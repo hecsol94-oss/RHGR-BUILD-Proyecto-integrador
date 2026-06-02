@@ -195,8 +195,11 @@ public class VentanaOficial extends JFrame {
         return box;
     }
 
-    // --- Otros métodos de construcción y estilo (Lista Citas, Menú, Botones, etc.) ---
-    // Se mantienen idénticos a la versión anterior para asegurar compatibilidad total.
+    /**
+     * --- Otros métodos de construcción y estilo (Lista Citas, Menú, Botones, etc.) ---
+     * Se mantienen idénticos a la versión anterior para asegurar compatibilidad total.
+     * @return
+     */
 
     private JPanel construirPanelListaCitas() {
         JPanel main = new JPanel(new BorderLayout(25, 25));
@@ -701,7 +704,8 @@ public class VentanaOficial extends JFrame {
     	btnNuevoEmpleadoEmb.setEnabled(false);
     }
     
- // Getters para los items de menú
+ /** Getters para los items de menú */
+    
     /**
      * 
      * @return

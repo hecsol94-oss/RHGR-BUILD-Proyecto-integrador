@@ -85,7 +85,9 @@ public class NuevoCliente extends JFrame {
         contentPane.add(lblFooter);
     }
 
-    // --- Métodos de Ayuda para Diseño ---
+    /**
+     * --- Métodos de Ayuda para Diseño ---
+     */
 
     /**
      * Aplica estilo visual a una etiqueta (JLabel) dentro del formulario.

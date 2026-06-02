@@ -74,7 +74,9 @@ public class NuevoTaller extends JFrame {
         contentPane.add(lblFooter);
     }
 
-    // --- Métodos de Ayuda para Diseño ---
+    /**
+     * --- Métodos de Ayuda para Diseño ---
+     */
 
     /**
      * Aplica estilo visual a una etiqueta (JLabel) dentro del formulario.
@@ -128,9 +130,12 @@ public class NuevoTaller extends JFrame {
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
 
-    // --- MÉTODOS PARA EL CONTROLADOR ---
+    /**
+     * --- MÉTODOS PARA EL CONTROLADOR ---
+     */
 
- // Método para obtener el texto del campo nombre
+ /** Método para obtener el texto del campo nombre */
+    
  	/**
  	 * 
  	 * @return
@@ -139,7 +144,8 @@ public class NuevoTaller extends JFrame {
  		return txtNomeSala.getText();
  	}
  	
- 	// Método para obtener el valor seleccionado del combo
+ 	/** Método para obtener el valor seleccionado del combo */
+ 	
  	/**
  	 * 
  	 * @return
@@ -148,7 +154,8 @@ public class NuevoTaller extends JFrame {
  		return (String) cbTipoSala.getSelectedItem();
  	}
  	
- 	// Getter del botón guardar para el controlador
+ 	/** Getter del botón guardar para el controlador */
+ 	
  	/**
  	 * 
  	 * @return
@@ -157,7 +164,8 @@ public class NuevoTaller extends JFrame {
  		return btnGuardar;
  	}
  	
- 	// Getter del botón cancelar para el controlador
+ 	/** Getter del botón cancelar para el controlador */
+ 	
  	/**
  	 * 
  	 * @return
@@ -166,7 +174,8 @@ public class NuevoTaller extends JFrame {
  		return btnCancelar;
  	}
  	
- 	// Método para rellenar los campos al editar un taller existente
+ 	/** Método para rellenar los campos al editar un taller existente */
+ 	
  	/**
  	 * 
  	 * @param taller

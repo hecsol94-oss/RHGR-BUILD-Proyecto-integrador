@@ -136,7 +136,7 @@ public class ListaClientes extends JFrame {
      * @param tabla tabla a la que se le aplicará el estilo
      */
     private void estilizarTabla(JTable tabla) {
-        tabla.setRowHeight(45); // Filas más altas para pantalla grande
+        tabla.setRowHeight(45); /** Filas más altas para pantalla grande */
         tabla.setFont(new Font("Tahoma", Font.PLAIN, 15));
         tabla.setSelectionBackground(AMARILLO_POWER);
         tabla.setSelectionForeground(NEGRO_ELITE);
@@ -150,7 +150,8 @@ public class ListaClientes extends JFrame {
         header.setReorderingAllowed(false);
     }
 
-    // --- MÉTODOS PARA EL CONTROLADOR (SE MANTIENEN IGUAL) ---
+    /** --- MÉTODOS PARA EL CONTROLADOR (SE MANTIENEN IGUAL) --- */
+    
     /**
 	 * 
 	 * @return

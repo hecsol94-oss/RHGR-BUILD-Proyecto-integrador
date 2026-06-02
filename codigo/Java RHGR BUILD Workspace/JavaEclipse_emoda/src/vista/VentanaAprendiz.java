@@ -22,7 +22,9 @@ public class VentanaAprendiz extends JFrame {
     private CardLayout cardLayout;
     private JPanel cardPane;
 
-    // --- Componentes originales (Todos mantenidos para el Controlador) ---
+    /**
+     * --- Componentes originales (Todos mantenidos para el Controlador) ---
+     */
     private JMenuItem menuItemListaCitas, menuItemNuevaCita, menuItemListaClientes, menuItemNuevoCliente, menuItemListaTalleres, menuItemNuevoTaller, menuItemListaEmpleados, menuItemNuevoEmpleado;
     private JLabel lblUsuario, lblSalir;
     private JLabel lblTodasLasCitas, lblNumeroDeMisCitas, lblNumeroDeTalleres, lblTotalClientes, lblCitasHoy, lblCitasSemana, lblProximaCita;
@@ -115,7 +117,9 @@ public class VentanaAprendiz extends JFrame {
      * @return JPanel con la vista del dashboard
      */
     private JPanel construirDashboard() {
-        // Contenedor principal con logo RHGR de fondo (Full Stretch)
+        /**
+         * Contenedor principal con logo RHGR de fondo (Full Stretch)
+         */
         JPanel p = new JPanel(new GridBagLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -147,7 +151,9 @@ public class VentanaAprendiz extends JFrame {
         gbcMain.insets = new Insets(0, 0, 40, 0); 
         contenedorCentral.add(tituloResumen, gbcMain);
 
-        // --- EL PANEL DE TARJETAS ---
+        /**
+         * --- EL PANEL DE TARJETAS ---
+         */
         JPanel panelTarjetas = new JPanel(new GridBagLayout());
         panelTarjetas.setOpaque(false);
         GridBagConstraints gbc = new GridBagConstraints();
@@ -199,8 +205,11 @@ public class VentanaAprendiz extends JFrame {
         return box;
     }
 
-    // --- Otros métodos de construcción y estilo (Lista Citas, Menú, Botones, etc.) ---
-    // Se mantienen idénticos a la versión anterior para asegurar compatibilidad total.
+    /**
+     * --- Otros métodos de construcción y estilo (Lista Citas, Menú, Botones, etc.) ---
+     * Se mantienen idénticos a la versión anterior para asegurar compatibilidad total.
+     * @return
+     */
 
     private JPanel construirPanelListaCitas() {
         JPanel main = new JPanel(new BorderLayout(25, 25));
@@ -341,7 +350,8 @@ public class VentanaAprendiz extends JFrame {
         return i;
     }
 
-    // --- GETTERS PARA EL CONTROLADOR (TODOS MANTENIDOS) ---
+    /** --- GETTERS PARA EL CONTROLADOR (TODOS MANTENIDOS) --- */
+    
     /**
      * 
      * @param card
@@ -609,7 +619,8 @@ public class VentanaAprendiz extends JFrame {
     	btnNuevoEmpleadoEmb.setEnabled(false);
     }
 
-    //Getters para los items de menú
+    /** Getters para los items de menú */
+    
     /**
      * 
      * @return

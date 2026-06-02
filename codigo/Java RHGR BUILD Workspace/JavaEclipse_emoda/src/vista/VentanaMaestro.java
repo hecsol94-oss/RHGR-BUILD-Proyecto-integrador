@@ -9,7 +9,9 @@ import javax.swing.table.JTableHeader;
 
 public class VentanaMaestro extends JFrame {
 
-	//COLORES
+	/**
+	 * COLORES
+	 */
     private final Color ROJO_HEROE = new Color(204, 0, 0);
     private final Color AMARILLO_POWER = new Color(255, 204, 0);
     private final Color NEGRO_ELITE = new Color(25, 25, 25);
@@ -18,7 +20,9 @@ public class VentanaMaestro extends JFrame {
     private CardLayout cardLayout;
     private JPanel cardPane;
 
-    // --- Componentes originales (Todos mantenidos para el Controlador) ---
+    /**
+     * --- Componentes originales (Todos mantenidos para el Controlador) ---
+     */
     private JMenuItem menuItemListaCitas, menuItemNuevaCita, menuItemListaClientes, menuItemNuevoCliente, menuItemListaTalleres, menuItemNuevoTaller, menuItemListaEmpleados, menuItemNuevoEmpleado;
     private JLabel lblUsuario, lblSalir;
     private JLabel lblTodasLasCitas, lblNumeroDeMisCitas, lblNumeroDeTalleres, lblTotalClientes, lblCitasHoy, lblCitasSemana, lblProximaCita;
@@ -101,7 +105,9 @@ public class VentanaMaestro extends JFrame {
      * @return JPanel con la vista del dashboard
      */
     private JPanel construirDashboard() {
-        // Contenedor principal con logo RHGR de fondo (Full Stretch)
+        /**
+         * Contenedor principal con logo RHGR de fondo (Full Stretch)
+         */
         JPanel p = new JPanel(new GridBagLayout()) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -119,23 +125,29 @@ public class VentanaMaestro extends JFrame {
         };
         p.setBackground(GRIS_TECNICO);
         
-        // Usamos un GridBagLayout central para organizar Título + Tarjetas
+        /**
+         * Usamos un GridBagLayout central para organizar Título + Tarjetas
+         */
         JPanel contenedorCentral = new JPanel(new GridBagLayout());
         contenedorCentral.setOpaque(false);
         GridBagConstraints gbcMain = new GridBagConstraints();
         gbcMain.gridx = 0;
         gbcMain.fill = GridBagConstraints.HORIZONTAL;
 
-        // --- EL TÍTULO REINTRODUCIDO ---
+        /**
+         * --- EL TÍTULO REINTRODUCIDO ---
+         */
         JLabel tituloResumen = new JLabel("RESUMEN DEL TALLER");
-        tituloResumen.setFont(new Font("Impact", Font.PLAIN, 36)); // Muy grande y estilo Edna
+        tituloResumen.setFont(new Font("Impact", Font.PLAIN, 36)); /** Muy grande y estilo Edna */
         tituloResumen.setForeground(NEGRO_ELITE);
         tituloResumen.setHorizontalAlignment(SwingConstants.CENTER);
         gbcMain.gridy = 0;
-        gbcMain.insets = new Insets(0, 0, 40, 0); // Espacio abajo del título
+        gbcMain.insets = new Insets(0, 0, 40, 0); /** Espacio abajo del título */
         contenedorCentral.add(tituloResumen, gbcMain);
 
-        // --- EL PANEL DE TARJETAS ---
+        /**
+         * --- EL PANEL DE TARJETAS ---
+         */
         JPanel panelTarjetas = new JPanel(new GridBagLayout());
         panelTarjetas.setOpaque(false);
         GridBagConstraints gbc = new GridBagConstraints();
@@ -190,8 +202,11 @@ public class VentanaMaestro extends JFrame {
         return box;
     }
 
-    // --- Otros métodos de construcción y estilo (Lista Citas, Menú, Botones, etc.) ---
-    // Se mantienen idénticos a la versión anterior para asegurar compatibilidad total.
+    /**
+     * --- Otros métodos de construcción y estilo (Lista Citas, Menú, Botones, etc.) ---
+     * Se mantienen idénticos a la versión anterior para asegurar compatibilidad total.
+     * @return
+     */
 
     private JPanel construirPanelListaCitas() {
         JPanel main = new JPanel(new BorderLayout(25, 25));
@@ -327,7 +342,8 @@ public class VentanaMaestro extends JFrame {
         return i;
     }
 
-    // Navegación
+    /** Navegación */
+    
     /**
      * 
      * @param card
@@ -336,7 +352,8 @@ public class VentanaMaestro extends JFrame {
     	cardLayout.show(cardPane, card); 
     	}
 
-    // Getters header
+    /** Getters header */
+    
     /**
      * 
      * @return
@@ -352,7 +369,8 @@ public class VentanaMaestro extends JFrame {
     	return lblSalir; 
     }
 
-    // Getters dashboard
+    /** Getters dashboard */
+    
     /**
      * 
      * @return
@@ -360,6 +378,10 @@ public class VentanaMaestro extends JFrame {
     public JLabel getLblTodasLasCitas() { 
     	return lblTodasLasCitas; 
     }
+    /**
+     * 
+     * @return
+     */
     public JLabel getLblNumeroDeMisCitas() {
     	return lblNumeroDeMisCitas; 
     }
@@ -399,7 +421,8 @@ public class VentanaMaestro extends JFrame {
     	return lblProximaCita; 
     }
 
-    // Getters lista citas
+    /** Getters lista citas */
+    
     /**
      * 
      * @return
@@ -478,7 +501,8 @@ public class VentanaMaestro extends JFrame {
     	return btnVolverCitas; 
     }
 
-    // Getters lista clientes
+    /** Getters lista clientes */
+    
     /**
      * 
      * @return
@@ -557,7 +581,8 @@ public class VentanaMaestro extends JFrame {
     	return btnVolverClientes;
     }
 
-    // Getters lista talleres
+    /** Getters lista talleres */
+    
     /**
      * 
      * @return
@@ -614,7 +639,8 @@ public class VentanaMaestro extends JFrame {
     	return btnVolverTalleres; 
     }
     
-    // Getters lista empleados
+    /** Getters lista empleados */
+    
     /**
      * 
      * @return
@@ -679,7 +705,8 @@ public class VentanaMaestro extends JFrame {
     	return btnVolverEmpleados;
     }
     
-    // Getters menú
+    /** Getters menú */
+    
     /**
      * 
      * @return

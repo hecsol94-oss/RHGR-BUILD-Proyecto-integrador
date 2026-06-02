@@ -158,7 +158,11 @@ public class NuevaCita extends JFrame {
         panelFase2.add(btnGuardar);
     }
 
-    // --- MÉTODOS DE ESTILIZACIÓN ---
+    /**
+     * --- MÉTODOS DE ESTILIZACIÓN ---
+     * @param titulo
+     * @return
+     */
 
     private JPanel crearHeader(String titulo) {
         JPanel p = new JPanel(null);
@@ -271,7 +275,8 @@ public class NuevaCita extends JFrame {
     	cardLayout.show(panelContenedor, "FASE1");
     }
 
-    // Getters Fase 1
+    /** Getters Fase 1 */
+    
     /**
      * 
      * @return
@@ -379,7 +384,8 @@ public class NuevaCita extends JFrame {
     	cbOficial.setSelectedItem(tipo);
     }
 
-    // Getters Fase 2
+    /** Getters Fase 2 */
+    
     /**
      * 
      * @return
@@ -409,7 +415,8 @@ public class NuevaCita extends JFrame {
     	return btnAtras;
     }
 
-    // Compatibilidad
+    /** Compatibilidad */
+    
     /**
      * 
      * @return
@@ -424,7 +431,8 @@ public class NuevaCita extends JFrame {
     public JButton getBtnTaller() {
     	return null;
     }
-    // Compatibilidad: getTxtOficial() devuelve null — ya no se usa
+    /** Compatibilidad: getTxtOficial() devuelve null — ya no se usa */
+    
     /**
      * 
      * @return
