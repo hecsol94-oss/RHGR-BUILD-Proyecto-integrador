@@ -207,8 +207,8 @@ public class NuevoEmpleado extends JFrame {
 	 * 
 	 * @return
 	 */
-	public JComboBox<String> getCbTipo() {
-	    return cbTipo;
+	public String getCbTipo() {
+	    return (String) cbTipo.getSelectedItem();
 	}
 	
 	/**

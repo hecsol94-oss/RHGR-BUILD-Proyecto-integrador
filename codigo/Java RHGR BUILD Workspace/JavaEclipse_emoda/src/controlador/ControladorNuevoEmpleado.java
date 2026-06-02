@@ -101,7 +101,7 @@ public class ControladorNuevoEmpleado {
 		String usuario = vista.getTxtUsuario().getText().trim();
 		String contraseña = vista.getContraseñaCampo().getText().trim();
 		String confirmar_contraseña = vista.getConfirmarContraseña().getText().trim();
-		String categoria = vista.getCbTipo().getSelectedItem().toString();
+		String categoria = vista.getCbTipo().toString();
 		
 		// Validación de campos obligatorios
 		if (apodo.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || contraseña.isEmpty() || confirmar_contraseña.isEmpty() || categoria.isEmpty()) {
