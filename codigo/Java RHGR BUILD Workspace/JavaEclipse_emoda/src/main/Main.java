@@ -27,7 +27,7 @@ public class Main {
         
 
 	    try {
-	    	// Secuencia lógica: Limpiar -> Insertar datos -> guardarlos en ArrayLists
+	    	/** Secuencia lógica: Limpiar -> Insertar datos -> guardarlos en ArrayLists */
 	    	acceso.limpiarTablas(c);
 	        
 	        acceso.insertarClientes(c);
