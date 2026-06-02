@@ -20,7 +20,9 @@ import vista.VentanaMaestro;
  */
 public class ControladorNuevoEmpleado {
 
-	// Referencias a vistas y capa de datos
+	/**
+	 * Referencias a vistas y capa de datos
+	 */
 	private NuevoEmpleado vista;
 	private ListaEmpleados vistaEmpleados;
 	private VentanaMaestro vistaMaestro;
@@ -28,10 +30,14 @@ public class ControladorNuevoEmpleado {
 	private AccesoBBDD acceso;
 	private Connection c;
 	
-	// Empleado en edición (null si es nuevo)
+	/**
+	 * Empleado en edición (null si es nuevo)
+	 */
 	private Empleado empleadoEditar;
 	
-	// Lista de empleados en memoria
+	/**
+	 * Lista de empleados en memoria
+	 */
 	private ArrayList<Empleado> empleados;
 	
 	
@@ -65,12 +71,16 @@ public class ControladorNuevoEmpleado {
 		this.empleados = empleados;
 		this.empleado = empleado;
 		
-		// Si estamos en modo edición, precargamos datos
+		/**
+		 * Si estamos en modo edición, precargamos datos
+		 */
         if (empleadoEditar != null) {
             precargarDatos();
         }
         
-        // Eventos de botones
+        /**
+         * Eventos de botones
+         */
         vista.getBtnGuardar().addActionListener(e -> guardarEmpleado());
         vista.getBtnCancelar().addActionListener(e -> cancelar());
 	}
@@ -103,7 +113,9 @@ public class ControladorNuevoEmpleado {
 		String confirmar_contraseña = vista.getConfirmarContraseña().getText().trim();
 		String categoria = vista.getCbTipo().toString();
 		
-		// Validación de campos obligatorios
+		/**
+		 * Validación de campos obligatorios
+		 */
 		if (apodo.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || contraseña.isEmpty() || confirmar_contraseña.isEmpty() || categoria.isEmpty()) {
 			JOptionPane.showMessageDialog(vista,
 					"Por favor, rellena todos los campos del empleado.",
@@ -113,7 +125,7 @@ public class ControladorNuevoEmpleado {
 		}
 		
 		try {
-			// ===== CASO: NUEVO EMPLEADO =====
+			/** ===== CASO: NUEVO EMPLEADO ===== */
 			if (empleadoEditar == null) {
 				
 				acceso.insertarNuevoEmpleado(c, apodo, nombre, apellido, usuario, contraseña, confirmar_contraseña, categoria);
@@ -121,7 +133,7 @@ public class ControladorNuevoEmpleado {
 				
 				JOptionPane.showMessageDialog(vista, "Empleado creado correctamente");
 				
-			// ===== CASO: EDITAR EMPLEADO =====
+			/** ===== CASO: EDITAR EMPLEADO ===== */
 			} else {
 				
 				acceso.actualizarEmpleado(c, empleadoEditar.getId_empleado(), apodo, nombre, apellido, usuario, contraseña, confirmar_contraseña, categoria);
@@ -130,9 +142,9 @@ public class ControladorNuevoEmpleado {
 				JOptionPane.showMessageDialog(vista, "Empleado actualizado correctamente.");
 			}
 			
-			// ===== REDIRECCIÓN SEGÚN CONTEXTO =====
+			/** ===== REDIRECCIÓN SEGÚN CONTEXTO ===== */
 			
-			// Desde ListaEmpleados
+			/** Desde ListaEmpleados */
 			if (vistaCita == null && (vistaEmpleados != null && vistaMaestro != null)) {
 				
 				ListaEmpleados le = new ListaEmpleados();
@@ -144,7 +156,7 @@ public class ControladorNuevoEmpleado {
 				vista.dispose();
 				vistaEmpleados.dispose();
 				
-			// Desde VentanaMaestro
+			/** Desde VentanaMaestro */
 			} else if (vistaCita == null && vistaEmpleados == null && vistaMaestro != null) {
 				
 				ListaEmpleados le = new ListaEmpleados();
@@ -153,7 +165,7 @@ public class ControladorNuevoEmpleado {
 				
 				vista.dispose();
 				
-			// Desde NuevaCita
+			/** Desde NuevaCita */
 			} else if (vistaCita != null && vistaEmpleados == null) {
 				
 				vista.dispose();

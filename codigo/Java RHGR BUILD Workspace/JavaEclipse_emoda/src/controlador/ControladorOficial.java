@@ -21,7 +21,9 @@ public class ControladorOficial {
     private final Connection c;
     private final Empleado empleado;
     
-    // Listas en memoria para evitar llamadas constantes a BD
+    /**
+     * Listas en memoria para evitar llamadas constantes a BD
+     */
     private ArrayList<Cita> todasCitas;
     private ArrayList<Cita> citasFiltradas;
     private ArrayList<Cliente> todosClientes;
@@ -45,21 +47,29 @@ public class ControladorOficial {
         this.c = c;
         this.empleado = empleado;
 
-        // Mostrar usuario en la interfaz
+        /**
+         * Mostrar usuario en la interfaz
+         */
         vista.getLblUsuario().setText("Usuario: " + empleado.getApodo() + " (" + empleado.getCategoria() + ")");
 
-        // Cargar datos iniciales y contadores del dashboard
+        /**
+         * Cargar datos iniciales y contadores del dashboard
+         */
         cargarDatosEnMemoria();
         cargarContadores();
         
-        // Navegación del menú
+        /**
+         * Navegación del menú
+         */
         vista.getMenuItemListaCitas().addActionListener(e -> abrirListaCitas());
         vista.getMenuItemNuevaCita().addActionListener(e -> abrirNuevaCita());
         vista.getMenuItemListaClientes().addActionListener(e -> abrirListaClientes());
         vista.getMenuItemListaTalleres().addActionListener(e -> abrirListaTalleres());
         vista.getMenuItemListaEmpleados().addActionListener(e -> abrirListaEmpleados());
 
-        // Evento de cerrar sesión desde label
+        /**
+         * Evento de cerrar sesión desde label
+         */
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vista.getLblSalir().addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
@@ -81,7 +91,7 @@ public class ControladorOficial {
             listaEmpleados = acceso.recogeEmpleados(c);
             listaTrajes    = acceso.recogeTrajes(c);
 
-            // Copias para filtrado en interfaz
+            /** Copias para filtrado en interfaz */
             citasFiltradas    = new ArrayList<>(todasCitas);
             clientesFiltrados = new ArrayList<>(todosClientes);
 
@@ -99,20 +109,20 @@ public class ControladorOficial {
             vista.getLblTodasLasCitas().setText(String.valueOf(todasCitas.size()));
             vista.getLblNumeroDeTalleres().setText(String.valueOf(todosTalleres.size()));
 
-            // Citas asignadas al oficial actual
+            /** Citas asignadas al oficial actual */
             long misCitas = todasCitas.stream()
                     .filter(ci -> ci.getId_empleado() == empleado.getId_empleado())
                     .count();
             vista.getLblNumeroDeMisCitas().setText(String.valueOf(misCitas));
 
-            // Citas del día actual
+            /** Citas del día actual */
             java.sql.Date hoy = new java.sql.Date(System.currentTimeMillis());
             long citasHoy = todasCitas.stream()
                     .filter(ci -> ci.getFecha().toString().equals(hoy.toString()))
                     .count();
             vista.getLblCitasHoy().setText(String.valueOf(citasHoy));
 
-            // Citas de la semana actual
+            /** Citas de la semana actual */
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
             Date ini = cal.getTime();
@@ -125,7 +135,7 @@ public class ControladorOficial {
 
             vista.getLblCitasSemana().setText(String.valueOf(semana));
 
-            // Próxima cita
+            /** Próxima cita */
             String proxima = todasCitas.stream()
                     .filter(ci -> !ci.getFecha().before(hoy))
                     .map(ci -> ci.getFecha() + " " + ci.getHora_inicio())
@@ -182,7 +192,7 @@ public class ControladorOficial {
             ListaClientes vistaLista = new ListaClientes();
             new ControladorListaClientes(vistaLista, acceso, c, clientes, trajes, empleado);
 
-            vistaLista.deshabilitarBotones(); // modo solo lectura
+            vistaLista.deshabilitarBotones(); /** modo solo lectura */
             vistaLista.setVisible(true);
             vista.dispose();
 
@@ -203,7 +213,7 @@ public class ControladorOficial {
 
         new ControladorListaTalleres(vistaLista, acceso, c, talleres, empleado);
 
-        vistaLista.deshabilitarBotones(); // modo solo lectura
+        vistaLista.deshabilitarBotones(); /** modo solo lectura */
         vistaLista.setVisible(true);
         vista.dispose();
     }
@@ -216,7 +226,7 @@ public class ControladorOficial {
     		ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
         	ListaEmpleados vistaLista = new ListaEmpleados();
         	new ControladorListaEmpleados(vistaLista, acceso, c, empleados, empleado);
-        	vistaLista.deshabilitarBotones(); // modo solo lectura
+        	vistaLista.deshabilitarBotones(); /** modo solo lectura */
         	vistaLista.setVisible(true);
         	vista.dispose();
     	} catch (SQLException ex) {

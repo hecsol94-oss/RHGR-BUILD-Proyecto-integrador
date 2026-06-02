@@ -27,7 +27,9 @@ import vista.VentanaMaestro;
  */
 public class ControladorNuevoTaller {
 
-	// Referencias a vistas, modelo y datos
+	/**
+	 * Referencias a vistas, modelo y datos
+	 */
 	private NuevoTaller vista;
 	private ListaTalleres ventanaTaller;
 	private VentanaMaestro ventanaMaestro;
@@ -60,7 +62,9 @@ public class ControladorNuevoTaller {
 		this.talleres = talleres;
 		this.emp = emp;
 
-		// Eventos de botones
+		/**
+		 * Eventos de botones
+		 */
 		this.vista.getBtnGuardar().addActionListener(e -> pulsarBtnGuardar());
 		this.vista.getBtnCancelar().addActionListener(e -> pulsarBtnCancelar());
 	}
@@ -75,12 +79,12 @@ public class ControladorNuevoTaller {
 		String nombreIntroducido = vista.getNombreSala();
 		String tipoIntroducido = vista.getTipoSala();
 		
-		// ===== CASO: CREAR NUEVO TALLER =====
+		/** ===== CASO: CREAR NUEVO TALLER ===== */
 		if (tallerEditar == null) {
 			
 			if (!nombreIntroducido.isEmpty()) {
 				
-				// Desde ListaTalleres
+				/** Desde ListaTalleres */
 				if (ventanaMaestro == null && ventanaTaller != null) {
 
 					Taller nuevoTaller = new Taller((talleres.size() + 1), nombreIntroducido, tipoIntroducido);
@@ -101,7 +105,7 @@ public class ControladorNuevoTaller {
 					ventanaTaller.dispose();
 				}
 
-				// Desde VentanaMaestro
+				/** Desde VentanaMaestro */
 				else if (ventanaMaestro != null && ventanaTaller == null) {
 
 					Taller nuevoTaller = new Taller((talleres.size() + 1), nombreIntroducido, tipoIntroducido);
@@ -125,7 +129,7 @@ public class ControladorNuevoTaller {
 			}
 		}
 
-		// ===== CASO: EDITAR TALLER =====
+		/** ===== CASO: EDITAR TALLER ===== */
 		else {
 			
 			if (!nombreIntroducido.isEmpty()) {

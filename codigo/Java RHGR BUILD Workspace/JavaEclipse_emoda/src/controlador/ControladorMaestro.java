@@ -21,7 +21,9 @@ public class ControladorMaestro {
     private final Connection c;
     private final Empleado empleado;
 
-    // Datos en memoria para las listas embebidas
+    /**
+     *  Datos en memoria para las listas embebidas
+     */
     private ArrayList<Cita> todasCitas;
     private ArrayList<Cita> citasFiltradas;
     private ArrayList<Cita> citasMias;
@@ -53,7 +55,9 @@ public class ControladorMaestro {
         cargarDatosEnMemoria();
         cargarContadores();
 
-        // Acceso completo al menú
+        /**
+         *  Acceso completo al menú
+         */
         vista.getMenuItemListaCitas().addActionListener(e -> abrirListaCitas());
         vista.getMenuItemNuevaCita().addActionListener(e -> abrirNuevaCita());
         vista.getMenuItemListaClientes().addActionListener(e -> abrirListaClientes());
@@ -63,7 +67,9 @@ public class ControladorMaestro {
         vista.getMenuItemListaEmpleados().addActionListener(e -> abrirListaEmpleados());
         vista.getMenuItemNuevoEmpleado().addActionListener(e -> abrirNuevoEmpleado());
 
-        // Salir
+        /**
+         *  Salir
+         */
         vista.getLblSalir().setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         vista.getLblSalir().addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -126,7 +132,9 @@ public class ControladorMaestro {
                     vista.getLblProximaCita().setText(proxima);
                 }
             }    
-        } catch (Exception ex) { ex.printStackTrace(); }
+        } catch (Exception ex) {
+        	ex.printStackTrace();
+        }
     }
 
     /**

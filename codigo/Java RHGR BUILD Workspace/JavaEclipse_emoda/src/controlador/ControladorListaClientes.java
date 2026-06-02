@@ -53,18 +53,24 @@ public class ControladorListaClientes {
 
         cargarTabla(clientesFiltrados, trajesFiltrados);
 
-        // Evento para resetear filtros y mostrar todos los clientes
+        /**
+         *  Evento para resetear filtros y mostrar todos los clientes
+         */
         vista.getBtnTodos().addActionListener(e -> {
             clientesFiltrados = new ArrayList<>(clientes);
             cargarTabla(clientesFiltrados, trajesFiltrados);
         });
 
-        // Configuración de botones de filtrado y búsqueda
+        /**
+         *  Configuración de botones de filtrado y búsqueda
+         */
         vista.getBtnHeroe().addActionListener(e -> filtrarPorTipo("superhéroe", "superheroína"));
         vista.getBtnVillano().addActionListener(e -> filtrarPorTipo("supervillano", "supervillana"));
         vista.getBtnBuscar().addActionListener(e -> buscar());
 
-        // Configuración de acciones CRUD y navegación
+        /**
+         *  Configuración de acciones CRUD y navegación
+         */
         vista.getBtnDetalle().addActionListener(e -> verDetalle());
         vista.getBtnEditar().addActionListener(e -> editarCliente());
         vista.getBtnNuevo().addActionListener(e -> nuevoCliente());

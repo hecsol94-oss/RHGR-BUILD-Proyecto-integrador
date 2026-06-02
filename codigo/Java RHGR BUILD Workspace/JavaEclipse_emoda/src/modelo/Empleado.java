@@ -2,7 +2,9 @@ package modelo;
 
 public class Empleado {
 	
-	// Datos de identificación y credenciales del personal del taller
+	/**
+	 *  Datos de identificación y credenciales del personal del empleado
+	 */
 	private int id_empleado;
 	private String categoria;
 	private String nombre;
@@ -12,8 +14,8 @@ public class Empleado {
 	private String contrasena;
 	private String confirmar_contrasena;
 	
-	// Constructor principal para crear el objeto Empleado con la información de la BBDD
 	/**
+	 * Constructor principal para crear el objeto Empleado con la información de la BBDD
 	 * 
 	 * @param id_empleado
 	 * @param categoria

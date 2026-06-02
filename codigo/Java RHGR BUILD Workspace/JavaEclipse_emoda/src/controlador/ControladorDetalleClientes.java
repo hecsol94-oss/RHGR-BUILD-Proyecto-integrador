@@ -62,13 +62,17 @@ public class ControladorDetalleClientes {
         this.trajes = trajes;
         this.empleado = empleado;
         
-        // Inicializar listeners de las acciones de la interfaz
+        /**
+         *  Inicializar listeners de las acciones de la interfaz
+         */
         this.vista.getBtnEditar().addActionListener(e -> irAEditarTraje());
         this.vista.getBtnEliminar().addActionListener(e -> eliminarTrajeSeleccionado());
         this.vista.getBtnVolver().addActionListener(e -> volverALista());
         this.vista.getBtnNuevoTraje().addActionListener(e -> abrirNuevoTraje());
         
-        // Población de datos del cliente en los componentes de la vista
+        /**
+         *  Población de datos del cliente en los componentes de la vista
+         */
         vista.getNombreCliente().setText(cliente.getNombre());
         vista.getTipoHeroeCliente().setText(cliente.getTipo_heroe());
         vista.getSuperpoderCliente().setText(cliente.getSuperpoder());
@@ -83,10 +87,14 @@ public class ControladorDetalleClientes {
 
         Traje trajeSeleccionado = null;
 
-        // Recuperar el texto seleccionado en el JList
+        /**
+         *  Recuperar el texto seleccionado en el JList
+         */
         String seleccionado = vista.getListTrajes().getSelectedValue();
 
-        // Búsqueda del objeto Traje que coincide con la selección visual
+        /**
+         *  Búsqueda del objeto Traje que coincide con la selección visual
+         */
         if (seleccionado != null) {
             for (Traje t : trajes) {
                 String texto = t.getNombre_traje() + " - " + t.getEstado();
@@ -97,7 +105,9 @@ public class ControladorDetalleClientes {
             }
         }
 
-        // Si se encontró una coincidencia, se lanza el controlador de edición
+        /**
+         *  Si se encontró una coincidencia, se lanza el controlador de edición
+         */
         if (trajeSeleccionado != null) {
             NuevoTraje vistaNuevo = new NuevoTraje();
             new ControladorNuevoTraje(vistaNuevo, acceso, c, cliente, trajes, trajeSeleccionado, empleado, vista, null);
@@ -117,7 +127,9 @@ public class ControladorDetalleClientes {
         int index = vista.getListTrajes().getSelectedIndex();
 
         if (index != -1) {
-            // Confirmación de seguridad
+            /**
+             *  Confirmación de seguridad
+             */
             int confirmacion = JOptionPane.showConfirmDialog(
                     vista,
                     "¿Estás seguro de que quieres eliminar este traje?\n" +
@@ -127,13 +139,19 @@ public class ControladorDetalleClientes {
             );
 
             if (confirmacion == JOptionPane.YES_OPTION) {
-                // Obtener el objeto antes de removerlo visualmente
+                /**
+                 *  Obtener el objeto antes de removerlo visualmente
+                 */
                 Traje traje = trajes.get(index);
 
-                // Persistencia: eliminación en BD
+                /**
+                 *  Persistencia: eliminación en BD
+                 */
                 acceso.eliminarTraje(c, traje.getId_traje());
 
-                // Sincronización: recargar lista y actualizar vista
+                /**
+                 *  Sincronización: recargar lista y actualizar vista
+                 */
                 trajes = acceso.getTrajesPorCliente(c, cliente.getId_cliente());
                 vista.recogerDatos(trajes);
 
@@ -150,7 +168,9 @@ public class ControladorDetalleClientes {
      */
     private void abrirNuevoTraje() {
         NuevoTraje vistaNuevo = new NuevoTraje();
-        // Se pasa la referencia de la vista actual para que el nuevo controlador pueda refrescarla al terminar
+        /**
+         *  Se pasa la referencia de la vista actual para que el nuevo controlador pueda refrescarla al terminar
+         */
         new ControladorNuevoTraje(vistaNuevo, acceso, c, cliente, trajes, null, empleado, this.vista, null);
         vistaNuevo.setVisible(true);
     }
@@ -165,7 +185,9 @@ public class ControladorDetalleClientes {
         ArrayList<Traje> trajesPorCliente;
 
         try {
-            // Sincronización de datos globales antes de volver
+            /**
+             *  Sincronización de datos globales antes de volver
+             */
             clientes = acceso.recogeClientes(c);
             trajesPorCliente = acceso.recogeTrajes(c);
 

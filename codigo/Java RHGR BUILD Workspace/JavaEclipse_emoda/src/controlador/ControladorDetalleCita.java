@@ -49,10 +49,14 @@ public class ControladorDetalleCita {
         this.c = c;
         this.aprendices = aprendices;
 
-        // Población de la interfaz
+        /**
+         *  Población de la interfaz
+         */
         rellenarCampos();
 
-        // Configuración de eventos
+        /**
+         *  Configuración de eventos
+         */
         vista.getBtnVolver().addActionListener(e -> vista.dispose());
     }
 
@@ -75,12 +79,16 @@ public class ControladorDetalleCita {
      */
     private void rellenarCampos() {
 
-        // Asignación de datos temporales básicos
+        /**
+         *  Asignación de datos temporales básicos
+         */
         vista.setFecha(String.valueOf(cita.getFecha()));
         vista.setHora(String.valueOf(cita.getHora_inicio()));
         vista.setDuracion(cita.getDuracion() + " h");
 
-        // Modo offline o sin acceso: Mostrar solo identificadores numéricos
+        /**
+         *  Modo offline o sin acceso: Mostrar solo identificadores numéricos
+         */
         if (acceso == null || c == null) {
             vista.setCliente("ID " + cita.getId_cliente());
             vista.setTraje("ID " + cita.getId_traje());
@@ -97,20 +105,26 @@ public class ControladorDetalleCita {
 
         
 
-        // Modo online: Resolución de nombres mediante listas de la BD
+        /**
+         *  Modo online: Resolución de nombres mediante listas de la BD
+         */
         try {
             ArrayList<Cliente>  clientes  = acceso.recogeClientes(c);
             ArrayList<Traje>    trajes    = acceso.recogeTrajes(c);
             ArrayList<Taller>   talleres  = acceso.recogeTalleres(c);
             ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
 
-            // Poblar vista con nombres reales
+            /**
+             *  Poblar vista con nombres reales
+             */
             vista.setCliente(nombreCliente(clientes, cita.getId_cliente()));
             vista.setTraje(nombreTraje(trajes, cita.getId_traje()));
             vista.setTaller(nombreTaller(talleres, cita.getId_sala()));
             vista.setOficial(nombreEmpleado(empleados, cita.getId_empleado()));
 
-            // Formateo del bloque de texto para aprendices
+            /**
+             *  Formateo del bloque de texto para aprendices
+             */
             StringBuilder texto = new StringBuilder();
             if (aprendices[0] != null && !aprendices[0].isEmpty()) {
                 texto.append(aprendices[0]);

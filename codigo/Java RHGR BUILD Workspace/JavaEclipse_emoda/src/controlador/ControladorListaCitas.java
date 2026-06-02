@@ -25,7 +25,9 @@ public class ControladorListaCitas {
     private ArrayList<Cita_Aprendiz> aprendices;
     private final Empleado empleado;
 
-    // Listas auxiliares para la resolución de nombres (IDs -> Strings legibles)
+    /**
+     *  Listas auxiliares para la resolución de nombres (IDs -> Strings legibles)
+     */
     private ArrayList<Cliente> listaClientes;
     private ArrayList<Taller> listaTalleres;
     private ArrayList<Traje> listaTrajes;
@@ -55,7 +57,9 @@ public class ControladorListaCitas {
         cargarListas();
         cargarTabla(citasFiltradas);
 
-        // Configuración de botones de filtrado rápido
+        /**
+         *  Configuración de botones de filtrado rápido
+         */
         vista.getBtnTodas().addActionListener(e -> {
             citasFiltradas = new ArrayList<>(citas);
             cargarTabla(citasFiltradas);
@@ -65,7 +69,9 @@ public class ControladorListaCitas {
         vista.getBtnCostura().addActionListener(e -> filtrarPorTipo("costura"));
         vista.getBtnPruebas().addActionListener(e -> filtrarPorTipo("pruebas"));
 
-        // Configuración de acciones y navegación
+        /**
+         *  Configuración de acciones y navegación
+         */
         vista.getBtnBuscar().addActionListener(e -> buscar());
         vista.getBtnVerDetalles().addActionListener(e -> verDetalle());
         vista.getBtnEditar().addActionListener(e -> editarCita());
@@ -373,7 +379,7 @@ public class ControladorListaCitas {
         }
     }
 
-    // --- Métodos de resolución de nombres (Traducción ID -> String) ---
+    /** --- Métodos de resolución de nombres (Traducción ID -> String) --- */
 
     private String nombreCliente(int id) {
         if (listaClientes == null) return String.valueOf(id);

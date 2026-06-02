@@ -21,7 +21,9 @@ import java.util.ArrayList;
  */
 public class ControladorNuevoCliente {
 
-    // Referencias a vistas y capa de datos
+    /**
+     * Referencias a vistas y capa de datos
+     */
     private NuevoCliente vista;
     private ListaClientes vistaClientes;
     private VentanaMaestro vistaMaestro;
@@ -29,10 +31,14 @@ public class ControladorNuevoCliente {
     private AccesoBBDD acceso;
     private Connection c;
 
-    // Cliente en edición (null si es nuevo)
+    /**
+     * Cliente en edición (null si es nuevo)
+     */
     private Cliente clienteEditar;
 
-    // Lista de clientes en memoria
+    /**
+     * Lista de clientes en memoria
+     */
     private ArrayList<Cliente> clientes;
 
     private Empleado empleado;
@@ -65,12 +71,16 @@ public class ControladorNuevoCliente {
         this.clientes = clientes;
         this.empleado = empleado;
 
-        // Si estamos en modo edición, precargamos datos
+        /**
+         * Si estamos en modo edición, precargamos datos
+         */
         if (clienteEditar != null) {
             precargarDatos();
         }
 
-        // Eventos de botones
+        /**
+         * Eventos de botones
+         */
         vista.getBtnGuardar().addActionListener(e -> guardarCliente());
         vista.getBtnCancelar().addActionListener(e -> cancelar());
     }
@@ -98,7 +108,9 @@ public class ControladorNuevoCliente {
         String color = vista.getTxtColor().getText().trim();
         String tipo = vista.getCbTipo().toString();
 
-        // Validación de campos obligatorios
+        /**
+         * Validación de campos obligatorios
+         */
         if (nombre.isEmpty() || superpoder.isEmpty() || color.isEmpty() || tipo.isEmpty()) {
             JOptionPane.showMessageDialog(vista,
                     "Por favor, rellena todos los campos del cliente.",
@@ -109,7 +121,7 @@ public class ControladorNuevoCliente {
 
         try {
 
-            // ===== CASO: NUEVO CLIENTE =====
+            /** ===== CASO: NUEVO CLIENTE ===== */
             if (clienteEditar == null) {
 
                 acceso.insertarNuevoCliente(c, nombre, tipo, superpoder, color);
@@ -117,7 +129,7 @@ public class ControladorNuevoCliente {
 
                 JOptionPane.showMessageDialog(vista, "Cliente creado correctamente.");
 
-            // ===== CASO: EDITAR CLIENTE =====
+            /** ===== CASO: EDITAR CLIENTE ===== */
             } else {
 
                 acceso.actualizarCliente(c, clienteEditar.getId_cliente(), nombre, tipo, superpoder, color);
@@ -126,9 +138,9 @@ public class ControladorNuevoCliente {
                 JOptionPane.showMessageDialog(vista, "Cliente actualizado correctamente.");
             }
 
-            // ===== REDIRECCIÓN SEGÚN CONTEXTO =====
+            /** ===== REDIRECCIÓN SEGÚN CONTEXTO ===== */
 
-            // Desde ListaClientes
+            /** Desde ListaClientes */
             if (vistaCita == null && (vistaClientes != null && vistaMaestro == null)) {
 
                 ListaClientes lc = new ListaClientes();
@@ -141,7 +153,7 @@ public class ControladorNuevoCliente {
                 vista.dispose();
                 vistaClientes.dispose();
 
-            // Desde VentanaMaestro
+            /** Desde VentanaMaestro */
             } else if (vistaCita == null && vistaClientes == null && vistaMaestro != null) {
 
                 ListaClientes lc = new ListaClientes();
@@ -151,7 +163,7 @@ public class ControladorNuevoCliente {
 
                 vista.dispose();
 
-            // Desde NuevaCita
+            /** Desde NuevaCita */
             } else if (vistaCita != null && vistaClientes == null) {
 
                 vista.dispose();
