@@ -167,7 +167,8 @@ public class ListaCitas extends JFrame {
         header.setPreferredSize(new Dimension(0, 40));
     }
 
-    // Getters
+    /** Getters */
+    
     /**
      * 
      * @return
