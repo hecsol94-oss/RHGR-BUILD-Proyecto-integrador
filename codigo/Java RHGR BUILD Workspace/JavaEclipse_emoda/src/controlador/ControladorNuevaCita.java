@@ -200,7 +200,7 @@ public class ControladorNuevaCita {
         String hora = citaAEditar.getHora_inicio().toString();
         String horaReal = hora.substring(0, hora.length() - 3);
         vista.getTxtHora().setText(horaReal);
-        vista.getTxtDuracion().setText(Integer.toString(citaAEditar.getDuracion()));        
+        vista.getTxtDuracion().setText(Integer.toString(citaAEditar.getDuracion()));
     }
     
     
