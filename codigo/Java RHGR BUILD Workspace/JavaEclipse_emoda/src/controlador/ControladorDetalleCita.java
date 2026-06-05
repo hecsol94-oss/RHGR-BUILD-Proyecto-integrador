@@ -109,9 +109,9 @@ public class ControladorDetalleCita {
          * Modo online: Resolución de nombres mediante listas de la BD
          */
         try {
-            ArrayList<Cliente>  clientes  = acceso.recogeClientes(c);
-            ArrayList<Traje>    trajes    = acceso.recogeTrajes(c);
-            ArrayList<Taller>   talleres  = acceso.recogeTalleres(c);
+            ArrayList<Cliente> clientes  = acceso.recogeClientes(c);
+            ArrayList<Traje> trajes    = acceso.recogeTrajes(c);
+            ArrayList<Taller> talleres  = acceso.recogeTalleres(c);
             ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
 
             /**

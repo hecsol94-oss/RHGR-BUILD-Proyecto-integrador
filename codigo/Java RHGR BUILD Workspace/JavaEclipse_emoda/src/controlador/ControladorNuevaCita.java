@@ -44,7 +44,7 @@ public class ControladorNuevaCita {
     private ArrayList<Empleado> listaEmpleados;
 
     /**
-     *  true cuando el traje seleccionado fue RECIÉN creado (estado=diseño), false si ya existía
+     * true cuando el traje seleccionado fue RECIÉN creado (estado=diseño), false si ya existía
      */
     private boolean trajeRecienCreado = false;
 
@@ -54,12 +54,12 @@ public class ControladorNuevaCita {
      * configura los eventos de la interfaz y precarga datos si se trata de una edición.
      */
     public ControladorNuevaCita(NuevaCita vista, AccesoBBDD acceso, ListaCitas ventanaCita, VentanaMaestro ventanaMaestro, VentanaOficial ventanaOficial, Connection c, Empleado empleado, Cita citaAEditar, String clienteEditable, String trajeEditable, String tallerEditable, String empleadoEditable, Cita_Aprendiz aprendizAEditar1, Cita_Aprendiz aprendizAEditar2) {
-        this.vista    = vista;
-        this.acceso   = acceso;
+        this.vista = vista;
+        this.acceso = acceso;
         this.ventanaCita = ventanaCita;
         this.ventanaMaestro = ventanaMaestro;
         this.ventanaOficial = ventanaOficial;
-        this.c        = c;
+        this.c = c;
         this.empleado = empleado;
         this.citaAEditar = citaAEditar;
         this.clienteEditable = clienteEditable;
@@ -565,7 +565,7 @@ public class ControladorNuevaCita {
                     new ControladorOficial(lc, acceso, c, empleado);
                     lc.setVisible(true);
                     vista.dispose();
-                    ventanaMaestro.dispose();
+                    ventanaOficial.dispose();
                 }
             } else {
                 JOptionPane.showMessageDialog(vista, "Cita y aprendices guardados correctamente.");
@@ -595,7 +595,7 @@ public class ControladorNuevaCita {
                     new ControladorOficial(lc, acceso, c, empleado);
                     lc.setVisible(true);
                     vista.dispose();
-                    ventanaMaestro.dispose();
+                    ventanaOficial.dispose();
                 }
             }
 
