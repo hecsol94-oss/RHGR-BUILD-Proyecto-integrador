@@ -700,6 +700,7 @@ public class VentanaOficial extends JFrame {
      * 
      */
     public void deshabilitarBotonesEmpleados() {
+    	btnEditarEmpleados.setEnabled(false);
     	btnEliminarEmpleados.setEnabled(false);
     	btnNuevoEmpleadoEmb.setEnabled(false);
     }

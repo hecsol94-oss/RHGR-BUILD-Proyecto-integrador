@@ -322,7 +322,7 @@ public class VentanaAprendiz extends JFrame {
         menuItemNuevoEmpleado = crearItem("Nuevo empleado");
         menuEmpleados.add(menuItemListaEmpleados); menuEmpleados.add(menuItemNuevoEmpleado);
         menuBar.add(menuEmpleados);
-        menuItemNuevoEmpleado.setEnabled(false);
+        menuEmpleados.setEnabled(false);
     }
 
     /**
@@ -615,6 +615,7 @@ public class VentanaAprendiz extends JFrame {
     	btnNuevoTallerEmb.setEnabled(false); 
     }
     public void deshabilitarBotonesEmpleados() {
+    	btnEditarEmpleados.setEnabled(false);
     	btnEliminarEmpleados.setEnabled(false);
     	btnNuevoEmpleadoEmb.setEnabled(false);
     }
