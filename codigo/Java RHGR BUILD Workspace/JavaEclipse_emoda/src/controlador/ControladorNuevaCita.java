@@ -111,6 +111,7 @@ public class ControladorNuevaCita {
                 }
 
             } else {
+            	/** Oficiales y aprendices solo ven su propio nombre. */
                 vista.getCbOficial().addItem(
                         empleado.getNombre() + " " + empleado.getApellido() + " (" + empleado.getCategoria() + ")"
                 );
@@ -439,6 +440,7 @@ public class ControladorNuevaCita {
             acceso.actualizarCita(c, citaAEditar.getId_cita(), nuevaCita);
         }
 
+        /** Guardar aprendices asignados */
         int idCitaReal;
 
         if (citaAEditar == null) {

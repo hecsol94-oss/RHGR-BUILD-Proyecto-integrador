@@ -514,12 +514,13 @@ public class AccesoBBDD {
 	        ps.setInt(1, idCita);
 	        ResultSet rs = ps.executeQuery();
 
+	        /** Añadir cada aprendiz encontrado a la lista */
 	        while (rs.next()) {
 	            aprendices.add(rs.getInt("id_empleado"));
 	        }
 
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        e.printStackTrace(); /** Manejo seguro sin propagar la excepción */
 	    }
 
 	    return aprendices;

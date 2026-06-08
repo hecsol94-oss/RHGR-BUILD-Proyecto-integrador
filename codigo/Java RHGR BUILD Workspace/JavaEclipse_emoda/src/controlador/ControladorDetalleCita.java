@@ -110,8 +110,8 @@ public class ControladorDetalleCita {
          */
         try {
             ArrayList<Cliente> clientes  = acceso.recogeClientes(c);
-            ArrayList<Traje> trajes    = acceso.recogeTrajes(c);
-            ArrayList<Taller> talleres  = acceso.recogeTalleres(c);
+            ArrayList<Traje> trajes = acceso.recogeTrajes(c);
+            ArrayList<Taller> talleres = acceso.recogeTalleres(c);
             ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
 
             /**
