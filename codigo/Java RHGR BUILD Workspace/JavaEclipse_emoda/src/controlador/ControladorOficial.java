@@ -175,7 +175,7 @@ public class ControladorOficial {
     private void abrirNuevaCita() {
         NuevaCita vistaForm = new NuevaCita();
         new ControladorNuevaCita(vistaForm, acceso, null, null, vista, c, empleado,
-                null, null, null, null, null, null, null);
+                null, null, null, null, null);
 
         vistaForm.setVisible(true);
     }

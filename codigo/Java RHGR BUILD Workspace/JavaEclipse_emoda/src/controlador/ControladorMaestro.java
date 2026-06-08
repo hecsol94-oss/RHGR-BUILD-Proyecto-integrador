@@ -158,7 +158,7 @@ public class ControladorMaestro {
      */
     private void abrirNuevaCita() {
         NuevaCita vistaForm = new NuevaCita();
-        new ControladorNuevaCita(vistaForm,  acceso, null, vista, null, c, empleado, null, null, null, null, null, null, null);
+        new ControladorNuevaCita(vistaForm, acceso, null, vista, null, c, empleado, null, null, null, null, null);
         vistaForm.setVisible(true);
     }
 

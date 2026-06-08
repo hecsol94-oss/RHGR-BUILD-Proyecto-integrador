@@ -497,6 +497,33 @@ public class AccesoBBDD {
 		st.close();
 		return citasAprendiz;
 	}
+	
+	/**
+	 * Devuelve la lista de IDs de empleados (aprendices) asignados a una cita.
+	 *
+	 * @param c conexión activa
+	 * @param idCita ID de la cita
+	 * @return lista de IDs de aprendices asignados (máximo 2)
+	 */
+	public ArrayList<Integer> getAprendicesDeCita(Connection c, int idCita) {
+	    ArrayList<Integer> aprendices = new ArrayList<>();
+
+	    String sql = "SELECT id_empleado FROM Cita_Aprendiz WHERE id_cita = ? ORDER BY id_aprendiz ASC";
+
+	    try (PreparedStatement ps = c.prepareStatement(sql)) {
+	        ps.setInt(1, idCita);
+	        ResultSet rs = ps.executeQuery();
+
+	        while (rs.next()) {
+	            aprendices.add(rs.getInt("id_empleado"));
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return aprendices;
+	}
 
 	/**
 	 * 

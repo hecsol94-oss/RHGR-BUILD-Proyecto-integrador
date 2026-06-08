@@ -184,10 +184,6 @@ public class ControladorListaCitas {
         cargarTabla(citasFiltradas);
     }
 
-    /**
-     * Abre una ventana de detalle para la cita seleccionada, mostrando información
-     * extendida incluyendo los nombres de los aprendices asignados.
-     */
     private void verDetalle() {
         int fila = vista.getTableCitas().getSelectedRow();
 
@@ -198,28 +194,65 @@ public class ControladorListaCitas {
         }
 
         Cita cita = citasFiltradas.get(fila);
-        int contador = 0;
+
         String[] aprs = new String[]{"", ""};
-        if(empleado.getCategoria().equals("aprendiz")) {
-        	aprs[0] = empleado.getNombre() + " " + empleado.getApellido();
-        	contador++;
+        int contador = 0;
+
+        /**
+         * Comprobamos si el aprendiz logado ya está asignado a la cita para evitar duplicarlo.
+         */
+        boolean aprendizYaAsignado = false;
+
+        if (empleado.getCategoria().equals("aprendiz")) {
+            for (Cita_Aprendiz a : aprendices) {
+                if (a.getId_cita() == cita.getId_cita() &&
+                    a.getId_empleado() == empleado.getId_empleado()) {
+                    aprendizYaAsignado = true;
+                    break;
+                }
+            }
         }
 
+        /**
+         * Si el usuario logado es aprendiz y NO está ya asignado, lo añadimos como primer aprendiz.
+         */
+        if (empleado.getCategoria().equals("aprendiz") && !aprendizYaAsignado) {
+            aprs[contador] = empleado.getNombre() + " " + empleado.getApellido();
+            contador++;
+        }
+
+        /**
+         * Añadimos los aprendices reales de la cita, evitando duplicar al aprendiz logado.
+         */
         for (Cita_Aprendiz a : aprendices) {
             if (a.getId_cita() == cita.getId_cita()) {
+
                 for (Empleado e : listaEmpleados) {
                     if (a.getId_empleado() == e.getId_empleado()) {
-                        if (contador < 2) aprs[contador] = e.getNombre() + " " + e.getApellido();
-                        contador++;
+
+                        // Evitar duplicar al aprendiz logado
+                        if (empleado.getCategoria().equals("aprendiz") &&
+                            empleado.getId_empleado() == e.getId_empleado()) {
+                            continue;
+                        }
+
+                        if (contador < 2) {
+                            aprs[contador] = e.getNombre() + " " + e.getApellido();
+                            contador++;
+                        }
                     }
                 }
             }
         }
 
+        /**
+         * Abrimos la ventana de detalle con los aprendices ya corregidos.
+         */
         DetalleCita vistaDetalle = new DetalleCita();
         new ControladorDetalleCita(vistaDetalle, cita, acceso, c, aprs);
         vistaDetalle.setVisible(true);
     }
+
 
     /**
      * Prepara y abre el formulario de edición (NuevaCita) cargando los datos
@@ -264,14 +297,14 @@ public class ControladorListaCitas {
                 	NuevaCita vistaForm = new NuevaCita();
                     new ControladorNuevaCita(vistaForm, acceso, vista, null, null, c,
                             empleado, citaEditable, clienteEditable, trajeEditable,
-                            tallerEditable, empleadoEditable, a1, a2);
+                            tallerEditable, empleadoEditable);
 
                     vistaForm.setVisible(true);
                 } else if (empleado.getCategoria().equals("maestro")){
                 	NuevaCita vistaForm = new NuevaCita();
                     new ControladorNuevaCita(vistaForm, acceso, vista, null, null, c,
                             empleado, citaEditable, clienteEditable, trajeEditable,
-                            tallerEditable, empleadoEditable, a1, a2);
+                            tallerEditable, empleadoEditable);
 
                     vistaForm.setVisible(true);
                 } else {
@@ -345,7 +378,7 @@ public class ControladorListaCitas {
     private void nuevaCita() {
         NuevaCita vistaForm = new NuevaCita();
         new ControladorNuevaCita(vistaForm, acceso, vista, null, null, c, empleado,
-                null, null, null, null, null, null, null);
+                null, null, null, null, null);
         vistaForm.setVisible(true);
     }
 
