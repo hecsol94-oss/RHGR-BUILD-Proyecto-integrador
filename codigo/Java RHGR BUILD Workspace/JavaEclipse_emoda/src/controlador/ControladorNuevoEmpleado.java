@@ -124,6 +124,24 @@ public class ControladorNuevoEmpleado {
 			return;
 		}
 		
+		/**
+		 * VALIDACIÓN CLAVE:
+		 * No permitir cambiar a aprendiz si el empleado tiene citas asignadas.
+		 * Solo aplica en modo edición.
+		 */
+		if (empleadoEditar != null && categoria.equalsIgnoreCase("aprendiz")) {
+			
+			boolean tieneCitas = acceso.empleadoTieneCitas(c, empleadoEditar.getId_empleado());
+			
+			if (tieneCitas) {
+				JOptionPane.showMessageDialog(vista,
+						"Este empleado tiene citas asignadas y no puede convertirse en aprendiz.",
+						"Operación no permitida",
+						JOptionPane.ERROR_MESSAGE);
+				return; /** Bloquear guardado */
+			}
+		}
+		
 		try {
 			/** ===== CASO: NUEVO EMPLEADO ===== */
 			if (empleadoEditar == null) {

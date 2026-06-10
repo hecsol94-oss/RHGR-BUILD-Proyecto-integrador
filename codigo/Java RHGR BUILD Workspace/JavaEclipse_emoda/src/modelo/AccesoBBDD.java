@@ -559,6 +559,31 @@ public class AccesoBBDD {
 	}
 	
 	/**
+	 * Indica si un empleado tiene citas asignadas como oficial/maestro.
+	 * 
+	 * @param c
+	 * @param idEmpleado
+	 */
+	public boolean empleadoTieneCitas(Connection c, int idEmpleado) {
+		
+		String query = "SELECT COUNT(*) FROM Citas WHERE id_empleado = ?";
+		
+		try (PreparedStatement pstmt = c.prepareStatement(query)) {
+			pstmt.setInt(1, idEmpleado);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getInt(1) > 0; /** true si tiene citas */
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	/**
 	 * Al crear un nuevo cliente en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD
 	 * 
 	 * @param c
