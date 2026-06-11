@@ -14,6 +14,7 @@ public class AccesoBBDD {
 	private String pword = "1234";
 
 	/**
+	 * Abrir conexión con la BBDD
 	 * 
 	 * @return
 	 */
@@ -35,6 +36,7 @@ public class AccesoBBDD {
 	}
 
 	/**
+	 * Cerrar conexión de la BBDD
 	 * 
 	 * @param c
 	 */
@@ -47,6 +49,7 @@ public class AccesoBBDD {
 	}
 
 	/**
+	 * Limpiar las tablas de la BBDD
 	 * 
 	 * @param c
 	 * @throws SQLException
@@ -75,6 +78,7 @@ public class AccesoBBDD {
 	}
 
 	/**
+	 * Inserta todos los clientes que hay de la BBDD
 	 * 
 	 * @param c
 	 * @throws SQLException
@@ -113,6 +117,7 @@ public class AccesoBBDD {
 	}
 
 	/**
+	 * Recoge los clientes de la BBDD
 	 * 
 	 * @param c
 	 * @return
@@ -146,6 +151,7 @@ public class AccesoBBDD {
 	 */
 
 	/**
+	 * Inserta todos los empleados que hay de la BBDD
 	 * 
 	 * @param c
 	 * @throws SQLException
@@ -182,6 +188,7 @@ public class AccesoBBDD {
 	}
 
 	/**
+	 * Recoge los empleados de la BBDD
 	 * 
 	 * @param c
 	 * @return
@@ -213,6 +220,7 @@ public class AccesoBBDD {
 	}
 
 	/**
+	 * Inserta los talleres que hay de la BBDD
 	 * 
 	 * @param c
 	 * @throws SQLException
@@ -238,6 +246,7 @@ public class AccesoBBDD {
 	}
 
 	/**
+	 * Recoge todos los talleres de la BBDD
 	 * 
 	 * @param c
 	 * @return
@@ -269,6 +278,7 @@ public class AccesoBBDD {
 	}
 
 	/**
+	 * Inserta los trajes que hay de la BBDD
 	 * 
 	 * @param c
 	 * @throws SQLException
@@ -319,6 +329,7 @@ public class AccesoBBDD {
 	}
 
 	/**
+	 * Recoge los trajes que hay de la BBDD
 	 * 
 	 * @param c
 	 * @return
@@ -345,6 +356,7 @@ public class AccesoBBDD {
 	}
 	
 	/**
+	 * Trajes que hay por cada cliente
 	 * 
 	 * @param c
 	 * @param idCliente
@@ -378,6 +390,7 @@ public class AccesoBBDD {
 	}
 
 	/**
+	 * Inserta las citas que hay de la BBDD
 	 * 
 	 * @param c
 	 * @throws SQLException
@@ -413,6 +426,7 @@ public class AccesoBBDD {
 	}
 
 	/**
+	 * Devuelve la lista de todas las citas de la BBDD
 	 * 
 	 * @param c
 	 * @return
@@ -445,6 +459,7 @@ public class AccesoBBDD {
 	}
 
 	/**
+	 * Inserta las citas en las que hay asignados aprendices
 	 * 
 	 * @param c
 	 * @throws SQLException
@@ -471,6 +486,7 @@ public class AccesoBBDD {
 	}
 
 	/**
+	 * Devuelve la lista de citas en las que hay asignados aprendices de la BBDD
 	 * 
 	 * @param c
 	 * @return
@@ -526,6 +542,7 @@ public class AccesoBBDD {
 	}
 
 	/**
+	 * Devuelve la lista de todos los aprendices de la BBDD
 	 * 
 	 * @param c
 	 * @return
@@ -607,6 +624,7 @@ public class AccesoBBDD {
 	}
 	
 	/**
+	 * Elimina un cliente de la BBDD
 	 * 
 	 * @param c
 	 * @param id_cliente
@@ -629,6 +647,7 @@ public class AccesoBBDD {
 	}
 	
 	/**
+	 * Actualiza un cliente de la BBDD
 	 * 
 	 * @param c
 	 * @param id_cliente
@@ -680,6 +699,7 @@ public class AccesoBBDD {
 	}
 	
 	/**
+	 * Elimina un taller de la BBDD
 	 * 
 	 * @param c
 	 * @param id_sala
@@ -698,6 +718,7 @@ public class AccesoBBDD {
 	}
 	
 	/**
+	 * Actualiza un taller de la BBDD
 	 * 
 	 * @param c
 	 * @param id_sala
@@ -744,6 +765,7 @@ public class AccesoBBDD {
 	}
 	
 	/**
+	 * Elimina un traje de la BBDD
 	 * 
 	 * @param c
 	 * @param id_traje
@@ -766,6 +788,7 @@ public class AccesoBBDD {
 	}
     
     /**
+     * Actualiza un traje de la BBDD
      * 
      * @param c
      * @param id_traje
@@ -813,6 +836,7 @@ public class AccesoBBDD {
 	}
 	
 	/**
+	 * Elimina una cita de la BBDD
 	 * 
 	 * @param c
 	 * @param id_cita
@@ -839,6 +863,7 @@ public class AccesoBBDD {
 	}
 	
 	/**
+	 * Actualiza una cita de la BBDD
 	 * 
 	 * @param c
 	 * @param id_cita
@@ -891,6 +916,7 @@ public class AccesoBBDD {
 	} 
 	
 	/**
+	 * Actualiza una cita con un aprendiz de la BBDD
 	 * 
 	 * @param c
 	 * @param id_aprendiz
@@ -942,6 +968,8 @@ public class AccesoBBDD {
 	}
 	
 	/**
+	 * Elimina un empleado de la BBDD
+	 * Solo debe llamarse si previamente se ha comprobado que no tiene citas asociadas.
 	 * 
 	 * @param c
 	 * @param id_empleado
@@ -949,7 +977,6 @@ public class AccesoBBDD {
 	public void eliminarEmpleado(Connection c, int id_empleado) {
 		
 	    String query = "DELETE FROM Empleados WHERE id_empleado = ?";
-	    
 	    
 	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
 	        
@@ -964,6 +991,7 @@ public class AccesoBBDD {
 	}
 	
 	/**
+	 * Actualiza un empleado de la BBDD
 	 * 
 	 * @param c
 	 * @param id_empleado
