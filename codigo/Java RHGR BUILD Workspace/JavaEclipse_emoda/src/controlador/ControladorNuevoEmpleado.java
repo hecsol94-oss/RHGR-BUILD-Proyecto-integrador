@@ -94,8 +94,7 @@ public class ControladorNuevoEmpleado {
 		vista.getTxtNombre().setText(empleadoEditar.getNombre());
 		vista.getTxtApellido().setText(empleadoEditar.getApellido());
 		vista.getTxtUsuario().setText(empleadoEditar.getUsuario());
-		vista.getContraseñaCampo().setText(empleadoEditar.getContrasena());
-		vista.getConfirmarContraseña().setText(empleadoEditar.getConfirmar_contrasena());
+		vista.getContraseñaActual().setText(empleadoEditar.getContrasena());
 		vista.setCbTipo(empleadoEditar.getCategoria());
 	}
 	
@@ -109,19 +108,55 @@ public class ControladorNuevoEmpleado {
 		String nombre = vista.getTxtNombre().getText().trim();
 		String apellido = vista.getTxtApellido().getText().trim();
 		String usuario = vista.getTxtUsuario().getText().trim();
-		String contraseña = vista.getContraseñaCampo().getText().trim();
-		String confirmar_contraseña = vista.getConfirmarContraseña().getText().trim();
+		String contraseñaActual = vista.getContraseñaActual().getText().trim();
+		String contraseñaNueva = vista.getContraseñaNueva().getText().trim();
+		String confirmarNueva = vista.getConfirmarContraseña().getText().trim();
 		String categoria = vista.getCbTipo().toString();
 		
 		/**
 		 * Validación de campos obligatorios
 		 */
-		if (apodo.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || contraseña.isEmpty() || confirmar_contraseña.isEmpty() || categoria.isEmpty()) {
+		if (apodo.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || contraseñaNueva.isEmpty() || confirmarNueva.isEmpty() || categoria.isEmpty()) {
 			JOptionPane.showMessageDialog(vista,
 					"Por favor, rellena todos los campos del empleado.",
 					"Campos incompletos",
 					JOptionPane.WARNING_MESSAGE);
 			return;
+		}
+		
+		/**
+		 * Validación de contraseña (solo en edición).
+		 */
+		if (empleadoEditar != null) {
+			
+			boolean quiereCambiar = !contraseñaNueva.equals(empleadoEditar.getContrasena());
+			
+			if (quiereCambiar) {
+				
+				if (contraseñaActual.isEmpty()) {
+					JOptionPane.showMessageDialog(vista,
+							"Debes escribir tu contraseña actual para poder cambiarla.",
+							"Validación",
+							JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				if (!contraseñaNueva.equals(empleadoEditar.getContrasena())) {
+					JOptionPane.showMessageDialog(vista,
+							"La contraseña actual no es correcta.",
+							"Error",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				
+				if (!contraseñaNueva.equals(confirmarNueva)) {
+					JOptionPane.showMessageDialog(vista,
+							"La nueva contraseña no coincide con la confirmación.",
+							"Error",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+			}
 		}
 		
 		/**
@@ -146,7 +181,7 @@ public class ControladorNuevoEmpleado {
 			/** ===== CASO: NUEVO EMPLEADO ===== */
 			if (empleadoEditar == null) {
 				
-				acceso.insertarNuevoEmpleado(c, categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña);
+				acceso.insertarNuevoEmpleado(c, categoria, nombre, apellido, apodo, usuario, contraseñaNueva);
 				empleados = acceso.recogeEmpleados(c);
 				
 				JOptionPane.showMessageDialog(vista, "Empleado creado correctamente");
@@ -154,7 +189,7 @@ public class ControladorNuevoEmpleado {
 			/** ===== CASO: EDITAR EMPLEADO ===== */
 			} else {
 				
-				acceso.actualizarEmpleado(c, empleadoEditar.getId_empleado(), categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña);
+				acceso.actualizarEmpleado(c, empleadoEditar.getId_empleado(), categoria, nombre, apellido, apodo, usuario, contraseñaNueva);
 				empleados = acceso.recogeEmpleados(c);
 				
 				JOptionPane.showMessageDialog(vista, "Empleado actualizado correctamente.");

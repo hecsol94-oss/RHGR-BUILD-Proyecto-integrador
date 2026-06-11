@@ -236,7 +236,7 @@ public class ControladorMaestro {
     	try {
     		NuevoEmpleado vistaForm = new NuevoEmpleado();
     		ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
-    		new ControladorNuevoEmpleado(vistaForm, null, vista, null, acceso, c, empleado, empleados, empleado);
+    		new ControladorNuevoEmpleado(vistaForm, null, vista, null, acceso, c, null, empleados, empleado);
     		vistaForm.setVisible(true);
     	} catch (SQLException ex) {
     		ex.printStackTrace();

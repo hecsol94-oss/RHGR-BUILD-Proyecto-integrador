@@ -158,22 +158,22 @@ public class AccesoBBDD {
 		/**
 		 * Lista de sentencias SQL para dar de alta a los empleados
 		 */
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('aprendiz', 'Lucía', 'Martínez', 'Aguja', 'lucia', 'Lucia2026', 'Lucia2026')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('aprendiz', 'Carlos', 'Ruiz', 'Tijeras', 'carlos', 'Tijeras123', 'Tijeras123')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('oficial', 'Ana', 'Torres', 'SastreX', 'ana', 'SastreX2026', 'SastreX2026')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('maestro', 'Javier', 'Gómez', 'MaestroModa', 'javier', 'MaestroModa!', 'MaestroModa!')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('aprendiz', 'María', 'Delgado', 'Costurilla', 'maria', 'Costurilla22', 'Costurilla22')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('aprendiz', 'Pablo', 'Herrera', 'HiloFino', 'pablo', 'HiloFino33', 'HiloFino33')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('oficial', 'Sofía', 'Navarro', 'PatrónX', 'sofia', 'PatronX44', 'PatronX44')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('oficial', 'Diego', 'Fernández', 'CorteMaestro', 'diego', 'CorteMaestro55', 'CorteMaestro55')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('maestro', 'Elena', 'Rivas', 'DamaAguja', 'elena', 'DamaAguja66', 'DamaAguja66')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('maestro', 'Tomás', 'Villalba', 'GranSastre', 'tomas', 'GranSastre77', 'GranSastre77')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('aprendiz', 'Laura', 'Sánchez', 'Dedal', 'laura', 'Dedal2026', 'Dedal2026')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('aprendiz', 'Miguel', 'Ortega', 'Puntada', 'miguel', 'Puntada123', 'Puntada123')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('aprendiz', 'Carmen', 'Vega', 'HiloRojo', 'carmen', 'HiloRojo456', 'HiloRojo456')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('aprendiz', 'Álvaro', 'Castro', 'Costurero', 'alvaro', 'Costurero789', 'Costurero789')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('oficial', 'Raquel', 'Molina', 'PatrónPro', 'raquel', 'PatronPro321', 'PatronPro321')");
-		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('maestro', 'Fernando', 'Ibáñez', 'AltaCostura', 'fernando', 'AltaCostura999', 'AltaCostura999')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Lucía', 'Martínez', 'Aguja', 'lucia', 'Lucia2026')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Carlos', 'Ruiz', 'Tijeras', 'carlos', 'Tijeras123')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Ana', 'Torres', 'SastreX', 'ana', 'SastreX2026')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Javier', 'Gómez', 'MaestroModa', 'javier', 'MaestroModa!')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'María', 'Delgado', 'Costurilla', 'maria', 'Costurilla22')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Pablo', 'Herrera', 'HiloFino', 'pablo', 'HiloFino33')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Sofía', 'Navarro', 'PatrónX', 'sofia', 'PatronX44')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Diego', 'Fernández', 'CorteMaestro', 'diego', 'CorteMaestro55')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Elena', 'Rivas', 'DamaAguja', 'elena', 'DamaAguja66')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Tomás', 'Villalba', 'GranSastre', 'tomas', 'GranSastre77')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Laura', 'Sánchez', 'Dedal', 'laura', 'Dedal2026')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Miguel', 'Ortega', 'Puntada', 'miguel', 'Puntada123')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Carmen', 'Vega', 'HiloRojo', 'carmen', 'HiloRojo456')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Álvaro', 'Castro', 'Costurero', 'alvaro', 'Costurero789')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('oficial', 'Raquel', 'Molina', 'PatrónPro', 'raquel', 'PatronPro321')");
+		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('maestro', 'Fernando', 'Ibáñez', 'AltaCostura', 'fernando', 'AltaCostura999')");
 
 		for (String q : queryE) {
 			st.executeUpdate(q);
@@ -201,10 +201,9 @@ public class AccesoBBDD {
 			String apodo = resultados.getString("apodo");
 			String usuario = resultados.getString("usuario");
 			String contrasena = resultados.getString("contraseña");
-			String confirmarContrasena = resultados.getString("confirmar_contraseña");
 
 			/** Creación del objeto e inserción en la lista */
-			Empleado empleado = new Empleado(idEmpleados, categoria, nombre, apellido, apodo, usuario, contrasena, confirmarContrasena);
+			Empleado empleado = new Empleado(idEmpleados, categoria, nombre, apellido, apodo, usuario, contrasena);
 			empleados.add(empleado);
 		}
 
@@ -546,10 +545,9 @@ public class AccesoBBDD {
 			String apodo = resultados.getString("apodo");
 			String usuario = resultados.getString("usuario");
 			String contrasena = resultados.getString("contraseña");
-			String confirmarContrasena = resultados.getString("confirmar_contraseña");
 
 			/** Creación del objeto e inserción en la lista */
-			Empleado aprendices = new Empleado(idEmpleado, categoria, nombre, apellido, apodo, usuario, contrasena, confirmarContrasena);
+			Empleado aprendices = new Empleado(idEmpleado, categoria, nombre, apellido, apodo, usuario, contrasena);
 			empleados.add(aprendices);
 		}
 
@@ -925,15 +923,14 @@ public class AccesoBBDD {
 	 * @param apellido
 	 * @param apodo
 	 * @param usuario
-	 * @param contraseña
-	 * @param confirmar_contraseña 
+	 * @param contraseña 
 	 */
-	public void insertarNuevoEmpleado(Connection c, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña, String confirmar_contraseña) {
+	public void insertarNuevoEmpleado(Connection c, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña) {
 
 		Statement st;
 		try {
 			st = c.createStatement();
-			String queryE = ("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña, confirmar_contraseña) VALUES ('" +categoria + "', '" +nombre + "', '" +apellido + "', '" +apodo + "', '" +usuario +"', '" +contraseña + "', '" +confirmar_contraseña + "');");
+			String queryE = ("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('" +categoria + "', '" +nombre + "', '" +apellido + "', '" +apodo + "', '" +usuario +"', '" +contraseña + "');");
 
 			st.executeUpdate(queryE);
 			st.close();
@@ -975,11 +972,10 @@ public class AccesoBBDD {
 	 * @param apellido
 	 * @param apodo
 	 * @param usuario
-	 * @param contraseña
-	 * @param confirmar_contraseña 
+	 * @param contraseña 
 	 */
-	public void actualizarEmpleado(Connection c, int id_empleado, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña, String confirmar_contraseña) {
-	    String query = "UPDATE Empleados SET apodo = ?, nombre = ?, apellido = ?, categoria = ?, usuario = ?, contraseña = ?, confirmar_contraseña = ? WHERE id_empleado = ?";
+	public void actualizarEmpleado(Connection c, int id_empleado, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña) {
+	    String query = "UPDATE Empleados SET apodo = ?, nombre = ?, apellido = ?, categoria = ?, usuario = ?, contraseña = ? WHERE id_empleado = ?";
 	    
 	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
 	        
@@ -989,8 +985,7 @@ public class AccesoBBDD {
 	        pstmt.setString(4, categoria);
 	        pstmt.setString(5, usuario);
 	        pstmt.setString(6, contraseña);
-	        pstmt.setString(7, confirmar_contraseña);
-	        pstmt.setInt(8, id_empleado);
+	        pstmt.setInt(7, id_empleado);
 	        
 	        pstmt.executeUpdate();
 	        

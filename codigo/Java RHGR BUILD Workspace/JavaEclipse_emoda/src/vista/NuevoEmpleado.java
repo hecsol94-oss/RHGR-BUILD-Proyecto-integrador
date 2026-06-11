@@ -15,14 +15,14 @@ public class NuevoEmpleado extends JFrame {
     private JPanel contentPane;
     private JTextField txtNombre, txtApellido, txtApodo, txtUsuario;
     private JComboBox<String> cbTipo;
-    private JPasswordField ContraseñaCampo, ConfirmarContraseña;
+    private JPasswordField ContraseñaNueva, ConfirmarContraseña, ContraseñaActual;
     private JButton btnGuardar, btnCancelar;
     
     public NuevoEmpleado() {
     	setTitle("REGISTRO DE EMPLEADO - EDNA MODA");
         setResizable(false); 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(420, 550);
+        setSize(420, 600);
         setLocationRelativeTo(null);
         
         contentPane = new JPanel();
@@ -67,17 +67,23 @@ public class NuevoEmpleado extends JFrame {
         txtUsuario = new JTextField();
         estilizarCampo(txtUsuario, 20, 265, 170, 30);
         
-        JLabel lblContraseñaCampo = new JLabel("CONTRASEÑA:");
-        estilizarLabel(lblContraseñaCampo, 20, 305);
+        JLabel lblContraseñaActual = new JLabel("CONTRASEÑA ACTUAL:");
+        estilizarLabel(lblContraseñaActual, 20, 305);
         
-        ContraseñaCampo = new JPasswordField();
-        estilizarContraseña(ContraseñaCampo, 20, 325, 170, 30);
+        ContraseñaActual = new JPasswordField();
+        estilizarContraseña(ContraseñaActual, 20, 325,170, 30);
+        
+        JLabel lblContraseñaNueva = new JLabel("CONTRASEÑA NUEVA:");
+        estilizarLabel(lblContraseñaNueva, 20, 365);
+        
+        ContraseñaNueva = new JPasswordField();
+        estilizarContraseña(ContraseñaNueva, 20, 385, 170, 30);
         
         JLabel lblConfirmarContraseña = new JLabel("CONFIRMAR CONTRASEÑA:");
-        estilizarLabel(lblConfirmarContraseña, 20, 365);
+        estilizarLabel(lblConfirmarContraseña, 20, 425);
         
         ConfirmarContraseña = new JPasswordField();
-        estilizarContraseña(ConfirmarContraseña, 20, 385, 170, 30);
+        estilizarContraseña(ConfirmarContraseña, 20, 445, 170, 30);
         
         JLabel lblTipo = new JLabel("CATEGORÍA:");
         estilizarLabel(lblTipo, 210, 185);
@@ -89,19 +95,19 @@ public class NuevoEmpleado extends JFrame {
         contentPane.add(cbTipo);
         
         btnGuardar = new JButton("CONFIRMAR");
-        btnGuardar.setBounds(50, 430, 140, 45);
+        btnGuardar.setBounds(50, 485, 140, 45);
         estilizarBoton(btnGuardar, ROJO_HEROE, Color.WHITE);
         contentPane.add(btnGuardar);
         
         btnCancelar = new JButton("CANCELAR");
-        btnCancelar.setBounds(210, 430, 140, 45);
+        btnCancelar.setBounds(210, 485, 140, 45);
         estilizarBoton(btnCancelar, NEGRO_ELITE, AMARILLO_POWER);
         contentPane.add(btnCancelar);
         
         JLabel lblFooter = new JLabel("EDNA MODA STRATEGIC SYSTEMS v2.6");
         lblFooter.setFont(new Font("Monospaced", Font.PLAIN, 10));
         lblFooter.setForeground(Color.GRAY);
-        lblFooter.setBounds(100, 480, 200, 20);
+        lblFooter.setBounds(100, 535, 200, 20);
         contentPane.add(lblFooter);
     }
     
@@ -218,12 +224,19 @@ public class NuevoEmpleado extends JFrame {
 	public void setCbTipo(String categoria) {
 		cbTipo.setSelectedItem(categoria);
     }
+	
+	/**
+	 * @return the ContraseñaNueva
+	 */
+	public JPasswordField getContraseñaNueva() {
+		return ContraseñaNueva;
+	}
 
 	/**
-	 * @return the contraseñaCampo
+	 * @return the contraseñaActual
 	 */
-	public JPasswordField getContraseñaCampo() {
-		return ContraseñaCampo;
+	public JPasswordField getContraseñaActual() {
+		return ContraseñaActual;
 	}
 
 	/**
