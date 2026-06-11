@@ -141,7 +141,7 @@ public class ControladorNuevoEmpleado {
 					return;
 				}
 				
-				if (!contraseñaNueva.equals(empleadoEditar.getContrasena())) {
+				if (!contraseñaActual.equals(empleadoEditar.getContrasena())) {
 					JOptionPane.showMessageDialog(vista,
 							"La contraseña actual no es correcta.",
 							"Error",

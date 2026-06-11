@@ -174,6 +174,16 @@ public class ControladorListaEmpleados {
         }
 
         Empleado empleado = empleadosFiltrados.get(fila);
+        
+        /** Impedir borrar empleado si tiene citas */
+        if (acceso.empleadoTieneCitas(c, empleado.getId_empleado())) {
+        	JOptionPane.showMessageDialog(vista,
+        			"No se puede eliminar este empleado porque tiene citas asignadas.",
+        			"Operación no permitida",
+        			JOptionPane.ERROR_MESSAGE);
+        	return;
+        }
+        
         int confirmacion = JOptionPane.showConfirmDialog(
                 vista,
                 "¿Seguro que quieres eliminar a " + empleado.getNombre() + "?",
