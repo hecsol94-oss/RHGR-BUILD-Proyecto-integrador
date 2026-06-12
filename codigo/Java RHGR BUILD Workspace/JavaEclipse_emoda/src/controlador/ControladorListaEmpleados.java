@@ -102,9 +102,7 @@ public class ControladorListaEmpleados {
         empleadosFiltrados = new ArrayList<>();
 
         for (Empleado empleado : empleados) {
-            if (empleado.getCategoria().equalsIgnoreCase(categoria)
-                    || empleado.getCategoria().equalsIgnoreCase(categoria)
-            		|| empleado.getCategoria().equalsIgnoreCase(categoria)) {
+            if (empleado.getCategoria().equalsIgnoreCase(categoria)) {
                 empleadosFiltrados.add(empleado);
             }
         }
