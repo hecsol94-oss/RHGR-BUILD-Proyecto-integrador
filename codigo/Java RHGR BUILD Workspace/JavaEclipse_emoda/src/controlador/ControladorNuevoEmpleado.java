@@ -94,7 +94,6 @@ public class ControladorNuevoEmpleado {
 		vista.getTxtNombre().setText(empleadoEditar.getNombre());
 		vista.getTxtApellido().setText(empleadoEditar.getApellido());
 		vista.getTxtUsuario().setText(empleadoEditar.getUsuario());
-		vista.getContraseñaActual().setText(empleadoEditar.getContrasena());
 		vista.setCbTipo(empleadoEditar.getCategoria());
 	}
 	
@@ -116,7 +115,7 @@ public class ControladorNuevoEmpleado {
 		/**
 		 * Validación de campos obligatorios
 		 */
-		if (apodo.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || contraseñaNueva.isEmpty() || confirmarNueva.isEmpty() || categoria.isEmpty()) {
+		if (apodo.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || categoria.isEmpty()) {
 			JOptionPane.showMessageDialog(vista,
 					"Por favor, rellena todos los campos del empleado.",
 					"Campos incompletos",
@@ -125,14 +124,19 @@ public class ControladorNuevoEmpleado {
 		}
 		
 		/**
-		 * Validación de contraseña (solo en edición).
+		 * Validación de contraseña.
+		 * Solo se aplica cuando se edita un empleado existente.
+		 * Requiere que el usuario escriba su contraseña actual y que esta coincida
+		 * con la almacenada en la base de datos antes de permitir el cambio.
 		 */
 		if (empleadoEditar != null) {
 			
+			/** Detectar si el usuario intenta cambiar la contraseña */
 			boolean quiereCambiar = !contraseñaNueva.equals(empleadoEditar.getContrasena());
 			
 			if (quiereCambiar) {
 				
+				/** Debe escribir la contraseña actual */
 				if (contraseñaActual.isEmpty()) {
 					JOptionPane.showMessageDialog(vista,
 							"Debes escribir tu contraseña actual para poder cambiarla.",
@@ -141,6 +145,7 @@ public class ControladorNuevoEmpleado {
 					return;
 				}
 				
+				/** La contraseña actual debe coincidir con la almacenada */
 				if (!contraseñaActual.equals(empleadoEditar.getContrasena())) {
 					JOptionPane.showMessageDialog(vista,
 							"La contraseña actual no es correcta.",
@@ -149,6 +154,7 @@ public class ControladorNuevoEmpleado {
 					return;
 				}
 				
+				/** La nueva contraseña debe coincidir con la confirmación */
 				if (!contraseñaNueva.equals(confirmarNueva)) {
 					JOptionPane.showMessageDialog(vista,
 							"La nueva contraseña no coincide con la confirmación.",

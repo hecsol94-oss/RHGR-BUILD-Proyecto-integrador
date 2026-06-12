@@ -163,6 +163,7 @@ public class ControladorListaEmpleados {
     private void eliminarEmpleado() {
         int fila = vista.getTable().getSelectedRow();
 
+        /** Debe haber un empleado seleccionado */
         if (fila < 0) {
             JOptionPane.showMessageDialog(vista,
                     "Selecciona un empleado para eliminar.",
@@ -182,6 +183,7 @@ public class ControladorListaEmpleados {
         	return;
         }
         
+        /** Confirmación del usuario */
         int confirmacion = JOptionPane.showConfirmDialog(
                 vista,
                 "¿Seguro que quieres eliminar a " + empleado.getNombre() + "?",
@@ -190,9 +192,12 @@ public class ControladorListaEmpleados {
         );
 
         if (confirmacion == JOptionPane.YES_OPTION) {
+        	/** Eliminación en BBDD */
             acceso.eliminarEmpleado(c, empleado.getId_empleado());
+            /** Eliminación en memoria */
             empleados.remove(empleado);
             empleadosFiltrados.remove(empleado);
+            /** Refrescar tabla */
             cargarTabla(empleadosFiltrados);
             JOptionPane.showMessageDialog(vista, "Empleado eliminado correctamente.");
         }
