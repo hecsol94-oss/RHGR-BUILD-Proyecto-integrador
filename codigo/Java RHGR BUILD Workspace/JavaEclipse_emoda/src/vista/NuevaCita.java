@@ -123,13 +123,13 @@ public class NuevaCita extends JFrame {
         panelFase2.add(header);
 
         int y = 55, dy = 30;
-        lblResumenFecha    = addResumenField(panelFase2, "FECHA:",    y); y += dy;
-        lblResumenHora     = addResumenField(panelFase2, "HORA:",     y); y += dy;
+        lblResumenFecha = addResumenField(panelFase2, "FECHA:", y); y += dy;
+        lblResumenHora = addResumenField(panelFase2, "HORA:", y); y += dy;
         lblResumenDuracion = addResumenField(panelFase2, "DURACIÓN:", y); y += dy;
-        lblResumenCliente  = addResumenField(panelFase2, "SUJETO:",   y); y += dy;
-        lblResumenTraje    = addResumenField(panelFase2, "DISEÑO:",   y); y += dy;
-        lblResumenTaller   = addResumenField(panelFase2, "SEDE:",     y); y += dy;
-        lblResumenOficial  = addResumenField(panelFase2, "MAESTRO:",  y); y += dy + 15;
+        lblResumenCliente = addResumenField(panelFase2, "SUJETO:", y); y += dy;
+        lblResumenTraje = addResumenField(panelFase2, "DISEÑO:", y); y += dy;
+        lblResumenTaller = addResumenField(panelFase2, "SEDE:", y); y += dy;
+        lblResumenOficial = addResumenField(panelFase2, "MAESTRO:", y); y += dy + 15;
 
         JSeparator sep = new JSeparator();
         sep.setBounds(25, y, 450, 2);
