@@ -45,13 +45,13 @@ public class DetalleCita extends JFrame {
         header.add(marcaAgua);
 
         int y = 65, dy = 38;
-        lblFechaVal    = addField(contentPane, "FECHA:",        20, y); y += dy;
-        lblHoraVal     = addField(contentPane, "HORA INICIO:",  20, y); y += dy;
+        lblFechaVal = addField(contentPane, "FECHA:", 20, y); y += dy;
+        lblHoraVal = addField(contentPane, "HORA INICIO:", 20, y); y += dy;
         lblDuracionVal = addField(contentPane, "DURACIÓN (H):", 20, y); y += dy;
-        lblClienteVal  = addField(contentPane, "SUJETO:",       20, y); y += dy;
-        lblTrajeVal    = addField(contentPane, "PROYECTO:",     20, y); y += dy;
-        lblTallerVal   = addField(contentPane, "UBICACIÓN:",    20, y); y += dy;
-        lblOficialVal  = addField(contentPane, "RESPONSABLE:",  20, y); y += dy;
+        lblClienteVal = addField(contentPane, "SUJETO:", 20, y); y += dy;
+        lblTrajeVal = addField(contentPane, "PROYECTO:", 20, y); y += dy;
+        lblTallerVal = addField(contentPane, "UBICACIÓN:", 20, y); y += dy;
+        lblOficialVal = addField(contentPane, "RESPONSABLE:", 20, y); y += dy;
 
         JLabel lblAprEtiq = new JLabel("PERSONAL DE APOYO:");
         lblAprEtiq.setFont(new Font("Tahoma", Font.BOLD, 11));
