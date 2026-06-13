@@ -183,6 +183,15 @@ public class ControladorListaEmpleados {
         	return;
         }
         
+        /** Impedir borrar aprendiz si tiene asignado citas */
+        if (acceso.empleadoEsAprendiz(c, empleado.getId_empleado())) {
+        	JOptionPane.showMessageDialog(vista,
+        			"No se puede eliminar este empleado porque participa como aprendiz en citas.",
+        			"Operación no permitida",
+        			JOptionPane.ERROR_MESSAGE);
+        	return;
+        }
+        
         /** Confirmación del usuario */
         int confirmacion = JOptionPane.showConfirmDialog(
                 vista,

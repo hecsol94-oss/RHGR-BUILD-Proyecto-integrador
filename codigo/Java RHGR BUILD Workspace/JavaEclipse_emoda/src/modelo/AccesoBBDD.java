@@ -599,6 +599,31 @@ public class AccesoBBDD {
 	}
 	
 	/**
+	 * Indica si un empleado aparece como aprendiz en alguna cita.
+	 * 
+	 * @param c
+	 * @param idEmpleado
+	 */
+	public boolean empleadoEsAprendiz(Connection c, int idEmpleado) {
+		
+		String query = "SELECT COUNT(*) FROM Cita_Aprendiz WHERE id_empleado = ?";
+		
+		try (PreparedStatement pstmt = c.prepareStatement(query)) {
+			pstmt.setInt(1, idEmpleado);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getInt(1) > 0; /** true si aparece como aprendiz */
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	/**
 	 * Al crear un nuevo cliente en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD
 	 * 
 	 * @param c
