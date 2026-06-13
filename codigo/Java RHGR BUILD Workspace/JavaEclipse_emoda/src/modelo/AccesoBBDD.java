@@ -599,6 +599,31 @@ public class AccesoBBDD {
 	}
 	
 	/**
+	 * Indica si un taller está siendo usado en alguna cita.
+	 * 
+	 * @param c
+	 * @param idSala
+	 */
+	public boolean tallerTieneCitas(Connection c, int idSala) {
+		
+		String query = "SELECT COUNT(*) FROM Citas WHERE id_sala = ?";
+		
+		try (PreparedStatement pstmt = c.prepareStatement(query)) {
+			pstmt.setInt(1, idSala);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				return rs.getInt(1) > 0; /** true si el taller está en uso */
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	/**
 	 * Indica si un empleado aparece como aprendiz en alguna cita.
 	 * 
 	 * @param c

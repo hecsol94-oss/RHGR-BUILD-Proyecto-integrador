@@ -52,6 +52,24 @@ public class ControladorListaTalleres {
 		vista.getBtnEliminar().addActionListener(e -> pulsarBtnEliminar());
 		vista.getBtnVolver().addActionListener(e -> pulsarBtnVolver());
 	}
+	
+	/**
+	 * Carga en la tabla los talleres proporcionados.
+	 * 
+	 * @param talleres Lista de talleres a mostrar en la tabla.
+	 */
+	private void cargarTabla(ArrayList<Taller> talleres) {
+		
+		DefaultTableModel modelo = (DefaultTableModel) vista.getTable().getModel();
+		modelo.setRowCount(0); /** Limpiar tabla */
+		
+		for (Taller t : talleres) {
+			modelo.addRow(new Object[] {
+					t.getNombre(),
+					t.getTipo()
+			});
+		}
+	}
 
 	/**
 	 * Abre el formulario para la creación de un nuevo taller.
@@ -107,6 +125,17 @@ public class ControladorListaTalleres {
 					JOptionPane.WARNING_MESSAGE);
 			return;
 		}
+		
+		Taller tallerEliminado = talleres.get(fila);
+		
+		/** ¿El taller está siendo usado en citas? */
+		if (acceso.tallerTieneCitas(c, tallerEliminado.getId_sala())) {
+			JOptionPane.showMessageDialog(vista,
+					"No se puede eliminar este taller porque está asignado a una o más citas.",
+					"Operación no permitida",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 
 		int confirmacion = JOptionPane.showConfirmDialog(
 				vista,
@@ -117,14 +146,12 @@ public class ControladorListaTalleres {
 
 		if (confirmacion == JOptionPane.YES_OPTION) {
 
-			Taller tallerEliminado = talleres.get(fila);
-
 			acceso.borrarTaller(c, tallerEliminado.getId_sala());
 
 			talleres = acceso.recogeTalleres(c);
 
-			DefaultTableModel modeloTabla = (DefaultTableModel) vista.getTable().getModel();
-			modeloTabla.removeRow(fila);
+			talleres.remove(tallerEliminado);
+			cargarTabla(talleres);
 
 			JOptionPane.showMessageDialog(vista, "Taller eliminado correctamente.");
 		}
