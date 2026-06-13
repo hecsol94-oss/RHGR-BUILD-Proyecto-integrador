@@ -87,7 +87,7 @@ public class VentanaOficial extends JFrame {
         header.setBackground(ROJO_HEROE);
         header.setBorder(new MatteBorder(0, 0, 4, 0, AMARILLO_POWER));
 
-        lblUsuario = new JLabel("OPERADOR: EDNA MODA");
+        lblUsuario = new JLabel("  OPERADOR: EDNA MODA");
         lblUsuario.setFont(new Font("Impact", Font.PLAIN, 26));
         lblUsuario.setForeground(Color.WHITE);
         header.add(lblUsuario, BorderLayout.WEST);
