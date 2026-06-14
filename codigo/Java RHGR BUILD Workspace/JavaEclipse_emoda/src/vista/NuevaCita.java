@@ -160,7 +160,8 @@ public class NuevaCita extends JFrame {
 
     /**
      * --- MÉTODOS DE ESTILIZACIÓN ---
-     * @param titulo
+     * 
+     * @param titulo.
      * @return
      */
 
@@ -179,10 +180,10 @@ public class NuevaCita extends JFrame {
     /**
      * Crea una etiqueta posicionada en coordenadas absolutas.
      *
-     * @param texto texto que mostrará la etiqueta
-     * @param x posición horizontal en píxeles
-     * @param y posición vertical en píxeles
-     * @return JLabel configurado con el texto y posición indicados
+     * @param texto texto que mostrará la etiqueta.
+     * @param x posición horizontal en píxeles.
+     * @param y posición vertical en píxeles.
+     * @return JLabel configurado con el texto y posición indicados.
      */
     private JLabel lblNegrita(String texto, int x, int y) {
         JLabel l = new JLabel(texto);
@@ -225,10 +226,10 @@ public class NuevaCita extends JFrame {
      * previamente de forma estructurada.
      * </p>
      *
-     * @param p panel donde se añadirá el campo
-     * @param etiqueta texto descriptivo del campo
-     * @param y posición vertical en píxeles
-     * @return JLabel que representa el valor asociado al campo
+     * @param p panel donde se añadirá el campo.
+     * @param etiqueta texto descriptivo del campo.
+     * @param y posición vertical en píxeles.
+     * @return JLabel que representa el valor asociado al campo.
      */
     private JLabel addResumenField(JPanel p, String etiqueta, int y) {
         JLabel lbl = new JLabel(etiqueta);
@@ -249,13 +250,13 @@ public class NuevaCita extends JFrame {
      * Muestra la fase 2 de la interfaz rellenando previamente
      * los datos del resumen de la cita.
      *
-     * @param fecha fecha de la cita
-     * @param hora hora de la cita
-     * @param duracion duración de la cita
-     * @param cliente nombre del cliente
-     * @param traje tipo de traje
-     * @param taller taller asignado
-     * @param oficial oficial responsable
+     * @param fecha fecha de la cita.
+     * @param hora hora de la cita.
+     * @param duracion duración de la cita.
+     * @param cliente nombre del cliente.
+     * @param traje tipo de traje.
+     * @param taller taller asignado.
+     * @param oficial oficial responsable.
      */
     public void mostrarFase2(String fecha, String hora, String duracion, String cliente, String traje, String taller, String oficial) {
         lblResumenFecha.setText(fecha);
@@ -275,7 +276,7 @@ public class NuevaCita extends JFrame {
     	cardLayout.show(panelContenedor, "FASE1");
     }
 
-    /** Getters Fase 1 */
+    /** Getters Fase 1. */
     
     /**
      * 
@@ -357,34 +358,34 @@ public class NuevaCita extends JFrame {
     
     /**
      * 
-     * @param tipo
+     * @param tipo.
      */
     public void setCbCliente(String tipo) {
     	cbCliente.setSelectedItem(tipo);
     }
     /**
      * 
-     * @param tipo
+     * @param tipo.
      */
     public void setCbTraje(String tipo) {
     	cbTraje.setSelectedItem(tipo);
     }
     /**
      * 
-     * @param tipo
+     * @param tipo.
      */
     public void setCbTaller(String tipo) {
     	cbTaller.setSelectedItem(tipo);
     }
     /**
      * 
-     * @param tipo
+     * @param tipo.
      */
     public void setCbOficial(String tipo) {
     	cbOficial.setSelectedItem(tipo);
     }
 
-    /** Getters Fase 2 */
+    /** Getters Fase 2. */
     
     /**
      * 
@@ -415,7 +416,7 @@ public class NuevaCita extends JFrame {
     	return btnAtras;
     }
 
-    /** Compatibilidad */
+    /** Compatibilidad. */
     
     /**
      * 
@@ -431,7 +432,7 @@ public class NuevaCita extends JFrame {
     public JButton getBtnTaller() {
     	return null;
     }
-    /** Compatibilidad: getTxtOficial() devuelve null — ya no se usa */
+    /** Compatibilidad: getTxtOficial() devuelve null — ya no se usa. */
     
     /**
      * 
