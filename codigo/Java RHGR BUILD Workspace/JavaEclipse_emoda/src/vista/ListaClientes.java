@@ -114,9 +114,9 @@ public class ListaClientes extends JFrame {
      * Define tamaño, colores, fuente, borde y comportamiento del cursor
      * para mantener una estética uniforme tipo "Elite".
      *
-     * @param btn botón al que se le aplicará el estilo
-     * @param w ancho del botón en píxeles
-     * @param h alto del botón en píxeles
+     * @param btn botón al que se le aplicará el estilo.
+     * @param w ancho del botón en píxeles.
+     * @param h alto del botón en píxeles.
      */
     private void estilizarBoton(JButton btn, int w, int h) {
         btn.setPreferredSize(new Dimension(w, h));
@@ -133,10 +133,10 @@ public class ListaClientes extends JFrame {
      * Mejora  legibilidad configurando altura de filas, fuentes,
      * colores de selección, líneas de rejilla y estilo del encabezado.
      *
-     * @param tabla tabla a la que se le aplicará el estilo
+     * @param tabla tabla a la que se le aplicará el estilo.
      */
     private void estilizarTabla(JTable tabla) {
-        tabla.setRowHeight(45); /** Filas más altas para pantalla grande */
+        tabla.setRowHeight(45); /** Filas más altas para pantalla grande. */
         tabla.setFont(new Font("Tahoma", Font.PLAIN, 15));
         tabla.setSelectionBackground(AMARILLO_POWER);
         tabla.setSelectionForeground(NEGRO_ELITE);
