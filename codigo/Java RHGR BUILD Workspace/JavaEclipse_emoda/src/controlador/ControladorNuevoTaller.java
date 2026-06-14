@@ -63,7 +63,7 @@ public class ControladorNuevoTaller {
 		this.emp = emp;
 
 		/**
-		 * Eventos de botones
+		 * Eventos de botones.
 		 */
 		this.vista.getBtnGuardar().addActionListener(e -> pulsarBtnGuardar());
 		this.vista.getBtnCancelar().addActionListener(e -> pulsarBtnCancelar());
@@ -84,7 +84,7 @@ public class ControladorNuevoTaller {
 			
 			if (!nombreIntroducido.isEmpty()) {
 				
-				/** Desde ListaTalleres */
+				/** Desde ListaTalleres. */
 				if (ventanaMaestro == null && ventanaTaller != null) {
 
 					Taller nuevoTaller = new Taller((talleres.size() + 1), nombreIntroducido, tipoIntroducido);
@@ -105,7 +105,7 @@ public class ControladorNuevoTaller {
 					ventanaTaller.dispose();
 				}
 
-				/** Desde VentanaMaestro */
+				/** Desde VentanaMaestro. */
 				else if (ventanaMaestro != null && ventanaTaller == null) {
 
 					Taller nuevoTaller = new Taller((talleres.size() + 1), nombreIntroducido, tipoIntroducido);
