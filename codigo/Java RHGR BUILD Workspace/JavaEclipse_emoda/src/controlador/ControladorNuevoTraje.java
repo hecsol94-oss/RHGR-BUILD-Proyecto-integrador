@@ -23,47 +23,47 @@ import vista.NuevoTraje;
 public class ControladorNuevoTraje {
 
     /**
-     * Vista del formulario de trajes
+     * Vista del formulario de trajes.
      */
     private NuevoTraje vista;
 
     /**
-     * Acceso a base de datos
+     * Acceso a base de datos.
      */
     private AccesoBBDD acceso;
 
     /**
-     * Conexión activa
+     * Conexión activa.
      */
     private Connection c;
 
     /**
-     * Cliente asociado al traje
+     * Cliente asociado al traje.
      */
     private Cliente cliente;
 
     /**
-     * Lista de trajes del cliente
+     * Lista de trajes del cliente.
      */
     private ArrayList<Traje> trajes;
 
     /**
-     * Traje que se está editando (null si es nuevo)
+     * Traje que se está editando (null si es nuevo).
      */
     private Traje trajeAEditar;
 
     /**
-     * Empleado logueado
+     * Empleado logueado.
      */
     private Empleado empleado;
 
     /**
-     * Vista origen: detalle de clientes
+     * Vista origen: detalle de clientes.
      */
     private DetalleClientes vistaCliente;
 
     /**
-     * Vista origen: nueva cita
+     * Vista origen: nueva cita.
      */
     private NuevaCita vistaCita;
 
@@ -97,7 +97,7 @@ public class ControladorNuevoTraje {
         this.vistaCita = vistaCita;
 
         /**
-         * Si estamos editando un traje, cargamos datos en la vista
+         * Si estamos editando un traje, cargamos datos en la vista.
          */
         if (trajeAEditar != null) {
             vista.getNombreTraje().setText(trajeAEditar.getNombre_traje());
@@ -105,7 +105,7 @@ public class ControladorNuevoTraje {
         }
 
         /**
-         * Eventos de botones
+         * Eventos de botones.
          */
         this.vista.getBtnGuardar().addActionListener(e -> guardarTraje());
         this.vista.getBtnCancelar().addActionListener(e -> cancelar());
@@ -119,7 +119,7 @@ public class ControladorNuevoTraje {
     private void guardarTraje() {
 
         /**
-         * Obtener datos introducidos por el usuario
+         * Obtener datos introducidos por el usuario.
          */
         String nombre = vista.getNombreTraje().getText();
         String estado = vista.getCbEstado().toString();
@@ -136,13 +136,13 @@ public class ControladorNuevoTraje {
              */
             if (trajeAEditar == null) {
 
-                /** Insertar en base de datos */
+                /** Insertar en base de datos. */
                 acceso.insertarNuevoTraje(c, nombre, estado, cliente.getId_cliente());
 
-                /** Recargar lista de trajes del cliente */
+                /** Recargar lista de trajes del cliente. */
                 trajes = acceso.getTrajesPorCliente(c, cliente.getId_cliente());
 
-                /** Si venimos desde DetalleClientes */
+                /** Si venimos desde DetalleClientes. */
                 if (vistaCliente != null && vistaCita == null) {
 
                     DetalleClientes dt = new DetalleClientes();
@@ -156,7 +156,7 @@ public class ControladorNuevoTraje {
                     vista.dispose();
                     vistaCliente.dispose();
 
-                /** Si venimos desde NuevaCita */
+                /** Si venimos desde NuevaCita. */
                 } else if (vistaCliente == null && vistaCita != null) {
 
                     JOptionPane.showMessageDialog(vista, "Traje creado correctamente");
@@ -170,10 +170,10 @@ public class ControladorNuevoTraje {
              */
             } else {
 
-                /** Actualizar en base de datos */
+                /** Actualizar en base de datos. */
                 acceso.actualizarTraje(c, trajeAEditar.getId_traje(), nombre, estado);
 
-                /** Recargar lista de trajes */
+                /** Recargar lista de trajes. */
                 trajes = acceso.getTrajesPorCliente(c, cliente.getId_cliente());
 
                 DetalleClientes dt = new DetalleClientes();
@@ -190,7 +190,7 @@ public class ControladorNuevoTraje {
 
         } else {
 
-            /** Error si el nombre está vacío */
+            /** Error si el nombre está vacío. */
             JOptionPane.showMessageDialog(vista,
                     "Por favor, rellene los campos obligatorios",
                     "Error",
@@ -204,7 +204,7 @@ public class ControladorNuevoTraje {
      */
     private void cancelar() {
 
-        /** Cierra la ventana sin guardar cambios */
+        /** Cierra la ventana sin guardar cambios. */
         if (vistaCliente != null && vistaCita == null) {
             vista.dispose();
         } else if (vistaCliente == null && vistaCita != null) {
