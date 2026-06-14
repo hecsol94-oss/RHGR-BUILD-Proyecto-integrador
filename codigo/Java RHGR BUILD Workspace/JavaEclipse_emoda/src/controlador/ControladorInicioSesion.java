@@ -38,7 +38,7 @@ public class ControladorInicioSesion {
         this.empleados = empleados;
 
         /**
-         * Configura el listener del botón de entrada
+         * Configura el listener del botón de entrada.
          */
         this.vista.getBtnEntrar().addActionListener(new ActionListener() {
             @Override
@@ -62,7 +62,7 @@ public class ControladorInicioSesion {
         Empleado empleadoAutenticado = null;
 
         /**
-         * Lógica de búsqueda del empleado en la lista cargada
+         * Lógica de búsqueda del empleado en la lista cargada.
          */
         for (Empleado emp : empleados) {
             if (emp.getUsuario().equals(usuario) &&
@@ -73,7 +73,7 @@ public class ControladorInicioSesion {
         }
 
         /**
-         * Manejo de error en caso de credenciales inválidas
+         * Manejo de error en caso de credenciales inválidas.
          */
         if (empleadoAutenticado == null) {
             vista.setRespuesta("Usuario o contraseña incorrectos");
@@ -81,7 +81,7 @@ public class ControladorInicioSesion {
         }
 
         /**
-         * Proceso de transición: cerrar login e iniciar sesión de trabajo
+         * Proceso de transición: cerrar login e iniciar sesión de trabajo.
          */
         String categoria = empleadoAutenticado.getCategoria();
 
@@ -89,7 +89,7 @@ public class ControladorInicioSesion {
         vista.dispose();
 
         /**
-         * Se abre una conexión única que se pasará a los siguientes controladores
+         * Se abre una conexión única que se pasará a los siguientes controladores.
          */
         Connection c = acceso.abrirConexion();
 
@@ -118,7 +118,7 @@ public class ControladorInicioSesion {
                 break;
 
             default:
-                /** En caso de que el rol no coincida con los esperados */
+                /** En caso de que el rol no coincida con los esperados. */
                 vista.setRespuesta("Categoría no reconocida: " + categoria);
                 break;
         }
