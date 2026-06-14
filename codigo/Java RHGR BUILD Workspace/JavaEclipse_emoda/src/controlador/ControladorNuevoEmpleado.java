@@ -21,7 +21,7 @@ import vista.VentanaMaestro;
 public class ControladorNuevoEmpleado {
 
 	/**
-	 * Referencias a vistas y capa de datos
+	 * Referencias a vistas y capa de datos.
 	 */
 	private NuevoEmpleado vista;
 	private ListaEmpleados vistaEmpleados;
@@ -31,12 +31,12 @@ public class ControladorNuevoEmpleado {
 	private Connection c;
 	
 	/**
-	 * Empleado en edición (null si es nuevo)
+	 * Empleado en edición (null si es nuevo).
 	 */
 	private Empleado empleadoEditar;
 	
 	/**
-	 * Lista de empleados en memoria
+	 * Lista de empleados en memoria.
 	 */
 	private ArrayList<Empleado> empleados;
 	
@@ -72,14 +72,14 @@ public class ControladorNuevoEmpleado {
 		this.empleado = empleado;
 		
 		/**
-		 * Si estamos en modo edición, precargamos datos
+		 * Si estamos en modo edición, precargamos datos.
 		 */
         if (empleadoEditar != null) {
             precargarDatos();
         }
         
         /**
-         * Eventos de botones
+         * Eventos de botones.
          */
         vista.getBtnGuardar().addActionListener(e -> guardarEmpleado());
         vista.getBtnCancelar().addActionListener(e -> cancelar());
@@ -113,7 +113,7 @@ public class ControladorNuevoEmpleado {
 		String categoria = vista.getCbTipo().toString();
 		
 		/**
-		 * Validación de campos obligatorios
+		 * Validación de campos obligatorios.
 		 */
 		if (apodo.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || usuario.isEmpty() || categoria.isEmpty()) {
 			JOptionPane.showMessageDialog(vista,
@@ -131,12 +131,12 @@ public class ControladorNuevoEmpleado {
 		 */
 		if (empleadoEditar != null) {
 			
-			/** Detectar si el usuario intenta cambiar la contraseña */
+			/** Detectar si el usuario intenta cambiar la contraseña. */
 			boolean quiereCambiar = !contraseñaNueva.equals(empleadoEditar.getContrasena());
 			
 			if (quiereCambiar) {
 				
-				/** Debe escribir la contraseña actual */
+				/** Debe escribir la contraseña actual. */
 				if (contraseñaActual.isEmpty()) {
 					JOptionPane.showMessageDialog(vista,
 							"Debes escribir tu contraseña actual para poder cambiarla.",
@@ -145,7 +145,7 @@ public class ControladorNuevoEmpleado {
 					return;
 				}
 				
-				/** La contraseña actual debe coincidir con la almacenada */
+				/** La contraseña actual debe coincidir con la almacenada. */
 				if (!contraseñaActual.equals(empleadoEditar.getContrasena())) {
 					JOptionPane.showMessageDialog(vista,
 							"La contraseña actual no es correcta.",
@@ -154,7 +154,7 @@ public class ControladorNuevoEmpleado {
 					return;
 				}
 				
-				/** La nueva contraseña debe coincidir con la confirmación */
+				/** La nueva contraseña debe coincidir con la confirmación. */
 				if (!contraseñaNueva.equals(confirmarNueva)) {
 					JOptionPane.showMessageDialog(vista,
 							"La nueva contraseña no coincide con la confirmación.",
@@ -179,7 +179,7 @@ public class ControladorNuevoEmpleado {
 						"Este empleado tiene citas asignadas y no puede convertirse en aprendiz.",
 						"Operación no permitida",
 						JOptionPane.ERROR_MESSAGE);
-				return; /** Bloquear guardado */
+				return; /** Bloquear guardado. */
 			}
 		}
 		
@@ -203,7 +203,7 @@ public class ControladorNuevoEmpleado {
 			
 			/** ===== REDIRECCIÓN SEGÚN CONTEXTO ===== */
 			
-			/** Desde ListaEmpleados */
+			/** Desde ListaEmpleados. */
 			if (vistaCita == null && (vistaEmpleados != null && vistaMaestro == null)) {
 				
 				ListaEmpleados le = new ListaEmpleados();
@@ -215,7 +215,7 @@ public class ControladorNuevoEmpleado {
 				vista.dispose();
 				vistaEmpleados.dispose();
 				
-			/** Desde VentanaMaestro */
+			/** Desde VentanaMaestro. */
 			} else if (vistaCita == null && vistaEmpleados == null && vistaMaestro != null) {
 				
 				ListaEmpleados le = new ListaEmpleados();
@@ -224,7 +224,7 @@ public class ControladorNuevoEmpleado {
 				
 				vista.dispose();
 				
-			/** Desde NuevaCita */
+			/** Desde NuevaCita. */
 			} else if (vistaCita != null && vistaEmpleados == null) {
 				
 				vista.dispose();
