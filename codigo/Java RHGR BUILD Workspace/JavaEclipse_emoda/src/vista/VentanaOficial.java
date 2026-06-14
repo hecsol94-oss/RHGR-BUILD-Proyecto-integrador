@@ -76,10 +76,9 @@ public class VentanaOficial extends JFrame {
 
     /**
      * Construye el panel superior de la aplicación (header).
-     * 
      * Incluye la información del usuario y la opción de cerrar sesión.
      *
-     * @return JPanel configurado como cabecera de la aplicación
+     * @return JPanel configurado como cabecera de la aplicación.
      */
     private JPanel construirHeader() {
         JPanel header = new JPanel(new BorderLayout());
@@ -107,7 +106,7 @@ public class VentanaOficial extends JFrame {
      * Muestra información relevante como número de citas,
      * talleres activos y próximas tareas.
      *
-     * @return JPanel con la vista del dashboard
+     * @return JPanel con la vista del dashboard.
      */
     private JPanel construirDashboard() {
         JPanel p = new JPanel(new GridBagLayout()) {
@@ -172,9 +171,9 @@ public class VentanaOficial extends JFrame {
     /**
      * Crea una tarjeta visual para mostrar una métrica en el dashboard.
      *
-     * @param titulo texto descriptivo de la métrica
-     * @param labelValor etiqueta donde se mostrará el valor dinámico
-     * @return JPanel configurado como tarjeta de información
+     * @param titulo texto descriptivo de la métrica.
+     * @param labelValor etiqueta donde se mostrará el valor dinámico.
+     * @return JPanel configurado como tarjeta de información.
      */
     private JPanel crearTarjetaDashboard(String titulo, JLabel labelValor) {
         JPanel box = new JPanel(new BorderLayout());
@@ -198,6 +197,7 @@ public class VentanaOficial extends JFrame {
     /**
      * --- Otros métodos de construcción y estilo (Lista Citas, Menú, Botones, etc.) ---
      * Se mantienen idénticos a la versión anterior para asegurar compatibilidad total.
+     * 
      * @return
      */
 
@@ -250,9 +250,9 @@ public class VentanaOficial extends JFrame {
     /**
      * Aplica estilo visual a un botón de acción.
      *
-     * @param btn botón a estilizar
-     * @param w ancho del botón
-     * @param h alto del botón
+     * @param btn botón a estilizar.
+     * @param w ancho del botón.
+     * @param h alto del botón.
      */
     private void estilizarBotonAccion(JButton btn, int w, int h) {
         btn.setPreferredSize(new Dimension(w, h));
@@ -266,7 +266,7 @@ public class VentanaOficial extends JFrame {
     /**
      * Aplica estilo visual a una tabla.
      *
-     * @param tabla tabla a estilizar
+     * @param tabla tabla a estilizar.
      */
     private void estilizarTablaElite(JTable tabla) {
         tabla.setRowHeight(45); 
@@ -279,7 +279,6 @@ public class VentanaOficial extends JFrame {
 
     /**
      * Configura la barra de menú principal de la aplicación.
-     * 
      * Crea los menús de citas, clientes y talleres y sus opciones.
      */
     private void configurarBarraMenu() {
@@ -315,8 +314,8 @@ public class VentanaOficial extends JFrame {
     /**
      * Crea un menú con el texto indicado y estilo básico aplicado.
      *
-     * @param t texto que se mostrará como título del menú
-     * @return JMenu configurado con el estilo de la aplicación
+     * @param t texto que se mostrará como título del menú.
+     * @return JMenu configurado con el estilo de la aplicación.
      */
     private JMenu crearMenu(String t) {
         JMenu m = new JMenu(t);
@@ -327,8 +326,8 @@ public class VentanaOficial extends JFrame {
     /**
      * Crea un elemento de menú con el texto indicado y estilo personalizado.
      *
-     * @param t texto que se mostrará en el item del menú
-     * @return JMenuItem configurado con colores de la interfaz
+     * @param t texto que se mostrará en el item del menú.
+     * @return JMenuItem configurado con colores de la interfaz.
      */
     private JMenuItem crearItem(String t) {
         JMenuItem i = new JMenuItem(t);
@@ -339,7 +338,7 @@ public class VentanaOficial extends JFrame {
 
     /**
      * 
-     * @param card
+     * @param card.
      */
     public void mostrarCard(String card) {
     	cardLayout.show(cardPane, card);
@@ -705,7 +704,7 @@ public class VentanaOficial extends JFrame {
     	btnNuevoEmpleadoEmb.setEnabled(false);
     }
     
- /** Getters para los items de menú */
+ /** Getters para los items de menú. */
     
     /**
      * 
