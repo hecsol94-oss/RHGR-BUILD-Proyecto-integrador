@@ -26,7 +26,7 @@ public class ControladorListaCitas {
     private final Empleado empleado;
 
     /**
-     * Listas auxiliares para la resolución de nombres (IDs -> Strings legibles)
+     * Listas auxiliares para la resolución de nombres (IDs -> Strings legibles).
      */
     private ArrayList<Cliente> listaClientes;
     private ArrayList<Taller> listaTalleres;
@@ -58,7 +58,7 @@ public class ControladorListaCitas {
         cargarTabla(citasFiltradas);
 
         /**
-         * Configuración de botones de filtrado rápido
+         * Configuración de botones de filtrado rápido.
          */
         vista.getBtnTodas().addActionListener(e -> {
             citasFiltradas = new ArrayList<>(citas);
@@ -70,7 +70,7 @@ public class ControladorListaCitas {
         vista.getBtnPruebas().addActionListener(e -> filtrarPorTipo("pruebas"));
 
         /**
-         * Configuración de acciones y navegación
+         * Configuración de acciones y navegación.
          */
         vista.getBtnBuscar().addActionListener(e -> buscar());
         vista.getBtnVerDetalles().addActionListener(e -> verDetalle());
@@ -236,7 +236,7 @@ public class ControladorListaCitas {
                 for (Empleado e : listaEmpleados) {
                     if (a.getId_empleado() == e.getId_empleado()) {
 
-                        /** Evitar duplicar al aprendiz logado */
+                        /** Evitar duplicar al aprendiz logado. */
                         if (empleado.getCategoria().equals("aprendiz") &&
                             empleado.getId_empleado() == e.getId_empleado()) {
                             continue;
@@ -283,12 +283,12 @@ public class ControladorListaCitas {
             }
         }
         
-        /** Obtener oficial responsable */
+        /** Obtener oficial responsable. */
         String empleadoEditable = "";
         for (Empleado e : listaEmpleados) {
             if (e.getId_empleado() == citaEditable.getId_empleado()) {
                 empleadoEditable = e.getNombre() + " " + e.getApellido() + " (" + e.getCategoria() + ")";
-                /** Solo oficiales y maestros pueden editar sus propias citas */
+                /** Solo oficiales y maestros pueden editar sus propias citas. */
                 if(empleado.getCategoria().equals("oficial") && empleado.getId_empleado() == citaEditable.getId_empleado()) {
                 	NuevaCita vistaForm = new NuevaCita();
                     new ControladorNuevaCita(vistaForm, acceso, vista, null, null, c,
