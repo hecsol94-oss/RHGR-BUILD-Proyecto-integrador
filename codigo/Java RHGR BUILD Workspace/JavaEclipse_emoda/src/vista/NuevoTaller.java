@@ -83,9 +83,9 @@ public class NuevoTaller extends JFrame {
      * Configura la fuente, color, posición y añade automáticamente el
      * componente al panel principal.
      *
-     * @param lbl etiqueta a estilizar
-     * @param x posición horizontal en píxeles dentro del panel
-     * @param y posición vertical en píxeles dentro del panel
+     * @param lbl etiqueta a estilizar.
+     * @param x posición horizontal en píxeles dentro del panel.
+     * @param y posición vertical en píxeles dentro del panel.
      */
     private void estilizarLabel(JLabel lbl, int x, int y) {
         lbl.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -99,11 +99,11 @@ public class NuevoTaller extends JFrame {
      * Define tamaño, borde, fuente y lo añade al panel principal para mantener
      * una apariencia uniforme en la interfaz.
      *
-     * @param txt campo de texto a estilizar
-     * @param x posición horizontal en píxeles
-     * @param y posición vertical en píxeles
-     * @param w ancho del campo en píxeles
-     * @param h alto del campo en píxeles
+     * @param txt campo de texto a estilizar.
+     * @param x posición horizontal en píxeles.
+     * @param y posición vertical en píxeles.
+     * @param w ancho del campo en píxeles.
+     * @param h alto del campo en píxeles.
      */
     private void estilizarCampo(JTextField txt, int x, int y, int w, int h) {
         txt.setBounds(x, y, w, h);
@@ -117,9 +117,9 @@ public class NuevoTaller extends JFrame {
      * Configura colores de fondo y texto, fuente, borde y cursor interactivo
      * para mejorar la experiencia de usuario.
      *
-     * @param btn botón al que se aplicará el estilo
-     * @param bg color de fondo del botón
-     * @param fg color del texto del botón
+     * @param btn botón al que se aplicará el estilo.
+     * @param bg color de fondo del botón.
+     * @param fg color del texto del botón.
      */
     private void estilizarBoton(JButton btn, Color bg, Color fg) {
         btn.setBackground(bg);
@@ -134,7 +134,7 @@ public class NuevoTaller extends JFrame {
      * --- MÉTODOS PARA EL CONTROLADOR ---
      */
 
- /** Método para obtener el texto del campo nombre */
+ /** Método para obtener el texto del campo nombre. */
     
  	/**
  	 * 
@@ -144,7 +144,7 @@ public class NuevoTaller extends JFrame {
  		return txtNomeSala.getText();
  	}
  	
- 	/** Método para obtener el valor seleccionado del combo */
+ 	/** Método para obtener el valor seleccionado del combo. */
  	
  	/**
  	 * 
@@ -154,7 +154,7 @@ public class NuevoTaller extends JFrame {
  		return (String) cbTipoSala.getSelectedItem();
  	}
  	
- 	/** Getter del botón guardar para el controlador */
+ 	/** Getter del botón guardar para el controlador. */
  	
  	/**
  	 * 
@@ -164,7 +164,7 @@ public class NuevoTaller extends JFrame {
  		return btnGuardar;
  	}
  	
- 	/** Getter del botón cancelar para el controlador */
+ 	/** Getter del botón cancelar para el controlador. */
  	
  	/**
  	 * 
@@ -174,11 +174,11 @@ public class NuevoTaller extends JFrame {
  		return btnCancelar;
  	}
  	
- 	/** Método para rellenar los campos al editar un taller existente */
+ 	/** Método para rellenar los campos al editar un taller existente. */
  	
  	/**
  	 * 
- 	 * @param taller
+ 	 * @param taller.
  	 */
  	public void cargarDatos(Taller taller) {
  	    txtNomeSala.setText(taller.getNombre());
