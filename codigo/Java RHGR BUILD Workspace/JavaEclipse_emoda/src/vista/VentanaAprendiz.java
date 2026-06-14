@@ -86,7 +86,7 @@ public class VentanaAprendiz extends JFrame {
      * 
      * Contiene la información del usuario y la opción de cerrar sesión.
      *
-     * @return JPanel configurado como cabecera
+     * @return JPanel configurado como cabecera.
      */
     private JPanel construirHeader() {
         JPanel header = new JPanel(new BorderLayout());
@@ -114,11 +114,11 @@ public class VentanaAprendiz extends JFrame {
      * Muestra información básica relevante para el aprendiz,
      * como citas asignadas y próxima tarea.
      *
-     * @return JPanel con la vista del dashboard
+     * @return JPanel con la vista del dashboard.
      */
     private JPanel construirDashboard() {
         /**
-         * Contenedor principal con logo RHGR de fondo (Full Stretch)
+         * Contenedor principal con logo RHGR de fondo (Full Stretch).
          */
         JPanel p = new JPanel(new GridBagLayout()) {
             @Override
@@ -182,9 +182,9 @@ public class VentanaAprendiz extends JFrame {
     /**
      * Crea una tarjeta visual para mostrar una métrica en el dashboard.
      *
-     * @param titulo texto descriptivo de la métrica
-     * @param labelValor etiqueta donde se mostrará el valor
-     * @return JPanel configurado como tarjeta informativa
+     * @param titulo texto descriptivo de la métrica.
+     * @param labelValor etiqueta donde se mostrará el valor.
+     * @return JPanel configurado como tarjeta informativa.
      */
     private JPanel crearTarjetaDashboard(String titulo, JLabel labelValor) {
         JPanel box = new JPanel(new BorderLayout());
@@ -207,7 +207,9 @@ public class VentanaAprendiz extends JFrame {
 
     /**
      * --- Otros métodos de construcción y estilo (Lista Citas, Menú, Botones, etc.) ---
+     * 
      * Se mantienen idénticos a la versión anterior para asegurar compatibilidad total.
+     * 
      * @return
      */
 
@@ -263,7 +265,7 @@ public class VentanaAprendiz extends JFrame {
      * Incluye filtros, tabla de datos y acciones disponibles
      * para el usuario aprendiz.
      *
-     * @return JPanel con la vista de citas
+     * @return JPanel con la vista de citas.
      */
     private void estilizarBotonAccion(JButton btn, int w, int h) {
         btn.setPreferredSize(new Dimension(w, h));
@@ -277,7 +279,7 @@ public class VentanaAprendiz extends JFrame {
     /**
      * Aplica estilo visual a una tabla.
      *
-     * @param tabla tabla a estilizar
+     * @param tabla tabla a estilizar.
      */
     private void estilizarTablaElite(JTable tabla) {
         tabla.setRowHeight(45); 
@@ -328,8 +330,8 @@ public class VentanaAprendiz extends JFrame {
     /**
      * Crea un menú con el texto indicado y estilo básico aplicado.
      *
-     * @param t texto que se mostrará como título del menú
-     * @return JMenu configurado con el estilo de la aplicación
+     * @param t texto que se mostrará como título del menú.
+     * @return JMenu configurado con el estilo de la aplicación.
      */
     private JMenu crearMenu(String t) {
         JMenu m = new JMenu(t);
@@ -340,8 +342,8 @@ public class VentanaAprendiz extends JFrame {
     /**
      * Crea un elemento de menú con el texto indicado y estilo personalizado.
      *
-     * @param t texto que se mostrará en el item del menú
-     * @return JMenuItem configurado con colores de la interfaz
+     * @param t texto que se mostrará en el item del menú.
+     * @return JMenuItem configurado con colores de la interfaz.
      */
     private JMenuItem crearItem(String t) {
         JMenuItem i = new JMenuItem(t);
@@ -354,7 +356,7 @@ public class VentanaAprendiz extends JFrame {
     
     /**
      * 
-     * @param card
+     * @param card.
      */
     public void mostrarCard(String card) {
     	cardLayout.show(cardPane, card);
@@ -620,7 +622,7 @@ public class VentanaAprendiz extends JFrame {
     	btnNuevoEmpleadoEmb.setEnabled(false);
     }
 
-    /** Getters para los items de menú */
+    /** Getters para los items de menú. */
     
     /**
      * 
