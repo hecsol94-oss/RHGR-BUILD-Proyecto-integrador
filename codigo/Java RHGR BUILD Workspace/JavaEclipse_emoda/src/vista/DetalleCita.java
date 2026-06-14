@@ -84,11 +84,11 @@ public class DetalleCita extends JFrame {
 
     /**
      *
-     * @param p panel donde se añadirán los componentes
-     * @param etiqueta texto descriptivo del campo (label izquierdo)
-     * @param x coordenada X donde se posicionará el conjunto
-     * @param y coordenada Y donde se posicionará el conjunto
-     * @return JLabel que contiene el valor del campo (puede actualizarse dinámicamente)
+     * @param p panel donde se añadirán los componentes.
+     * @param etiqueta texto descriptivo del campo (label izquierdo).
+     * @param x coordenada X donde se posicionará el conjunto.
+     * @param y coordenada Y donde se posicionará el conjunto.
+     * @return JLabel que contiene el valor del campo (puede actualizarse dinámicamente).
      */
     private JLabel addField(JPanel p, String etiqueta, int x, int y) {
         JLabel lbl = new JLabel(etiqueta);
@@ -109,11 +109,11 @@ public class DetalleCita extends JFrame {
         return val;
     }
 
-    /** Setters (Mantenidos) */
+    /** Setters (Mantenidos). */
     
     /**
      * 
-     * @param v
+     * @param v.
      */
     public void setFecha(String v) {
     	lblFechaVal.setText(v); 
@@ -121,7 +121,7 @@ public class DetalleCita extends JFrame {
     
     /**
      * 
-     * @param v
+     * @param v.
      */
     public void setHora(String v) {
     	lblHoraVal.setText(v); 
@@ -129,7 +129,7 @@ public class DetalleCita extends JFrame {
     
     /**
      * 
-     * @param v
+     * @param v.
      */
     public void setDuracion(String v) {
     	lblDuracionVal.setText(v); 
@@ -137,7 +137,7 @@ public class DetalleCita extends JFrame {
     
     /**
      * 
-     * @param v
+     * @param v.
      */
     public void setCliente(String v) {
     	lblClienteVal.setText(v); 
@@ -145,7 +145,7 @@ public class DetalleCita extends JFrame {
     
     /**
      * 
-     * @param v
+     * @param v.
      */
     public void setTraje(String v) {
     	lblTrajeVal.setText(v); 
@@ -153,7 +153,7 @@ public class DetalleCita extends JFrame {
     
     /**
      * 
-     * @param v
+     * @param v.
      */
     public void setTaller(String v) {
     	lblTallerVal.setText(v); 
@@ -161,7 +161,7 @@ public class DetalleCita extends JFrame {
     
     /**
      * 
-     * @param v
+     * @param v.
      */
     public void setOficial(String v) {
     	lblOficialVal.setText(v); 
@@ -170,7 +170,8 @@ public class DetalleCita extends JFrame {
 
     /**
      * 
-     * @param v
+     * @param v.
+     * 
      * Acepta una cadena con los aprendices separados por "  " o "\n".
      * Normaliza a líneas para mostrarlas en el JTextArea.
      */
