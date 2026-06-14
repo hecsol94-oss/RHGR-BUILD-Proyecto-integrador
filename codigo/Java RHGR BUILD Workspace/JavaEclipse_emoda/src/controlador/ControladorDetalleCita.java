@@ -15,19 +15,19 @@ import java.util.ArrayList;
  */
 public class ControladorDetalleCita {
 
-    /** Interfaz gráfica que muestra los detalles de la cita */
+    /** Interfaz gráfica que muestra los detalles de la cita. */
     private final DetalleCita vista;
 
-    /** Objeto que contiene los datos de la cita a mostrar */
+    /** Objeto que contiene los datos de la cita a mostrar. */
     private final Cita cita;
 
-    /** Objeto de acceso a datos para la resolución de nombres */
+    /** Objeto de acceso a datos para la resolución de nombres. */
     private final AccesoBBDD acceso;
 
-    /** Conexión activa a la base de datos SQL */
+    /** Conexión activa a la base de datos SQL. */
     private final Connection c;
 
-    /** Array que contiene los nombres de los aprendices asignados a la cita */
+    /** Array que contiene los nombres de los aprendices asignados a la cita. */
     private final String[] aprendices;
     
 
@@ -50,12 +50,12 @@ public class ControladorDetalleCita {
         this.aprendices = aprendices;
 
         /**
-         * Población de la interfaz
+         * Población de la interfaz.
          */
         rellenarCampos();
 
         /**
-         * Configuración de eventos
+         * Configuración de eventos.
          */
         vista.getBtnVolver().addActionListener(e -> vista.dispose());
     }
@@ -80,14 +80,14 @@ public class ControladorDetalleCita {
     private void rellenarCampos() {
 
         /**
-         * Asignación de datos temporales básicos
+         * Asignación de datos temporales básicos.
          */
         vista.setFecha(String.valueOf(cita.getFecha()));
         vista.setHora(String.valueOf(cita.getHora_inicio()));
         vista.setDuracion(cita.getDuracion() + " h");
 
         /**
-         * Modo offline o sin acceso: Mostrar solo identificadores numéricos
+         * Modo offline o sin acceso: Mostrar solo identificadores numéricos.
          */
         if (acceso == null || c == null) {
             vista.setCliente("ID " + cita.getId_cliente());
@@ -106,7 +106,7 @@ public class ControladorDetalleCita {
         
 
         /**
-         * Modo online: Resolución de nombres mediante listas de la BD
+         * Modo online: Resolución de nombres mediante listas de la BBDD.
          */
         try {
             ArrayList<Cliente> clientes  = acceso.recogeClientes(c);
@@ -115,7 +115,7 @@ public class ControladorDetalleCita {
             ArrayList<Empleado> empleados = acceso.recogeEmpleados(c);
 
             /**
-             * Poblar vista con nombres reales
+             * Poblar vista con nombres reales.
              */
             vista.setCliente(nombreCliente(clientes, cita.getId_cliente()));
             vista.setTraje(nombreTraje(trajes, cita.getId_traje()));
@@ -123,7 +123,7 @@ public class ControladorDetalleCita {
             vista.setOficial(nombreEmpleado(empleados, cita.getId_empleado()));
 
             /**
-             * Formateo del bloque de texto para aprendices
+             * Formateo del bloque de texto para aprendices.
              */
             StringBuilder texto = new StringBuilder();
             if (aprendices[0] != null && !aprendices[0].isEmpty()) {
@@ -156,6 +156,7 @@ public class ControladorDetalleCita {
 
     /**
      * Busca el nombre de un traje dado su ID en una lista proporcionada.
+     * 
      * @param lista Lista de trajes disponibles.
      * @param id Identificador a buscar.
      * @return Nombre del traje o "ID x" si no se encuentra.
@@ -169,6 +170,7 @@ public class ControladorDetalleCita {
 
     /**
      * Busca el nombre y tipo de un taller dado su ID en una lista proporcionada.
+     * 
      * @param lista Lista de talleres disponibles.
      * @param id Identificador a buscar.
      * @return Nombre formateado del taller o "ID x" si no se encuentra.
@@ -182,6 +184,7 @@ public class ControladorDetalleCita {
 
     /**
      * Busca el nombre completo de un empleado dado su ID en una lista proporcionada.
+     * 
      * @param lista Lista de empleados disponibles.
      * @param id Identificador a buscar.
      * @return Nombre y apellido del empleado o "ID x" si no se encuentra.
