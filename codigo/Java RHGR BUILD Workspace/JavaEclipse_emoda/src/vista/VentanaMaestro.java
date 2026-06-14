@@ -10,7 +10,7 @@ import javax.swing.table.JTableHeader;
 public class VentanaMaestro extends JFrame {
 
 	/**
-	 * COLORES
+	 * COLORES.
 	 */
     private final Color ROJO_HEROE = new Color(204, 0, 0);
     private final Color AMARILLO_POWER = new Color(255, 204, 0);
@@ -102,11 +102,11 @@ public class VentanaMaestro extends JFrame {
      * Construye el panel principal de resumen (dashboard).
      * Muestra métricas clave como citas, clientes y talleres.
      *
-     * @return JPanel con la vista del dashboard
+     * @return JPanel con la vista del dashboard.
      */
     private JPanel construirDashboard() {
         /**
-         * Contenedor principal con logo RHGR de fondo (Full Stretch)
+         * Contenedor principal con logo RHGR de fondo (Full Stretch).
          */
         JPanel p = new JPanel(new GridBagLayout()) {
             @Override
@@ -126,7 +126,7 @@ public class VentanaMaestro extends JFrame {
         p.setBackground(GRIS_TECNICO);
         
         /**
-         * Usamos un GridBagLayout central para organizar Título + Tarjetas
+         * Usamos un GridBagLayout central para organizar Título + Tarjetas.
          */
         JPanel contenedorCentral = new JPanel(new GridBagLayout());
         contenedorCentral.setOpaque(false);
@@ -138,11 +138,11 @@ public class VentanaMaestro extends JFrame {
          * --- EL TÍTULO REINTRODUCIDO ---
          */
         JLabel tituloResumen = new JLabel("RESUMEN DEL TALLER");
-        tituloResumen.setFont(new Font("Impact", Font.PLAIN, 36)); /** Muy grande y estilo Edna */
+        tituloResumen.setFont(new Font("Impact", Font.PLAIN, 36)); /** Muy grande y estilo Edna. */
         tituloResumen.setForeground(NEGRO_ELITE);
         tituloResumen.setHorizontalAlignment(SwingConstants.CENTER);
         gbcMain.gridy = 0;
-        gbcMain.insets = new Insets(0, 0, 40, 0); /** Espacio abajo del título */
+        gbcMain.insets = new Insets(0, 0, 40, 0); /** Espacio abajo del título. */
         contenedorCentral.add(tituloResumen, gbcMain);
 
         /**
@@ -180,8 +180,8 @@ public class VentanaMaestro extends JFrame {
     /**
      * Crea una tarjeta visual para mostrar una métrica en el dashboard.
      *
-     * @param titulo texto descriptivo de la métrica
-     * @param labelValor etiqueta donde se mostrará el valor dinámico
+     * @param titulo texto descriptivo de la métrica.
+     * @param labelValor etiqueta donde se mostrará el valor dinámico.
      */
     private JPanel crearTarjetaDashboard(String titulo, JLabel labelValor) {
         JPanel box = new JPanel(new BorderLayout());
@@ -204,7 +204,9 @@ public class VentanaMaestro extends JFrame {
 
     /**
      * --- Otros métodos de construcción y estilo (Lista Citas, Menú, Botones, etc.) ---
+     * 
      * Se mantienen idénticos a la versión anterior para asegurar compatibilidad total.
+     * 
      * @return
      */
 
@@ -257,9 +259,9 @@ public class VentanaMaestro extends JFrame {
     /**
      * Aplica estilo visual a un botón de acción.
      *
-     * @param btn botón a estilizar
-     * @param w ancho del botón
-     * @param h alto del botón
+     * @param btn botón a estilizar.
+     * @param w ancho del botón.
+     * @param h alto del botón.
      */
     private void estilizarBotonAccion(JButton btn, int w, int h) {
         btn.setPreferredSize(new Dimension(w, h));
@@ -273,7 +275,7 @@ public class VentanaMaestro extends JFrame {
     /**
      * Aplica estilo visual a una tabla.
      *
-     * @param tabla tabla a estilizar
+     * @param tabla tabla a estilizar.
      */
     private void estilizarTablaElite(JTable tabla) {
         tabla.setRowHeight(45); 
@@ -285,8 +287,7 @@ public class VentanaMaestro extends JFrame {
     }
 
     /**
-     * Configura la barra de menú principal de la aplicación.
-     * 
+     * Configura la barra de menú principal de la aplicación. 
      * Crea los menús de citas, clientes y talleres y sus opciones.
      */
     private void configurarBarraMenu() {
@@ -320,8 +321,8 @@ public class VentanaMaestro extends JFrame {
     /**
      * Crea un menú con el texto indicado y estilo básico aplicado.
      *
-     * @param t texto que se mostrará como título del menú
-     * @return JMenu configurado con el estilo de la aplicación
+     * @param t texto que se mostrará como título del menú.
+     * @return JMenu configurado con el estilo de la aplicación.
      */
     private JMenu crearMenu(String t) {
         JMenu m = new JMenu(t);
@@ -332,8 +333,8 @@ public class VentanaMaestro extends JFrame {
     /**
      * Crea un elemento de menú con el texto indicado y estilo personalizado.
      *
-     * @param t texto que se mostrará en el item del menú
-     * @return JMenuItem configurado con colores de la interfaz
+     * @param t texto que se mostrará en el item del menú.
+     * @return JMenuItem configurado con colores de la interfaz.
      */
     private JMenuItem crearItem(String t) {
         JMenuItem i = new JMenuItem(t);
@@ -342,17 +343,17 @@ public class VentanaMaestro extends JFrame {
         return i;
     }
 
-    /** Navegación */
+    /** Navegación. */
     
     /**
      * 
-     * @param card
+     * @param card.
      */
     public void mostrarCard(String card) {
     	cardLayout.show(cardPane, card); 
     	}
 
-    /** Getters header */
+    /** Getters header. */
     
     /**
      * 
@@ -369,7 +370,7 @@ public class VentanaMaestro extends JFrame {
     	return lblSalir; 
     }
 
-    /** Getters dashboard */
+    /** Getters dashboard. */
     
     /**
      * 
@@ -406,10 +407,10 @@ public class VentanaMaestro extends JFrame {
     public JLabel getLblCitasHoy() {
     	return lblCitasHoy; 
     }
-   /**
-    * 
-    * @return
-    */
+    /**
+     * 
+     * @return
+     */
     public JLabel getLblCitasSemana() {
     	return lblCitasSemana; 
     }
@@ -421,7 +422,7 @@ public class VentanaMaestro extends JFrame {
     	return lblProximaCita; 
     }
 
-    /** Getters lista citas */
+    /** Getters lista citas. */
     
     /**
      * 
@@ -501,7 +502,7 @@ public class VentanaMaestro extends JFrame {
     	return btnVolverCitas; 
     }
 
-    /** Getters lista clientes */
+    /** Getters lista clientes. */
     
     /**
      * 
@@ -581,7 +582,7 @@ public class VentanaMaestro extends JFrame {
     	return btnVolverClientes;
     }
 
-    /** Getters lista talleres */
+    /** Getters lista talleres. */
     
     /**
      * 
@@ -639,7 +640,7 @@ public class VentanaMaestro extends JFrame {
     	return btnVolverTalleres; 
     }
     
-    /** Getters lista empleados */
+    /** Getters lista empleados. */
     
     /**
      * 
@@ -705,7 +706,7 @@ public class VentanaMaestro extends JFrame {
     	return btnVolverEmpleados;
     }
     
-    /** Getters menú */
+    /** Getters menú. */
     
     /**
      * 
