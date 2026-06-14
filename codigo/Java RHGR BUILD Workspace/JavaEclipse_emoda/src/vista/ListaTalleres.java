@@ -28,7 +28,7 @@ public class ListaTalleres extends JFrame {
 
         JPanel contentPane = new JPanel(new BorderLayout(20, 20));
         contentPane.setBackground(GRIS_TECNICO);
-        contentPane.setBorder(new EmptyBorder(40, 50, 40, 50)); /** Margen externo elegante */
+        contentPane.setBorder(new EmptyBorder(40, 50, 40, 50)); /** Margen externo elegante. */
         setContentPane(contentPane);
 
         JPanel panelNorte = new JPanel(new BorderLayout(0, 20));
@@ -90,9 +90,9 @@ public class ListaTalleres extends JFrame {
      * Define tamaño, colores, fuente, borde y comportamiento del cursor
      * para mantener una estética uniforme tipo "Elite".
      *
-     * @param btn botón al que se le aplicará el estilo
-     * @param w ancho del botón en píxeles
-     * @param h alto del botón en píxeles
+     * @param btn botón al que se le aplicará el estilo.
+     * @param w ancho del botón en píxeles.
+     * @param h alto del botón en píxeles.
      */
     private void estilizarBoton(JButton btn, int w, int h) {
         btn.setPreferredSize(new Dimension(w, h));
@@ -109,7 +109,7 @@ public class ListaTalleres extends JFrame {
      * Mejora  legibilidad configurando altura de filas, fuentes,
      * colores de selección, líneas de rejilla y estilo del encabezado.
      *
-     * @param tabla tabla a la que se le aplicará el estilo
+     * @param tabla tabla a la que se le aplicará el estilo.
      */
     private void estilizarTabla(JTable tabla) {
         tabla.setRowHeight(45); /** Filas más altas para legibilidad */
@@ -129,7 +129,7 @@ public class ListaTalleres extends JFrame {
 
     /** --- MÉTODOS PARA EL CONTROLADOR (SE MANTIENEN IGUAL) --- */
 
- /** Getter del botón nuevo taller */
+ /** Getter del botón nuevo taller. */
     
     /**
      * 
@@ -139,7 +139,7 @@ public class ListaTalleres extends JFrame {
     	return btnNuevoTaller;
     }
     
-    /** Getter del botón editar */
+    /** Getter del botón editar. */
     
     /**
      * 
@@ -149,7 +149,7 @@ public class ListaTalleres extends JFrame {
     	return btnEditar;
     }
     
-    /** Getter del botón eliminar */
+    /** Getter del botón eliminar. */
     
     /**
      * 
@@ -159,7 +159,7 @@ public class ListaTalleres extends JFrame {
     	return btnEliminar;
     }
     
-    /** Getter del botón volver */
+    /** Getter del botón volver. */
     
     /**
      * 
@@ -169,7 +169,7 @@ public class ListaTalleres extends JFrame {
     	return btnVolver;
     }
     
-    /** Devuelve la tabla */
+    /** Devuelve la tabla. */
     
     /**
      * 
@@ -179,21 +179,21 @@ public class ListaTalleres extends JFrame {
     	return table;
     }
     
-    /** Añade una fila a tabla y lista */
+    /** Añade una fila a tabla y lista. */
     
     /**
      * 
-     * @param t
+     * @param t.
      */
     public void agregarFila(Taller t) {
         modeloTabla.addRow(new Object[]{t.getNombre(), t.getTipo() });       
     }
     
-    /** Carga datos desde lista de talleres */
+    /** Carga datos desde lista de talleres. */
     
     /**
      * 
-     * @param talleres
+     * @param talleres.
      */
     public void recogerDatos(ArrayList<Taller> talleres) {
     	
