@@ -8,9 +8,9 @@ public class Cita_Aprendiz {
 	
 	/**
 	 * 
-	 * @param id_aprendiz
-	 * @param id_cita
-	 * @param id_empleado
+	 * @param id_aprendiz.
+	 * @param id_cita.
+	 * @param id_empleado.
 	 */
 	public Cita_Aprendiz(int id_aprendiz, int id_cita, int id_empleado) {
 		this.id_aprendiz = id_aprendiz;
@@ -28,7 +28,7 @@ public class Cita_Aprendiz {
 
 	/**
 	 * 
-	 * @param id_aprendiz
+	 * @param id_aprendiz.
 	 */
 	public void setId_aprendiz(int id_aprendiz) {
 		this.id_aprendiz = id_aprendiz;
@@ -44,7 +44,7 @@ public class Cita_Aprendiz {
 
 	/**
 	 * 
-	 * @param id_cita
+	 * @param id_cita.
 	 */
 	public void setId_cita(int id_cita) {
 		this.id_cita = id_cita;
@@ -60,7 +60,7 @@ public class Cita_Aprendiz {
 
 	/**
 	 * 
-	 * @param id_empleado
+	 * @param id_empleado.
 	 */
 	public void setId_empleado(int id_empleado) {
 		this.id_empleado = id_empleado;
