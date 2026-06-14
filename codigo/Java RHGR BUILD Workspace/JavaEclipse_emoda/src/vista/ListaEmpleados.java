@@ -114,9 +114,9 @@ public class ListaEmpleados extends JFrame {
      * Define tamaño, colores, fuente, borde y comportamiento del cursor
      * para mantener una estética uniforme tipo "Elite".
      *
-     * @param btn botón al que se le aplicará el estilo
-     * @param w ancho del botón en píxeles
-     * @param h alto del botón en píxeles
+     * @param btn botón al que se le aplicará el estilo.
+     * @param w ancho del botón en píxeles.
+     * @param h alto del botón en píxeles.
      */
     private void estilizarBoton(JButton btn, int w, int h) {
         btn.setPreferredSize(new Dimension(w, h));
@@ -133,10 +133,10 @@ public class ListaEmpleados extends JFrame {
      * Mejora  legibilidad configurando altura de filas, fuentes,
      * colores de selección, líneas de rejilla y estilo del encabezado.
      *
-     * @param tabla tabla a la que se le aplicará el estilo
+     * @param tabla tabla a la que se le aplicará el estilo.
      */
     private void estilizarTabla(JTable tabla) {
-        tabla.setRowHeight(45); /** Filas más altas para pantalla grande */
+        tabla.setRowHeight(45); /** Filas más altas para pantalla grande. */
         tabla.setFont(new Font("Tahoma", Font.PLAIN, 15));
         tabla.setSelectionBackground(AMARILLO_POWER);
         tabla.setSelectionForeground(NEGRO_ELITE);
@@ -151,7 +151,7 @@ public class ListaEmpleados extends JFrame {
     }
 
 	/**
-	 * @return the txtBuscar
+	 * @return the txtBuscar.
 	 */
 	public JTextField getTxtBuscar() {
 		return txtBuscar;
@@ -159,70 +159,70 @@ public class ListaEmpleados extends JFrame {
 	
 	/**
 	 * 
-	 * @return the table
+	 * @return the table.
 	 */
 	public JTable getTable() {
 		return table; 
 	}
 
 	/**
-	 * @return the btnBuscar
+	 * @return the btnBuscar.
 	 */
 	public JButton getBtnBuscar() {
 		return btnBuscar;
 	}
 
 	/**
-	 * @return the btnNuevo
+	 * @return the btnNuevo.
 	 */
 	public JButton getBtnNuevo() {
 		return btnNuevo;
 	}
 
 	/**
-	 * @return the btnEditar
+	 * @return the btnEditar.
 	 */
 	public JButton getBtnEditar() {
 		return btnEditar;
 	}
 
 	/**
-	 * @return the btnVolver
+	 * @return the btnVolver.
 	 */
 	public JButton getBtnVolver() {
 		return btnVolver;
 	}
 
 	/**
-	 * @return the btnTodos
+	 * @return the btnTodos.
 	 */
 	public JButton getBtnTodos() {
 		return btnTodos;
 	}
 
 	/**
-	 * @return the btnAprendiz
+	 * @return the btnAprendiz.
 	 */
 	public JButton getBtnAprendiz() {
 		return btnAprendiz;
 	}
 
 	/**
-	 * @return the btnOficial
+	 * @return the btnOficial.
 	 */
 	public JButton getBtnOficial() {
 		return btnOficial;
 	}
 
 	/**
-	 * @return the btnMaestro
+	 * @return the btnMaestro.
 	 */
 	public JButton getBtnMaestro() {
 		return btnMaestro;
 	}
 
 	/**
-	 * @return the btnEliminar
+	 * @return the btnEliminar.
 	 */
 	public JButton getBtnEliminar() {
 		return btnEliminar;
