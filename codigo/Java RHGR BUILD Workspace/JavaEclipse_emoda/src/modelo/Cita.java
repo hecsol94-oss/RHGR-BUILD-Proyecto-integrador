@@ -8,7 +8,7 @@ import java.util.List;
 public class Cita {
 	
 	/**
-	 * Atributos que representan el registro de una sesión de pruebas o diseño
+	 * Atributos que representan el registro de una sesión de pruebas o diseño.
 	 */
 	private int id_cita;
 	private Date fecha;
@@ -25,16 +25,16 @@ public class Cita {
 	private List<Cita_Aprendiz> aprendices;
 	
 	/**
-	 * Constructor completo para gestionar la agenda del taller
+	 * Constructor completo para gestionar la agenda del taller.
 	 * 
-	 * @param id_cita
-	 * @param fecha
-	 * @param hora_inicio
-	 * @param duracion
-	 * @param id_empleado
-	 * @param id_cliente
-	 * @param id_sala
-	 * @param id_traje
+	 * @param id_cita.
+	 * @param fecha.
+	 * @param hora_inicio.
+	 * @param duracion.
+	 * @param id_empleado.
+	 * @param id_cliente.
+	 * @param id_sala.
+	 * @param id_traje.
 	 */
 	public Cita(int id_cita, Date fecha, Time hora_inicio, int duracion, int id_empleado, int id_cliente, int id_sala, int id_traje) {
 		this.id_cita = id_cita;
@@ -52,7 +52,7 @@ public class Cita {
 		this.aprendices = new ArrayList<>();
 	}
 
-	/** Métodos de acceso para la gestión temporal y espacial de la cita */
+	/** Métodos de acceso para la gestión temporal y espacial de la cita. */
 	
 	/**
 	 * 
@@ -64,7 +64,7 @@ public class Cita {
 
 	/**
 	 * 
-	 * @param fecha
+	 * @param fecha.
 	 */
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
@@ -80,7 +80,7 @@ public class Cita {
 
 	/**
 	 * 
-	 * @param duracion
+	 * @param duracion.
 	 */
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
@@ -93,7 +93,11 @@ public class Cita {
 	public Time getHora_inicio() {
 		return hora_inicio;
 	}
-
+	
+	/**
+	 * 
+	 * @param hora_inicio.
+	 */
 	public void setHora_inicio(Time hora_inicio) {
 		this.hora_inicio = hora_inicio;
 	}
@@ -108,7 +112,7 @@ public class Cita {
 
 	/**
 	 * 
-	 * @param id_cliente
+	 * @param id_cliente.
 	 */
 	public void setId_cliente(int id_cliente) {
 		this.id_cliente = id_cliente;
@@ -124,7 +128,7 @@ public class Cita {
 
 	/**
 	 * 
-	 * @param id_sala
+	 * @param id_sala.
 	 */
 	public void setId_sala(int id_sala) {
 		this.id_sala = id_sala;
@@ -140,7 +144,7 @@ public class Cita {
 
 	/**
 	 * 
-	 * @param id_cita
+	 * @param id_cita.
 	 */
 	public void setId_cita(int id_cita) {
 		this.id_cita = id_cita;
@@ -156,7 +160,7 @@ public class Cita {
 
 	/**
 	 * 
-	 * @param id_empleado
+	 * @param id_empleado.
 	 */
 	public void setId_empleado(int id_empleado) {
 		this.id_empleado = id_empleado;
@@ -172,7 +176,7 @@ public class Cita {
 
 	/**
 	 * 
-	 * @param id_traje
+	 * @param id_traje.
 	 */
 	public void setId_traje(int id_traje) {
 		this.id_traje = id_traje;
