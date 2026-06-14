@@ -135,7 +135,7 @@ public class InicioSesion extends JFrame {
         	);
     }
 
- /** Método para obtener el botón de entrar (usado por el controlador para asignar el listener) */
+ /** Método para obtener el botón de entrar (usado por el controlador para asignar el listener). */
     
     /**
      * 
@@ -145,7 +145,7 @@ public class InicioSesion extends JFrame {
         return entrar;
     }
     
-    /** Método para obtener el nombre ingresado */
+    /** Método para obtener el nombre ingresado. */
     
     /**
      * 
@@ -155,7 +155,7 @@ public class InicioSesion extends JFrame {
         return NomUsuario.getText();
     }
     
-    /** Método para obtener la contraseña ingresada */
+    /** Método para obtener la contraseña ingresada. */
     
     /**
      * 
@@ -165,11 +165,11 @@ public class InicioSesion extends JFrame {
         return ContraseñaCampo.getPassword();
     }
     
-    /** Método para mostrar mensajes de error u otra información */
+    /** Método para mostrar mensajes de error u otra información. */
     
     /**
      * 
-     * @param respuesta
+     * @param respuesta.
      */
     public void setRespuesta(String respuesta) {
         javax.swing.JOptionPane.showMessageDialog(InicioSesion.this, 
