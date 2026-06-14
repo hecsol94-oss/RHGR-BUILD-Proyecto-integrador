@@ -3,7 +3,7 @@ package modelo;
 public class Empleado {
 	
 	/**
-	 * Datos de identificación y credenciales del personal del empleado
+	 * Datos de identificación y credenciales del personal del empleado.
 	 */
 	private int id_empleado;
 	private String categoria;
@@ -14,15 +14,15 @@ public class Empleado {
 	private String contrasena;
 	
 	/**
-	 * Constructor principal para crear el objeto Empleado con la información de la BBDD
+	 * Constructor principal para crear el objeto Empleado con la información de la BBDD.
 	 * 
-	 * @param id_empleado
-	 * @param categoria
-	 * @param nombre
-	 * @param apellido
-	 * @param apodo
-	 * @param usuario
-	 * @param contrasena
+	 * @param id_empleado.
+	 * @param categoria.
+	 * @param nombre.
+	 * @param apellido.
+	 * @param apodo.
+	 * @param usuario.
+	 * @param contrasena.
 	 */
 	public Empleado (int id_empleado, String categoria, String nombre, String apellido, String apodo, String usuario, String contrasena) {
 		this.id_empleado = id_empleado;
@@ -35,7 +35,7 @@ public class Empleado {
 		
 	}
 	
-	/** Getters y Setters para la gestión de la información del empleado */
+	/** Getters y Setters para la gestión de la información del empleado. */
 	
 	/**
 	 * 
@@ -47,7 +47,7 @@ public class Empleado {
 
 	/**
 	 * 
-	 * @param nombre
+	 * @param nombre.
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -64,7 +64,7 @@ public class Empleado {
 
 	/**
 	 * 
-	 * @param categoria
+	 * @param categoria.
 	 */
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
@@ -81,7 +81,7 @@ public class Empleado {
 
 	/**
 	 * 
-	 * @param apellido
+	 * @param apellido.
 	 */
 
 	public void setApellido(String apellido) {
@@ -96,8 +96,12 @@ public class Empleado {
 	public String getApodo() {
 		return apodo;
 	}
-
-
+	
+	/**
+	 * 
+	 * @param apodo.
+	 */
+	
 	public void setApodo(String apodo) {
 		this.apodo = apodo;
 	}
@@ -114,7 +118,7 @@ public class Empleado {
 
 	/**
 	 * 
-	 * @param usuario
+	 * @param usuario.
 	 */
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
@@ -132,7 +136,7 @@ public class Empleado {
 
 	/**
 	 * 
-	 * @param contrasena
+	 * @param contrasena.
 	 */
 	public void setContrasena(String contrasena) {
 		this.contrasena = contrasena;
@@ -148,7 +152,7 @@ public class Empleado {
 
 	/**
 	 * 
-	 * @param id_empleado
+	 * @param id_empleado.
 	 */
 	public void setId_empleado(int id_empleado) {
 		this.id_empleado = id_empleado;
