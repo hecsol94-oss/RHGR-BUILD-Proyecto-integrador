@@ -6,7 +6,7 @@ import java.sql.*;
 public class AccesoBBDD {
 
 	/**
-	 * Configuración de los parámetros de conexión a MySQL
+	 * Configuración de los parámetros de conexión a MySQL.
 	 */
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	private String url = "jdbc:mysql://localhost/tallerednamoda";
@@ -14,7 +14,7 @@ public class AccesoBBDD {
 	private String pword = "1234";
 
 	/**
-	 * Abrir conexión con la BBDD
+	 * Abrir conexión con la BBDD.
 	 * 
 	 * @return
 	 */
@@ -23,7 +23,7 @@ public class AccesoBBDD {
 		Connection conexion = null;
 
 		try {
-			/** Carga del driver y establecimiento de la conexión */
+			/** Carga del driver y establecimiento de la conexión. */
 			Class.forName(driver);
 			conexion = DriverManager.getConnection(url, usuario, pword);
 
@@ -36,9 +36,9 @@ public class AccesoBBDD {
 	}
 
 	/**
-	 * Cerrar conexión de la BBDD
+	 * Cerrar conexión de la BBDD.
 	 * 
-	 * @param c
+	 * @param c.
 	 */
 	public void cerrarConexion(Connection c) {
 		try {
@@ -49,21 +49,21 @@ public class AccesoBBDD {
 	}
 
 	/**
-	 * Limpiar las tablas de la BBDD
+	 * Limpiar las tablas de la BBDD.
 	 * 
-	 * @param c
-	 * @throws SQLException
+	 * @param c.
+	 * @throws SQLException.
 	 */
 	public void limpiarTablas(Connection c) throws SQLException {
 		Statement st = c.createStatement();
 
 		/**
-		 * Desactivación de restricciones para limpiar tablas con claves ajenas
+		 * Desactivación de restricciones para limpiar tablas con claves ajenas.
 		 */
 		st.executeUpdate("SET FOREIGN_KEY_CHECKS = 0");
 
 		/**
-		 * Vaciado de tablas y reinicio de contadores AUTO_INCREMENT
+		 * Vaciado de tablas y reinicio de contadores AUTO_INCREMENT.
 		 */
 		st.executeUpdate("TRUNCATE TABLE Cita_Aprendiz");
 		st.executeUpdate("TRUNCATE TABLE Citas");
@@ -78,17 +78,17 @@ public class AccesoBBDD {
 	}
 
 	/**
-	 * Inserta todos los clientes que hay de la BBDD
+	 * Inserta todos los clientes que hay de la BBDD.
 	 * 
-	 * @param c
-	 * @throws SQLException
+	 * @param c.
+	 * @throws SQLException.
 	 */
 	public void insertarClientes(Connection c) throws SQLException {
 		Statement st = c.createStatement();
 		ArrayList<String> queryC = new ArrayList<>();
 
 		/**
-		 * Lista de sentencias SQL para dar de alta a los personajes
+		 * Lista de sentencias SQL para dar de alta a los personajes.
 		 */
 		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Mr. Increíble', 'superhéroe', 'superfuerza', 'rojo y azúl');");
 		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Elastigirl', 'superheroína', 'elasticidad', 'rojo y blanco');");
@@ -108,7 +108,7 @@ public class AccesoBBDD {
 		queryC.add("INSERT INTO Cliente (nombre_personaje, tipo_heroe, superpoder, colores) VALUES ('Silbido', 'superhéroe', 'chillido agudo', 'negro');");
 
 		/**
-		 * Ejecución masiva de los inserts
+		 * Ejecución masiva de los inserts.
 		 */
 		for (String query : queryC) {
 			st.executeUpdate(query);
@@ -117,18 +117,18 @@ public class AccesoBBDD {
 	}
 
 	/**
-	 * Recoge los clientes de la BBDD
+	 * Recoge los clientes de la BBDD.
 	 * 
-	 * @param c
+	 * @param c.
 	 * @return
-	 * @throws SQLException
+	 * @throws SQLException.
 	 */
 	public ArrayList<Cliente> recogeClientes(Connection c) throws SQLException {
 		ArrayList<Cliente> clientes = new ArrayList<>();
 		Statement st = c.createStatement();
 		ResultSet resultados = st.executeQuery("SELECT * FROM Cliente");
 
-		/** Bucle para convertir cada fila de la BBDD en un objeto de la clase Cliente */
+		/** Bucle para convertir cada fila de la BBDD en un objeto de la clase Cliente. */
 		while (resultados.next()) {
 			int idClientes = resultados.getInt("id_cliente");
 			String nombre = resultados.getString("nombre_personaje");
@@ -147,14 +147,14 @@ public class AccesoBBDD {
 	
 
 	/**
-	 * (El resto de métodos insertar y recoge siguen la misma lógica comentada arriba)
+	 * (El resto de métodos insertar y recoge siguen la misma lógica comentada arriba).
 	 */
 
 	/**
-	 * Inserta todos los empleados que hay de la BBDD
+	 * Inserta todos los empleados que hay de la BBDD.
 	 * 
-	 * @param c
-	 * @throws SQLException
+	 * @param c.
+	 * @throws SQLException.
 	 */
 	public void insertarEmpleados(Connection c) throws SQLException {
 
@@ -162,7 +162,7 @@ public class AccesoBBDD {
 
 		ArrayList<String> queryE = new ArrayList<>();
 		/**
-		 * Lista de sentencias SQL para dar de alta a los empleados
+		 * Lista de sentencias SQL para dar de alta a los empleados.
 		 */
 		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Lucía', 'Martínez', 'Aguja', 'lucia', 'Lucia2026')");
 		queryE.add("INSERT INTO Empleados (categoria, nombre, apellido, apodo, usuario, contraseña) VALUES ('aprendiz', 'Carlos', 'Ruiz', 'Tijeras', 'carlos', 'Tijeras123')");
@@ -188,11 +188,11 @@ public class AccesoBBDD {
 	}
 
 	/**
-	 * Recoge los empleados de la BBDD
+	 * Recoge los empleados de la BBDD.
 	 * 
-	 * @param c
+	 * @param c.
 	 * @return
-	 * @throws SQLException
+	 * @throws SQLException.
 	 */
 	public ArrayList<Empleado> recogeEmpleados(Connection c) throws SQLException {
 		ArrayList<Empleado> empleados = new ArrayList<>();
@@ -200,7 +200,7 @@ public class AccesoBBDD {
 		ResultSet resultados = st.executeQuery("SELECT * FROM Empleados");
 
 		while (resultados.next()) {
-			/** Declaración de variables según las columnas de la tabla */
+			/** Declaración de variables según las columnas de la tabla. */
 			int idEmpleados = resultados.getInt("id_empleado");
 			String categoria = resultados.getString("categoria");
 			String nombre = resultados.getString("nombre");
@@ -209,7 +209,7 @@ public class AccesoBBDD {
 			String usuario = resultados.getString("usuario");
 			String contrasena = resultados.getString("contraseña");
 
-			/** Creación del objeto e inserción en la lista */
+			/** Creación del objeto e inserción en la lista. */
 			Empleado empleado = new Empleado(idEmpleados, categoria, nombre, apellido, apodo, usuario, contrasena);
 			empleados.add(empleado);
 		}
@@ -220,10 +220,10 @@ public class AccesoBBDD {
 	}
 
 	/**
-	 * Inserta los talleres que hay de la BBDD
+	 * Inserta los talleres que hay de la BBDD.
 	 * 
-	 * @param c
-	 * @throws SQLException
+	 * @param c.
+	 * @throws SQLException.
 	 */
 	public void insertarTalleres(Connection c) throws SQLException {
 
@@ -231,7 +231,7 @@ public class AccesoBBDD {
 
 		ArrayList<String> queryT = new ArrayList<>();
 		/**
-		 * Lista de sentencias SQL para dar de alta a los talleres
+		 * Lista de sentencias SQL para dar de alta a los talleres.
 		 */
 		queryT.add("INSERT INTO Taller (nombre_sala, tipo_sala) VALUES ('Milán', 'diseño');");
 		queryT.add("INSERT INTO Taller (nombre_sala, tipo_sala) VALUES ('París', 'diseño');");
@@ -246,9 +246,9 @@ public class AccesoBBDD {
 	}
 
 	/**
-	 * Recoge todos los talleres de la BBDD
+	 * Recoge todos los talleres de la BBDD.
 	 * 
-	 * @param c
+	 * @param c.
 	 * @return
 	 */
 	public ArrayList<Taller> recogeTalleres(Connection c) {
@@ -278,17 +278,17 @@ public class AccesoBBDD {
 	}
 
 	/**
-	 * Inserta los trajes que hay de la BBDD
+	 * Inserta los trajes que hay de la BBDD.
 	 * 
-	 * @param c
-	 * @throws SQLException
+	 * @param c.
+	 * @throws SQLException.
 	 */
 	public void insertarTrajes(Connection c) throws SQLException {
 
 		Statement st = c.createStatement();
 
 		ArrayList<String> queryT = new ArrayList<>();
-		/** Lista de sentencias SQL para dar de alta a los trajes */
+		/** Lista de sentencias SQL para dar de alta a los trajes. */
 		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje principal de Mr. Increíble', 'pruebas', 1)");
 		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje reforzado para misiones pesadas', 'costura', 1)");
 		queryT.add("INSERT INTO Traje (nombre_traje, estado, id_cliente) VALUES ('Traje elástico de alta resistencia', 'pruebas', 2)");
@@ -329,11 +329,11 @@ public class AccesoBBDD {
 	}
 
 	/**
-	 * Recoge los trajes que hay de la BBDD
+	 * Recoge los trajes que hay de la BBDD.
 	 * 
-	 * @param c
+	 * @param c.
 	 * @return
-	 * @throws SQLException
+	 * @throws SQLException.
 	 */
 	public ArrayList<Traje> recogeTrajes(Connection c) throws SQLException {
 		ArrayList<Traje> trajes = new ArrayList<>();
@@ -356,10 +356,10 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Trajes que hay por cada cliente
+	 * Trajes que hay por cada cliente.
 	 * 
-	 * @param c
-	 * @param idCliente
+	 * @param c.
+	 * @param idCliente.
 	 * @return
 	 */
 	public ArrayList<Traje> getTrajesPorCliente(Connection c, int idCliente) {
@@ -390,10 +390,10 @@ public class AccesoBBDD {
 	}
 
 	/**
-	 * Inserta las citas que hay de la BBDD
+	 * Inserta las citas que hay de la BBDD.
 	 * 
-	 * @param c
-	 * @throws SQLException
+	 * @param c.
+	 * @throws SQLException.
 	 */
 	public void insertarCitas(Connection c) throws SQLException {
 
@@ -426,11 +426,11 @@ public class AccesoBBDD {
 	}
 
 	/**
-	 * Devuelve la lista de todas las citas de la BBDD
+	 * Devuelve la lista de todas las citas de la BBDD.
 	 * 
-	 * @param c
+	 * @param c.
 	 * @return
-	 * @throws SQLException
+	 * @throws SQLException.
 	 */
 	public ArrayList<Cita> recogeCitas(Connection c) throws SQLException {
 		ArrayList<Cita> citas = new ArrayList<>();
@@ -438,7 +438,7 @@ public class AccesoBBDD {
 		ResultSet resultados = st.executeQuery("SELECT * FROM Citas ORDER BY fecha, hora_inicio");
 
 		while (resultados.next()) {
-			/** Extraemos el ID que MySQL creó automáticamente */
+			/** Extraemos el ID que MySQL creó automáticamente. */
 			int id = resultados.getInt("id_cita");
 			Date fecha = resultados.getDate("fecha");
 			Time hora = resultados.getTime("hora_inicio");
@@ -448,7 +448,7 @@ public class AccesoBBDD {
 			int idSala = resultados.getInt("id_sala");
 			int idTraje = resultados.getInt("id_traje");
 
-			/** Se lo pasamos al constructor de tu clase Cita */
+			/** Se lo pasamos al constructor de tu clase Cita. */
 			Cita cita = new Cita(id, fecha, hora, duracion, idEmpleado, idCliente, idSala, idTraje);
 			citas.add(cita);
 		}
@@ -459,10 +459,10 @@ public class AccesoBBDD {
 	}
 
 	/**
-	 * Inserta las citas en las que hay asignados aprendices
+	 * Inserta las citas en las que hay asignados aprendices.
 	 * 
-	 * @param c
-	 * @throws SQLException
+	 * @param c.
+	 * @throws SQLException.
 	 */
 	public void insertarCitasAprendiz(Connection c) throws SQLException {
 
@@ -470,7 +470,7 @@ public class AccesoBBDD {
 
 		ArrayList<String> QueryCA = new ArrayList<>();
 		/**
-		 * Lista de sentencias SQL para dar de alta a las citas de los aprendices
+		 * Lista de sentencias SQL para dar de alta a las citas de los aprendices.
 		 */
 		QueryCA.add("INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (1, 1);");
 		QueryCA.add("INSERT INTO Cita_Aprendiz (id_cita, id_empleado) VALUES (2, 1);");
@@ -486,11 +486,11 @@ public class AccesoBBDD {
 	}
 
 	/**
-	 * Devuelve la lista de citas en las que hay asignados aprendices de la BBDD
+	 * Devuelve la lista de citas en las que hay asignados aprendices de la BBDD.
 	 * 
-	 * @param c
+	 * @param c.
 	 * @return
-	 * @throws SQLException
+	 * @throws SQLException.
 	 */
 	public ArrayList<Cita_Aprendiz> recogeCitasAprendiz(Connection c) throws SQLException {
 		ArrayList<Cita_Aprendiz> citasAprendiz = new ArrayList<>();
@@ -498,12 +498,12 @@ public class AccesoBBDD {
 		ResultSet resultados = st.executeQuery("SELECT * FROM Cita_Aprendiz");
 
 		while (resultados.next()) {
-			/** Extraemos el ID que MySQL creó automáticamente */
+			/** Extraemos el ID que MySQL creó automáticamente. */
 			int idAprendiz = resultados.getInt("id_aprendiz");
 			int idCita = resultados.getInt("id_cita");
 			int idEmpleado = resultados.getInt("id_empleado");
 
-			/** Se lo pasamos al constructor de tu clase Cita */
+			/** Se lo pasamos al constructor de tu clase Cita. */
 			Cita_Aprendiz citaAprendiz = new Cita_Aprendiz(idAprendiz, idCita, idEmpleado);
 			citasAprendiz.add(citaAprendiz);
 		}
@@ -516,9 +516,9 @@ public class AccesoBBDD {
 	/**
 	 * Devuelve la lista de IDs de empleados (aprendices) asignados a una cita.
 	 *
-	 * @param c conexión activa
-	 * @param idCita ID de la cita
-	 * @return lista de IDs de aprendices asignados (máximo 2)
+	 * @param c conexión activa.
+	 * @param idCita ID de la cita.
+	 * @return lista de IDs de aprendices asignados (máximo 2).
 	 */
 	public ArrayList<Integer> getAprendicesDeCita(Connection c, int idCita) {
 	    ArrayList<Integer> aprendices = new ArrayList<>();
@@ -529,24 +529,24 @@ public class AccesoBBDD {
 	        ps.setInt(1, idCita);
 	        ResultSet rs = ps.executeQuery();
 
-	        /** Añadir cada aprendiz encontrado a la lista */
+	        /** Añadir cada aprendiz encontrado a la lista. */
 	        while (rs.next()) {
 	            aprendices.add(rs.getInt("id_empleado"));
 	        }
 
 	    } catch (SQLException e) {
-	        e.printStackTrace(); /** Manejo seguro sin propagar la excepción */
+	        e.printStackTrace(); /** Manejo seguro sin propagar la excepción. */
 	    }
 
 	    return aprendices;
 	}
 
 	/**
-	 * Devuelve la lista de todos los aprendices de la BBDD
+	 * Devuelve la lista de todos los aprendices de la BBDD.
 	 * 
-	 * @param c
+	 * @param c.
 	 * @return
-	 * @throws SQLException
+	 * @throws SQLException.
 	 */
 	public ArrayList<Empleado> recogeAprendices(Connection c) throws SQLException {
 		ArrayList<Empleado> empleados = new ArrayList<>();
@@ -554,7 +554,7 @@ public class AccesoBBDD {
 		ResultSet resultados = st.executeQuery("SELECT * FROM Empleados WHERE categoria = 'aprendiz'");
 
 		while (resultados.next()) {
-			/** Declaración de variables según las columnas de la tabla */
+			/** Declaración de variables según las columnas de la tabla. */
 			int idEmpleado = resultados.getInt("id_empleado");
 			String categoria = resultados.getString("categoria");
 			String nombre = resultados.getString("nombre");
@@ -563,7 +563,7 @@ public class AccesoBBDD {
 			String usuario = resultados.getString("usuario");
 			String contrasena = resultados.getString("contraseña");
 
-			/** Creación del objeto e inserción en la lista */
+			/** Creación del objeto e inserción en la lista. */
 			Empleado aprendices = new Empleado(idEmpleado, categoria, nombre, apellido, apodo, usuario, contrasena);
 			empleados.add(aprendices);
 		}
@@ -576,8 +576,8 @@ public class AccesoBBDD {
 	/**
 	 * Indica si un empleado tiene citas asignadas como oficial/maestro.
 	 * 
-	 * @param c
-	 * @param idEmpleado
+	 * @param c.
+	 * @param idEmpleado.
 	 */
 	public boolean empleadoTieneCitas(Connection c, int idEmpleado) {
 		
@@ -588,7 +588,7 @@ public class AccesoBBDD {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				return rs.getInt(1) > 0; /** true si tiene citas */
+				return rs.getInt(1) > 0; /** true si tiene citas. */
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -601,8 +601,8 @@ public class AccesoBBDD {
 	/**
 	 * Indica si un taller está siendo usado en alguna cita.
 	 * 
-	 * @param c
-	 * @param idSala
+	 * @param c.
+	 * @param idSala.
 	 */
 	public boolean tallerTieneCitas(Connection c, int idSala) {
 		
@@ -613,7 +613,7 @@ public class AccesoBBDD {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				return rs.getInt(1) > 0; /** true si el taller está en uso */
+				return rs.getInt(1) > 0; /** true si el taller está en uso. */
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -626,8 +626,8 @@ public class AccesoBBDD {
 	/**
 	 * Indica si un empleado aparece como aprendiz en alguna cita.
 	 * 
-	 * @param c
-	 * @param idEmpleado
+	 * @param c.
+	 * @param idEmpleado.
 	 */
 	public boolean empleadoEsAprendiz(Connection c, int idEmpleado) {
 		
@@ -638,7 +638,7 @@ public class AccesoBBDD {
 			ResultSet rs = pstmt.executeQuery();
 			
 			if (rs.next()) {
-				return rs.getInt(1) > 0; /** true si aparece como aprendiz */
+				return rs.getInt(1) > 0; /** true si aparece como aprendiz. */
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -649,13 +649,13 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Al crear un nuevo cliente en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD
+	 * Al crear un nuevo cliente en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD.
 	 * 
-	 * @param c
-	 * @param nombre
-	 * @param tipo
-	 * @param superpoder
-	 * @param color
+	 * @param c.
+	 * @param nombre.
+	 * @param tipo.
+	 * @param superpoder.
+	 * @param color.
 	 */
 	public void insertarNuevoCliente(Connection c, String nombre, String tipo, String superpoder, String color) {
 
@@ -674,10 +674,10 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Elimina un cliente de la BBDD
+	 * Elimina un cliente de la BBDD.
 	 * 
-	 * @param c
-	 * @param id_cliente
+	 * @param c.
+	 * @param id_cliente.
 	 */
 	public void eliminarCliente(Connection c, int id_cliente) {
 		
@@ -697,14 +697,14 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Actualiza un cliente de la BBDD
+	 * Actualiza un cliente de la BBDD.
 	 * 
-	 * @param c
-	 * @param id_cliente
-	 * @param nombre
-	 * @param tipo
-	 * @param superpoder
-	 * @param color
+	 * @param c.
+	 * @param id_cliente.
+	 * @param nombre.
+	 * @param tipo.
+	 * @param superpoder.
+	 * @param color.
 	 */
 	public void actualizarCliente(Connection c, int id_cliente, String nombre, String tipo, String superpoder, String color) {
 	    String query = "UPDATE Cliente SET nombre_personaje = ?, tipo_heroe = ?, superpoder = ?, colores = ? WHERE id_cliente = ?";
@@ -726,10 +726,10 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Al crear un nuevo taller y traje en la ventana NuevoTaller, añadimos la insercion de la nueva fila a la BBDD
+	 * Al crear un nuevo taller y traje en la ventana NuevoTaller, añadimos la insercion de la nueva fila a la BBDD.
 	 * 
-	 * @param c
-	 * @param t
+	 * @param c.
+	 * @param t.
 	 */
 	public void insertarNuevoTaller(Connection c, Taller t) {
 
@@ -749,10 +749,10 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Elimina un taller de la BBDD
+	 * Elimina un taller de la BBDD.
 	 * 
-	 * @param c
-	 * @param id_sala
+	 * @param c.
+	 * @param id_sala.
 	 */
 	public void borrarTaller(Connection c, int id_sala) {
 		String queryT = "DELETE FROM Taller WHERE id_sala = ?";
@@ -768,14 +768,14 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Actualiza un taller de la BBDD
+	 * Actualiza un taller de la BBDD.
 	 * 
-	 * @param c
-	 * @param id_sala
-	 * @param tn
+	 * @param c.
+	 * @param id_sala.
+	 * @param tn.
 	 */
 	public void ActualizarTaller(Connection c, int id_sala, Taller tn) {
-		/** Usamos PreparedStatement para que sea más limpio y seguro */
+		/** Usamos PreparedStatement para que sea más limpio y seguro. */
 	    String query = "UPDATE Taller SET nombre_sala = ?, tipo_sala = ? WHERE id_sala = ?";
 	    
 	    try (PreparedStatement pstmt = c.prepareStatement(query)) {
@@ -791,12 +791,12 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Al crear un nuevo traje en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD
+	 * Al crear un nuevo traje en la ventana NuevoCliente, añadimos la insercion de la nueva fila a la BBDD.
 	 * 
-	 * @param c
-	 * @param nombre
-	 * @param estado
-	 * @param id_cliente
+	 * @param c.
+	 * @param nombre.
+	 * @param estado.
+	 * @param id_cliente.
 	 */
 	public void insertarNuevoTraje(Connection c, String nombre, String estado, int id_cliente) {
 
@@ -815,10 +815,10 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Elimina un traje de la BBDD
+	 * Elimina un traje de la BBDD.
 	 * 
-	 * @param c
-	 * @param id_traje
+	 * @param c.
+	 * @param id_traje.
 	 */
     public void eliminarTraje(Connection c, int id_traje) {
 		
@@ -838,12 +838,12 @@ public class AccesoBBDD {
 	}
     
     /**
-     * Actualiza un traje de la BBDD
+     * Actualiza un traje de la BBDD.
      * 
-     * @param c
-     * @param id_traje
-     * @param nombre
-     * @param estado
+     * @param c.
+     * @param id_traje.
+     * @param nombre.
+     * @param estado.
      */
     public void actualizarTraje(Connection c, int id_traje, String nombre, String estado) {
 	    String query = "UPDATE Traje SET nombre_traje = ?, estado = ? WHERE id_traje = ?";
@@ -863,10 +863,10 @@ public class AccesoBBDD {
 	}
 	
     /**
-     * Al crear una nueva cita ventana NuevaCitaMaestro, añadimos la insercion de la nueva fila a la BBDD
+     * Al crear una nueva cita ventana NuevaCitaMaestro, añadimos la insercion de la nueva fila a la BBDD.
      * 
-     * @param c
-     * @param ci
+     * @param c.
+     * @param ci.
      */
 	public void insertarNuevaCita(Connection c, Cita ci) {
 
@@ -886,13 +886,13 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Elimina una cita de la BBDD
+	 * Elimina una cita de la BBDD.
 	 * 
-	 * @param c
-	 * @param id_cita
+	 * @param c.
+	 * @param id_cita.
 	 */
 	public void eliminarCita(Connection c, int id_cita) {
-	    /** Primero eliminar los registros relacionados en cita_aprendiz (FK) */
+	    /** Primero eliminar los registros relacionados en cita_aprendiz (FK). */
 	    String queryAprendiz = "DELETE FROM Cita_Aprendiz WHERE id_cita = ?";
 	    try (PreparedStatement pstmt = c.prepareStatement(queryAprendiz)) {
 	        pstmt.setInt(1, id_cita);
@@ -901,7 +901,7 @@ public class AccesoBBDD {
 	        System.out.println("Error al eliminar aprendices de la cita: " + e.getMessage());
 	        e.printStackTrace();
 	    }
-	    /** Luego eliminar la cita */
+	    /** Luego eliminar la cita. */
 	    String queryCita = "DELETE FROM Citas WHERE id_cita = ?";
 	    try (PreparedStatement pstmt = c.prepareStatement(queryCita)) {
 	        pstmt.setInt(1, id_cita);
@@ -913,11 +913,11 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Actualiza una cita de la BBDD
+	 * Actualiza una cita de la BBDD.
 	 * 
-	 * @param c
-	 * @param id_cita
-	 * @param ci
+	 * @param c.
+	 * @param id_cita.
+	 * @param ci.
 	 */
 	public void actualizarCita(Connection c, int id_cita, Cita ci) {
 	    String query = "UPDATE Citas SET fecha = ?, hora_inicio = ?, duracion = ?, id_cliente = ?, id_sala = ?, id_empleado = ?, id_traje = ? WHERE id_cita = ?";
@@ -943,10 +943,10 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Al asignar la cita a el/los aprendiz/es en la ventana NuevaCitaOficial, añadimos la insercion de la nueva fila a la BBDD
+	 * Al asignar la cita a el/los aprendiz/es en la ventana NuevaCitaOficial, añadimos la insercion de la nueva fila a la BBDD.
 	 * 
-	 * @param c
-	 * @param ca
+	 * @param c.
+	 * @param ca.
 	 */
 	public void insertarNuevaCita_Aprendiz(Connection c, Cita_Aprendiz ca) {
 
@@ -966,11 +966,11 @@ public class AccesoBBDD {
 	} 
 	
 	/**
-	 * Actualiza una cita con un aprendiz de la BBDD
+	 * Actualiza una cita con un aprendiz de la BBDD.
 	 * 
-	 * @param c
-	 * @param id_aprendiz
-	 * @param ca
+	 * @param c.
+	 * @param id_aprendiz.
+	 * @param ca.
 	 */
 	public void actualizarCitaAprendiz(Connection c, int id_aprendiz, Cita_Aprendiz ca) {
 	    String query = "UPDATE Cita_Aprendiz SET id_cita = ?, id_empleado = ? WHERE id_aprendiz = ?";
@@ -991,15 +991,15 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Al crear un nuevo empleado en la ventana NuevoEmpleado, añadimos la insercion de la nueva fila a la BBDD
+	 * Al crear un nuevo empleado en la ventana NuevoEmpleado, añadimos la insercion de la nueva fila a la BBDD.
 	 * 
-	 * @param c
-	 * @param categoria
-	 * @param nombre
-	 * @param apellido
-	 * @param apodo
-	 * @param usuario
-	 * @param contraseña 
+	 * @param c.
+	 * @param categoria.
+	 * @param nombre.
+	 * @param apellido.
+	 * @param apodo.
+	 * @param usuario.
+	 * @param contraseña .
 	 */
 	public void insertarNuevoEmpleado(Connection c, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña) {
 
@@ -1018,11 +1018,11 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Elimina un empleado de la BBDD
+	 * Elimina un empleado de la BBDD.
 	 * Solo debe llamarse si previamente se ha comprobado que no tiene citas asociadas.
 	 * 
-	 * @param c
-	 * @param id_empleado
+	 * @param c.
+	 * @param id_empleado.
 	 */
 	public void eliminarEmpleado(Connection c, int id_empleado) {
 		
@@ -1041,16 +1041,16 @@ public class AccesoBBDD {
 	}
 	
 	/**
-	 * Actualiza un empleado de la BBDD
+	 * Actualiza un empleado de la BBDD.
 	 * 
-	 * @param c
-	 * @param id_empleado
-	 * @param categoria
-	 * @param nombre
-	 * @param apellido
-	 * @param apodo
-	 * @param usuario
-	 * @param contraseña 
+	 * @param c.
+	 * @param id_empleado.
+	 * @param categoria.
+	 * @param nombre.
+	 * @param apellido.
+	 * @param apodo.
+	 * @param usuario.
+	 * @param contraseña.
 	 */
 	public void actualizarEmpleado(Connection c, int id_empleado, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña) {
 	    String query = "UPDATE Empleados SET apodo = ?, nombre = ?, apellido = ?, categoria = ?, usuario = ?, contraseña = ? WHERE id_empleado = ?";
