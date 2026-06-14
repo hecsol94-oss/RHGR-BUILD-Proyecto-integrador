@@ -116,8 +116,8 @@ public class ListaCitas extends JFrame {
      * Crea un botón de filtro con estilo básico predefinido.
      * Se utiliza en la interfaz para botones pequeños de selección o filtrado.
      *
-     * @param texto texto que se mostrará en el botón
-     * @return JButton configurado con tamaño, fuente y bordes personalizados
+     * @param texto texto que se mostrará en el botón.
+     * @return JButton configurado con tamaño, fuente y bordes personalizados.
      */
     private JButton crearBotonFiltro(String texto) {
         JButton btn = new JButton(texto);
@@ -133,11 +133,11 @@ public class ListaCitas extends JFrame {
      * Aplica un estilo visual personalizado a un botón.
      * Permite definir tamaño, colores y comportamiento del cursor.
      *
-     * @param btn botón a estilizar
-     * @param w ancho del botón
-     * @param h alto del botón
-     * @param bg color de fondo del botón
-     * @param fg color del texto del botón
+     * @param btn botón a estilizar.
+     * @param w ancho del botón.
+     * @param h alto del botón.
+     * @param bg color de fondo del botón.
+     * @param fg color del texto del botón.
      */
     private void estilizarBoton(JButton btn, int w, int h, Color bg, Color fg) {
         btn.setPreferredSize(new Dimension(w, h));
@@ -152,7 +152,7 @@ public class ListaCitas extends JFrame {
      * Aplica un estilo uniforme a una tabla JTable.
      * Mejora la legibilidad ajustando filas, fuentes y colores de selección.
      *
-     * @param tabla JTable a la que se le aplicará el estilo
+     * @param tabla JTable a la que se le aplicará el estilo.
      */
     private void estilizarTabla(JTable tabla) {
         tabla.setRowHeight(35);
@@ -167,7 +167,7 @@ public class ListaCitas extends JFrame {
         header.setPreferredSize(new Dimension(0, 40));
     }
 
-    /** Getters */
+    /** Getters. */
     
     /**
      * 
