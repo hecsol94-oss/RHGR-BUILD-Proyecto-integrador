@@ -3,7 +3,7 @@ package modelo;
 public class Cliente {
 	
 	/**
-	 * Atributos privados que representan las columnas de la tabla Cliente en la BBDD
+	 * Atributos privados que representan las columnas de la tabla Cliente en la BBDD.
 	 */
 	private int id_cliente;
 	private String nombre;
@@ -11,15 +11,15 @@ public class Cliente {
 	private String superpoder;
 	private String color;
 	
-	/** Constructor para instanciar el objeto con todos los datos (incluyendo el ID autogenerado) */
+	/** Constructor para instanciar el objeto con todos los datos (incluyendo el ID autogenerado). */
 	
 	/**
 	 * 
-	 * @param id_cliente
-	 * @param nombre
-	 * @param tipo_heroe
-	 * @param superpoder
-	 * @param color
+	 * @param id_cliente.
+	 * @param nombre.
+	 * @param tipo_heroe.
+	 * @param superpoder.
+	 * @param color.
 	 */
 	public Cliente(int id_cliente, String nombre, String tipo_heroe, String superpoder, String color) {
 		this.id_cliente = id_cliente;
@@ -30,7 +30,7 @@ public class Cliente {
 		
 	}
 
-	/** Métodos Getter y Setter para el acceso controlado a los atributos del cliente */
+	/** Métodos Getter y Setter para el acceso controlado a los atributos del cliente. */
 	
 	/**
 	 * 
@@ -42,7 +42,7 @@ public class Cliente {
 
 	/**
 	 * 
-	 * @param nombre
+	 * @param nombre.
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -58,7 +58,7 @@ public class Cliente {
 
 	/**
 	 * 
-	 * @param tipo_heroe
+	 * @param tipo_heroe.
 	 */
 	public void setTipo_heroe(String tipo_heroe) {
 		this.tipo_heroe = tipo_heroe;
@@ -74,7 +74,7 @@ public class Cliente {
 
 	/**
 	 * 
-	 * @param superpoder
+	 * @param superpoder.
 	 */
 	public void setSuperpoder(String superpoder) {
 		this.superpoder = superpoder;
@@ -90,7 +90,7 @@ public class Cliente {
 
 	/**
 	 * 
-	 * @param color
+	 * @param color.
 	 */
 	public void setColor(String color) {
 		this.color = color;
@@ -106,7 +106,7 @@ public class Cliente {
 
 	/**
 	 * 
-	 * @param id_cliente
+	 * @param id_cliente.
 	 */
 	public void setId_cliente(int id_cliente) {
 		this.id_cliente = id_cliente;
