@@ -54,7 +54,7 @@ public class ControladorListaClientes {
         cargarTabla(clientesFiltrados, trajesFiltrados);
 
         /**
-         * Evento para resetear filtros y mostrar todos los clientes
+         * Evento para resetear filtros y mostrar todos los clientes.
          */
         vista.getBtnTodos().addActionListener(e -> {
             clientesFiltrados = new ArrayList<>(clientes);
@@ -62,14 +62,14 @@ public class ControladorListaClientes {
         });
 
         /**
-         * Configuración de botones de filtrado y búsqueda
+         * Configuración de botones de filtrado y búsqueda.
          */
         vista.getBtnHeroe().addActionListener(e -> filtrarPorTipo("superhéroe", "superheroína"));
         vista.getBtnVillano().addActionListener(e -> filtrarPorTipo("supervillano", "supervillana"));
         vista.getBtnBuscar().addActionListener(e -> buscar());
 
         /**
-         * Configuración de acciones CRUD y navegación
+         * Configuración de acciones CRUD y navegación.
          */
         vista.getBtnDetalle().addActionListener(e -> verDetalle());
         vista.getBtnEditar().addActionListener(e -> editarCliente());
@@ -147,7 +147,7 @@ public class ControladorListaClientes {
 
     /**
      * Obtiene el cliente seleccionado y abre la ventana de detalles.
-     * Carga específicamente los trajes pertenecientes a dicho cliente desde la BD.
+     * Carga específicamente los trajes pertenecientes a dicho cliente desde la BBDD.
      */
     private void verDetalle() {
         int fila = vista.getTable().getSelectedRow();
