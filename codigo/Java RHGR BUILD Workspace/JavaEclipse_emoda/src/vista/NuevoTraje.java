@@ -85,9 +85,9 @@ public class NuevoTraje extends JFrame {
      * Este método configura tamaño, colores, fuente y bordes para mantener
      * la coherencia estética de la aplicación (tema "Elite").
      *
-     * @param btn botón al que se le aplicará el estilo
-     * @param w ancho deseado del botón en píxeles
-     * @param h alto deseado del botón en píxeles
+     * @param btn botón al que se le aplicará el estilo.
+     * @param w ancho deseado del botón en píxeles.
+     * @param h alto deseado del botón en píxeles.
      */
     private void estilizarBoton(JButton btn, Color bg, Color fg) {
         btn.setBackground(bg);
@@ -122,7 +122,7 @@ public class NuevoTraje extends JFrame {
      
      /**
       * 
-      * @param estado
+      * @param estado.
       */
      public void setCbEstado(String estado) {
          cbEstado.setSelectedItem(estado);
