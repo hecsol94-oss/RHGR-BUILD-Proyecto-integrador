@@ -31,7 +31,7 @@ public class ControladorListaEmpleados {
      * Inicializa los datos y configura todos los escuchadores de eventos para la interfaz.
      * 
      * @param vista La ventana que muestra la tabla de empleados.
-     * @param acceso Objeto de acceso a datos para operaciones en BD.
+     * @param acceso Objeto de acceso a datos para operaciones en BBDD.
      * @param c Conexión activa a la base de datos.
      * @param empleados Lista completa de empleados registrados.
      * @param empleado Empleado que está utilizando la aplicación (para control de roles).
@@ -49,7 +49,7 @@ public class ControladorListaEmpleados {
 		cargarTabla(empleadosFiltrados);
 		
 		/**
-		 * Evento para resetear filtros y mostrar todos los empleados
+		 * Evento para resetear filtros y mostrar todos los empleados.
 		 */
         vista.getBtnTodos().addActionListener(e -> {
             empleadosFiltrados = new ArrayList<>(empleados);
@@ -57,7 +57,7 @@ public class ControladorListaEmpleados {
         });
         
         /**
-         * Configuración de botones de filtrado y búsqueda
+         * Configuración de botones de filtrado y búsqueda.
          */
         vista.getBtnAprendiz().addActionListener(e -> filtrarPorCategoria("aprendiz"));
         vista.getBtnOficial().addActionListener(e -> filtrarPorCategoria("oficial"));
@@ -65,7 +65,7 @@ public class ControladorListaEmpleados {
         vista.getBtnBuscar().addActionListener(e -> buscar());
         
         /**
-         * Configuración de acciones CRUD y navegación
+         * Configuración de acciones CRUD y navegación.
          */
         vista.getBtnEditar().addActionListener(e -> editarEmpleado());
         vista.getBtnNuevo().addActionListener(e -> nuevoEmpleado());
@@ -174,7 +174,7 @@ public class ControladorListaEmpleados {
 
         Empleado empleado = empleadosFiltrados.get(fila);
         
-        /** Impedir borrar empleado si tiene citas */
+        /** Impedir borrar empleado si tiene citas. */
         if (acceso.empleadoTieneCitas(c, empleado.getId_empleado())) {
         	JOptionPane.showMessageDialog(vista,
         			"No se puede eliminar este empleado porque tiene citas asignadas.",
@@ -183,7 +183,7 @@ public class ControladorListaEmpleados {
         	return;
         }
         
-        /** Impedir borrar aprendiz si tiene asignado citas */
+        /** Impedir borrar aprendiz si tiene asignado citas. */
         if (acceso.empleadoEsAprendiz(c, empleado.getId_empleado())) {
         	JOptionPane.showMessageDialog(vista,
         			"No se puede eliminar este empleado porque participa como aprendiz en citas.",
@@ -192,7 +192,7 @@ public class ControladorListaEmpleados {
         	return;
         }
         
-        /** Confirmación del usuario */
+        /** Confirmación del usuario. */
         int confirmacion = JOptionPane.showConfirmDialog(
                 vista,
                 "¿Seguro que quieres eliminar a " + empleado.getNombre() + "?",
@@ -201,12 +201,12 @@ public class ControladorListaEmpleados {
         );
 
         if (confirmacion == JOptionPane.YES_OPTION) {
-        	/** Eliminación en BBDD */
+        	/** Eliminación en BBDD. */
             acceso.eliminarEmpleado(c, empleado.getId_empleado());
-            /** Eliminación en memoria */
+            /** Eliminación en memoria. */
             empleados.remove(empleado);
             empleadosFiltrados.remove(empleado);
-            /** Refrescar tabla */
+            /** Refrescar tabla. */
             cargarTabla(empleadosFiltrados);
             JOptionPane.showMessageDialog(vista, "Empleado eliminado correctamente.");
         }
