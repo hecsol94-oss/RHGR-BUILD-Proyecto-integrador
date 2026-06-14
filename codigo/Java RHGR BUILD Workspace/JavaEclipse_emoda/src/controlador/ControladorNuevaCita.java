@@ -26,13 +26,13 @@ public class ControladorNuevaCita {
     private final Empleado empleado;
     private final Cita citaAEditar;
 
-    /** Datos precargados para edición */
+    /** Datos precargados para edición. */
     private final String clienteEditable;
     private final String trajeEditable;
     private final String tallerEditable;
     private final String empleadoEditable;
 
-    /** Listas de datos */
+    /** Listas de datos. */
     private ArrayList<Cliente> listaClientes;
     private ArrayList<Taller> listaTalleres;
     private ArrayList<Taller> listaTalleresFiltrados;
@@ -41,7 +41,7 @@ public class ControladorNuevaCita {
     private ArrayList<Empleado> listaOficiales;
     private ArrayList<Empleado> listaEmpleados;
 
-    /** true cuando el traje seleccionado fue recién creado */
+    /** true cuando el traje seleccionado fue recién creado. */
     private boolean trajeRecienCreado = false;
 
     /**
@@ -76,20 +76,20 @@ public class ControladorNuevaCita {
      */
     private void cargarDatosIniciales() {
         try {
-            /** Talleres */
+            /** Talleres. */
             listaTalleres = acceso.recogeTalleres(c);
 
-            /** Clientes */
+            /** Clientes. */
             listaClientes = acceso.recogeClientes(c);
             vista.getCbCliente().removeAllItems();
             for (Cliente cl : listaClientes)
                 vista.getCbCliente().addItem(cl.getNombre());
 
-            /** Trajes */
+            /** Trajes. */
             listaTrajes = acceso.recogeTrajes(c);
             actualizarComboTrajes();
 
-            /** Oficiales */
+            /** Oficiales. */
             if (empleado.getCategoria().equals("maestro")) {
                 listaOficiales = new ArrayList<>();
                 for (Empleado e : acceso.recogeEmpleados(c)) {
@@ -117,10 +117,10 @@ public class ControladorNuevaCita {
                 );
             }
 
-            /** Empleados */
+            /** Empleados. */
             listaEmpleados = acceso.recogeEmpleados(c);
 
-            /** Aprendices */
+            /** Aprendices. */
             listaAprendices = acceso.recogeAprendices(c);
             cargarCombosAprendices(-1);
 
@@ -135,13 +135,13 @@ public class ControladorNuevaCita {
      */
     private void asignarListeners() {
 
-        /** Cambio de cliente → actualizar trajes y talleres */
+        /** Cambio de cliente → actualizar trajes y talleres. */
         vista.getCbCliente().addActionListener(e -> actualizarComboTrajes());
 
-        /** Cancelar */
+        /** Cancelar. */
         vista.getBtnCancelar().addActionListener(e -> cancelar());
 
-        /** Nuevo cliente */
+        /** Nuevo cliente. */
         vista.getBtnNuevoCliente().addActionListener(e -> {
             NuevoCliente vc = new NuevoCliente();
             new ControladorNuevoCliente(vc, null, null, vista, acceso, c, null, listaClientes, empleado);
@@ -154,7 +154,7 @@ public class ControladorNuevaCita {
             });
         });
 
-        /** Nuevo traje */
+        /** Nuevo traje. */
         vista.getBtnNuevoTraje().addActionListener(e -> {
             int idx = vista.getCbCliente().getSelectedIndex();
             if (idx < 0) {
@@ -183,26 +183,26 @@ public class ControladorNuevaCita {
             });
         });
 
-        /** Cambio de traje */
+        /** Cambio de traje. */
         vista.getCbTraje().addActionListener(e -> {
             if (!trajeRecienCreado)
                 actualizarComboTalleres();
         });
 
-        /** Exclusión mutua aprendices */
+        /** Exclusión mutua aprendices. */
         vista.getCbAprendiz1().addActionListener(e -> {
             int idxApr1 = vista.getCbAprendiz1().getSelectedIndex() - 1;
             cargarCombosAprendices(idxApr1);
             vista.getCbAprendiz1().setSelectedIndex(idxApr1 + 1);
         });
 
-        /** Siguiente fase */
+        /** Siguiente fase. */
         vista.getBtnSiguiente().addActionListener(e -> avanzarFase2());
 
-        /** Volver fase 1 */
+        /** Volver fase 1. */
         vista.getBtnAtras().addActionListener(e -> vista.volverFase1());
 
-        /** Guardar */
+        /** Guardar. */
         vista.getBtnGuardar().addActionListener(e -> guardarCita());
     }
 
@@ -220,7 +220,7 @@ public class ControladorNuevaCita {
             if (t.getId_cliente() == idCliente)
                 vista.getCbTraje().addItem(t.getNombre_traje());
 
-        /** Al cambiar de cliente, el traje ya no es recién creado */
+        /** Al cambiar de cliente, el traje ya no es recién creado. */
         trajeRecienCreado = false;
         actualizarComboTalleres();
     }
@@ -275,18 +275,18 @@ public class ControladorNuevaCita {
 
         ArrayList<Integer> asignados = acceso.getAprendicesDeCita(c, citaAEditar.getId_cita());
 
-        /** Aprendiz 1 */
+        /** Aprendiz 1. */
         if (asignados.size() >= 1) {
             int idApr1 = asignados.get(0);
             for (int i = 0; i < listaAprendices.size(); i++) {
                 if (listaAprendices.get(i).getId_empleado() == idApr1) {
-                    vista.getCbAprendiz1().setSelectedIndex(i + 1); /** +1 por "— Ninguno —" */
+                    vista.getCbAprendiz1().setSelectedIndex(i + 1); /** +1 por "— Ninguno —". */
                     break;
                 }
             }
         }
 
-        /** Aprendiz 2 */
+        /** Aprendiz 2. */
         if (asignados.size() >= 2) {
             int idApr2 = asignados.get(1);
             for (int i = 0; i < listaAprendices.size(); i++) {
@@ -423,7 +423,7 @@ public class ControladorNuevaCita {
             return;
         }
 
-        /** Usar el id_empleado del oficial seleccionado */
+        /** Usar el id_empleado del oficial seleccionado. */
         int idOficial = 0;
         if (empleado.getCategoria().equals("maestro")) {
             idOficial = listaOficiales.get(idxOficial).getId_empleado();
@@ -431,7 +431,7 @@ public class ControladorNuevaCita {
             idOficial = empleado.getId_empleado();
         }
 
-        /** Crear o actualizar cita */
+        /** Crear o actualizar cita. */
         if (citaAEditar == null) {
             Cita nuevaCita = new Cita(0, fechaDate, horaTime, duracionInt, idOficial, idCliente, idSala, idTraje);
             acceso.insertarNuevaCita(c, nuevaCita);
@@ -440,7 +440,7 @@ public class ControladorNuevaCita {
             acceso.actualizarCita(c, citaAEditar.getId_cita(), nuevaCita);
         }
 
-        /** Guardar aprendices asignados */
+        /** Guardar aprendices asignados. */
         int idCitaReal;
 
         if (citaAEditar == null) {
@@ -456,19 +456,19 @@ public class ControladorNuevaCita {
         }
 
         try {
-            /** 1. Borrar aprendices antiguos */
+            /** Borrar aprendices antiguos. */
             PreparedStatement ps = c.prepareStatement("DELETE FROM Cita_Aprendiz WHERE id_cita = ?");
             ps.setInt(1, idCitaReal);
             ps.executeUpdate();
 
-            /** 2. Insertar aprendiz 1 */
+            /** Insertar aprendiz 1. */
             int idxApr1 = vista.getCbAprendiz1().getSelectedIndex();
             if (idxApr1 > 0) {
                 Empleado apr1 = listaAprendices.get(idxApr1 - 1);
                 acceso.insertarNuevaCita_Aprendiz(c, new Cita_Aprendiz(0, idCitaReal, apr1.getId_empleado()));
             }
 
-            /** 3. Insertar aprendiz 2 */
+            /** Insertar aprendiz 2. */
             int idxApr2 = vista.getCbAprendiz2().getSelectedIndex();
             if (idxApr2 > 0) {
                 Empleado apr2 = listaAprendices.get(idxApr2 - 1);
@@ -482,7 +482,7 @@ public class ControladorNuevaCita {
         JOptionPane.showMessageDialog(vista, "Cita y aprendices guardados correctamente.");
 
        /**
-        * NAVEGACIÓN FINAL SEGÚN VENTANA DE ORIGEN
+        * NAVEGACIÓN FINAL SEGÚN VENTANA DE ORIGEN.
         */
 
         try {
