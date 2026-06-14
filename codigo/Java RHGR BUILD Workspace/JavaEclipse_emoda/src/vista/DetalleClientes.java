@@ -123,9 +123,9 @@ public class DetalleClientes extends JFrame {
      * Crea un campo de texto con etiqueta asociada y lo añade directamente al panel.
      * El campo se configura como no editable y con un estilo visual consistente con la interfaz.
      *
-     * @param panel panel donde se insertará el campo completo (label + textbox)
-     * @param label texto descriptivo que acompaña al campo
-     * @return JTextField creado y añadido al contenedor
+     * @param panel panel donde se insertará el campo completo (label + textbox).
+     * @param label texto descriptivo que acompaña al campo.
+     * @return JTextField creado y añadido al contenedor.
      */
     private JTextField crearCampoTexto(JPanel panel, String label) {
         JPanel contenedorCampo = new JPanel(new BorderLayout(5, 5));
@@ -152,9 +152,9 @@ public class DetalleClientes extends JFrame {
      * Aplica un estilo visual estándar a un botón de la interfaz.
      * Define colores, tamaño, fuente, borde y comportamiento del cursor.
      *
-     * @param btn botón al que se le aplicará el estilo
-     * @param w ancho del botón
-     * @param h alto del botón
+     * @param btn botón al que se le aplicará el estilo.
+     * @param w ancho del botón.
+     * @param h alto del botón.
      */
     private void estilizarBoton(JButton btn, int w, int h) {
         btn.setPreferredSize(new Dimension(w, h));
@@ -252,7 +252,7 @@ public class DetalleClientes extends JFrame {
     
     /**
      * 
-     * @param t
+     * @param t.
      */
     public void agregarOpcion(Traje t) {
         modeloLista.addElement(t.getNombre_traje() + " - " +t.getEstado());       
@@ -260,7 +260,7 @@ public class DetalleClientes extends JFrame {
     
     /**
      * 
-     * @param trajes
+     * @param trajes.
      */
     public void recogerDatos(ArrayList<Traje> trajes) {
         modeloLista.clear();
