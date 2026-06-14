@@ -23,22 +23,22 @@ import vista.NuevoTraje;
  */
 public class ControladorDetalleClientes {
 
-    /** Vista principal de detalle de cliente */
+    /** Vista principal de detalle de cliente. */
     private DetalleClientes vista;
 
-    /** Objeto para realizar operaciones en la base de datos */
+    /** Objeto para realizar operaciones en la base de datos. */
     private AccesoBBDD acceso;
 
-    /** Conexión activa a la base de datos */
+    /** Conexión activa a la base de datos. */
     private Connection c;
 
-    /** Entidad Cliente cuyos detalles se están visualizando */
+    /** Entidad Cliente cuyos detalles se están visualizando. */
     private Cliente cliente;
 
-    /** Lista de trajes pertenecientes al cliente actual */
+    /** Lista de trajes pertenecientes al cliente actual. */
     private ArrayList<Traje> trajes;
 
-    /** Empleado autenticado que realiza las operaciones */
+    /** Empleado autenticado que realiza las operaciones. */
     private Empleado empleado;
 
     /**
@@ -63,7 +63,7 @@ public class ControladorDetalleClientes {
         this.empleado = empleado;
         
         /**
-         * Inicializar listeners de las acciones de la interfaz
+         * Inicializar listeners de las acciones de la interfaz.
          */
         this.vista.getBtnEditar().addActionListener(e -> irAEditarTraje());
         this.vista.getBtnEliminar().addActionListener(e -> eliminarTrajeSeleccionado());
@@ -71,7 +71,7 @@ public class ControladorDetalleClientes {
         this.vista.getBtnNuevoTraje().addActionListener(e -> abrirNuevoTraje());
         
         /**
-         * Población de datos del cliente en los componentes de la vista
+         * Población de datos del cliente en los componentes de la vista.
          */
         vista.getNombreCliente().setText(cliente.getNombre());
         vista.getTipoHeroeCliente().setText(cliente.getTipo_heroe());
@@ -88,12 +88,12 @@ public class ControladorDetalleClientes {
         Traje trajeSeleccionado = null;
 
         /**
-         * Recuperar el texto seleccionado en el JList
+         * Recuperar el texto seleccionado en el JList.
          */
         String seleccionado = vista.getListTrajes().getSelectedValue();
 
         /**
-         * Búsqueda del objeto Traje que coincide con la selección visual
+         * Búsqueda del objeto Traje que coincide con la selección visual.
          */
         if (seleccionado != null) {
             for (Traje t : trajes) {
@@ -106,7 +106,7 @@ public class ControladorDetalleClientes {
         }
 
         /**
-         * Si se encontró una coincidencia, se lanza el controlador de edición
+         * Si se encontró una coincidencia, se lanza el controlador de edición.
          */
         if (trajeSeleccionado != null) {
             NuevoTraje vistaNuevo = new NuevoTraje();
@@ -128,7 +128,7 @@ public class ControladorDetalleClientes {
 
         if (index != -1) {
             /**
-             * Confirmación de seguridad
+             * Confirmación de seguridad.
              */
             int confirmacion = JOptionPane.showConfirmDialog(
                     vista,
@@ -140,17 +140,17 @@ public class ControladorDetalleClientes {
 
             if (confirmacion == JOptionPane.YES_OPTION) {
                 /**
-                 * Obtener el objeto antes de removerlo visualmente
+                 * Obtener el objeto antes de removerlo visualmente.
                  */
                 Traje traje = trajes.get(index);
 
                 /**
-                 * Persistencia: eliminación en BD
+                 * Persistencia: eliminación en BBDD.
                  */
                 acceso.eliminarTraje(c, traje.getId_traje());
 
                 /**
-                 * Sincronización: recargar lista y actualizar vista
+                 * Sincronización: recargar lista y actualizar vista.
                  */
                 trajes = acceso.getTrajesPorCliente(c, cliente.getId_cliente());
                 vista.recogerDatos(trajes);
@@ -186,7 +186,7 @@ public class ControladorDetalleClientes {
 
         try {
             /**
-             * Sincronización de datos globales antes de volver
+             * Sincronización de datos globales antes de volver.
              */
             clientes = acceso.recogeClientes(c);
             trajesPorCliente = acceso.recogeTrajes(c);
