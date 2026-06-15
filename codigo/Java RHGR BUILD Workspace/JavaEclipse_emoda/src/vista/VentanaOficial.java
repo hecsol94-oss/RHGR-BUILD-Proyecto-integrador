@@ -35,7 +35,6 @@ public class VentanaOficial extends JFrame {
 
     /**
      * Construye la ventana principal del oficial.
-     * 
      * Inicializa los componentes gráficos, configura el menú,
      * el header superior y el sistema de navegación basado en CardLayout.
      */
