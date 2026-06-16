@@ -192,7 +192,7 @@ public class ControladorOficial {
             ListaClientes vistaLista = new ListaClientes();
             new ControladorListaClientes(vistaLista, acceso, c, clientes, trajes, empleado);
 
-            vistaLista.deshabilitarBotones(); /** modo solo lectura */
+            vistaLista.deshabilitarBotones(); /** Modo solo lectura. */
             vistaLista.setVisible(true);
             vista.dispose();
 
