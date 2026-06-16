@@ -102,7 +102,7 @@ public class ControladorNuevaCita {
                 for (Empleado e : listaOficiales)
                     vista.getCbOficial().addItem(e.getNombre() + " " + e.getApellido() + " (" + e.getCategoria() + ")");
 
-                /** Preseleccionar el maestro logado */
+                /** Preseleccionar el maestro logado. */
                 for (int i = 0; i < listaOficiales.size(); i++) {
                     if (listaOficiales.get(i).getId_empleado() == empleado.getId_empleado()) {
                         vista.getCbOficial().setSelectedIndex(i);
