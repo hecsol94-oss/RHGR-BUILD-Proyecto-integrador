@@ -28,7 +28,7 @@ import vista.VentanaMaestro;
 public class ControladorNuevoTaller {
 
 	/**
-	 * Referencias a vistas, modelo y datos
+	 * Referencias a vistas, modelo y datos.
 	 */
 	private NuevoTaller vista;
 	private ListaTalleres ventanaTaller;
