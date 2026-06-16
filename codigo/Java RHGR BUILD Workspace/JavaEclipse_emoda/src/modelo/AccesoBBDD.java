@@ -999,7 +999,7 @@ public class AccesoBBDD {
 	 * @param apellido.
 	 * @param apodo.
 	 * @param usuario.
-	 * @param contraseña .
+	 * @param contraseña.
 	 */
 	public void insertarNuevoEmpleado(Connection c, String categoria, String nombre, String apellido, String apodo, String usuario, String contraseña) {
 
