@@ -125,7 +125,7 @@ public class ControladorNuevoTraje {
         String estado = vista.getCbEstado().toString();
 
         /**
-         * Validación básica
+         * Validación básica.
          */
         if (!nombre.isEmpty()) {
 
