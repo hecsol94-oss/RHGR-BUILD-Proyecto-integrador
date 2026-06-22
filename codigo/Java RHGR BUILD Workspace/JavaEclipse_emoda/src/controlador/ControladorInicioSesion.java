@@ -55,6 +55,11 @@ public class ControladorInicioSesion {
      * específico del rol (Aprendiz, Oficial o Maestro).
      */
     private void iniciarSesion() {
+    	
+    	/**
+         * Se abre una conexión única que se pasará a los siguientes controladores.
+         */
+        Connection c = acceso.abrirConexion();
 
         String usuario = vista.getInfoNombre().trim();
         String password = new String(vista.getInfoContrasenia()).trim();
@@ -83,21 +88,17 @@ public class ControladorInicioSesion {
         /**
          * Proceso de transición: cerrar login e iniciar sesión de trabajo.
          */
-        String categoria = empleadoAutenticado.getCategoria();
 
         vista.setVisible(false);
         vista.dispose();
 
         /**
-         * Se abre una conexión única que se pasará a los siguientes controladores.
-         */
-        Connection c = acceso.abrirConexion();
-
-        /**
          * Selección de ventana principal según el rol profesional del empleado.
          * Se delega el control a los controladores específicos de cada ventana.
          */
-        switch (categoria.toLowerCase()) {
+        String categoria = empleadoAutenticado.getCategoria().toLowerCase();
+        
+        switch (categoria) {
 
             case "aprendiz":
                 VentanaAprendiz vAprendiz = new VentanaAprendiz();

@@ -132,7 +132,7 @@ public class ControladorNuevoEmpleado {
 		if (empleadoEditar != null) {
 			
 			/** Detectar si el usuario intenta cambiar la contraseña. */
-			boolean quiereCambiar = !contraseñaNueva.equals(empleadoEditar.getContrasena());
+			boolean quiereCambiar = !contraseñaNueva.isEmpty();
 			
 			if (quiereCambiar) {
 				
@@ -184,10 +184,11 @@ public class ControladorNuevoEmpleado {
 		}
 		
 		try {
+			
 			/** ===== CASO: NUEVO EMPLEADO ===== */
 			if (empleadoEditar == null) {
 				
-				acceso.insertarNuevoEmpleado(c, categoria, nombre, apellido, apodo, usuario, contraseñaNueva);
+				acceso.insertarNuevoEmpleado(c, categoria, nombre, apellido, apodo, usuario, contraseñaActual);
 				empleados = acceso.recogeEmpleados(c);
 				
 				JOptionPane.showMessageDialog(vista, "Empleado creado correctamente");
