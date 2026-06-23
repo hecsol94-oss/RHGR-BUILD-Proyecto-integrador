@@ -139,7 +139,7 @@ public class ControladorListaTalleres {
 
 		int confirmacion = JOptionPane.showConfirmDialog(
 				vista,
-				"¿Seguro que quieres eliminar este taller?\nLas citas asociadas también se eliminarán.",
+				"¿Seguro que quieres eliminar este taller?",
 				"Confirmar eliminación",
 				JOptionPane.YES_NO_OPTION
 		);
