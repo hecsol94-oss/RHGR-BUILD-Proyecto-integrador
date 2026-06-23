@@ -127,19 +127,10 @@ public class ControladorListaTalleres {
 		}
 		
 		Taller tallerEliminado = talleres.get(fila);
-		
-		/** ¿El taller está siendo usado en citas? */
-		if (acceso.tallerTieneCitas(c, tallerEliminado.getId_sala())) {
-			JOptionPane.showMessageDialog(vista,
-					"No se puede eliminar este taller porque está asignado a una o más citas.",
-					"Operación no permitida",
-					JOptionPane.ERROR_MESSAGE);
-			return;
-		}
 
 		int confirmacion = JOptionPane.showConfirmDialog(
 				vista,
-				"¿Seguro que quieres eliminar este taller?",
+				"¿Seguro que quieres eliminar este taller?\nLas citas asociadas también se eliminarán.",
 				"Confirmar eliminación",
 				JOptionPane.YES_NO_OPTION
 		);
